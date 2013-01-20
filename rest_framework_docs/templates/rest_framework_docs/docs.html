@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Django Rest Framework Docs</title>
+		<style type="text/css">
+			body {
+				margin: 0;
+				padding: 0;
+				font-family: Arial, Helvetica, sans-serif;
+				font-size: 14px;
+				color: #333;
+				background-color: #E8761A;
+			}
+			#div-top {
+				background-color: #333;
+				width: 100%;
+				height: 25px;
+				margin: 0;
+				padding: 10px 0;
+				box-shadow: 1px 1px 1px 1px;
+				position: relative;
+			}
+			#div-api {
+				width: 80%;
+				max-width: 900px;
+				margin: 0 auto;
+				padding: 10px 50px;
+				background-color: #FFF;
+			}
+			.no-bullets {
+				list-style: none;
+				padding-left: 0;
+				margin-left: 0;
+			}
+			h1, h2, h3, h4, p {
+				padding: 1px 0;
+				margin: 2px 0;
+			}
+			#div-top h1 {
+				margin: auto;
+				width: 80%;
+				max-width: 900px;
+				padding: 0px;
+				font-weight: normal;
+				letter-spacing: -1px;
+				font-size: 1.5em;
+				color: #eee;
+			}
+			h2 {
+				font-weight: normal;
+				letter-spacing: -1px;
+			}
+			.item-api {
+				border-bottom: 1px solid #ccc;
+				padding: 10px 50px;
+			}
+			.item-api:hover {
+				background-color: #eee;
+				cursor: pointer;
+			}
+			.table-fields {
+			    width:90%
+			}
+			.table-fields td {
+			    padding:2px 0;
+			}
+			#list-api {
+				width: 90%;
+				margin: auto;
+			}
+			.space-below {
+				padding-bottom: 25px;
+			}
+			.span-path {
+				color: green;
+			}
+			.list-api-details li {
+				padding: 4px 0 4px;
+			}
+			.details {
+				display: none;
+			}
+			.selected {
+				background-color: #eee;
+			}
+		</style>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+		<script>
+			$(document).ready(function() {
+
+				$('.list-api-details').click(function() {
+					details = $(this).children('.details')
+					console.log(details)
+					console.log(details.is(':visible'))
+
+					if (details.is(':visible')) {
+						details.hide()
+						$(this).parent().removeClass('selected')					} else {
+						$(this).parent().addClass('selected')
+						details.show()
+					}
+				});
+			});
+		</script>
+	</head>
+	{% block content %}
+	<body>
+		<div id="div-top">
+			<h1>Django Rest Framework Docs</h1>
+		</div>
+		<div id="div-api">
+			<ul class="no-bullets" id="list-api">
+				{% for api in docs %}
+				<li class="item-api">
+					<ul class="no-bullets list-api-details">
+
+						<li>
+							<h2 class="span-path">/{{ api.path }}</h2>
+						</li>
+
+						{% if api.title %}
+						<li class="space-below">
+							<h2>{{ api.title }} </h2>
+						</li>
+						{% endif %}
+						<div class='details'>
+							<li>
+								<b>Allowed Methods:</b>
+								[
+								{% for method in api.allowed_methods %}
+								{{ method }}{% if not forloop.last %},{% endif %}
+								{% endfor %}
+								]
+							</li>
+							{% if api.model %}
+							<li>
+								<b>Model:</b> {{ api.model }}
+							</li>
+							{% endif %}
+
+							{% if api.description %}
+							<li>
+								<h4>Description:</h4>
+								{{ api.description }}
+							</li>
+							{% endif %}
+
+							{% if api.params %}
+							<li>
+								<h4>Parameters:</h4>
+								<ul>
+									{% for key, value in api.params %}
+									<li>
+										{{ key }}: {{value}}
+									</li>
+									{% endfor %}
+								</ul>
+							</li>
+							{% endif %}
+
+							{% if api.fields %}
+							<li>
+								<h4>Fields:</h4>
+								<table class="table-fields">
+								    <tr>
+								        <th>Name</th>
+								        <th>Type</th>
+								        <th>Read-only</th>
+								        <th>Default</th>
+								        <th>Min</th>
+								        <th>Max</th>
+								    </tr>
+								    {% for field in api.fields %}
+								    <tr>
+                                        {% for name, details in field.items %}
+                                        <td>
+                                        {{name}}
+                                        </td>
+                                        <td>
+                                            {{details.type}}
+                                        </td>
+                                        <td>
+                                            {% if details.read_only %}x{% endif %}
+                                        </td>
+
+                                        <td>
+                                            {% if details.default %}
+                                            {{ details.default }}
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                        {% if details.min_length %}
+                                            {{ details.min_length }}
+                                        {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if details.max_length %}
+                                            {{ details.max_length }}
+                                            {% endif %}
+                                        </td>
+                                        {% endfor %}
+								    </tr>
+								    {% endfor %}
+								</table>
+							</li>
+							{% endif %}
+						</div>
+					</ul>
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+		{% endblock %}
+	</body>
+</html>
