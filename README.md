@@ -3,7 +3,7 @@ Rest Framework Docs (0.1.0)
 ===========================
 
 Rest Framework Docs is an application built to produce an inventory
-and documentation for you Django Rest Framework v2 endpoints.
+and documentation for your Django Rest Framework v2 endpoints.
 
 Installation
 ------------
@@ -31,7 +31,7 @@ Quick start
         url(r'^rest-api/', include('rest_framework_docs.urls')),
 
 
-3. View /rest-api/docs to see you Django Rest Framework endpoints
+3. View /rest-api/docs to see your Django Rest Framework endpoints
 
 
 How it works
