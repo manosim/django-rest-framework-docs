@@ -4,7 +4,6 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-     ('Marc Gibbons', 'marc.gibbons@bnotions.com'),
 )
 
 MANAGERS = ADMINS
@@ -123,11 +122,8 @@ INSTALLED_APPS = (
     'cigar_example.app',
     'cigar_example.restapi',
     'rest_framework',
-    'rest_framework_docs'
-    # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    'rest_framework_docs',
+    'django.contrib.admin',
 )
 
 # A sample logging configuration. The only tangible logging

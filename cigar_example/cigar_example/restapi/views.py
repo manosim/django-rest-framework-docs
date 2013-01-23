@@ -16,7 +16,6 @@ class CigarList(ListCreateAPIView):
 
 class CigarDetails(RetrieveUpdateDestroyAPIView):
     """
-    I really really like horses.
     Gets a detailed view of an individual cigar record. Can be updated and deleted. Each cigar must
     be assigned to a manufacturer
     """

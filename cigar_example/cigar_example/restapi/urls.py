@@ -8,7 +8,7 @@ from cigar_example.restapi import views as api_views
 
 urlpatterns = patterns('',
     # Examples:
-     url(r'^api/custom/?$', api_views.MyCustomView.as_view(), name='a-custom-view'),
+     url(r'^api/custom$', api_views.MyCustomView.as_view(), name='a-custom-view'),
      url(r'^api/cigars/?$', api_views.CigarList.as_view(), name='list_of_cigars'),
      url(r'^api/cigars/(?P<pk>[^/]+)/?$', api_views.CigarDetails.as_view(), name='cigar_details'),
 
