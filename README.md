@@ -10,7 +10,7 @@ Installation
 From pip:
 
 	pip install django-rest-framework-docs
-	
+
 From the source:
 - Download: https://github.com/marcgibbons/django-rest-framework-docs/raw/master/dist/django-rest-framework-docs-0.1.0.tar.gz
 - Extract files
@@ -31,7 +31,7 @@ Quick start
         url(r'^rest-api/', include('rest_framework_docs.urls')),
 
 
-3. View /rest-api/docs to see your Django Rest Framework endpoints
+3. View /rest-api/ to see your Django Rest Framework endpoints
 
 
 How it works
@@ -45,7 +45,7 @@ Here is what is being tracked to generate documentation:
 1)  The name attribute from the URL pattern is used as the title. The following will produce a title of 'List of Countries'
 
       url(r'^api/countries/?$', views.Countries.as_view(), name='list_of_countries'),
-    
+
 
 2)  The class doctsring is used as the description::
 
@@ -75,3 +75,13 @@ Here is what is being tracked to generate documentation:
 	        """
 
 Many thanks to Tom Christie for developing the Django Rest Framework.
+
+Release Notes
+-------------
+v0.1.1 (Jan 24, 2013)
+---------------------
+- Fixed trailing $ sign in the URL pattern regex
+- Changed URL pattern to show docs at index
+- Added example Django REST application called cigar_example.
+- Minor CSS changes
+- Fixed setup.py requirements to require django>=1.4
