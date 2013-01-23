@@ -17,7 +17,7 @@ setup(
     long_description=README,
     install_requires=[
         'jsonpickle>=0.4.0',
-        'django==1.4',
+        'django>=1.4',
         'djangorestframework>=2.1.3'
     ],
 
