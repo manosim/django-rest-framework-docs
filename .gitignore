@@ -3,4 +3,4 @@
 *.pyc
 local_settings.py
 *.egg-info/
-*.gitignore
+.project
