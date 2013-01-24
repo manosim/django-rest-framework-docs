@@ -78,8 +78,7 @@ Many thanks to Tom Christie for developing the Django Rest Framework.
 
 Release Notes
 -------------
-v0.1.1 (Jan 24, 2013)
----------------------
+### v0.1.1 (Jan 24, 2013)
 - Fixed trailing $ sign in the URL pattern regex
 - Changed URL pattern to show docs at index
 - Added example Django REST application called cigar_example.
