@@ -7,5 +7,5 @@ from views import documentation
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^docs/?$', documentation, name='api-documentation'),
+    url(r'^/?$', documentation, name='api-documentation'),
 )

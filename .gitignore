@@ -3,5 +3,6 @@
 *.pyc
 local_settings.py
 *.egg-info/
-.project
+*.project
+*.settings
 .pydevproject
