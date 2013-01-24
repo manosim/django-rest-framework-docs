@@ -1,9 +1,11 @@
 ===========================
-Rest Framework Docs (0.1.0)
+Rest Framework Docs (0.1.1)
 ===========================
 
 Rest Framework Docs is an application built to produce an inventory
 and documentation for your Django Rest Framework v2 endpoints.
+
+![My image](https://raw.github.com/marcgibbons/django-rest-framework-docs/v0.1.1/screenshots/api-docs.png)
 
 Installation
 ------------
@@ -12,7 +14,7 @@ From pip:
 	pip install django-rest-framework-docs
 
 From the source:
-- Download: https://github.com/marcgibbons/django-rest-framework-docs/raw/master/dist/django-rest-framework-docs-0.1.0.tar.gz
+- Download: https://github.com/marcgibbons/django-rest-framework-docs/raw/v0.1.1/dist/django-rest-framework-docs-0.1.1.tar.gz
 - Extract files
 - python setup.py install
 
