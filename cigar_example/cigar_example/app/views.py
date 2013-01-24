@@ -18,8 +18,4 @@ class ApiDocumentation(APIView):
         return Response(json.loads(docs))
 
 
-def home(request):
-    return render_to_response('index.html')
-
-
 
