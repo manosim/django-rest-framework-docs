@@ -5,7 +5,7 @@ Rest Framework Docs (0.1.1)
 Rest Framework Docs is an application built to produce an inventory
 and documentation for your Django Rest Framework v2 endpoints.
 
-![Screenshot](screenshots/api-docs.png)
+![Screenshot](https://raw.github.com/marcgibbons/django-rest-framework-docs/v0.1.1/screenshots/api-docs.png)
 
 Installation
 ------------
@@ -14,7 +14,7 @@ From pip:
 	pip install django-rest-framework-docs
 
 From the source:
-- Download: <a href="dist/django-rest-framework-docs-0.1.1.tar.gz">django-rest-framework-docs-0.1.1.tar.gz</a>
+- Download the tarball: <a href="dist/django-rest-framework-docs-0.1.1.tar.gz">django-rest-framework-docs-0.1.1.tar.gz</a>
 - Extract files
 - Run python setup.py install
 
@@ -82,7 +82,7 @@ Included is an example project called <a href="cigar_example/">cigar_example</a>
 and custom API views to demonstrate the different behaviours. I also included an API of the documentation,
 that is, the data parsed by the generator in JSON format (api/docs). Yes, it's an API about APIs. 
 
-![ApiInception](screenshots/docs-in-api-form.png)
+![ApiInception](https://raw.github.com/marcgibbons/django-rest-framework-docs/v0.1.1/screenshots/docs-in-api-form.png)
 
 Special Thanks
 --------------
