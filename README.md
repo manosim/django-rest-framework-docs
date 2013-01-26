@@ -5,8 +5,6 @@ Rest Framework Docs (0.1.1)
 Rest Framework Docs is an application built to produce an inventory
 and documentation for your Django Rest Framework v2 endpoints.
 
-![Screenshot](https://raw.github.com/marcgibbons/django-rest-framework-docs/v0.1.1/screenshots/api-docs.png)
-
 Installation
 ------------
 From pip:
@@ -108,16 +106,16 @@ Another option is to create an API for documentation that can be consumed on a d
 By default, Django REST Framework Docs scans all your URL patterns and extracts those which inherit from the base `rest_framework.views.APIView`. You may choose to explicitly specify which URL patterns are to be included in the documentation by providing the urlpatterns to the DocumentationGenerator constructor.
 
 ```python
-        from yourproject.myapp import urls
-        docs = DocumentationGenerator(urls.urlpatterns).get_docs()
+	from yourproject.myapp import urls
+	docs = DocumentationGenerator(urls.urlpatterns).get_docs()
 ```
 
 Included Example
 -----------------
 Included is an example project called <a href="cigar_example/">cigar_example</a>. It contains both Model-based 
 and custom API views to demonstrate the different behaviours. I also included an API of the documentation,
-that is, the data parsed by the generator in JSON format (api/docs). Yes, it's an API about APIs. 
-
+that is, the data parsed by the generator in JSON format (api/docs).
+![Screenshot](https://raw.github.com/marcgibbons/django-rest-framework-docs/v0.1.1/screenshots/api-docs.png)
 ![ApiInception](https://raw.github.com/marcgibbons/django-rest-framework-docs/v0.1.1/screenshots/docs-in-api-form.png)
 
 Special Thanks
