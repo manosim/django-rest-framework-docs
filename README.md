@@ -130,6 +130,7 @@ Release Notes
 - Added example Django REST application called cigar_example.
 - Minor CSS changes
 - Fixed setup.py requirements to require django>=1.4
+- Fixed extra spaces in serializer fields regex (ie. U R L => URL)
 
 License
 --------
