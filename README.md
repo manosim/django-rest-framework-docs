@@ -49,7 +49,7 @@ Here is what is being tracked to generate documentation:
       url(r'^api/countries/?$', views.Countries.as_view(), name='list_of_countries'),
 
 
-2)  The class doctsring is used as the description::
+2)  The class doctsring is used as the description:
 
   	class Countries(APIView):
 		    """
@@ -67,7 +67,7 @@ Here is what is being tracked to generate documentation:
     API. To do so, include a key-value pair in the docstring of your API class
     delimited by two hyphens ('--').
 
-    Example: 'start_time -- The first reading'::
+    Example: 'start_time -- The first reading':
 
 	    class Countries(APIView):
 	        """
