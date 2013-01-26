@@ -55,7 +55,6 @@ class DocumentationGenerator():
         else:
             return jsonpickle.encode(docs, unpicklable=False)
 
-
     def __process_urlpatterns(self):
         """ Assembles ApiDocObject """
         docs = []
@@ -173,7 +172,8 @@ class DocumentationGenerator():
             for name, field in fields.items():
 
                 field_data = {}
-                field_name = " ".join(re.findall('[A-Z][^A-Z]*', field.__class__.__name__))
+                CAMELCASE_BOUNDARY = '(((?<=[a-z])[A-Z])|([A-Z](?![A-Z]|$)))'
+                field_name = re.sub(CAMELCASE_BOUNDARY, ' \\1', field.__class__.__name__)
                 field_data['type'] = field_name
                 try:
                     field_data['read_only'] = field.read_only
