@@ -22,16 +22,18 @@ Quick start
 -----------
 
 1. Add "rest_framework_docs" to your INSTALLED_APPS setting like this:
-
+	```python
         INSTALLED_APPS = (
             ...
             'rest_framework_docs',
         )
+	```
 
 2. Include the polls URLconf in your project urls.py like this:
 
+```python
         url(r'^rest-api/', include('rest_framework_docs.urls')),
-
+```
 
 3. View /rest-api/ to see your Django Rest Framework endpoints
 
@@ -46,15 +48,18 @@ Here is what is being tracked to generate documentation:
 
 1)  The name attribute from the URL pattern is used as the title. The following will produce a title of 'List of Countries'
 
+```python
       url(r'^api/countries/?$', views.Countries.as_view(), name='list_of_countries'),
-
+```
 
 2)  The class doctsring is used as the description:
 
-  	class Countries(APIView):
-		    """
-		    This text is the description for this API
-		    """
+```python
+	class Countries(APIView):
+	"""
+	This text is the description for this API
+	"""
+```
 
 3)  The class model. (ie. User)
 
@@ -65,16 +70,47 @@ Here is what is being tracked to generate documentation:
 
 6)  Custom parameters. It is possible to customize a parameter list for your
     API. To do so, include a key-value pair in the docstring of your API class
-    delimited by two hyphens ('--').
+    delimited by two hyphens ('--'). Example: 'start_time -- The first reading':
+```python
+	class Countries(APIView):
+		"""
+		This text is the description for this API
+		param1 -- A first parameter
+		param2 -- A second parameter
+		"""
+```
+### Customization
 
-    Example: 'start_time -- The first reading':
+#### Template
+Django REST Framework Docs comes with a [default Django template][template] which you may override.
 
-	    class Countries(APIView):
-	        """
-	        This text is the description for this API
-		      param1 -- A first parameter
-		      param2 -- A second parameter
-	        """
+#### Make an API
+Another option is to create an API for documentation that can be consumed on a different platform (ie. mobile).
+	
+```python
+        import json
+        from rest_framework.response import Response
+        from rest_framework.views import APIView
+        from cigar_example.restapi import urls
+        from rest_framework_docs.docs import DocumentationGenerator
+
+
+        class ApiDocumentation(APIView):
+            """
+            Gets the documentation for the API endpoints
+            """
+            def get(self, *args, **kwargs):
+                docs = DocumentationGenerator().get_docs()
+                return Response(json.loads(docs))
+```
+
+#### Specify your own URL patterns
+By default, Django REST Framework Docs scans all your URL patterns and extracts those which inherit from the base `rest_framework.views.APIView`. You may choose to explicitly specify which URL patterns are to be included in the documentation by providing the urlpatterns to the DocumentationGenerator constructor.
+
+```python
+        from yourproject.myapp import urls
+        docs = DocumentationGenerator(urls.urlpatterns).get_docs()
+```
 
 Included Example
 -----------------
