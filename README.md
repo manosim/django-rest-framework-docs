@@ -63,7 +63,7 @@ Here is what is being tracked to generate documentation:
 5)  Serializer properties. If your API uses a serializer, the properties are
     listed
 
-5)  Custom parameters. It is possible to customize a parameter list for your
+6)  Custom parameters. It is possible to customize a parameter list for your
     API. To do so, include a key-value pair in the docstring of your API class
     delimited by two hyphens ('--').
 
