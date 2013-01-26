@@ -1,11 +1,8 @@
 import json
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from django.shortcuts import render_to_response
-from django.template import RequestContext
 from cigar_example.restapi import urls
 from rest_framework_docs.docs import DocumentationGenerator
-from django.http import HttpResponse
 
 
 class ApiDocumentation(APIView):
