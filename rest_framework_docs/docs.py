@@ -3,7 +3,8 @@ import sys
 import re
 from django.conf import settings
 from rest_framework.views import APIView
-
+from django.core.urlresolvers import RegexURLResolver, RegexURLPattern
+from itertools import groupby
 
 class DocumentationGenerator():
     """
@@ -23,12 +24,27 @@ class DocumentationGenerator():
 
         self.urlpatterns = urlpatterns
 
+    def _flatten_patterns_tree(self, patterns):
+        """
+        Uses recursion to flatten url tree
+
+        patterns - urlpatterns list
+        """
+        pattern_list = []
+        for pattern in patterns:
+            if isinstance(pattern, RegexURLPattern):
+                pattern_list.append(pattern)
+            elif isinstance(pattern, RegexURLResolver):
+                pattern_list.extend(self._flatten_patterns_tree(pattern.url_patterns))
+        return pattern_list
+
     def get_url_patterns(self):
 
         urls = __import__(settings.ROOT_URLCONF)
         patterns = urls.urls.urlpatterns
 
         api_url_patterns = []
+        patterns = self._flatten_patterns_tree(patterns)
 
         for pattern in patterns:
             try:
@@ -39,7 +55,25 @@ class DocumentationGenerator():
                     api_url_patterns.append(pattern)
             except:
                 pass
+
+        # get only unique-named patterns, its, because rest_framework can add additional patterns
+        # to distinguish format
+        api_url_patterns = self._filter_unique_patterns(api_url_patterns)
         return api_url_patterns
+
+    def _filter_unique_patterns(self, patterns):
+        """
+        Gets only unique patterns by its names"""
+        unique_patterns = []
+        # group patterns by its names
+        grouped_patterns = groupby(patterns, lambda pattern: pattern.name)
+        for name, group in grouped_patterns:
+            group_list = list(group)
+            # choose from group pattern with shortest regex
+            unique = min(group_list, key=lambda pattern: len(pattern.regex.pattern))
+            unique_patterns.append(unique)
+
+        return unique_patterns
 
     def get_docs(self, as_objects=False):
         """
