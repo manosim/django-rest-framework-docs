@@ -140,8 +140,8 @@ Release Notes
 
 Contributors
 ------------
-Scott Mountenay
-swistakm
+- Scott Mountenay
+- swistakm
 
 License
 --------
