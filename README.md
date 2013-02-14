@@ -1,5 +1,5 @@
 ===========================
-Rest Framework Docs (0.1.1)
+Rest Framework Docs (0.1.2)
 ===========================
 
 Rest Framework Docs is an application built to produce an inventory
@@ -12,7 +12,7 @@ From pip:
 	pip install django-rest-framework-docs
 
 From the source:
-- Download the tarball: <a href="dist/django-rest-framework-docs-0.1.1.tar.gz">django-rest-framework-docs-0.1.1.tar.gz</a>
+- Download the tarball: <a href="dist/django-rest-framework-docs-0.1.2.tar.gz">django-rest-framework-docs-0.1.2.tar.gz</a>
 - Extract files
 - Run python setup.py install
 
@@ -84,7 +84,7 @@ Django REST Framework Docs comes with a [default Django template][template] whic
 
 #### Make an API
 Another option is to create an API for documentation that can be consumed on a different platform (ie. mobile).
-	
+
 ```python
         import json
         from rest_framework.response import Response
@@ -112,7 +112,7 @@ By default, Django REST Framework Docs scans all your URL patterns and extracts 
 
 Included Example
 -----------------
-Included is an example project called <a href="cigar_example/">cigar_example</a>. It contains both Model-based 
+Included is an example project called <a href="cigar_example/">cigar_example</a>. It contains both Model-based
 and custom API views to demonstrate the different behaviours. I also included an API of the documentation,
 that is, the data parsed by the generator in JSON format (api/docs).
 ![Screenshot](https://raw.github.com/marcgibbons/django-rest-framework-docs/v0.1.1/screenshots/api-docs.png)
@@ -131,6 +131,17 @@ Release Notes
 - Minor CSS changes
 - Fixed setup.py requirements to require django>=1.4
 - Fixed extra spaces in serializer fields regex (ie. U R L => URL)
+
+### v.0.1.2 (Feb 14, 2013)
+- Now possible to use URL patterns using include
+	Example:
+	(r'', include('project.some_app.urls')),
+
+
+Contributors
+------------
+Scott Mountenay
+swistakm
 
 License
 --------
