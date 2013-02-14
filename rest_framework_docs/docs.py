@@ -6,6 +6,7 @@ from rest_framework.views import APIView
 from django.core.urlresolvers import RegexURLResolver, RegexURLPattern
 from itertools import groupby
 
+
 class DocumentationGenerator():
     """
     Creates documentation for a list of URL patterns pointing to
@@ -23,20 +24,6 @@ class DocumentationGenerator():
             urlpatterns = self.get_url_patterns()
 
         self.urlpatterns = urlpatterns
-
-    def _flatten_patterns_tree(self, patterns):
-        """
-        Uses recursion to flatten url tree
-
-        patterns - urlpatterns list
-        """
-        pattern_list = []
-        for pattern in patterns:
-            if isinstance(pattern, RegexURLPattern):
-                pattern_list.append(pattern)
-            elif isinstance(pattern, RegexURLResolver):
-                pattern_list.extend(self._flatten_patterns_tree(pattern.url_patterns))
-        return pattern_list
 
     def get_url_patterns(self):
 
@@ -56,14 +43,29 @@ class DocumentationGenerator():
             except:
                 pass
 
-        # get only unique-named patterns, its, because rest_framework can add additional patterns
-        # to distinguish format
+        # get only unique-named patterns, its, because rest_framework can add
+        # additional patterns to distinguish format
         api_url_patterns = self._filter_unique_patterns(api_url_patterns)
         return api_url_patterns
 
+    def _flatten_patterns_tree(self, patterns):
+        """
+        Uses recursion to flatten url tree
+
+        patterns - urlpatterns list
+        """
+        pattern_list = []
+        for pattern in patterns:
+            if isinstance(pattern, RegexURLPattern):
+                pattern_list.append(pattern)
+            elif isinstance(pattern, RegexURLResolver):
+                pattern_list.extend(self._flatten_patterns_tree(pattern.url_patterns))
+        return pattern_list
+
     def _filter_unique_patterns(self, patterns):
         """
-        Gets only unique patterns by its names"""
+        Gets only unique patterns by its names
+        """
         unique_patterns = []
         # group patterns by its names
         grouped_patterns = groupby(patterns, lambda pattern: pattern.name)
