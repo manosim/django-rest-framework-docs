@@ -2,6 +2,7 @@ import jsonpickle
 import sys
 import re
 from django.conf import settings
+from django.utils.importlib import import_module
 from rest_framework.views import APIView
 from django.core.urlresolvers import RegexURLResolver, RegexURLPattern
 from itertools import groupby
@@ -27,8 +28,8 @@ class DocumentationGenerator():
 
     def get_url_patterns(self):
 
-        urls = __import__(settings.ROOT_URLCONF)
-        patterns = urls.urls.urlpatterns
+        urls = import_module(settings.ROOT_URLCONF)
+        patterns = urls.urlpatterns
 
         api_url_patterns = []
         patterns = self._flatten_patterns_tree(patterns)
