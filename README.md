@@ -1,5 +1,5 @@
 ===========================
-Rest Framework Docs (0.1.2)
+Rest Framework Docs (0.1.3)
 ===========================
 
 Rest Framework Docs is an application built to produce an inventory
@@ -12,7 +12,7 @@ From pip:
 	pip install django-rest-framework-docs
 
 From the source:
-- Download the tarball: <a href="dist/django-rest-framework-docs-0.1.2.tar.gz">django-rest-framework-docs-0.1.2.tar.gz</a>
+- Download the tarball: <a href="dist/django-rest-framework-docs-0.1.3.tar.gz">django-rest-framework-docs-0.1.3.tar.gz</a>
 - Extract files
 - Run python setup.py install
 
@@ -118,12 +118,25 @@ that is, the data parsed by the generator in JSON format (api/docs).
 ![Screenshot](https://raw.github.com/marcgibbons/django-rest-framework-docs/v0.1.1/screenshots/api-docs.png)
 ![ApiInception](https://raw.github.com/marcgibbons/django-rest-framework-docs/v0.1.1/screenshots/docs-in-api-form.png)
 
+Contributions
+--------------
+Please contribute to improving this tool!
+
+
 Special Thanks
 --------------
 Many thanks to Tom Christie for developing the Django Rest Framework - a tool I use everyday.
 
 Release Notes
 -------------
+### v.0.1.3 (March 6, 2013)
+- URL import bug resolved
+
+### v.0.1.2 (Feb 14, 2013)
+- Now possible to use URL patterns using include
+	Example:
+	(r'', include('project.some_app.urls')),
+
 ### v0.1.1 (Jan 24, 2013)
 - Fixed trailing $ sign in the URL pattern regex
 - Changed URL pattern to show docs at index
@@ -132,16 +145,12 @@ Release Notes
 - Fixed setup.py requirements to require django>=1.4
 - Fixed extra spaces in serializer fields regex (ie. U R L => URL)
 
-### v.0.1.2 (Feb 14, 2013)
-- Now possible to use URL patterns using include
-	Example:
-	(r'', include('project.some_app.urls')),
-
-
 Contributors
 ------------
+- Marc Gibbons
 - Scott Mountenay
 - swistakm
+- Peter Baumgartner
 
 License
 --------
