@@ -35,14 +35,11 @@ class DocumentationGenerator():
         patterns = self._flatten_patterns_tree(patterns)
 
         for pattern in patterns:
-            try:
-                class_instance = pattern.callback.cls_instance
-                parents = type(class_instance).mro()
-
-                if APIView in parents:
+            for pattern in patterns:
+                # If this is a CBV, check if it is an APIView
+                if (hasattr(pattern.callback, 'cls_instance') and
+                     issubclass(pattern.callback.cls_instance.__class__, APIView)):
                     api_url_patterns.append(pattern)
-            except:
-                pass
 
         # get only unique-named patterns, its, because rest_framework can add
         # additional patterns to distinguish format
