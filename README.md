@@ -120,7 +120,7 @@ that is, the data parsed by the generator in JSON format (api/docs).
 
 Contributions
 --------------
-Please contribute to improving this tool!
+Please contribute to improve this tool!
 
 
 Special Thanks
