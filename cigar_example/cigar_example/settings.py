@@ -110,6 +110,10 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
     # '/home/marc/rest-documentation/cigar_example/cigar_example/templates',
 )
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+SOUTH_TESTS_MIGRATE = False
+NOSE_ARGS = ['--nocapture', '--nologcapture']
+
 
 INSTALLED_APPS = (
     'rest_framework_docs',
@@ -119,6 +123,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_nose',
     'cigar_example.app',
     'cigar_example.restapi',
     'rest_framework',
