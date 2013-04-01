@@ -4,7 +4,7 @@ from django.conf import settings
 from django.utils.importlib import import_module
 from django.contrib.admindocs.utils import trim_docstring
 from django.contrib.admindocs.views import simplify_regex
-from rest_framework.views import APIView
+from rest_framework.views import APIView, _camelcase_to_spaces
 from django.core.urlresolvers import RegexURLResolver, RegexURLPattern
 from itertools import groupby
 
@@ -197,27 +197,13 @@ class DocumentationGenerator():
             data = []
 
             for name, field in fields.items():
-
                 field_data = {}
-                CAMELCASE_BOUNDARY = '(((?<=[a-z])[A-Z])|([A-Z](?![A-Z]|$)))'
-                field_name = re.sub(CAMELCASE_BOUNDARY, ' \\1', field.__class__.__name__)
-                field_data['type'] = field_name
-                try:
-                    field_data['read_only'] = field.read_only
-                except:
-                    pass
-                try:
-                    field_data['default'] = field.default
-                except:
-                    pass
-                try:
-                    field_data['max_length'] = field.max_length
-                except:
-                    pass
-                try:
-                    field_data['min_length'] = field.min_length
-                except:
-                    pass
+                field_data['type'] = _camelcase_to_spaces(field.__class__.__name__)
+
+                for key in ('read_only', 'default', 'max_length', 'min_length'):
+                    if hasattr(field, key):
+                        field_data[key] = getattr(field, key)
+
                 data.append({name: field_data})
 
             return data
@@ -229,7 +215,8 @@ class DocumentationGenerator():
         Trims whitespace from docstring
         """
         return trim_docstring(docstring)
-#
+
+
     class ApiDocObject(object):
         """ API Documentation Object """
         path = None
