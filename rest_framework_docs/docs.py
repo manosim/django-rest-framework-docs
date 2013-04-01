@@ -3,6 +3,7 @@ import re
 from django.conf import settings
 from django.utils.importlib import import_module
 from django.contrib.admindocs.utils import trim_docstring
+from django.contrib.admindocs.views import simplify_regex
 from rest_framework.views import APIView
 from django.core.urlresolvers import RegexURLResolver, RegexURLPattern
 from itertools import groupby
@@ -165,25 +166,14 @@ class DocumentationGenerator():
         pattern of the URL pattern. Cleans out the regex characters
         and replaces with RESTful URL descriptors
         """
-        try:  # Get the URL
-            cleaned = endpoint.regex.pattern
-            cleaned = re.sub('\([^<]*<', '{', cleaned)
-            cleaned = re.sub('>[^\)]*\)', '_id}', cleaned)
-            cleaned = re.sub('^\^|/\??\$$', '', cleaned)
-            cleaned = re.sub('\$$', '', cleaned)
-            cleaned = re.sub('\^', '', cleaned)
-            return cleaned
-        except:
-            return None
+        return simplify_regex(endpoint.regex.pattern)
 
     def __get_model__(self, endpoint):
         """
         Gets associated model from the view
         """
-        try:
+        if hasattr(endpoint.callback.cls_instance, 'model'):
             return endpoint.callback.cls_instance.model.__name__
-        except:
-            return None
 
     def __get_allowed_methods__(self, endpoint):
         """
