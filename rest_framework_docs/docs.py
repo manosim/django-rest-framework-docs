@@ -45,18 +45,21 @@ class DocumentationGenerator():
         api_url_patterns = self._filter_unique_patterns(api_url_patterns)
         return api_url_patterns
 
-    def _flatten_patterns_tree(self, patterns):
+    def _flatten_patterns_tree(self, patterns, prefix=None):
         """
-        Uses recursion to flatten url tree
+        Uses recursion to flatten url tree.
 
-        patterns - urlpatterns list
+        patterns -- urlpatterns list
+        prefix -- (optional) Prefix for URL pattern
         """
         pattern_list = []
         for pattern in patterns:
             if isinstance(pattern, RegexURLPattern):
+                pattern._regex = prefix + pattern._regex
                 pattern_list.append(pattern)
             elif isinstance(pattern, RegexURLResolver):
-                pattern_list.extend(self._flatten_patterns_tree(pattern.url_patterns))
+                resolver_prefix = pattern._regex
+                pattern_list.extend(self._flatten_patterns_tree(pattern.url_patterns, resolver_prefix))
         return pattern_list
 
     def _filter_unique_patterns(self, patterns):
@@ -168,6 +171,7 @@ class DocumentationGenerator():
             cleaned = re.sub('>[^\)]*\)', '_id}', cleaned)
             cleaned = re.sub('^\^|/\??\$$', '', cleaned)
             cleaned = re.sub('\$$', '', cleaned)
+            cleaned = re.sub('\^', '', cleaned)
             return cleaned
         except:
             return None
