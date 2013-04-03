@@ -27,6 +27,20 @@ class DocumentationGenerator():
 
         self.urlpatterns = urlpatterns
 
+    def get_docs(self, as_objects=False):
+        """
+        Gets the documentation as a list of objects or a JSON string
+
+        as_objects -- (bool) default=False. Set to true to return objects instead of JSON
+        """
+        docs = self.__process_urlpatterns()
+        docs.sort(key=lambda x: x.path)  # Sort by path
+
+        if as_objects:
+            return docs
+        else:
+            return jsonpickle.encode(docs, unpicklable=False)
+
     def get_url_patterns(self):
 
         urls = import_module(settings.ROOT_URLCONF)
@@ -78,20 +92,6 @@ class DocumentationGenerator():
 
         return unique_patterns
 
-    def get_docs(self, as_objects=False):
-        """
-        Gets the documentation as a list of objects or a JSON string
-
-        as_objects -- (bool) default=False. Set to true to return objects instead of JSON
-        """
-        docs = self.__process_urlpatterns()
-        docs.sort(key=lambda x: x.path)  # Sort by path
-
-        if as_objects:
-            return docs
-        else:
-            return jsonpickle.encode(docs, unpicklable=False)
-
     def __process_urlpatterns(self):
         """ Assembles ApiDocObject """
         docs = []
@@ -105,9 +105,10 @@ class DocumentationGenerator():
             # Build object and add it to the list
             doc = self.ApiDocObject()
             doc.title = self.__get_title__(endpoint)
-            parsed_docstring = self.__parse_docstring__(endpoint)
-            doc.description = parsed_docstring['description']
-            doc.params = parsed_docstring['params']
+            docstring = self.__get_docstring__(endpoint)
+            docstring_meta = self.__parse_docstring__(docstring)
+            doc.description = docstring_meta['description']
+            doc.params = docstring_meta['params']
             doc.path = self.__get_path__(endpoint)
             doc.model = self.__get_model__(endpoint)
             doc.allowed_methods = self.__get_allowed_methods__(endpoint)
@@ -121,14 +122,13 @@ class DocumentationGenerator():
         """
         Gets the URL Pattern name and make it the title
         """
-        try:
-                name = endpoint.name
-                title = re.sub('[-_]', ' ', name)
-                return title.title()
-        except:
-            return None
+        title = ''
+        if hasattr(endpoint, 'name'):
+            name = endpoint.name
+            title = re.sub('[-_]', ' ', name)
+        return title.title()
 
-    def __parse_docstring__(self, endpoint):
+    def __get_docstring__(self, endpoint):
         """
         Parses the view's docstring and creates a description
         and a list of parameters
@@ -137,28 +137,33 @@ class DocumentationGenerator():
             myVar -- a variable
         """
 
-        try:  # Get API Doc String
-            docstring = endpoint.callback.__doc__
-            description = self.__trim(docstring)
-            split_lines = description.split('\n')
-            trimmed = False  # Flag if string needs to be trimmed
-            _params = []
+        if not hasattr(endpoint, 'callback'):
+            return
 
-            for line in split_lines:
-                if not trimmed:
-                    needle = line.find('--')
-                    if needle != -1:
-                        trim_at = description.find(line)
-                        description = description[:trim_at]
-                        trimmed = True
+        return endpoint.callback.__doc__
 
-                params = line.split(' -- ')
-                if len(params) == 2:
-                    _params.append([params[0].strip(), params[1].strip()])
+    def __parse_docstring__(self, docstring):
 
-            return {'description': description, 'params': _params}
-        except:
-            return None
+        docstring = self.__trim(docstring)
+        split_lines = docstring.split('\n')
+        trimmed = False  # Flag if string needs to be trimmed
+        _params = []
+        description = docstring
+
+        for line in split_lines:
+            if not trimmed:
+                needle = line.find('--')
+                if needle != -1:
+                    trim_at = docstring.find(line)
+                    description = docstring[:trim_at]
+                    trimmed = True
+
+            params = line.split(' -- ')
+            if len(params) == 2:
+                _params.append([params[0].strip(), params[1].strip()])
+
+        return {'description': description, 'params': _params}
+
 
     def __get_path__(self, endpoint):
         """
