@@ -1,9 +1,10 @@
 import jsonpickle
-import sys
 import re
 from django.conf import settings
 from django.utils.importlib import import_module
-from rest_framework.views import APIView
+from django.contrib.admindocs.utils import trim_docstring
+from django.contrib.admindocs.views import simplify_regex
+from rest_framework.views import APIView, _camelcase_to_spaces
 from django.core.urlresolvers import RegexURLResolver, RegexURLPattern
 from itertools import groupby
 
@@ -45,18 +46,21 @@ class DocumentationGenerator():
         api_url_patterns = self._filter_unique_patterns(api_url_patterns)
         return api_url_patterns
 
-    def _flatten_patterns_tree(self, patterns):
+    def _flatten_patterns_tree(self, patterns, prefix=None):
         """
-        Uses recursion to flatten url tree
+        Uses recursion to flatten url tree.
 
-        patterns - urlpatterns list
+        patterns -- urlpatterns list
+        prefix -- (optional) Prefix for URL pattern
         """
         pattern_list = []
         for pattern in patterns:
             if isinstance(pattern, RegexURLPattern):
+                pattern._regex = prefix + pattern._regex
                 pattern_list.append(pattern)
             elif isinstance(pattern, RegexURLResolver):
-                pattern_list.extend(self._flatten_patterns_tree(pattern.url_patterns))
+                resolver_prefix = pattern._regex
+                pattern_list.extend(self._flatten_patterns_tree(pattern.url_patterns, resolver_prefix))
         return pattern_list
 
     def _filter_unique_patterns(self, patterns):
@@ -162,24 +166,14 @@ class DocumentationGenerator():
         pattern of the URL pattern. Cleans out the regex characters
         and replaces with RESTful URL descriptors
         """
-        try:  # Get the URL
-            cleaned = endpoint.regex.pattern
-            cleaned = re.sub('\([^<]*<', '{', cleaned)
-            cleaned = re.sub('>[^\)]*\)', '_id}', cleaned)
-            cleaned = re.sub('^\^|/\??\$$', '', cleaned)
-            cleaned = re.sub('\$$', '', cleaned)
-            return cleaned
-        except:
-            return None
+        return simplify_regex(endpoint.regex.pattern)
 
     def __get_model__(self, endpoint):
         """
         Gets associated model from the view
         """
-        try:
+        if hasattr(endpoint.callback.cls_instance, 'model'):
             return endpoint.callback.cls_instance.model.__name__
-        except:
-            return None
 
     def __get_allowed_methods__(self, endpoint):
         """
@@ -203,27 +197,13 @@ class DocumentationGenerator():
             data = []
 
             for name, field in fields.items():
-
                 field_data = {}
-                CAMELCASE_BOUNDARY = '(((?<=[a-z])[A-Z])|([A-Z](?![A-Z]|$)))'
-                field_name = re.sub(CAMELCASE_BOUNDARY, ' \\1', field.__class__.__name__)
-                field_data['type'] = field_name
-                try:
-                    field_data['read_only'] = field.read_only
-                except:
-                    pass
-                try:
-                    field_data['default'] = field.default
-                except:
-                    pass
-                try:
-                    field_data['max_length'] = field.max_length
-                except:
-                    pass
-                try:
-                    field_data['min_length'] = field.min_length
-                except:
-                    pass
+                field_data['type'] = _camelcase_to_spaces(field.__class__.__name__)
+
+                for key in ('read_only', 'default', 'max_length', 'min_length'):
+                    if hasattr(field, key):
+                        field_data[key] = getattr(field, key)
+
                 data.append({name: field_data})
 
             return data
@@ -232,32 +212,10 @@ class DocumentationGenerator():
 
     def __trim(self, docstring):
         """
-        Trims whitespace from the docstring in accordance to the PEP-257 standard
-        From: http://www.python.org/dev/peps/pep-0257/#multi-line-docstrings
+        Trims whitespace from docstring
         """
-        if not docstring:
-            return ''
-        # Convert tabs to spaces (following the normal Python rules)
-        # and split into a list of lines:
-        lines = docstring.expandtabs().splitlines()
-        # Determine minimum indentation (first line doesn't count):
-        indent = sys.maxint
-        for line in lines[1:]:
-            stripped = line.lstrip()
-            if stripped:
-                indent = min(indent, len(line) - len(stripped))
-        # Remove indentation (first line is special):
-        trimmed = [lines[0].strip()]
-        if indent < sys.maxint:
-            for line in lines[1:]:
-                trimmed.append(line[indent:].rstrip())
-        # Strip off trailing and leading blank lines:
-        while trimmed and not trimmed[-1]:
-            trimmed.pop()
-        while trimmed and not trimmed[0]:
-            trimmed.pop(0)
-        # Return a single string:
-        return '\n'.join(trimmed)
+        return trim_docstring(docstring)
+
 
     class ApiDocObject(object):
         """ API Documentation Object """

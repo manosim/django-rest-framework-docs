@@ -6,3 +6,4 @@ local_settings.py
 *.project
 *.settings
 .pydevproject
+.ropeproject

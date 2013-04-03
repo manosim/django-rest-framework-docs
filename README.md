@@ -1,5 +1,5 @@
 ===========================
-Rest Framework Docs (0.1.3)
+Rest Framework Docs (0.1.4)
 ===========================
 
 Rest Framework Docs is an application built to produce an inventory
@@ -9,10 +9,10 @@ Installation
 ------------
 From pip:
 
-	pip install django-rest-framework-docs
+    pip install django-rest-framework-docs
 
 From the source:
-- Download the tarball: <a href="dist/django-rest-framework-docs-0.1.3.tar.gz">django-rest-framework-docs-0.1.3.tar.gz</a>
+- Download the tarball: <a href="dist/django-rest-framework-docs-0.1.4.tar.gz">django-rest-framework-docs-0.1.4.tar.gz</a>
 - Extract files
 - Run python setup.py install
 
@@ -20,12 +20,12 @@ Quick start
 -----------
 
 1. Add "rest_framework_docs" to your INSTALLED_APPS setting like this:
-	```python
+    ```python
         INSTALLED_APPS = (
             ...
             'rest_framework_docs',
         )
-	```
+    ```
 
 2. Include the polls URLconf in your project urls.py like this:
 
@@ -35,6 +35,10 @@ Quick start
 
 3. View /rest-api/ to see your Django Rest Framework endpoints
 
+Requirements
+-----------
+- Django [1.4, 1.5]
+- Django Rest Framework (2.1, 2.2)
 
 How it works
 ------------
@@ -53,10 +57,10 @@ Here is what is being tracked to generate documentation:
 2)  The class doctsring is used as the description:
 
 ```python
-	class Countries(APIView):
-	"""
-	This text is the description for this API
-	"""
+    class Countries(APIView):
+    """
+    This text is the description for this API
+    """
 ```
 
 3)  The class model. (ie. User)
@@ -70,12 +74,12 @@ Here is what is being tracked to generate documentation:
     API. To do so, include a key-value pair in the docstring of your API class
     delimited by two hyphens ('--'). Example: 'start_time -- The first reading':
 ```python
-	class Countries(APIView):
-		"""
-		This text is the description for this API
-		param1 -- A first parameter
-		param2 -- A second parameter
-		"""
+    class Countries(APIView):
+        """
+        This text is the description for this API
+        param1 -- A first parameter
+        param2 -- A second parameter
+        """
 ```
 ### Customization
 
@@ -106,8 +110,8 @@ Another option is to create an API for documentation that can be consumed on a d
 By default, Django REST Framework Docs scans all your URL patterns and extracts those which inherit from the base `rest_framework.views.APIView`. You may choose to explicitly specify which URL patterns are to be included in the documentation by providing the urlpatterns to the DocumentationGenerator constructor.
 
 ```python
-	from yourproject.myapp import urls
-	docs = DocumentationGenerator(urls.urlpatterns).get_docs()
+    from yourproject.myapp import urls
+    docs = DocumentationGenerator(urls.urlpatterns).get_docs()
 ```
 
 Included Example
@@ -129,13 +133,19 @@ Many thanks to Tom Christie for developing the Django Rest Framework - a tool I 
 
 Release Notes
 -------------
+### v.0.1.4 (April 3, 2013)
+- Improved URL importing: included URL modules now show the full URL with prefix
+- Borrowing URL "restification" from Django's admin docs
+- General refactoring
+- Wrote a few tests, more need to be written
+
 ### v.0.1.3 (March 6, 2013)
 - URL import bug resolved
 
 ### v.0.1.2 (Feb 14, 2013)
 - Now possible to use URL patterns using include
-	Example:
-	(r'', include('project.some_app.urls')),
+    Example:
+    (r'', include('project.some_app.urls')),
 
 ### v0.1.1 (Jan 24, 2013)
 - Fixed trailing $ sign in the URL pattern regex
@@ -146,7 +156,7 @@ Release Notes
 - Fixed extra spaces in serializer fields regex (ie. U R L => URL)
 
 Contributors
-------------
+-------------
 - Marc Gibbons
 - Scott Mountenay
 - swistakm
