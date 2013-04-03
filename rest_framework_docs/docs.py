@@ -60,7 +60,7 @@ class DocumentationGenerator():
         api_url_patterns = self._filter_unique_patterns(api_url_patterns)
         return api_url_patterns
 
-    def _flatten_patterns_tree(self, patterns, prefix=None):
+    def _flatten_patterns_tree(self, patterns, prefix=''):
         """
         Uses recursion to flatten url tree.
 
