@@ -4,10 +4,14 @@ from django.conf import settings
 from django.utils.importlib import import_module
 from django.contrib.admindocs.utils import trim_docstring
 from django.contrib.admindocs.views import simplify_regex
-from rest_framework.views import APIView, _camelcase_to_spaces
+from rest_framework.views import APIView
+from rest_framework.viewsets import ViewSet
 from django.core.urlresolvers import RegexURLResolver, RegexURLPattern
 from itertools import groupby
-
+try:
+    from rest_framework.views import _camelcase_to_spaces
+except ImportError:
+    from rest_framework.utils.formatting import _camelcase_to_spaces
 
 class DocumentationGenerator():
     """
@@ -51,13 +55,12 @@ class DocumentationGenerator():
 
         for pattern in patterns:
             # If this is a CBV, check if it is an APIView
-            if (hasattr(pattern.callback, 'cls_instance') and
-                 issubclass(pattern.callback.cls_instance.__class__, APIView)):
+            if (hasattr(pattern.callback, 'cls') and issubclass(pattern.callback.cls, APIView)):
                 api_url_patterns.append(pattern)
 
         # get only unique-named patterns, its, because rest_framework can add
         # additional patterns to distinguish format
-        api_url_patterns = self._filter_unique_patterns(api_url_patterns)
+        #api_url_patterns = self._filter_unique_patterns(api_url_patterns)
         return api_url_patterns
 
     def _flatten_patterns_tree(self, patterns, prefix=''):
@@ -70,7 +73,7 @@ class DocumentationGenerator():
         pattern_list = []
         for pattern in patterns:
             if isinstance(pattern, RegexURLPattern):
-                pattern._regex = prefix + pattern._regex
+                pattern.__path = prefix + pattern._regex
                 pattern_list.append(pattern)
             elif isinstance(pattern, RegexURLResolver):
                 resolver_prefix = pattern._regex
@@ -171,22 +174,24 @@ class DocumentationGenerator():
         pattern of the URL pattern. Cleans out the regex characters
         and replaces with RESTful URL descriptors
         """
-        return simplify_regex(endpoint.regex.pattern)
+        #return simplify_regex(endpoint.regex.pattern)
+        return simplify_regex(endpoint.__path)
 
     def __get_model__(self, endpoint):
         """
         Gets associated model from the view
         """
-        if hasattr(endpoint.callback.cls_instance, 'model'):
-            return endpoint.callback.cls_instance.model.__name__
+        if hasattr(endpoint.callback.cls, 'model'):
+            return endpoint.callback.cls.model.__name__
 
     def __get_allowed_methods__(self, endpoint):
         """
         Gets allowed methods for the API. (ie. POST, PUT, GET)
         """
         try:  # Get the allowed methods
-            return endpoint.callback.cls_instance.allowed_methods
-        except:
+            return endpoint.callback.cls().allowed_methods
+        except Exception as e:
+            print e
             pass
 
     def __get_serializer_fields__(self, endpoint):
@@ -195,7 +200,7 @@ class DocumentationGenerator():
         with field properties (read-only, default, min and max length)
         """
         try:  # Get the model's serializer fields
-            serializer = endpoint.callback.cls_instance.get_serializer_class()
+            serializer = endpoint.callback.cls().get_serializer_class()
 
             fields = serializer().get_fields()
 
