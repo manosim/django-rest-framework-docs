@@ -7,3 +7,4 @@ local_settings.py
 *.settings
 .pydevproject
 .ropeproject
+*env/
