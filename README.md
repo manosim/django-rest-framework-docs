@@ -1,5 +1,5 @@
 ===========================
-Rest Framework Docs (0.1.4)
+Rest Framework Docs (0.1.5)
 ===========================
 
 Rest Framework Docs is an application built to produce an inventory
@@ -12,7 +12,7 @@ From pip:
     pip install django-rest-framework-docs
 
 From the source:
-- Download the tarball: <a href="dist/django-rest-framework-docs-0.1.4.tar.gz">django-rest-framework-docs-0.1.4.tar.gz</a>
+- Download the tarball: <a href="dist/django-rest-framework-docs-0.1.5.tar.gz">django-rest-framework-docs-0.1.5.tar.gz</a>
 - Extract files
 - Run python setup.py install
 
@@ -133,6 +133,10 @@ Many thanks to Tom Christie for developing the Django Rest Framework - a tool I 
 
 Release Notes
 -------------
+### v.0.1.5 (June 1, 2013)
+- Now supports Django Rest Framework v2.3
+- Backwards compatibility
+
 ### v.0.1.4 (April 3, 2013)
 - Improved URL importing: included URL modules now show the full URL with prefix
 - Borrowing URL "restification" from Django's admin docs
