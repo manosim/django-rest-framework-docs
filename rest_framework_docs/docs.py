@@ -51,14 +51,26 @@ class DocumentationGenerator():
 
         for pattern in patterns:
             # If this is a CBV, check if it is an APIView
-            if (hasattr(pattern.callback, 'cls_instance') and
-                 issubclass(pattern.callback.cls_instance.__class__, APIView)):
+            if self._get_api_callback(pattern):
                 api_url_patterns.append(pattern)
 
         # get only unique-named patterns, its, because rest_framework can add
         # additional patterns to distinguish format
-        api_url_patterns = self._filter_unique_patterns(api_url_patterns)
+        #api_url_patterns = self._filter_unique_patterns(api_url_patterns)
         return api_url_patterns
+
+    def _get_api_callback(self, pattern):
+        """
+        Verifies that pattern callback is a subclass of APIView, and returns the class
+        Handles older django & django rest 'cls_instance'
+        """
+        if not hasattr(pattern, 'callback'):
+            return
+
+        if (hasattr(pattern.callback, 'cls') and issubclass(pattern.callback.cls, APIView)):
+            return pattern.callback.cls
+        elif (hasattr(pattern.callback, 'cls_instance') and isinstance(pattern.callback.cls_instance, APIView)):
+            return pattern.callback.cls_instance
 
     def _flatten_patterns_tree(self, patterns, prefix=''):
         """
@@ -70,7 +82,7 @@ class DocumentationGenerator():
         pattern_list = []
         for pattern in patterns:
             if isinstance(pattern, RegexURLPattern):
-                pattern._regex = prefix + pattern._regex
+                pattern.__path = prefix + pattern._regex
                 pattern_list.append(pattern)
             elif isinstance(pattern, RegexURLResolver):
                 resolver_prefix = pattern._regex
@@ -98,8 +110,9 @@ class DocumentationGenerator():
 
         for endpoint in self.urlpatterns:
 
-            # Skip if URL isn't bound to a view
-            if not endpoint.callback:
+            # Skip if callback isn't an APIView
+            callback = self._get_api_callback(endpoint)
+            if callback is None:
                 continue
 
             # Build object and add it to the list
@@ -110,9 +123,9 @@ class DocumentationGenerator():
             doc.description = docstring_meta['description']
             doc.params = docstring_meta['params']
             doc.path = self.__get_path__(endpoint)
-            doc.model = self.__get_model__(endpoint)
-            doc.allowed_methods = self.__get_allowed_methods__(endpoint)
-            doc.fields = self.__get_serializer_fields__(endpoint)
+            doc.model = self.__get_model__(callback)
+            doc.allowed_methods = self.__get_allowed_methods__(callback)
+            doc.fields = self.__get_serializer_fields__(callback)
             docs.append(doc)
             del(doc)  # Clean up
 
@@ -171,49 +184,54 @@ class DocumentationGenerator():
         pattern of the URL pattern. Cleans out the regex characters
         and replaces with RESTful URL descriptors
         """
-        return simplify_regex(endpoint.regex.pattern)
+        #return simplify_regex(endpoint.regex.pattern)
+        return simplify_regex(endpoint.__path)
 
     def __get_model__(self, endpoint):
         """
         Gets associated model from the view
         """
-        if hasattr(endpoint.callback.cls_instance, 'model'):
-            return endpoint.callback.cls_instance.model.__name__
+        api_view = self._get_api_callback(endpoint)
+        if hasattr(api_view, 'model'):
+            return api_view.model.__name__
 
-    def __get_allowed_methods__(self, endpoint):
+    def __get_allowed_methods__(self, callback):
         """
         Gets allowed methods for the API. (ie. POST, PUT, GET)
         """
-        try:  # Get the allowed methods
-            return endpoint.callback.cls_instance.allowed_methods
-        except:
-            pass
+        if hasattr(callback, '__call__'):
+            return callback().allowed_methods
+        else:
+            return callback.allowed_methods
 
-    def __get_serializer_fields__(self, endpoint):
+    def __get_serializer_fields__(self, callback):
         """
         Gets serializer fields if set in the view. Returns dictionaries
         with field properties (read-only, default, min and max length)
         """
-        try:  # Get the model's serializer fields
-            serializer = endpoint.callback.cls_instance.get_serializer_class()
-
-            fields = serializer().get_fields()
-
-            data = []
-
-            for name, field in fields.items():
-                field_data = {}
-                field_data['type'] = self.__camelcase_to_spaces(field.__class__.__name__)
-
-                for key in ('read_only', 'default', 'max_length', 'min_length'):
-                    if hasattr(field, key):
-                        field_data[key] = getattr(field, key)
-
-                data.append({name: field_data})
-
+        data = []
+        if not hasattr(callback, 'get_serializer_class'):
             return data
-        except:
-            return None
+
+        if hasattr(callback, '__call__'):
+            serializer = callback().get_serializer_class()
+        else:
+            serializer = callback.get_serializer_class()
+
+        fields = serializer().get_fields()
+
+
+        for name, field in fields.items():
+            field_data = {}
+            field_data['type'] = self.__camelcase_to_spaces(field.__class__.__name__)
+
+            for key in ('read_only', 'default', 'max_length', 'min_length'):
+                if hasattr(field, key):
+                    field_data[key] = getattr(field, key)
+
+            data.append({name: field_data})
+
+        return data
 
     def __trim(self, docstring):
         """
@@ -221,7 +239,7 @@ class DocumentationGenerator():
         """
         return trim_docstring(docstring)
 
-    def __camel_case_to_spaces(self, camel_string):
+    def __camelcase_to_spaces(self, camel_string):
         CAMELCASE_BOUNDARY = '(((?<=[a-z])[A-Z])|([A-Z](?![A-Z]|$)))'
         return re.sub(CAMELCASE_BOUNDARY, ' \\1', camel_string)
 
