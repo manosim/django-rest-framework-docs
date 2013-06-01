@@ -4,8 +4,8 @@ from django.conf import settings
 from django.utils.importlib import import_module
 from django.contrib.admindocs.utils import trim_docstring
 from django.contrib.admindocs.views import simplify_regex
-from rest_framework.views import APIView, _camelcase_to_spaces
 from django.core.urlresolvers import RegexURLResolver, RegexURLPattern
+from rest_framework.views import APIView
 from itertools import groupby
 
 
@@ -203,7 +203,7 @@ class DocumentationGenerator():
 
             for name, field in fields.items():
                 field_data = {}
-                field_data['type'] = _camelcase_to_spaces(field.__class__.__name__)
+                field_data['type'] = self.__camelcase_to_spaces(field.__class__.__name__)
 
                 for key in ('read_only', 'default', 'max_length', 'min_length'):
                     if hasattr(field, key):
@@ -221,6 +221,9 @@ class DocumentationGenerator():
         """
         return trim_docstring(docstring)
 
+    def __camel_case_to_spaces(self, camel_string):
+        CAMELCASE_BOUNDARY = '(((?<=[a-z])[A-Z])|([A-Z](?![A-Z]|$)))'
+        return re.sub(CAMELCASE_BOUNDARY, ' \\1', camel_string)
 
     class ApiDocObject(object):
         """ API Documentation Object """
