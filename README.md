@@ -165,6 +165,7 @@ Contributors
 - Scott Mountenay
 - swistakm
 - Peter Baumgartner
+- Marlon Bailey
 
 License
 --------
