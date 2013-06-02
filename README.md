@@ -119,8 +119,8 @@ Included Example
 Included is an example project called <a href="cigar_example/">cigar_example</a>. It contains both Model-based
 and custom API views to demonstrate the different behaviours. I also included an API of the documentation,
 that is, the data parsed by the generator in JSON format (api/docs).
-![Screenshot](https://raw.github.com/marcgibbons/django-rest-framework-docs/v0.1.1/screenshots/api-docs.png)
-![ApiInception](https://raw.github.com/marcgibbons/django-rest-framework-docs/v0.1.1/screenshots/docs-in-api-form.png)
+![Screenshot](https://raw.github.com/marcgibbons/django-rest-framework-docs/master/screenshots/api-docs.png)
+![ApiInception](https://raw.github.com/marcgibbons/django-rest-framework-docs/master/screenshots/docs-in-api-form.png)
 
 Contributions
 --------------
