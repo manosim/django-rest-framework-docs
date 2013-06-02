@@ -84,7 +84,7 @@ Here is what is being tracked to generate documentation:
 ### Customization
 
 #### Template
-Django REST Framework Docs comes with a [default Django template][template] which you may override.
+Django REST Framework Docs comes with a default template which you may override.
 
 #### Make an API
 Another option is to create an API for documentation that can be consumed on a different platform (ie. mobile).
