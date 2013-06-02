@@ -218,8 +218,10 @@ class DocumentationGenerator():
         else:
             serializer = callback.get_serializer_class()
 
-        fields = serializer().get_fields()
-
+        try:
+            fields = serializer().get_fields()
+        except:
+            return
 
         for name, field in fields.items():
             field_data = {}
