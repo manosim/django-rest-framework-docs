@@ -38,7 +38,7 @@ Quick start
 Requirements
 -----------
 - Django [1.4, 1.5]
-- Django Rest Framework (2.1, 2.2)
+- Django Rest Framework (2.1, 2.2, 2.3)
 
 How it works
 ------------
