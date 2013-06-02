@@ -161,11 +161,11 @@ Release Notes
 
 Contributors
 -------------
-- Marc Gibbons
-- Scott Mountenay
-- swistakm
-- Peter Baumgartner
-- Marlon Bailey
+- Marc Gibbons (@marcgibbons)
+- Scott Mountenay (@scottmx81)
+- @swistakm
+- Peter Baumgartner (@ipmb)
+- Marlon Bailey (@avinash240)
 
 License
 --------
