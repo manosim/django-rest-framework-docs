@@ -136,9 +136,12 @@ class DocumentationGenerator():
         Gets the URL Pattern name and make it the title
         """
         title = ''
-        if hasattr(endpoint, 'name'):
-            name = endpoint.name
-            title = re.sub('[-_]', ' ', name)
+        if endpoint.name is None:
+            return title
+
+        name = endpoint.name
+        title = re.sub('[-_]', ' ', name)
+
         return title.title()
 
     def __get_docstring__(self, endpoint):
