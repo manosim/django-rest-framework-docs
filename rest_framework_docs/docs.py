@@ -126,6 +126,9 @@ class DocumentationGenerator():
             doc.model = self.__get_model__(callback)
             doc.allowed_methods = self.__get_allowed_methods__(callback)
             doc.fields = self.__get_serializer_fields__(callback)
+            doc.filter_fields = self.__get_filter_fields__(callback)
+            doc.search_fields = self.__get_search_fields__(callback)
+            doc.ordering = self.__get_ordering__(callback)
             docs.append(doc)
             del(doc)  # Clean up
 
@@ -238,6 +241,18 @@ class DocumentationGenerator():
 
         return data
 
+    def __get_filter_fields__(self, callback):
+        """Gets filter fields if described in API view"""
+        return getattr(callback, 'filter_fields', None)
+
+    def __get_search_fields__(self, callback):
+        """Gets search fields if described in API view"""
+        return getattr(callback, 'search_fields', None)
+
+    def __get_ordering__(self, callback):
+        """Gets ordering fields if described in API view"""
+        return getattr(callback, 'ordering', None)
+
     def __trim(self, docstring):
         """
         Trims whitespace from docstring
@@ -256,3 +271,5 @@ class DocumentationGenerator():
         params = []
         allowed_methods = []
         model = None
+
+
