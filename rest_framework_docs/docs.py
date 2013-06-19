@@ -24,6 +24,8 @@ class DocumentationGenerator():
         """
         if urlpatterns is None:
             urlpatterns = self.get_url_patterns()
+        else:
+            urlpatterns = self._flatten_patterns_tree(urlpatterns)
 
         self.urlpatterns = urlpatterns
 
