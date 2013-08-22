@@ -7,6 +7,8 @@ from django.contrib.admindocs.views import simplify_regex
 from django.core.urlresolvers import RegexURLResolver, RegexURLPattern
 from rest_framework.views import APIView
 from itertools import groupby
+from django.test.client import RequestFactory
+from django.contrib.auth import get_user_model
 
 
 class DocumentationGenerator():
@@ -216,10 +218,15 @@ class DocumentationGenerator():
         if not hasattr(callback, 'get_serializer_class'):
             return data
 
+        factory = RequestFactory()
+        request = factory.get('')
+        request.user = get_user_model()()
+
         if hasattr(callback, '__call__'):
-            serializer = callback().get_serializer_class()
-        else:
-            serializer = callback.get_serializer_class()
+            callback = callback()
+
+        callback.request = request
+        serializer = callback.get_serializer_class()
 
         try:
             fields = serializer().get_fields()
