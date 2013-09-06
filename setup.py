@@ -22,7 +22,6 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 setup(
     name='django-rest-framework-docs',
     version='0.1.7',
-    download_url='https://github.com/marcgibbons/django-rest-framework-docs/raw/master/dist/django-rest-framework-docs-0.1.7.tar.gz',
     packages=['rest_framework_docs'],
     package_data={'rest_framework_docs': ['templates/rest_framework_docs/*']},
     include_package_data=True,
