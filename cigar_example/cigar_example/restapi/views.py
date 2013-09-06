@@ -12,7 +12,9 @@ class CigarList(ListCreateAPIView):
     model = Cigar
     """ This is the model """
     serializer_class = CigarSerializer
-
+    ordering = ("price", "length")
+    filter_fields = ("colour",)
+    search_fields = ("name", "manufacturer",)
 
 class CigarDetails(RetrieveUpdateDestroyAPIView):
     """

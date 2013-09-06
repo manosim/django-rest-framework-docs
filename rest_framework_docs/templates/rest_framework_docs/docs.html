@@ -99,7 +99,8 @@
 
                     if (details.is(':visible')) {
                         details.hide()
-                        $(this).parent().removeClass('selected')                    } else {
+                        $(this).parent().removeClass('selected')
+                    } else {
                         $(this).parent().addClass('selected')
                         details.show()
                     }
@@ -208,6 +209,40 @@
                                 </table>
                             </li>
                             {% endif %}
+
+                            {% if api.filter_fields %}
+                            <li>
+                                <b>Filter fields:</b>
+                                [
+                                {% for field in api.filter_fields %}
+                                    {{ field }}{% if not forloop.last %},{% endif %}
+                                {% endfor %}
+                                ]
+                            </li>
+                            {% endif %}
+
+                            {% if api.search_fields %}
+                            <li>
+                                <b>Search fields:</b>
+                                [
+                                {% for field in api.search_fields %}
+                                    {{ field }}{% if not forloop.last %},{% endif %}
+                                {% endfor %}
+                                ]
+                            </li>
+                            {% endif %}
+
+                            {% if api.ordering %}
+                            <li>
+                                <b>Ordering:</b>
+                                [
+                                {% for field in api.ordering %}
+                                    {{ field }}{% if not forloop.last %},{% endif %}
+                                {% endfor %}
+                                ]
+                            </li>
+                            {% endif %}
+
                         </div>
                     </ul>
                 </li>
