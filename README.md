@@ -1,9 +1,13 @@
+## ** This package is no longer being maintained **
+## Please use [Django REST Swagger](https://github.com/marcgibbons/django-rest-swagger)
+
 ===========================
 Rest Framework Docs (0.1.7)
 ===========================
 
 Rest Framework Docs is an application built to produce an inventory
 and documentation for your Django Rest Framework v2 endpoints.
+
 
 Installation
 ------------
