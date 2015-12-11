@@ -1,5 +1,5 @@
 # drf-docs [![Build Status](https://travis-ci.com/ekonstantinidis/drf-docs.svg?token=9QR4ewbqbkEmHps6q5sq&branch=master)](https://travis-ci.com/ekonstantinidis/drf-docs)
-Documentation for Web APIs made with Django Rest Framewor.
+Documentation for Web APIs made with Django Rest Framework.
 
 
 ### Prerequisites
