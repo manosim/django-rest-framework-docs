@@ -1,0 +1,7 @@
+include README.md
+include LICENSE
+
+recursive-include drfdocs/static *.js *.css *.png *.eot *.svg *.ttf *.woff
+recursive-include drfdocs/templates *.html
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
