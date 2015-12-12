@@ -1,0 +1,27 @@
+body {
+  background-color: #FEFEFE;
+}
+
+h1, h2, h3, h4 {
+  text-align: center;
+}
+
+.jumbotron {
+  margin: 50px 0 40px;
+  text-align: center;
+}
+
+.footer {
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.footer .links {
+  padding: 20px 0;
+}
+
+.footer .links .fa {
+  margin: 0 10px;
+  font-size: 22px;
+}
