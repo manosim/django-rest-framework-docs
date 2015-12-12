@@ -1,11 +1,10 @@
 {% extends "drfdocs/base.html" %}
 
 {% block content %}
-  <ul>
   {% for endpoint in endpoints %}
-    <li>
+    <div class="endpoint">
       <pre>{{ endpoint.regex }}</pre>
       <p>{{ endpoint.view_name }}</p>
+    </div>
   {% endfor %}
-  </ul>
 {% endblock %}
