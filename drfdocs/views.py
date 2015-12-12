@@ -9,5 +9,5 @@ class DRFDocsView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(DRFDocsView, self).get_context_data(**kwargs)
         docs = ApiDocumentation()
-        context['views'] = docs.get_views()
+        context['endpoints'] = docs.get_endpoints()
         return context

@@ -2,8 +2,10 @@
 
 {% block content %}
   <ul>
-  {% for view in views %}
-    <li>{{ view }}</li>
+  {% for endpoint in endpoints %}
+    <li>
+      <pre>{{ endpoint.regex }}</pre>
+      <p>{{ endpoint.view_name }}</p>
   {% endfor %}
   </ul>
 {% endblock %}
