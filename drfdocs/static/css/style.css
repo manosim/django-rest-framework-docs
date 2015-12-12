@@ -1,0 +1,92 @@
+/* @group Misc */
+
+body {
+  background-color: #FEFEFE;
+}
+
+.jumbotron {
+  margin: 50px 0 40px;
+  text-align: center;
+}
+
+/* @end Misc */
+
+
+/* @group Endpoint */
+
+.endpoint {
+  padding: 5px 20px;
+  margin: 20px 0;
+  background-color: #ecf0f1;
+}
+
+.endpoint .title {
+  font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+}
+
+/* @end Endpoint */
+
+
+/* @group Footer */
+
+.footer {
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.footer .links {
+  padding: 20px 0;
+}
+
+.footer .links .fa {
+  margin: 0 10px;
+  font-size: 22px;
+}
+
+/* @end Footer */
+
+
+/* @group Github Ribbon - SVG */
+
+.github-corner:hover .octo-arm {
+  animation: octocat-wave 560ms ease-in-out;
+}
+
+@keyframes octocat-wave {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  20% {
+    transform: rotate(-25deg);
+  }
+
+  40% {
+    transform: rotate(10deg);
+  }
+
+  60% {
+   transform: rotate(-25deg);
+  }
+
+  80% {
+    transform: rotate(10deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@media (max-width: 500px) {
+    .github-corner:hover .octo-arm {
+        animation: none;
+    }
+
+    .github-corner .octo-arm {
+        animation: octocat-wave 560ms ease-in-out;
+    }
+}
+
+/* @end Github Ribbon - SVG */

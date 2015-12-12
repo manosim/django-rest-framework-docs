@@ -1,9 +1,13 @@
 {% extends "drfdocs/base.html" %}
 
 {% block content %}
-  <ul>
-  {% for view in views %}
-    <li>{{ view }}</li>
+  <h2>API Endpoints</h2>
+
+  {% for endpoint in endpoints %}
+    <div class="endpoint">
+      <h3 class="title">{{ endpoint.path }}</h3>
+      <p>View Name: {{ endpoint.view_name }}</p>
+      <p>URL Name: {{ endpoint.name }}</p>
+    </div>
   {% endfor %}
-  </ul>
 {% endblock %}
