@@ -3,7 +3,7 @@
 {% block content %}
   {% for endpoint in endpoints %}
     <div class="endpoint">
-      <pre>{{ endpoint.regex }}</pre>
+      <h3 class="title">{{ endpoint.regex }}</h3>
       <p>{{ endpoint.view_name }}</p>
     </div>
   {% endfor %}
