@@ -1,6 +1,8 @@
 {% extends "drfdocs/base.html" %}
 
 {% block content %}
+  <h2>API Endpoints</h2>
+
   {% for endpoint in endpoints %}
     <div class="endpoint">
       <h3 class="title">{{ endpoint.regex }}</h3>
