@@ -1,1 +1,9 @@
 {% extends "drfdocs/base.html" %}
+
+{% block content %}
+  <ul>
+  {% for view in views %}
+    <li>{{ view }}</li>
+  {% endfor %}
+  </ul>
+{% endblock %}
