@@ -7,12 +7,14 @@ class DRFDocsView(TemplateView):
 
     root_urlconf = __import__(settings.ROOT_URLCONF)
     template_name = "drfdocs/home.html"
+    EXCLUDED_APPS = ["admin", "drfdocs"]
     VIEW_NAMES = []
 
     def get_all_view_names(self, urlpatterns):
         for pattern in urlpatterns:
             if isinstance(pattern, RegexURLResolver):
-                self.get_all_view_names(pattern.url_patterns)
+                if pattern.app_name not in self.EXCLUDED_APPS:
+                    self.get_all_view_names(pattern.url_patterns)
             elif isinstance(pattern, RegexURLPattern):
                 view_name = pattern.callback.__name__
                 self.VIEW_NAMES.append(view_name)

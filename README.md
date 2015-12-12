@@ -34,5 +34,5 @@ Finally include the `drfdocs` urls in your `urls.py`:
 
     urlpatterns = [
         ...
-        url(r'^docs/', include('drfdocs.urls', namespace='drfdocs')),
+        url(r'^docs/', include('drfdocs.urls', app_name='drfdocs', namespace='drfdocs')),
     ]
