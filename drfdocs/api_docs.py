@@ -12,7 +12,6 @@ class ApiDocumentation(object):
 
     def get_all_view_names(self, urlpatterns):
         for pattern in urlpatterns:
-            print(pattern)
             if isinstance(pattern, RegexURLResolver) and (pattern.app_name not in self.excluded_apps):
                 self.get_all_view_names(pattern.url_patterns)
             elif isinstance(pattern, RegexURLPattern):
