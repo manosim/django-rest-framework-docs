@@ -5,8 +5,9 @@
 
   {% for endpoint in endpoints %}
     <div class="endpoint">
-      <h3 class="title">{{ endpoint.regex }}</h3>
-      <p>{{ endpoint.view_name }}</p>
+      <h3 class="title">{{ endpoint.url_regex }}</h3>
+      <p>View Name: {{ endpoint.view_name }}</p>
+      <p>URL Name: {{ endpoint.url_name }}</p>
     </div>
   {% endfor %}
 {% endblock %}
