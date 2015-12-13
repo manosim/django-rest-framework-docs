@@ -18,29 +18,29 @@ body {
   padding: 5px 20px;
   margin: 20px 0;
   background-color: #ecf0f1;
-}
 
-.endpoint .title {
-  font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
-  word-wrap: break-word;
-}
+  .title {
+    font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+    word-wrap: break-word;
+  }
 
-.endpoint .methods {
-  margin-bottom: 0;
-}
+  .methods {
+    margin-bottom: 0;
 
-.endpoint .methods .method {
-  padding: 4px 8px;
-  margin-top: 10.5px;
-  color: #FFF;
-}
+     .method {
+      padding: 4px 8px;
+      margin-top: 10.5px;
+      color: #FFF;
 
-.endpoint .methods .method.get { background-color: #18bc9c; }
-.endpoint .methods .method.post { background-color: #f39c12; }
-.endpoint .methods .method.put { background-color: #028d94; }
-.endpoint .methods .method.patch { background-color: #028d94; }
-.endpoint .methods .method.delete { background-color: #e74c3c; }
-.endpoint .methods .method.options { background-color: #3498db; }
+      &.get { background-color: #18bc9c; }
+      &.post { background-color: #f39c12; }
+      &.patch { background-color: #028d94; }
+      &.put { background-color: #028d94; }
+      &.delete { background-color: #e74c3c; }
+      &.options { background-color: #3498db; }
+    }
+  }
+}
 
 /* @end Endpoint */
 
@@ -51,15 +51,15 @@ body {
   text-align: center;
   padding: 20px;
   margin-bottom: 20px;
-}
 
-.footer .links {
-  padding: 20px 0;
-}
+  .links {
+    padding: 20px 0;
 
-.footer .links .fa {
-  margin: 0 10px;
-  font-size: 22px;
+   .fa {
+      margin: 0 10px;
+      font-size: 22px;
+    }
+  }
 }
 
 /* @end Footer */
@@ -72,29 +72,12 @@ body {
 }
 
 @keyframes octocat-wave {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  20% {
-    transform: rotate(-25deg);
-  }
-
-  40% {
-    transform: rotate(10deg);
-  }
-
-  60% {
-   transform: rotate(-25deg);
-  }
-
-  80% {
-    transform: rotate(10deg);
-  }
-
-  100% {
-    transform: rotate(0deg);
-  }
+  0% { transform: rotate(0deg); }
+  20% { transform: rotate(-25deg); }
+  40% { transform: rotate(10deg); }
+  60% { transform: rotate(-25deg); }
+  80% { transform: rotate(10deg); }
+  100% { transform: rotate(0deg); }
 }
 
 @media (max-width: 500px) {
