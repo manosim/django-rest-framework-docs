@@ -1,5 +1,6 @@
-# drf-docs [![Build Status](https://travis-ci.com/ekonstantinidis/drf-docs.svg?token=9QR4ewbqbkEmHps6q5sq&branch=master)](https://travis-ci.com/ekonstantinidis/drf-docs) [![PyPI Version](https://img.shields.io/pypi/v/drfdocs.svg](https://travis-ci.com/ekonstantinidis/drf-docs)
-Documentation for Web APIs made with Django Rest Framework.
+# drf-docs [![travis][travis-image]][travis-url] [![pypi][pypi-image]][pypi-url]
+
+Document Web APIs made with Django Rest Framework.
 
 
 ### Prerequisites
@@ -36,3 +37,9 @@ Finally include the `drfdocs` urls in your `urls.py`:
         ...
         url(r'^docs/', include('drfdocs.urls', app_name='drfdocs', namespace='drfdocs')),
     ]
+
+[travis-image]: https://travis-ci.com/ekonstantinidis/drf-docs.svg?token=9QR4ewbqbkEmHps6q5sq&branch=master
+[travis-url]: https://travis-ci.com/ekonstantinidis/drf-docs
+
+[pypi-image]: https://img.shields.io/pypi/v/drfdocs.svg
+[pypi-url]: https://pypi.python.org/pypi/drffocs/
