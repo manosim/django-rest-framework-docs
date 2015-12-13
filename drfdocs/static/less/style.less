@@ -25,10 +25,22 @@ body {
   word-wrap: break-word;
 }
 
-.endpoint .methods .method {
-  border: 1px solid #2c3e50;
-  padding: 3px 8px;
+.endpoint .methods {
+  margin-bottom: 0;
 }
+
+.endpoint .methods .method {
+  padding: 4px 8px;
+  margin-top: 10.5px;
+  color: #FFF;
+}
+
+.endpoint .methods .method.get { background-color: #18bc9c; }
+.endpoint .methods .method.post { background-color: #f39c12; }
+.endpoint .methods .method.put { background-color: #028d94; }
+.endpoint .methods .method.patch { background-color: #028d94; }
+.endpoint .methods .method.delete { background-color: #e74c3c; }
+.endpoint .methods .method.options { background-color: #3498db; }
 
 /* @end Endpoint */
 

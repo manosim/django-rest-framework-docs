@@ -10,16 +10,18 @@
 
     {% for endpoint in group.list %}
       <div class="endpoint">
-        <h4 class="title">{{ endpoint.path }}</h4>
-
-        <ul class="list-inline methods">
-          {% for method in endpoint.allowed_methods %}
-            <li class="method">{{ method }}</li>
-          {% endfor %}
-        </ul>
-
-        <p>View Name: {{ endpoint.view_name }}</p>
-        <p>URL Name: {{ endpoint.name }}</p>
+        <div class="row">
+          <div class="col-md-7">
+            <h4 class="title">{{ endpoint.path }}</h4>
+          </div>
+          <div class="col-md-5 text-right">
+            <ul class="list-inline methods">
+              {% for method in endpoint.allowed_methods %}
+                <li class="method {{ method|lower }}">{{ method }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
 
         {% if endpoint.fields %}
         <p>Fields:</p>
