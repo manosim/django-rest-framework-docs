@@ -10,6 +10,7 @@ class ApiEndpoint(object):
         self.path = self.__get_path__(parent_pattern)
         self.allowed_methods = self.__get_allowed_methods__()
         self.view_name = pattern.callback.__name__
+        self.fields = self.__get_serializer_fields__()
 
     def __get_path__(self, parent_pattern):
         if parent_pattern:
@@ -19,3 +20,13 @@ class ApiEndpoint(object):
 
     def __get_allowed_methods__(self):
         return [m.upper() for m in self.callback.cls.http_method_names if hasattr(self.callback.cls, m)]
+
+    def __get_serializer_fields__(self):
+        fields = []
+
+        if hasattr(self.callback.cls, 'serializer_class') and hasattr(self.callback.cls.serializer_class, 'get_fields'):
+            serializer = self.callback.cls.serializer_class
+            if hasattr(serializer, 'get_fields'):
+                fields = [{"name": key, "type": str(value.__class__.__name__)} for key, value in serializer().get_fields().items()]
+
+        return fields
