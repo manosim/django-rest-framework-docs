@@ -1,7 +1,25 @@
+/* @group Colours */
+
+@BgColor: #FEFEFE;
+
+@GetColor: #18bc9c;
+@PostColor: #f39c12;
+@PutColor: #028d94;
+@PatchColor: #028d94;
+@DeleteColor: #e74c3c;
+@OptionsColor: #3498db;
+
+/* @end Colours */
+
+
 /* @group Misc */
 
 body {
-  background-color: #FEFEFE;
+  background-color: @BgColor;
+}
+
+.navbar {
+  margin-top: 20px;
 }
 
 .jumbotron {
@@ -32,12 +50,12 @@ body {
       margin-top: 10.5px;
       color: #FFF;
 
-      &.get { background-color: #18bc9c; }
-      &.post { background-color: #f39c12; }
-      &.patch { background-color: #028d94; }
-      &.put { background-color: #028d94; }
-      &.delete { background-color: #e74c3c; }
-      &.options { background-color: #3498db; }
+      &.get { background-color: @GetColor; }
+      &.post { background-color: @PostColor; }
+      &.patch { background-color: @PutColor; }
+      &.put { background-color: @PatchColor; }
+      &.delete { background-color: @DeleteColor; }
+      &.options { background-color: @OptionsColor; }
     }
   }
 }
@@ -80,7 +98,11 @@ body {
   100% { transform: rotate(0deg); }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 768px) {
+    .github-corner {
+      display: none;
+    }
+
     .github-corner:hover .octo-arm {
         animation: none;
     }
