@@ -9,7 +9,7 @@ class ApiEndpoint(object):
         self.name = pattern.name
         self.path = self.__get_path__(parent_pattern)
         self.allowed_methods = self.__get_allowed_methods__()
-        # self.view_name = pattern.callback.__name__
+        self.view_name = pattern.callback.__name__
 
     def __get_path__(self, parent_pattern):
         if parent_pattern:
