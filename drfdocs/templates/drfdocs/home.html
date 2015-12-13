@@ -6,6 +6,11 @@
   {% for endpoint in endpoints %}
     <div class="endpoint">
       <h3 class="title">{{ endpoint.path }}</h3>
+      <ul class="list-inline methods">
+        {% for method in endpoint.allowed_methods %}
+          <li class="method">{{ method }}</li>
+        {% endfor %}
+      </ul>
       <p>View Name: {{ endpoint.view_name }}</p>
       <p>URL Name: {{ endpoint.name }}</p>
     </div>

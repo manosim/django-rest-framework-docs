@@ -22,6 +22,7 @@ body {
 
 .endpoint .title {
   font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+  word-wrap: break-word;
 }
 
 /* @end Endpoint */
