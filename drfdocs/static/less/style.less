@@ -1,0 +1,115 @@
+/* @group Colours */
+
+@BgColor: #FEFEFE;
+
+@GetColor: #18bc9c;
+@PostColor: #f39c12;
+@PutColor: #028d94;
+@PatchColor: #028d94;
+@DeleteColor: #e74c3c;
+@OptionsColor: #3498db;
+
+/* @end Colours */
+
+
+/* @group Misc */
+
+body {
+  background-color: @BgColor;
+}
+
+.navbar {
+  margin-top: 20px;
+}
+
+.jumbotron {
+  margin: 50px 0 40px;
+  text-align: center;
+}
+
+/* @end Misc */
+
+
+/* @group Endpoint */
+
+.endpoint {
+  padding: 5px 20px;
+  margin: 20px 0;
+  background-color: #ecf0f1;
+
+  .title {
+    font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+    word-wrap: break-word;
+  }
+
+  .methods {
+    margin-bottom: 0;
+
+     .method {
+      padding: 4px 8px;
+      margin-top: 10.5px;
+      color: #FFF;
+
+      &.get { background-color: @GetColor; }
+      &.post { background-color: @PostColor; }
+      &.patch { background-color: @PutColor; }
+      &.put { background-color: @PatchColor; }
+      &.delete { background-color: @DeleteColor; }
+      &.options { background-color: @OptionsColor; }
+    }
+  }
+}
+
+/* @end Endpoint */
+
+
+/* @group Footer */
+
+.footer {
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 20px;
+
+  .links {
+    padding: 20px 0;
+
+   .fa {
+      margin: 0 10px;
+      font-size: 22px;
+    }
+  }
+}
+
+/* @end Footer */
+
+
+/* @group Github Ribbon - SVG */
+
+.github-corner:hover .octo-arm {
+  animation: octocat-wave 560ms ease-in-out;
+}
+
+@keyframes octocat-wave {
+  0% { transform: rotate(0deg); }
+  20% { transform: rotate(-25deg); }
+  40% { transform: rotate(10deg); }
+  60% { transform: rotate(-25deg); }
+  80% { transform: rotate(10deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@media (max-width: 768px) {
+    .github-corner {
+      display: none;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: none;
+    }
+
+    .github-corner .octo-arm {
+        animation: octocat-wave 560ms ease-in-out;
+    }
+}
+
+/* @end Github Ribbon - SVG */

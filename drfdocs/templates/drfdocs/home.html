@@ -1,25 +1,40 @@
 {% extends "drfdocs/base.html" %}
 
+{% block apps_menu %}
+{% regroup endpoints by name_parent as endpoints_grouped %}
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Jump To <span class="caret"></span></a>
+  <ul class="dropdown-menu">
+    <!-- <li><a href="#dd">ddsf{{group.grouper}}</a></li> -->
+    {% for group in endpoints_grouped %}
+      <li><a href="#{{ group.grouper|lower }}">{{ group.grouper }}</a></li>
+    {% endfor %}
+  </ul>
+</li>
+{% endblock %}
+
+
 {% block content %}
 
-  <h1>API Endpoints</h1>
   {% regroup endpoints by name_parent as endpoints_grouped %}
 
   {% for group in endpoints_grouped %}
-    <h1>{{group.grouper}}</h1>
+    <h1 id="{{ group.grouper|lower }}">{{group.grouper}}</h1>
 
     {% for endpoint in group.list %}
       <div class="endpoint">
-        <h4 class="title">{{ endpoint.path }}</h4>
-
-        <ul class="list-inline methods">
-          {% for method in endpoint.allowed_methods %}
-            <li class="method">{{ method }}</li>
-          {% endfor %}
-        </ul>
-
-        <p>View Name: {{ endpoint.view_name }}</p>
-        <p>URL Name: {{ endpoint.name }}</p>
+        <div class="row">
+          <div class="col-md-7">
+            <h4 class="title">{{ endpoint.path }}</h4>
+          </div>
+          <div class="col-md-5 text-right">
+            <ul class="list-inline methods">
+              {% for method in endpoint.allowed_methods %}
+                <li class="method {{ method|lower }}">{{ method }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
 
         {% if endpoint.fields %}
         <p>Fields:</p>
@@ -28,6 +43,8 @@
             <li class="field">{{ field.name }}: {{ field.type }}</li>
           {% endfor %}
           </ul>
+        {% else %}
+        <p>No fields.</p>
         {% endif %}
 
       </div>

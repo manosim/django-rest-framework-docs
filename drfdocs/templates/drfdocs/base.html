@@ -9,14 +9,15 @@
 
     <title>DRF Docs</title>
 
-    <!-- Bootstrap -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Flatly -->
+    <!-- Bootstrap & Flatly -->
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/flatly/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- Custom Style -->
-    <link href="{% static "css/style.css" %}" rel="stylesheet">
+    <link rel="stylesheet/less" type="text/css" href="{% static "less/style.less" %}" />
+
+    <!-- LESS CSS -->
+     <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.3/less.min.js"></script>
   </head>
 
   <body>
@@ -29,9 +30,37 @@
     </a>
 
     <div class="container">
+
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#drfdoc-navbar" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">DRF Docs</a>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="drfdoc-navbar">
+            <form class="navbar-form navbar-right" role="search">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+              </div>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+              {% block apps_menu %}{% endblock %}
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+
       <div class="jumbotron">
         <h1>DRF Docs</h1>
-        <h3>Documentation for Web APIs made with <a href="http://www.django-rest-framework.org/" target="_blank">Django Rest Framework</a>.</h3>
+        <h3>Document Web APIs made with <a href="http://www.django-rest-framework.org/" target="_blank">Django Rest Framework</a>.</h3>
       </div>
 
       {% block content %}{% endblock %}
@@ -45,5 +74,10 @@
         Copyright © 2015 Emmanouil Konstantinidis.
       </div>
     </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo= sha512-2e8qq0ETcfWRI4HJBzQiA3UoyFk6tbNyG+qSaIBZLyW9Xf3sWZHN/lxe9fTh1U45DpPf07yj94KsUHHWe4Yk1A==" crossorigin="anonymous"></script>
   </body>
 </html>
