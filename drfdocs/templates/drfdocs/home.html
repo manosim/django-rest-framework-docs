@@ -1,18 +1,32 @@
 {% extends "drfdocs/base.html" %}
 
 {% block content %}
+
   <h2>API Endpoints</h2>
 
   {% for endpoint in endpoints %}
     <div class="endpoint">
       <h3 class="title">{{ endpoint.path }}</h3>
+
       <ul class="list-inline methods">
         {% for method in endpoint.allowed_methods %}
           <li class="method">{{ method }}</li>
         {% endfor %}
       </ul>
+
       <p>View Name: {{ endpoint.view_name }}</p>
       <p>URL Name: {{ endpoint.name }}</p>
+
+      {% if endpoint.fields %}
+      <p>Fields:</p>
+        <ul class="list fields">
+        {% for field in endpoint.fields %}
+          <li class="field">{{ field.name }}: {{ field.type }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+
     </div>
   {% endfor %}
+
 {% endblock %}
