@@ -5,8 +5,10 @@
   <h2>API Endpoints</h2>
 
   {% for endpoint in endpoints %}
+    {{endpoint.name_parent}}
+
     <div class="endpoint">
-      <h3 class="title">{{ endpoint.path }}</h3>
+      <h4 class="title">{{ endpoint.path }}</h4>
 
       <ul class="list-inline methods">
         {% for method in endpoint.allowed_methods %}
