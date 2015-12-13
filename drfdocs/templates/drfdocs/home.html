@@ -30,6 +30,8 @@
             <li class="field">{{ field.name }}: {{ field.type }}</li>
           {% endfor %}
           </ul>
+        {% else %}
+        <p>No fields.</p>
         {% endif %}
 
       </div>
