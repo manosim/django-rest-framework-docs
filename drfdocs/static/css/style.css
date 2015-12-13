@@ -22,6 +22,12 @@ body {
 
 .endpoint .title {
   font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+  word-wrap: break-word;
+}
+
+.endpoint .methods .method {
+  border: 1px solid #2c3e50;
+  padding: 3px 8px;
 }
 
 /* @end Endpoint */
