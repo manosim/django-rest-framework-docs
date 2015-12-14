@@ -1,4 +1,5 @@
-# drf-docs [![travis][travis-image]][travis-url] [![pypi][pypi-image]][pypi-url]
+# Django Rest Framework Docs [![travis][travis-image]][travis-url] [![pypi][pypi-image]][pypi-url]
+
 Document Web APIs made with Django Rest Framework.
 
 
@@ -21,7 +22,7 @@ Document Web APIs made with Django Rest Framework.
 
 Install using pip:
 
-    pip install django-rest-framework-docs
+    pip install djangorestframeworkdocs
 
 Add 'rest_framework_docs' to your `INSTALLED_APPS` setting:
 
@@ -30,15 +31,15 @@ Add 'rest_framework_docs' to your `INSTALLED_APPS` setting:
         'rest_framework_docs',
     )
 
-Finally include the `drfdocs` urls in your `urls.py`:
+Finally include the `rest_framework_docs` urls in your `urls.py`:
 
     urlpatterns = [
         ...
-        url(r'^docs/', include('drfdocs.urls', app_name='drfdocs', namespace='drfdocs')),
+        url(r'^docs/', include('rest_framework_docs.urls', app_name='rest_framework_docs', namespace='rest_framework_docs')),
     ]
 
 [travis-image]: https://travis-ci.com/ekonstantinidis/django-rest-framework-docs.svg?token=9QR4ewbqbkEmHps6q5sq&branch=master
 [travis-url]: https://travis-ci.com/ekonstantinidis/django-rest-framework-docs
 
-[pypi-image]: https://img.shields.io/pypi/v/django-rest-framework-docs.svg
-[pypi-url]: https://pypi.python.org/pypi/django-rest-framework-docs/
+[pypi-image]: https://img.shields.io/pypi/v/djangorestframeworkdocs.svg
+[pypi-url]: https://pypi.python.org/pypi/djangorestframeworkdocs/
