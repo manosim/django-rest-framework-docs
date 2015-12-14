@@ -40,6 +40,10 @@ INSTALLED_APPS = (
 
     'rest_framework',
     'rest_framework_docs',
+
+    'project.accounts',
+    'project.organisations',
+
 )
 
 MIDDLEWARE_CLASSES = (
@@ -84,6 +88,18 @@ DATABASES = {
     }
 }
 
+# Django REST Framework
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    )
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
