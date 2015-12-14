@@ -34,29 +34,37 @@ body {
 
 .endpoint {
   padding: 5px 20px;
-  margin: 20px 0;
+  margin: 0;
   background-color: #ecf0f1;
 
-  .title {
-    font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
-    word-wrap: break-word;
+  .panel-heading {
+    padding: 5px;
+
+    .title {
+      margin-top: 6px;
+      font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+      word-wrap: break-word;
+    }
+
+    .methods {
+      margin-bottom: 0;
+
+       .method {
+        padding: 4px 8px;
+        color: #FFF;
+
+        &.get { background-color: @GetColor; }
+        &.post { background-color: @PostColor; }
+        &.patch { background-color: @PutColor; }
+        &.put { background-color: @PatchColor; }
+        &.delete { background-color: @DeleteColor; }
+        &.options { background-color: @OptionsColor; }
+      }
+    }
   }
 
-  .methods {
-    margin-bottom: 0;
-
-     .method {
-      padding: 4px 8px;
-      margin-top: 10.5px;
-      color: #FFF;
-
-      &.get { background-color: @GetColor; }
-      &.post { background-color: @PostColor; }
-      &.patch { background-color: @PutColor; }
-      &.put { background-color: @PatchColor; }
-      &.delete { background-color: @DeleteColor; }
-      &.options { background-color: @OptionsColor; }
-    }
+  .panel-body {
+    padding: 0;
   }
 }
 
