@@ -3,7 +3,7 @@ import sys
 import subprocess
 
 
-FLAKE8_ARGS = ['rest_framework_docs', '--ignore=E501']
+FLAKE8_ARGS = ['demo/project/', 'rest_framework_docs', '--ignore=E501']
 
 
 def exit_on_failure(command, message=None):
