@@ -5,7 +5,7 @@ from rest_framework_docs.api_endpoint import ApiEndpoint
 
 
 class ApiDocumentation(object):
-    excluded_apps = ["admin", "drfdocs"]
+    excluded_apps = ["admin", "rest_framework_docs"]
     excluded_endpoints = ["serve"]
 
     def __init__(self):
