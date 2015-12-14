@@ -1,9 +1,11 @@
 language: python
 
 python:
+  - "2.7"
   - "3.3"
   - "3.4"
   - "3.5"
+  - "pypy"
   - "pypy3"
 
 install:
@@ -11,3 +13,7 @@ install:
 
 script:
  - python runtests.py
+
+notifications:
+  slack:
+    secure: xcxRhPzGhq27OR9MG2WCPaE/OgZzC4S4HiX/EK9l/VID6vXyYV2ZQLbmV97nAkBqqP8CDQJ3Ynx8jWJGuSpjYEnxGjiSaOqXZCxT9aWFQb3EhNkriyBXVewxiYEF+3IscCcefsJNlNILjwGgDybyx20DttEh2+6geS+pCNiXKk1m6BjozJ8oJeVeTLf2uu9rPa2zkVJPnQXDTYY2DxCcDnBWRxAwySNsD0bwQESLDDsj1fbdqUt9KSw0R6QTAHnmV/coHaYxQi+xwPJpFXhiQvQkfcQt4/UMpO4vNqOOBvMfzpXZ5V39CU8eUFQYv/9eTOMOFMW9oVrCw6Cgps9Vivzz2U1gbctU5CbchbTS0+Z2PJJzpYnzoP5VSqvTlOChY9czMfpC9KHaCH+AeHmRMjmgyWqi+u8o6XsVVKJtwJTusDeZeR+zz94N60qAAa9fXZAEJH/WtPdAeWwsge0hLu2EeNbL2jiMVl66R5qfJm402zS104Y6K2vbzvpT0QlOeeNoMB5QUyY34WMbkR2/+fyH9BRhFNqG1hMp2XvmAJWuSIfEjKgjY8Fmtc0EQjeflIaYPY9BL2Q6rKDY6AWm1j9RKKN1uaj3aQckbh1X1x/unK2PfFe8UbvDBtFgHm98oD5QIYvQvZhqYnce4GCwbrZXsVbeD8gois+94BmokC0=
