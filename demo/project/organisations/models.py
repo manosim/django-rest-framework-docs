@@ -5,10 +5,6 @@ from project.accounts.models import User
 
 class Organisation(models.Model):
 
-    class Meta:
-        verbose_name_plural = "Organisations"
-        ordering = ['name']
-
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
@@ -18,9 +14,6 @@ class Organisation(models.Model):
     members = models.ManyToManyField(User, through='Membership', through_fields=('organisation', 'user'))
 
     is_active = models.BooleanField(default=False)
-
-    def __str__(self):
-        return self.name
 
 
 class Membership(models.Model):

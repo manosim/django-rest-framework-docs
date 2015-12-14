@@ -11,7 +11,7 @@ A demo project to get you started with DRF docs development.
     env/bin/pip install -r requirements.txt
 
     # Install Django Rest Framework Docs
-    pip install -e ../
+    env/bin/pip install -e ../
 
     # Run the project
     env/bin/python manage.py runserver
