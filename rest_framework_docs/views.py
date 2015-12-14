@@ -1,5 +1,5 @@
 from django.views.generic.base import TemplateView
-from drfdocs.api_docs import ApiDocumentation
+from rest_framework_docs.api_docs import ApiDocumentation
 
 
 class DRFDocsView(TemplateView):

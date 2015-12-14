@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from drfdocs.views import DRFDocsView
+from rest_framework_docs.views import DRFDocsView
 
 urlpatterns = [
     # Url to view the API Docs
