@@ -38,6 +38,9 @@ Finally include the `rest_framework_docs` urls in your `urls.py`:
         url(r'^docs/', include('rest_framework_docs.urls')),
     ]
 
+### Development & Demo Project
+Included in this repo you can find the demo project(at `/demo`). It is a project with *Django* & *Django Rest Framework* that will allow you to work with this project. For more information on how you can set it up please readme the [README.md](demo/README.md) of the demo project.
+
 ### Settings
 
     REST_FRAMEWORK_DOCS = {
