@@ -4,7 +4,7 @@ from rest_framework_docs.api_docs import ApiDocumentation
 
 class DRFDocsView(TemplateView):
 
-    template_name = "drfdocs/home.html"
+    template_name = "rest_framework_docs/home.html"
 
     def get_context_data(self, **kwargs):
         context = super(DRFDocsView, self).get_context_data(**kwargs)
