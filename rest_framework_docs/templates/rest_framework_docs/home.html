@@ -20,34 +20,48 @@
   {% for group in endpoints_grouped %}
     <h1 id="{{ group.grouper|lower }}">{{group.grouper}}</h1>
 
+    <div class="panel-group" role="tablist">
+
     {% for endpoint in group.list %}
-      <div class="endpoint">
-        <div class="row">
-          <div class="col-md-7">
-            <h4 class="title">{{ endpoint.path }}</h4>
-          </div>
-          <div class="col-md-5 text-right">
-            <ul class="list-inline methods">
-              {% for method in endpoint.allowed_methods %}
-                <li class="method {{ method|lower }}">{{ method }}</li>
-              {% endfor %}
-            </ul>
+
+      <div class="panel panel-default endpoint">
+
+        <div class="panel-heading" role="tab" data-toggle="collapse" data-target="#{{ endpoint.path|slugify }}">
+          <div class="row">
+            <div class="col-md-7">
+              <h4 class="panel-title title">
+                <i class="fa fa-link"></i> {{ endpoint.path }}
+              </h4>
+            </div>
+
+            <div class="col-md-5 text-right">
+              <ul class="list-inline methods">
+                {% for method in endpoint.allowed_methods %}
+                  <li class="method {{ method|lower }}">{{ method }}</li>
+                {% endfor %}
+              </ul>
+            </div>
           </div>
         </div>
 
-        {% if endpoint.fields %}
-        <p>Fields:</p>
-          <ul class="list fields">
-          {% for field in endpoint.fields %}
-            <li class="field">{{ field.name }}: {{ field.type }}</li>
-          {% endfor %}
-          </ul>
-        {% else %}
-        <p>No fields.</p>
-        {% endif %}
-
+        <div id="{{ endpoint.path|slugify }}" class="panel-collapse collapse" role="tabpanel">
+          <div class="panel-body">
+            {% if endpoint.fields %}
+            <p>Fields:</p>
+              <ul class="list fields">
+              {% for field in endpoint.fields %}
+                <li class="field">{{ field.name }}: {{ field.type }}</li>
+              {% endfor %}
+              </ul>
+            {% else %}
+            <p>No fields.</p>
+            {% endif %}
+          </div>
+        </div>
       </div>
     {% endfor %}
+
+    </div>
 
   {% endfor %}
 

@@ -1,6 +1,9 @@
 /* @group Colours */
 
+@ThemeAlt: #c9c9c9;
+
 @BgColor: #FEFEFE;
+@AccordionBgColor: #ecf0f1;
 
 @GetColor: #18bc9c;
 @PostColor: #f39c12;
@@ -34,30 +37,53 @@ body {
 
 .endpoint {
   padding: 5px 20px;
-  margin: 20px 0;
+  margin: 0;
   background-color: #ecf0f1;
 
-  .title {
-    font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
-    word-wrap: break-word;
-  }
+  &:hover {
+    background-color: darken(@AccordionBgColor, 5%);
 
-  .methods {
-    margin-bottom: 0;
-
-     .method {
-      padding: 4px 8px;
-      margin-top: 10.5px;
-      color: #FFF;
-
-      &.get { background-color: @GetColor; }
-      &.post { background-color: @PostColor; }
-      &.patch { background-color: @PutColor; }
-      &.put { background-color: @PatchColor; }
-      &.delete { background-color: @DeleteColor; }
-      &.options { background-color: @OptionsColor; }
+    .panel-heading {
+      background-color: darken(@AccordionBgColor, 5%);
     }
   }
+
+  .panel-heading {
+    padding: 5px;
+    cursor: pointer;
+
+    .title {
+      margin-top: 6px;
+      font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+      word-wrap: break-word;
+
+      .fa {
+        color: darken(@AccordionBgColor, 15%);
+      }
+    }
+
+    .methods {
+      margin-bottom: 0;
+
+       .method {
+        padding: 4px 8px;
+        color: #FFF;
+
+        &.get { background-color: @GetColor; }
+        &.post { background-color: @PostColor; }
+        &.patch { background-color: @PutColor; }
+        &.put { background-color: @PatchColor; }
+        &.delete { background-color: @DeleteColor; }
+        &.options { background-color: @OptionsColor; }
+      }
+    }
+  }
+
+  .panel-body {
+    padding: 0;
+  }
+
+  > .panel-heading +.panel-collapse > .panel-body { border: 0; }
 }
 
 /* @end Endpoint */
