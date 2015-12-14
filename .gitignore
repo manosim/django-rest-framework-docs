@@ -3,3 +3,5 @@ __pycache__/
 
 env/
 djangorestframeworkdocs.egg-info/
+
+demo/db.sqlite3
