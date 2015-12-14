@@ -5,8 +5,6 @@ from rest_framework_docs.api_endpoint import ApiEndpoint
 
 
 class ApiDocumentation(object):
-    excluded_apps = ["admin", "rest_framework_docs"]
-    excluded_endpoints = ["serve"]
 
     def __init__(self):
         self.endpoints = []
@@ -15,9 +13,9 @@ class ApiDocumentation(object):
 
     def get_all_view_names(self, urlpatterns, parent_pattern=None):
         for pattern in urlpatterns:
-            if isinstance(pattern, RegexURLResolver) and (pattern.app_name not in self.excluded_apps):
+            if isinstance(pattern, RegexURLResolver):
                 self.get_all_view_names(urlpatterns=pattern.url_patterns, parent_pattern=pattern)
-            elif isinstance(pattern, RegexURLPattern) and (pattern.callback.__name__ not in self.excluded_endpoints) and self._is_drf_view(pattern):
+            elif isinstance(pattern, RegexURLPattern) and self._is_drf_view(pattern):
                 api_endpoint = ApiEndpoint(pattern, parent_pattern)
                 self.endpoints.append(api_endpoint)
 
