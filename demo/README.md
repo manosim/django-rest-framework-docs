@@ -15,3 +15,11 @@ A demo project to get you started with DRF docs development.
 
     # Run the project
     env/bin/python manage.py runserver
+
+
+### Viewing DRF Docs
+Once you install and run the project go to [http://0.0.0.0:8000/docs/](http://0.0.0.0:8000/docs/).
+
+
+### Note
+The demo project has no functionality at all. Its purpose is **only** for viewing the docs and developing DRF docs further.
