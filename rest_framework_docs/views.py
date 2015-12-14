@@ -1,9 +1,13 @@
-from docs import DocumentationGenerator
-from django.shortcuts import render_to_response
-from django.template.context import RequestContext
+from django.views.generic.base import TemplateView
+from rest_framework_docs.api_docs import ApiDocumentation
 
 
-def documentation(request, *args, **kwargs):
-    docs = DocumentationGenerator().get_docs(as_objects=True)
-    return render_to_response("rest_framework_docs/docs.html", {'docs': docs},
-                              context_instance=RequestContext(request))
+class DRFDocsView(TemplateView):
+
+    template_name = "drfdocs/home.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(DRFDocsView, self).get_context_data(**kwargs)
+        docs = ApiDocumentation()
+        context['endpoints'] = docs.get_endpoints()
+        return context

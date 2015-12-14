@@ -1,11 +1,7 @@
-from django.conf.urls import patterns, include, url
-from views import documentation
+from django.conf.urls import url
+from rest_framework_docs.views import DRFDocsView
 
-# Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
-
-urlpatterns = patterns('',
-    # Examples:
-    url(r'^/?$', documentation, name='api-documentation'),
-)
+urlpatterns = [
+    # Url to view the API Docs
+    url(r'^$', DRFDocsView.as_view(), name='drfdocs'),
+]

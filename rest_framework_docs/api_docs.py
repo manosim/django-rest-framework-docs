@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.core.urlresolvers import RegexURLResolver, RegexURLPattern
-from drfdocs.api_endpoint import ApiEndpoint
 from rest_framework.views import APIView
+from rest_framework_docs.api_endpoint import ApiEndpoint
 
 
 class ApiDocumentation(object):
