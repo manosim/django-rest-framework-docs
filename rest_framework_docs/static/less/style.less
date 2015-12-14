@@ -1,6 +1,9 @@
 /* @group Colours */
 
+@ThemeAlt: #c9c9c9;
+
 @BgColor: #FEFEFE;
+@AccordionBgColor: #ecf0f1;
 
 @GetColor: #18bc9c;
 @PostColor: #f39c12;
@@ -37,13 +40,26 @@ body {
   margin: 0;
   background-color: #ecf0f1;
 
+  &:hover {
+    background-color: darken(@AccordionBgColor, 10%);
+
+    .panel-heading {
+      background-color: darken(@AccordionBgColor, 10%);
+    }
+  }
+
   .panel-heading {
     padding: 5px;
+    cursor: pointer;
 
     .title {
       margin-top: 6px;
       font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
       word-wrap: break-word;
+
+      .fa {
+        color: darken(@AccordionBgColor, 15%);
+      }
     }
 
     .methods {
@@ -66,6 +82,8 @@ body {
   .panel-body {
     padding: 0;
   }
+
+  > .panel-heading +.panel-collapse > .panel-body { border: 0; }
 }
 
 /* @end Endpoint */

@@ -25,11 +25,12 @@
     {% for endpoint in group.list %}
 
       <div class="panel panel-default endpoint">
-        <div class="panel-heading" role="tab" id="headingOne">
+
+        <div class="panel-heading" role="tab" id="headingOne" data-toggle="collapse" data-target="#{{ endpoint.path|slugify }}">
           <div class="row">
             <div class="col-md-7">
               <h4 class="panel-title title">
-                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#{{ endpoint.path|slugify }}" aria-expanded="true" aria-controls="{{ endpoint.path|slugify }}">{{ endpoint.path }}</a>
+                <i class="fa fa-link"></i> {{ endpoint.path }}
               </h4>
             </div>
 
@@ -42,7 +43,8 @@
             </div>
           </div>
         </div>
-        <div id="{{ endpoint.path|slugify }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+
+        <div id="{{ endpoint.path|slugify }}" class="panel-collapse collapse" role="tabpanel">
           <div class="panel-body">
             {% if endpoint.fields %}
             <p>Fields:</p>
