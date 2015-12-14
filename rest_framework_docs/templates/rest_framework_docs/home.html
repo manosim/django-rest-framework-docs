@@ -17,7 +17,9 @@
 
   {% regroup endpoints by name_parent as endpoints_grouped %}
 
+  {% if endpoints_grouped %}
   {% for group in endpoints_grouped %}
+
     <h1 id="{{ group.grouper|lower }}">{{group.grouper}}</h1>
 
     <div class="panel-group" role="tablist">
@@ -64,5 +66,8 @@
     </div>
 
   {% endfor %}
+  {% else %}
+    <h2 class="center">There are currently no api endpoints to document.</h2>
+  {% endif %}
 
 {% endblock %}
