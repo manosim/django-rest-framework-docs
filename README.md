@@ -38,6 +38,12 @@ Finally include the `rest_framework_docs` urls in your `urls.py`:
         url(r'^docs/', include('rest_framework_docs.urls')),
     ]
 
+### Settings
+
+    REST_FRAMEWORK_DOCS = {
+        'HIDDEN': True  # Default: False
+    }
+
 ### Roadmap
 
   - [ ] Support Python 2 & Python 3
