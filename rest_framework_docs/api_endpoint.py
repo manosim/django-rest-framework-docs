@@ -27,6 +27,15 @@ class ApiEndpoint(object):
         if hasattr(self.callback.cls, 'serializer_class') and hasattr(self.callback.cls.serializer_class, 'get_fields'):
             serializer = self.callback.cls.serializer_class
             if hasattr(serializer, 'get_fields'):
-                fields = [{"name": key, "type": str(value.__class__.__name__)} for key, value in serializer().get_fields().items()]
+                fields = [{
+                    "name": key,
+                    "type": str(field.__class__.__name__),
+                    "required": field.required
+                } for key, field in serializer().get_fields().items()]
+
+                # for name, field in serializer().get_fields().items():
+                #     print(name)
+                #     print(dir(field))
+                #     print('--------')
 
         return fields
