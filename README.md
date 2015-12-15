@@ -3,10 +3,10 @@
 Document Web APIs made with Django Rest Framework.
 
 
-### Prerequisites
+### Supports
 
-  - Python (3.3, 3.4, 3.5)
-  - Django (1.8, 1.9)
+  - Python (2.7, 3.3, 3.4, 3.5)
+  - Django (1.7, 1.8, 1.9)
   - Django Rest Framework (3+)
 
 
@@ -49,6 +49,7 @@ Included in this repo you can find the demo project(at `/demo`). It is a project
 
 ### Roadmap
 
+  - [ ] Creade demo app
   - [ ] Support Python 2 & Python 3
   - [ ] Support DRF 3+
   - [ ] Open Pull Request to include in DRF
