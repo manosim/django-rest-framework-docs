@@ -33,9 +33,7 @@ class ApiEndpoint(object):
                     "required": field.required
                 } for key, field in serializer().get_fields().items()]
 
-                # for name, field in serializer().get_fields().items():
-                #     print(name)
-                #     print(dir(field))
-                #     print('--------')
+                # FIXME:
+                # Show more attibutes of `field`?
 
         return fields
