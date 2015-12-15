@@ -52,7 +52,7 @@
             <p>Fields:</p>
               <ul class="list fields">
               {% for field in endpoint.fields %}
-                <li class="field">{{ field.name }}: {{ field.type }}</li>
+                <li class="field">{{ field.name }}: {{ field.type }} {% if field.required %}<span class="label label-primary label-required" title="Required">R</span>{% endif %}</li>
               {% endfor %}
               </ul>
             {% else %}
