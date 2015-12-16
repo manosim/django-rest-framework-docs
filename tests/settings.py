@@ -16,11 +16,17 @@ DATABASES = {
 
 INSTALLED_APPS = [
     # Django Apps
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
     'django.contrib.staticfiles',
 
     # External Packages
     "rest_framework",
     "rest_framework_docs",
+
+    # Test apps
+    "tests"
 ]
 
 ROOT_URLCONF = 'tests.urls'

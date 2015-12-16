@@ -38,4 +38,4 @@ class DRFDocsViewTests(TestCase):
         response = self.client.get(reverse('drfdocs'))
 
         self.assertEqual(response.status_code, 404)
-        self.assertEqual(response.reason_phrase, "NOT FOUND")
+        self.assertEqual(response.reason_phrase.upper(), "NOT FOUND")
