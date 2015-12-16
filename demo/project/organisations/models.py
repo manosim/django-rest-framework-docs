@@ -10,7 +10,7 @@ class Organisation(models.Model):
     modified = models.DateTimeField(auto_now=True)
 
     name = models.CharField(unique=True, max_length=100)
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True, null=True, blank=True)
     members = models.ManyToManyField(User, through='Membership', through_fields=('organisation', 'user'))
 
     is_active = models.BooleanField(default=False)

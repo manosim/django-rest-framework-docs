@@ -6,7 +6,7 @@
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Jump To <span class="caret"></span></a>
   <ul class="dropdown-menu">
     {% for group in endpoints_grouped %}
-      <li><a href="#{{ group.grouper|lower }}">{{ group.grouper }}</a></li>
+      <li><a href="#{{ group.grouper|lower }}-nav">{{ group.grouper }}</a></li>
     {% endfor %}
   </ul>
 </li>
@@ -20,7 +20,7 @@
   {% if endpoints_grouped %}
   {% for group in endpoints_grouped %}
 
-    <h1 id="{{ group.grouper|lower }}">{{group.grouper}}</h1>
+    <h1 id="{{ group.grouper|lower }}-nav">{{group.grouper}}</h1>
 
     <div class="panel-group" role="tablist">
 
@@ -52,7 +52,7 @@
             <p>Fields:</p>
               <ul class="list fields">
               {% for field in endpoint.fields %}
-                <li class="field">{{ field.name }}: {{ field.type }}</li>
+                <li class="field">{{ field.name }}: {{ field.type }} {% if field.required %}<span class="label label-primary label-required" title="Required">R</span>{% endif %}</li>
               {% endfor %}
               </ul>
             {% else %}

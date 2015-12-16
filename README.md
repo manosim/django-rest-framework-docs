@@ -3,20 +3,22 @@
 Document Web APIs made with Django Rest Framework.
 
 
-### Prerequisites
+### Supports
 
-  - Python (3.3, 3.4, 3.5)
-  - Django (1.8, 1.9)
+  - Python (2.7, 3.3, 3.4, 3.5)
+  - Django (1.7, 1.8, 1.9)
   - Django Rest Framework (3+)
 
 
-### Development
+### Development & Demo Project
+If you are looking to develop this package with one of your own django projects:
 
     pyvenv env
     env/bin/pip install -r requirements.txt
-
-    # To test within another django project
     pip install -e ~/Projects/drf-docs/
+
+If you want to use the demo app to work on this package:
+Included in this repo you can find the demo project(at `/demo`). It is a project with *Django* & *Django Rest Framework* that will allow you to work with this project. For more information on how you can set it up please check the [README.md](demo/README.md) of the demo project.
 
 ### Installation
 
@@ -38,8 +40,6 @@ Finally include the `rest_framework_docs` urls in your `urls.py`:
         url(r'^docs/', include('rest_framework_docs.urls')),
     ]
 
-### Development & Demo Project
-Included in this repo you can find the demo project(at `/demo`). It is a project with *Django* & *Django Rest Framework* that will allow you to work with this project. For more information on how you can set it up please readme the [README.md](demo/README.md) of the demo project.
 
 ### Settings
 
@@ -47,8 +47,10 @@ Included in this repo you can find the demo project(at `/demo`). It is a project
         'HIDDEN': True  # Default: False
     }
 
+
 ### Roadmap
 
+  - [ ] Creade demo app
   - [ ] Support Python 2 & Python 3
   - [ ] Support DRF 3+
   - [ ] Open Pull Request to include in DRF
