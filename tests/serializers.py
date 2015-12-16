@@ -60,7 +60,7 @@ class OrganisationErroredSerializer(serializers.ModelSerializer):
         fields = ('name', 'slug', 'is_active')
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super(OrganisationErroredSerializer, self).__init__(*args, **kwargs)
 
         # Should raise a KeyError
         self.context["test_value"]
