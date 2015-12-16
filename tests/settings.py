@@ -15,5 +15,17 @@ DATABASES = {
 }
 
 INSTALLED_APPS = [
+    # Django Apps
+    'django.contrib.staticfiles',
+
+    # External Packages
     "rest_framework",
+    "rest_framework_docs",
 ]
+
+ROOT_URLCONF = 'tests.urls'
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.8/howto/static-files/
+
+STATIC_URL = '/static/'
