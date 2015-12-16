@@ -4,10 +4,19 @@ from tests import views
 
 accounts_urls = [
     url(r'^login/$', views.LoginView.as_view(), name="login"),
+    url(r'^register/$', views.UserRegistrationView.as_view(), name="register"),
+    url(r'^reset-password/$', view=views.PasswordResetView.as_view(), name="reset-password"),
+    url(r'^reset-password/confirm/$', views.PasswordResetConfirmView.as_view(), name="reset-password-confirm"),
+
+    url(r'^user/profile/$', views.UserProfileView.as_view(), name="profile"),
+
+    url(r'^test/$', views.TestView.as_view(), name="test-view"),
 ]
 
 organisations_urls = [
-
+    url(r'^create/$', view=views.CreateOrganisationView.as_view(), name="create"),
+    url(r'^(?P<slug>[\w-]+)/members/$', view=views.OrganisationMembersView.as_view(), name="members"),
+    url(r'^(?P<slug>[\w-]+)/leave/$', view=views.LeaveOrganisationView.as_view(), name="leave")
 ]
 
 urlpatterns = [
