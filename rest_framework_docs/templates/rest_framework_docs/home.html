@@ -48,6 +48,10 @@
 
         <div id="{{ endpoint.path|slugify }}" class="panel-collapse collapse" role="tabpanel">
           <div class="panel-body">
+            {% if endpoint.errors %}
+            <div class="alert alert-danger" role="alert">Oops! There was something wrong with {{ endpoint.errors }}. Please check your code.</div>
+            {% endif %}
+
             {% if endpoint.fields %}
             <p>Fields:</p>
               <ul class="list fields">
@@ -55,7 +59,7 @@
                 <li class="field">{{ field.name }}: {{ field.type }} {% if field.required %}<span class="label label-primary label-required" title="Required">R</span>{% endif %}</li>
               {% endfor %}
               </ul>
-            {% else %}
+            {% elif not endpoint.errors %}
             <p>No fields.</p>
             {% endif %}
           </div>

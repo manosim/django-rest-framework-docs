@@ -11,6 +11,7 @@ class ApiEndpoint(object):
         self.path = self.__get_path__(parent_pattern)
         self.allowed_methods = self.__get_allowed_methods__()
         # self.view_name = pattern.callback.__name__
+        self.errors = None
         self.fields = self.__get_serializer_fields__()
 
     def __get_path__(self, parent_pattern):
@@ -27,11 +28,15 @@ class ApiEndpoint(object):
         if hasattr(self.callback.cls, 'serializer_class') and hasattr(self.callback.cls.serializer_class, 'get_fields'):
             serializer = self.callback.cls.serializer_class
             if hasattr(serializer, 'get_fields'):
-                fields = [{
-                    "name": key,
-                    "type": str(field.__class__.__name__),
-                    "required": field.required
-                } for key, field in serializer().get_fields().items()]
+                try:
+                    fields = [{
+                        "name": key,
+                        "type": str(field.__class__.__name__),
+                        "required": field.required
+                    } for key, field in serializer().get_fields().items()]
+                except KeyError as e:
+                    self.errors = e
+                    fields = []
 
                 # FIXME:
                 # Show more attibutes of `field`?
