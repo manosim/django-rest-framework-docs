@@ -1,5 +1,6 @@
 from django.core.urlresolvers import reverse
 from django.test import TestCase, override_settings
+from rest_framework_docs.settings import DRFSettings
 
 
 class DRFDocsViewTests(TestCase):
@@ -10,6 +11,13 @@ class DRFDocsViewTests(TestCase):
 
     def setUp(self):
         super(DRFDocsViewTests, self).setUp()
+
+    def test_settings_module(self):
+
+        settings = DRFSettings()
+
+        self.assertEqual(settings.get_setting("HIDDEN"), False)
+        self.assertEqual(settings.get_setting("TEST"), None)
 
     def test_index_view_with_endpoints(self):
         """
