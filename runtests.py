@@ -31,7 +31,7 @@ def run_tests_coverage():
         test_runner = TestRunner()
 
         # Setup Coverage
-        cov = coverage(source=["rest_framework_docs"], omit=["__init__.py"])
+        cov = coverage(source=["rest_framework_docs"], omit=["rest_framework_docs/__init__.py"])
         cov.start()
 
         failures = test_runner.run_tests(["tests"])
