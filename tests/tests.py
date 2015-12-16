@@ -27,7 +27,7 @@ class DRFDocsViewTests(TestCase):
         response = self.client.get(reverse('drfdocs'))
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.context["endpoints"]), 9)
+        self.assertEqual(len(response.context["endpoints"]), 10)
 
         # Test the login view
         self.assertEqual(response.context["endpoints"][0].name_parent, "accounts")
@@ -36,6 +36,9 @@ class DRFDocsViewTests(TestCase):
         self.assertEqual(len(response.context["endpoints"][0].fields), 2)
         self.assertEqual(response.context["endpoints"][0].fields[0]["type"], "CharField")
         self.assertTrue(response.context["endpoints"][0].fields[0]["required"])
+
+        # The view "OrganisationErroredView" (organisations/(?P<slug>[\w-]+)/errored/) should contain an error.
+        self.assertEqual(str(response.context["endpoints"][8].errors), "'test_value'")
 
     @override_settings(REST_FRAMEWORK_DOCS=SETTINGS_HIDE_DOCS)
     def test_index_view_docs_hidden(self):
