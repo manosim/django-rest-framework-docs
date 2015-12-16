@@ -27,7 +27,7 @@ class DRFDocsViewTests(TestCase):
         response = self.client.get(reverse('drfdocs'))
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.context["endpoints"]), 8)
+        self.assertEqual(len(response.context["endpoints"]), 9)
 
         # Test the login view
         self.assertEqual(response.context["endpoints"][0].name_parent, "accounts")

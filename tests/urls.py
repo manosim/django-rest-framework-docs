@@ -28,4 +28,7 @@ urlpatterns = [
     # API
     url(r'^accounts/', view=include(accounts_urls, namespace='accounts')),
     url(r'^organisations/', view=include(organisations_urls, namespace='organisations')),
+
+    # Endpoints without parents/namespaces
+    url(r'^another-login/$', views.LoginView.as_view(), name="login"),
 ]
