@@ -25,6 +25,10 @@ INSTALLED_APPS = [
 
 ROOT_URLCONF = 'tests.urls'
 
+REST_FRAMEWORK_DOCS = {
+    'HIDDEN': False
+}
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
