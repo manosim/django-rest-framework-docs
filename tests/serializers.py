@@ -1,3 +1,5 @@
+from __future__ import absolute_import, division, print_function
+
 from rest_framework import serializers
 from tests.models import User, Organisation, Membership
 

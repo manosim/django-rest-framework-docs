@@ -1,3 +1,5 @@
+from __future__ import absolute_import, division, print_function
+
 from django.shortcuts import get_object_or_404
 from django.views.generic.base import TemplateView
 from rest_framework import parsers, renderers, generics, status
