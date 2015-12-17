@@ -1,5 +1,9 @@
+@import "node_modules/bootstrap/less/bootstrap";
+@import "node_modules/font-awesome/less/font-awesome.less";
+
 /* @group Colors */
 
+@BgColor: #FEFEFE;
 
 
 /* @end Colors */
@@ -21,3 +25,76 @@
 @brand-danger:          #E74C3C;
 
 /* @end Bootstrap Overrides */
+
+
+/* @group Misc */
+
+body {
+  background-color: @BgColor;
+}
+
+/* @end Misc */
+
+
+/* @group Header */
+
+.header {
+  .jumbotron {
+    margin: 50px 0 40px;
+    text-align: center;
+  }
+}
+
+/* @end Header */
+
+
+/* @group Footer */
+
+.footer {
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 20px;
+
+  .links {
+    padding: 20px 0;
+
+   .fa {
+      margin: 0 10px;
+      font-size: 22px;
+    }
+  }
+}
+
+/* @end Footer */
+
+
+/* @group Github Ribbon - SVG */
+
+.github-corner:hover .octo-arm {
+  animation: octocat-wave 560ms ease-in-out;
+}
+
+@keyframes octocat-wave {
+  0% { transform: rotate(0deg); }
+  20% { transform: rotate(-25deg); }
+  40% { transform: rotate(10deg); }
+  60% { transform: rotate(-25deg); }
+  80% { transform: rotate(10deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@media (max-width: 768px) {
+    .github-corner {
+      display: none;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: none;
+    }
+
+    .github-corner .octo-arm {
+        animation: octocat-wave 560ms ease-in-out;
+    }
+}
+
+/* @end Github Ribbon - SVG */

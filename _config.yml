@@ -14,9 +14,9 @@ baseurl: "" # the subpath of your site, e.g. /blog
 
 url: "http://www.drfdocs.com" # the base hostname & protocol for your site
 
-twitter_username: jekyllrb
-
-github_username:  jekyll
+twitter_username: iamemmanouil
+github_username:  ekonstantinidis
+github_repo_url: ekonstantinidis/drfdocs
 
 # Build settings
 markdown: kramdown
