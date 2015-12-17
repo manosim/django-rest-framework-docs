@@ -4,6 +4,12 @@
   "description": "Document Web APIs made with Django Rest Framework",
   "main": "index.js",
   "scripts": {
+    "build-font-awesome": "cp -r node_modules/font-awesome/fonts static/",
+    "build-bootstrap-fonts": "cp -r node_modules/bootstrap/fonts static/",
+    "build-less": "lessc --clean-css --silent _less/_base.less static/css/base.css",
+    "watch-less": "watch 'npm run build-less' _less/",
+    "build": "npm run build-font-awesome && npm run build-bootstrap-fonts && npm run build-less",
+    "start": "npm run build && npm run watch-less & jekyll serve --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -25,6 +31,12 @@
   "homepage": "https://www.drfdocs.com/",
   "dependencies": {
     "bootstrap": "=3.3.6",
+    "bootswatch": "=3.3.6",
     "font-awesome": "=4.5.0"
+  },
+  "devDependencies": {
+    "less": "=2.5.3",
+    "less-plugin-clean-css": "=1.5.1",
+    "watch": "=0.16.0"
   }
 }

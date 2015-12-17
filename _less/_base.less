@@ -1,0 +1,166 @@
+@import "node_modules/bootstrap/less/bootstrap";
+@import "node_modules/bootswatch/flatly/variables.less";
+@import "node_modules/font-awesome/less/font-awesome.less";
+@import url(http://fonts.googleapis.com/css?family=ABeeZee);
+
+/* @group Colors */
+
+@BgColor: #FEFEFE;
+
+
+/* @end Colors */
+
+
+/* @group Bootstrap Overrides */
+
+/* @end Bootstrap Overrides */
+
+
+/* @group Mixins */
+
+.BorderRadius(@radius: 5px) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius:    @radius;
+    border-radius:         @radius;
+
+    -moz-background-clip:    padding;
+    -webkit-background-clip: padding-box;
+    background-clip:         padding-box;
+}
+
+/* @end Mixins */
+
+
+/* @group Misc */
+
+body {
+  background-color: @BgColor;
+}
+
+.nav-wrapper {
+
+  @media screen and (min-width: @screen-sm-min) {
+    padding-left: 0;
+  }
+}
+
+.btn-edit {
+  margin-top: 10px;
+  padding: 5px 10px;
+  float: right;
+}
+
+pre {
+  font-size: (@font-size-base - 3); // 14px to 13px
+}
+
+.thanks {
+
+  .img-responsive {
+    display: inline-block;
+    max-width: 145px;
+    margin: 10px auto;
+  }
+}
+
+.scroll-to-top {
+    padding: 10px;
+
+    .BorderRadius(5px);
+    background-color: darken(@gray-lighter, 10%);
+    color: @brand-primary;
+    font-size: 12px;
+    text-decoration: none;
+
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    display:none;
+
+    &:hover{
+        text-decoration: none;
+    }
+}
+
+/* @end Misc */
+
+
+/* @group Header */
+
+.header {
+  .jumbotron {
+    margin: 50px 0 40px;
+    text-align: center;
+
+    .img-responsive {
+      display: inline-block;
+      margin: 5px auto;
+    }
+  }
+}
+
+/* @end Header */
+
+
+/* @group Doc Page */
+
+.doc {
+
+  .doc-title {
+    margin-top: 0;
+  }
+}
+
+/* @end Doc Page */
+
+
+/* @group Footer */
+
+.footer {
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 20px;
+
+  .links {
+    padding: 20px 0;
+
+   .fa {
+      margin: 0 10px;
+      font-size: 22px;
+    }
+  }
+}
+
+/* @end Footer */
+
+
+/* @group Github Ribbon - SVG */
+
+.github-corner:hover .octo-arm {
+  animation: octocat-wave 560ms ease-in-out;
+}
+
+@keyframes octocat-wave {
+  0% { transform: rotate(0deg); }
+  20% { transform: rotate(-25deg); }
+  40% { transform: rotate(10deg); }
+  60% { transform: rotate(-25deg); }
+  80% { transform: rotate(10deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@media (max-width: 768px) {
+    .github-corner {
+      display: none;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: none;
+    }
+
+    .github-corner .octo-arm {
+        animation: octocat-wave 560ms ease-in-out;
+    }
+}
+
+/* @end Github Ribbon - SVG */
