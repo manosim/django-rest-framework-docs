@@ -28,7 +28,7 @@ defaults:
 
 twitter_username: iamemmanouil
 github_username:  ekonstantinidis
-github_repo_url: ekonstantinidis/drfdocs
+github_repo_url: ekonstantinidis/django-rest-framework-docs
 
 # Build settings
 markdown: kramdown

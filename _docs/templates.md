@@ -3,22 +3,29 @@ title:  "Extending the Template"
 source_filename: "templates"
 order: 4
 ---
-You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
-To add new posts, simply add a file in the `_posts` directory that follows the convention `YYYY-MM-DD-name-of-post.ext` and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.
+### Create the template file
 
-Jekyll also offers powerful support for code snippets:
 
-{% highlight ruby %}
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
-{% endhighlight %}
 
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
+### Default Block
 
-[jekyll-docs]: http://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
+
+##### Logo
+
+    { % block logo % }
+      <a class="navbar-brand" href="http://www.drfdocs.com/">DRF Docs</a>
+    { % endblock % }
+
+##### Footer
+
+    { % block footer % }
+      <div class="footer">
+        <div class="links">
+          <a href="http://www.iamemmanouil.com"><i class="fa fa-link"></i></a>
+          <a href="http://www.github.com/ekonstantinidis"><i class="fa fa-github"></i></a>
+          <a href="http://www.twitter.com/iamemmanouil"><i class="fa fa-twitter"></i></a>
+        </div>
+        Copyright © 2015 Emmanouil Konstantinidis.
+      </div>
+    { % endblock % }

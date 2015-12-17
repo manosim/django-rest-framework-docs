@@ -38,7 +38,10 @@ body {
 }
 
 .nav-wrapper {
-  padding-left: 0;
+
+  @media screen and (min-width: @screen-sm-min) {
+    padding-left: 0;
+  }
 }
 
 .btn-edit {
