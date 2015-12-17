@@ -10,9 +10,19 @@
     <div class="container">
       <div class="col-md-4">
 
+        <h3>Navigation</h3>
         <ul class="well nav nav-pills nav-stacked">
           {% for doc in site.docs %}
-            <li role="presentation" class=""><a href="{{ doc.url }}">{{ doc.title }}</a></li>
+            {% if doc.latest %}
+            <li role="presentation" {% if page.url == doc.url %}class="active"{% endif %}><a href="{{ doc.url }}">{{ doc.title }}</a></li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+
+        <h3>Versions</h3>
+        <ul class="well nav nav-pills nav-stacked">
+          {% for version in site.available_versions reversed %}
+            <li role="presentation"><a href="{{ version.url }}">{{ version }}</a></li>
           {% endfor %}
         </ul>
 

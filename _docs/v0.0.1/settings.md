@@ -1,8 +1,7 @@
 ---
-layout: post
-title:  "Installation"
+title:  "Settings"
 date:   2015-12-17 11:17:05 +0000
-categories: jekyll update
+version: 0.0.1
 ---
 You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 

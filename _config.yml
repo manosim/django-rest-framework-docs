@@ -15,11 +15,25 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://www.drfdocs.com" # the base hostname & protocol for your site
 
 collections:
-  - docs
+  docs:
+    output: true
+    permalink: /docs/:path/
+
+defaults:
+  - scope:
+      path: ""
+      type: docs
+    values:
+      layout: doc
 
 twitter_username: iamemmanouil
 github_username:  ekonstantinidis
 github_repo_url: ekonstantinidis/drfdocs
+
+available_versions:
+  - v0.0.1
+  - v0.0.2
+  - v0.0.3
 
 # Build settings
 markdown: kramdown
