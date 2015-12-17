@@ -1,5 +1,6 @@
 @import "node_modules/bootstrap/less/bootstrap";
 @import "node_modules/font-awesome/less/font-awesome.less";
+@import url(http://fonts.googleapis.com/css?family=ABeeZee);
 
 /* @group Colors */
 
@@ -10,6 +11,9 @@
 
 
 /* @group Bootstrap Overrides */
+
+@ThemeBG: #f7f7fa;
+@ThemeHeadings: #6b6b6b;
 
 @gray-base:              #000;
 @gray-darker:            lighten(@gray-base, 13.5%); // #222
@@ -24,13 +28,58 @@
 @brand-warning:         #F39C12;
 @brand-danger:          #E74C3C;
 
+@headings-font-family: 'ABeeZee', sans-serif;
+@headings-color: @ThemeHeadings;
+
+
+@jumbotron-padding:              30px;
+@jumbotron-color:                inherit;
+@jumbotron-bg:                   @gray-lighter;
+@jumbotron-heading-color:        inherit;
+@jumbotron-font-size:            ceil((@font-size-base * 1.5));
+@jumbotron-heading-font-size:    ceil((@font-size-base * 4.5));
+
 /* @end Bootstrap Overrides */
+
+
+/* @group Mixins */
+
+.BorderRadius(@radius: 5px) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius:    @radius;
+    border-radius:         @radius;
+
+    -moz-background-clip:    padding;
+    -webkit-background-clip: padding-box;
+    background-clip:         padding-box;
+}
+
+/* @end Mixins */
 
 
 /* @group Misc */
 
 body {
   background-color: @BgColor;
+}
+
+.scroll-to-top {
+    padding: 10px;
+
+    .BorderRadius(5px);
+    background-color: darken(@gray-lighter, 10%);
+    color: @brand-primary;
+    font-size: 12px;
+    text-decoration: none;
+
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    display:none;
+
+    &:hover{
+        text-decoration: none;
+    }
 }
 
 /* @end Misc */
