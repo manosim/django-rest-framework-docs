@@ -1,5 +1,6 @@
 ---
 title:  "Contributing"
+source_filename: "contributing"
 order: 5
 ---
 

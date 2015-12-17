@@ -1,5 +1,6 @@
 ---
 title:  "Installation"
+source_filename: "installation"
 order: 2
 ---
 

@@ -1,5 +1,6 @@
 ---
 title:  "Changelog"
+source_filename: "changelog"
 order: 5
 ---
 

@@ -1,5 +1,6 @@
 ---
 title:  "Settings"
+source_filename: "settings"
 order: 3
 ---
 

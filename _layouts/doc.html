@@ -11,6 +11,11 @@ layout: default
 
   <div class="post-content" itemprop="articleBody">
     {{ content }}
+
+    {% if page.source_filename %}
+    <a class="btn btn-default btn-edit" href="https://github.com/ekonstantinidis/django-rest-framework-docs/blob/gh-pages/_docs/{{ page.source_filename }}.md">Edit on Github <i class="fa fa-github"></i></a>
+    {% endif %}
+
   </div>
 
 </div>
