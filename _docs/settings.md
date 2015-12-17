@@ -2,22 +2,30 @@
 title:  "Settings"
 order: 3
 ---
-You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
-To add new posts, simply add a file in the `_posts` directory that follows the convention `YYYY-MM-DD-name-of-post.ext` and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.
+### How to set the settings
+To set DRF docs' settings just include the dictionary below in Django's `settings.py` file.
 
-Jekyll also offers powerful support for code snippets:
+    REST_FRAMEWORK_DOCS = {
+        'HIDDEN': True
+    }
 
-{% highlight ruby %}
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
-{% endhighlight %}
 
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
+### Settings Description
 
-[jekyll-docs]: http://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
+##### HIDDEN
+You can use hidden to prevent your docs from showing up in different environments (ie. Show in development, hide in production). To do so you can use environment variables.
+
+    REST_FRAMEWORK_DOCS = {
+        'HIDDEN': os.environ.get('SHOW_DRFDOCS', False)
+    }
+
+Then set the value of the environment variable `SHOW_DRFDOCS` for each environment (ie. Use `.env` files)
+
+### List of Settings
+
+{:.table .table-striped}
+| Setting | Type    | Options         | Default |
+|---------|---------|-----------------|---------|
+| HIDDEN  | Boolean | `True`, `False` | `False` |
+|         |         |                 |         |
