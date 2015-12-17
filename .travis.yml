@@ -2,17 +2,19 @@ language: python
 
 python:
   - "2.7"
-  - "3.3"
   - "3.4"
   - "3.5"
-  - "pypy"
-  - "pypy3"
+
+env:
+  - DJANGO_VERSION=1.8
+  - DJANGO_VERSION=1.9
 
 install:
- - pip install -r requirements.txt
+  - pip install -r requirements.txt
+  - pip install -U Django==$DJANGO_VERSION
 
 script:
- - python runtests.py
+  - python runtests.py
 
 notifications:
   slack:

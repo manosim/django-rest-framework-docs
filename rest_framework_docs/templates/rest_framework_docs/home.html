@@ -6,7 +6,7 @@
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Jump To <span class="caret"></span></a>
   <ul class="dropdown-menu">
     {% for group in endpoints_grouped %}
-      <li><a href="#{{ group.grouper|lower }}-nav">{{ group.grouper }}</a></li>
+      <li><a href="#{{ group.grouper|lower }}-group">{{ group.grouper }}</a></li>
     {% endfor %}
   </ul>
 </li>
@@ -20,7 +20,7 @@
   {% if endpoints_grouped %}
   {% for group in endpoints_grouped %}
 
-    <h1 id="{{ group.grouper|lower }}-nav">{{group.grouper}}</h1>
+    <h1 id="{{ group.grouper|lower }}-group">{{group.grouper}}</h1>
 
     <div class="panel-group" role="tablist">
 
@@ -48,6 +48,10 @@
 
         <div id="{{ endpoint.path|slugify }}" class="panel-collapse collapse" role="tabpanel">
           <div class="panel-body">
+            {% if endpoint.errors %}
+            <div class="alert alert-danger" role="alert">Oops! There was something wrong with {{ endpoint.errors }}. Please check your code.</div>
+            {% endif %}
+
             {% if endpoint.fields %}
             <p>Fields:</p>
               <ul class="list fields">
@@ -55,7 +59,7 @@
                 <li class="field">{{ field.name }}: {{ field.type }} {% if field.required %}<span class="label label-primary label-required" title="Required">R</span>{% endif %}</li>
               {% endfor %}
               </ul>
-            {% else %}
+            {% elif not endpoint.errors %}
             <p>No fields.</p>
             {% endif %}
           </div>

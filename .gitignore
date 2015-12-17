@@ -1,3 +1,6 @@
+.coverage
+covhtml/
+
 *.pyc
 __pycache__/
 
