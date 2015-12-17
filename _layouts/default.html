@@ -11,8 +11,8 @@
       <div class="col-md-4">
 
         <ul class="well nav nav-pills nav-stacked">
-          {% for post in site.posts %}
-            <li role="presentation" class=""><a href="#">{{ post.title}}</a></li>
+          {% for doc in site.docs %}
+            <li role="presentation" class=""><a href="{{ doc.url }}">{{ doc.title }}</a></li>
           {% endfor %}
         </ul>
 
