@@ -3,9 +3,11 @@ layout: default
 ---
 <div class="doc">
 
+  {% if page.title != "Home" %}
   <div class="doc-header">
-    <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
+    <h1 class="doc-title" itemprop="name headline">{{ page.title }}</h1>
   </div>
+  {% endif %}
 
   <div class="post-content" itemprop="articleBody">
     {{ content }}

@@ -11,7 +11,8 @@
       <div class="col-md-4">
 
         <ul class="well nav nav-pills nav-stacked">
-          {% for doc in site.docs %}
+          {% assign sorted_docs = site.docs | sort:"order" %}
+          {% for doc in sorted_docs %}
             <li role="presentation" {% if page.url == doc.url %}class="active"{% endif %}><a href="{{ doc.url }}">{{ doc.title }}</a></li>
           {% endfor %}
         </ul>
