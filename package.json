@@ -4,6 +4,10 @@
   "description": "Document Web APIs made with Django Rest Framework",
   "main": "index.js",
   "scripts": {
+    "build-less": "lessc --silent _less/_base.less static/css/base.css",
+    "watch-less": "watch 'npm run build-less' _less/",
+    "build": "npm run build-less",
+    "start": "npm run watch-less & jekyll serve --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,5 +30,9 @@
   "dependencies": {
     "bootstrap": "=3.3.6",
     "font-awesome": "=4.5.0"
+  },
+  "devDependencies": {
+    "less": "^2.5.3",
+    "watch": "^0.16.0"
   }
 }
