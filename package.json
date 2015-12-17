@@ -1,0 +1,30 @@
+{
+  "name": "django-rest-framework-docs",
+  "version": "0.0.1",
+  "description": "Document Web APIs made with Django Rest Framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ekonstantinidis/django-rest-framework-docs.git"
+  },
+  "keywords": [
+    "django",
+    "rest",
+    "framework",
+    "docs",
+    "jekyll"
+  ],
+  "author": "Emmanouil Konstantinidis",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/ekonstantinidis/django-rest-framework-docs/issues"
+  },
+  "homepage": "https://www.drfdocs.com/",
+  "dependencies": {
+    "bootstrap": "=3.3.6",
+    "font-awesome": "=4.5.0"
+  }
+}
