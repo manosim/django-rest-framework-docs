@@ -31,6 +31,7 @@
   "homepage": "https://www.drfdocs.com/",
   "dependencies": {
     "bootstrap": "=3.3.6",
+    "bootswatch": "=3.3.6",
     "font-awesome": "=4.5.0"
   },
   "devDependencies": {
