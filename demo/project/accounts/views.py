@@ -20,6 +20,9 @@ class TestView(TemplateView):
 
 
 class LoginView(APIView):
+    """
+    A view that allows users to login providing their username and password.
+    """
 
     throttle_classes = ()
     permission_classes = ()
@@ -42,6 +45,9 @@ class UserRegistrationView(generics.CreateAPIView):
 
 
 class UserProfileView(generics.RetrieveUpdateAPIView):
+    """
+    An endpoint for users to view and update their profile information.
+    """
 
     serializer_class = UserProfileSerializer
 
