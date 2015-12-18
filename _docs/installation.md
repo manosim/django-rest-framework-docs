@@ -8,7 +8,7 @@ The installation itself should not take more than a couple of minutes. Follow th
 
 Install using pip:
 
-    pip install djangorestframeworkdocs
+    pip install drfdocs
 
 Add 'rest_framework_docs' to your `INSTALLED_APPS` setting:
 
