@@ -2,6 +2,7 @@
 
 Document Web APIs made with Django Rest Framework.
 
+![DRFdocs](http://drfdocs.com/static/images/mockup.png)
 
 ### Supports
 
