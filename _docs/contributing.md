@@ -1,8 +1,42 @@
 ---
-title:  "Contributing"
+title:  "Contributing & Development"
 source_filename: "contributing"
 order: 5
 ---
+
+### Development
+If you want to **use the demo** app to work on this package:
+
+In the prepository](https://github.com/ekonstantinidis/django-rest-framework-docs) you can find the demo app(at /demo). It is a project with Django & Django Rest Framework that will allow you to work with this project.
+
+From the route of the repository:
+
+    # Create the virtual environment
+    pyvenv env
+
+    # Install requirements
+    env/bin/pip install -r requirements.txt
+
+    # Activate the environment
+    source env/bin/activate
+
+    # Cd Into the demo
+    cd demo/
+
+    # Install Django Rest Framework Docs
+    pip install -e ../
+
+    # Run the project
+    python manage.py runserver
+
+Note: You do not need a database or to run migrate.
+
+
+If you are looking to develop this package with one of your **own django projects**:
+
+    pyvenv env
+    env/bin/pip install -r requirements.txt
+    pip install -e ~/Projects/drf-docs/
 
 ### Contributing to the project
 
