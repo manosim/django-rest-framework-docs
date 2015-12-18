@@ -15,5 +15,12 @@ class DRFDocsView(TemplateView):
 
         context = super(DRFDocsView, self).get_context_data(**kwargs)
         docs = ApiDocumentation()
-        context['endpoints'] = docs.get_endpoints()
+        endpoints = docs.get_endpoints()
+
+        query = self.request.GET.get("q", None)
+        if query and endpoints:
+            endpoints = [endpoint for endpoint in endpoints if query in endpoint.path]
+
+        context['query'] = query
+        context['endpoints'] = endpoints
         return context
