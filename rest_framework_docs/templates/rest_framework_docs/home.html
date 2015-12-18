@@ -70,8 +70,10 @@
     </div>
 
   {% endfor %}
-  {% else %}
+  {% elif not query %}
     <h2 class="text-center">There are currently no api endpoints to document.</h2>
+  {% else %}
+    <h2 class="text-center">No endpoints found for {{ query }}.</h2>
   {% endif %}
 
 {% endblock %}

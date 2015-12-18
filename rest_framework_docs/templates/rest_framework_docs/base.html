@@ -39,9 +39,9 @@
 
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="drfdoc-navbar">
-            <form class="navbar-form navbar-right" role="search">
+            <form method="get" action="." class="navbar-form navbar-right" role="search">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search">
+                <input type="text" class="form-control" name="search" value="{{ query }}" placeholder="Search">
               </div>
             </form>
             <ul class="nav navbar-nav navbar-right">
