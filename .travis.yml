@@ -1,5 +1,7 @@
 language: python
 
+sudo: false
+
 python:
   - "2.7"
   - "3.4"
@@ -12,9 +14,13 @@ env:
 install:
   - pip install -r requirements.txt
   - pip install -U Django==$DJANGO_VERSION
+  - pip install codecov
 
 script:
   - python runtests.py
+
+after_success:
+  - codecov
 
 notifications:
   slack:
