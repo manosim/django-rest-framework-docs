@@ -1,4 +1,4 @@
-# [Django Rest Framework Docs](http://www.drfdocs.com/) [![travis][travis-image]][travis-url] [![pypi][pypi-image]][pypi-url]
+# [Django Rest Framework Docs](http://www.drfdocs.com/) [![travis][travis-image]][travis-url] [![codecov][codecov-image]][codecov-url] [![pypi][pypi-image]][pypi-url]
 
 Document Web APIs made with Django Rest Framework.
 
@@ -58,3 +58,6 @@ First of all thanks to the [Django](http://www.djangoproject.com/) core team and
 
 [pypi-image]: https://img.shields.io/pypi/v/drfdocs.svg
 [pypi-url]: https://pypi.python.org/pypi/drfdocs/
+
+[codecov-image]: https://codecov.io/github/ekonstantinidis/django-rest-framework-docs/coverage.svg?branch=master
+[codecov-url]:https://codecov.io/github/ekonstantinidis/django-rest-framework-docs?branch=master
