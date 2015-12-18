@@ -1,7 +1,7 @@
 from setuptools import find_packages, setup
 
 setup(
-    name="djangorestframeworkdocs",
+    name="drfdocs",
     version=__import__('rest_framework_docs').__version__,
     author="Emmanouil Konstantinidis",
     author_email="manos@iamemmanouil.com",

@@ -24,7 +24,7 @@ Included in this repo you can find the demo project(at `/demo`). It is a project
 
 Install using pip:
 
-    pip install djangorestframeworkdocs
+    pip install drfdocs
 
 Add 'rest_framework_docs' to your `INSTALLED_APPS` setting:
 
@@ -48,15 +48,6 @@ Finally include the `rest_framework_docs` urls in your `urls.py`:
     }
 
 
-### Roadmap
-
-  - [ ] Creade demo app
-  - [ ] Support Python 2 & Python 3
-  - [ ] Support DRF 3+
-  - [ ] Open Pull Request to include in DRF
-  - [ ] Submit to djangopackages.com
-
-
 ### Credits
 
 First of all thanks to the [Django](http://www.djangoproject.com/) core team and to all the contributors of [Django REST Framework](http://www.django-rest-framework.org/) for their amazing work. Also I would like to thank [Marc Gibbons](https://github.com/marcgibbons) for his *django-rest-framework-docs* project. Both projects share the same idea, it is just that Marc's is not maintained anymore and does not support DRF 3+ & Python 3.
@@ -64,5 +55,5 @@ First of all thanks to the [Django](http://www.djangoproject.com/) core team and
 [travis-image]: https://travis-ci.com/ekonstantinidis/django-rest-framework-docs.svg?token=9QR4ewbqbkEmHps6q5sq&branch=master
 [travis-url]: https://travis-ci.com/ekonstantinidis/django-rest-framework-docs
 
-[pypi-image]: https://img.shields.io/pypi/v/djangorestframeworkdocs.svg
-[pypi-url]: https://pypi.python.org/pypi/djangorestframeworkdocs/
+[pypi-image]: https://img.shields.io/pypi/v/drfdocs.svg
+[pypi-url]: https://pypi.python.org/pypi/drfdocs/
