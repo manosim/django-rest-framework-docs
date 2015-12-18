@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load static from staticfiles %}
 
 <!DOCTYPE html>
 <html>
@@ -9,15 +9,8 @@
 
     <title>{% block title %}DRF Docs{% endblock %}</title>
 
-    <!-- Bootstrap & Flatly -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/flatly/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
     <!-- Custom Style -->
-    <link rel="stylesheet/less" type="text/css" href="{% static "less/style.less" %}" />
-
-    <!-- LESS CSS -->
-     <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.3/less.min.js"></script>
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
   </head>
 
   <body>

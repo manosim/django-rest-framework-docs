@@ -3,6 +3,7 @@ A demo project to get you started with DRF docs development.
 
 
 ### Installation
+From the route of the repository:
 
     # Create the virtual environment
     pyvenv env
@@ -10,11 +11,17 @@ A demo project to get you started with DRF docs development.
     # Install requirements
     env/bin/pip install -r requirements.txt
 
+    # Activate the environment
+    source env/bin/activate
+
+    # Cd Into the demo
+    cd demo/
+
     # Install Django Rest Framework Docs
-    env/bin/pip install -e ../
+    pip install -e ../
 
     # Run the project
-    env/bin/python manage.py runserver
+    python manage.py runserver
 
 **Note**: You **do not** need a database or to run `migrate`.
 

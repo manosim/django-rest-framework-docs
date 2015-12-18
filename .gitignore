@@ -5,7 +5,8 @@ covhtml/
 __pycache__/
 
 env/
+demo/db.sqlite3
+dist/
 djangorestframeworkdocs.egg-info/
 
-demo/env/
-demo/db.sqlite3
+rest_framework_docs/static/node_modules/
