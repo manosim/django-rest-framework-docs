@@ -48,12 +48,16 @@
 
         <div id="{{ endpoint.path|slugify }}" class="panel-collapse collapse" role="tabpanel">
           <div class="panel-body">
+            {% if endpoint.docstring %}
+            <p class="lead">{{ endpoint.docstring }}</p>
+            {% endif %}
+
             {% if endpoint.errors %}
             <div class="alert alert-danger" role="alert">Oops! There was something wrong with {{ endpoint.errors }}. Please check your code.</div>
             {% endif %}
 
             {% if endpoint.fields %}
-            <p>Fields:</p>
+            <p class="fields-desc">Fields:</p>
               <ul class="list fields">
               {% for field in endpoint.fields %}
                 <li class="field">{{ field.name }}: {{ field.type }} {% if field.required %}<span class="label label-primary label-required" title="Required">R</span>{% endif %}</li>
