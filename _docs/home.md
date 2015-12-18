@@ -6,6 +6,8 @@ order: 1
 
 Django Rest Framework Docs (DRF Docs) allows you to list all your API Endpoints that inherit from <a href="http://www.django-rest-framework.org/" target="_blank">Django Rest Framework</a> **automatically**. Its purpose is to work out of the box and it should take a minimum to install it.
 
+<a class="btn btn-success btn-demo" href="http://demo.drfdocs.com/" target="_blank"><i class="fa fa-laptop"></i> Check the Demo</a>
+
 <h4>How It Works</h4>
 
 <img class="img-responsive" src="static/images/mockup.png" alt="Mock Up" />
