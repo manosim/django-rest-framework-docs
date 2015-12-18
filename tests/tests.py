@@ -40,6 +40,16 @@ class DRFDocsViewTests(TestCase):
         # The view "OrganisationErroredView" (organisations/(?P<slug>[\w-]+)/errored/) should contain an error.
         self.assertEqual(str(response.context["endpoints"][8].errors), "'test_value'")
 
+    def test_index_search_with_endpoints(self):
+        url = "%s?search=reset-password" % reverse("drfdocs")
+        print(url)
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context["endpoints"]), 2)
+        self.assertEqual(response.context["endpoints"][1].path, "/accounts/reset-password/confirm/")
+        self.assertEqual(len(response.context["endpoints"][1].fields), 3)
+
     @override_settings(REST_FRAMEWORK_DOCS=SETTINGS_HIDE_DOCS)
     def test_index_view_docs_hidden(self):
         """
