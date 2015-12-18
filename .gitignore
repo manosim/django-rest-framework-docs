@@ -7,7 +7,6 @@ __pycache__/
 env/
 djangorestframeworkdocs.egg-info/
 
-demo/env/
 demo/db.sqlite3
 
 rest_framework_docs/static/node_modules/
