@@ -17,7 +17,7 @@ class DRFDocsView(TemplateView):
         docs = ApiDocumentation()
         endpoints = docs.get_endpoints()
 
-        query = self.request.GET.get("q", None)
+        query = self.request.GET.get("search", "")
         if query and endpoints:
             endpoints = [endpoint for endpoint in endpoints if query in endpoint.path]
 
