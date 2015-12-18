@@ -4,6 +4,12 @@ source_filename: "changelog"
 order: 5
 ---
 
+### Release 0.0.2
+
+  - Search between endpoint paths
+  - Show docstring for each endpoint
+
+
 ### Release 0.0.1
 
 First release of the project to [pypi](https://pypi.python.org/pypi). Features include:
