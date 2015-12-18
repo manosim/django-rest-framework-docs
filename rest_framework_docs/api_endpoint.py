@@ -1,3 +1,4 @@
+import inspect
 from django.contrib.admindocs.views import simplify_regex
 
 
@@ -24,7 +25,7 @@ class ApiEndpoint(object):
         return [m.upper() for m in self.callback.cls.http_method_names if hasattr(self.callback.cls, m)]
 
     def __get_docstring__(self):
-        return self.callback.cls.__doc__
+        return inspect.getdoc(self.callback)
 
     def __get_serializer_fields__(self):
         fields = []
