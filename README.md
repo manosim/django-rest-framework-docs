@@ -11,6 +11,15 @@ Document Web APIs made with Django Rest Framework.
   - Django Rest Framework (3+)
 
 
+### Documentation - Table of contents
+
+  - [Installation](http://drfdocs.com/docs/installation/)
+  - [Settings](http://drfdocs.com/docs/settings/)
+  - [Extending the template](http://drfdocs.com/docs/templates/)
+  - [Contributing & Development](http://drfdocs.com/docs/contributing/)
+  - [Changelog](http://drfdocs.com/docs/changelog/)
+
+
 ### Development & Demo Project
 If you are looking to develop this package with one of your own django projects:
 
@@ -20,6 +29,8 @@ If you are looking to develop this package with one of your own django projects:
 
 If you want to use the demo app to work on this package:
 Included in this repo you can find the demo project(at `/demo`). It is a project with *Django* & *Django Rest Framework* that will allow you to work with this project. For more information on how you can set it up please check the [README.md](demo/README.md) of the demo project.
+
+For more information visit [the docs](http://drfdocs.com/docs/contributing/).
 
 ### Installation
 
@@ -43,6 +54,7 @@ Finally include the `rest_framework_docs` urls in your `urls.py`:
 
 
 ### Settings
+You can find detailed information about the package's settings at [the docs](http://drfdocs.com/docs/settings/).
 
     REST_FRAMEWORK_DOCS = {
         'HIDDEN': True  # Default: False
