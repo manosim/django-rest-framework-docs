@@ -7,7 +7,7 @@ order: 5
 ### Development
 If you want to **use the demo** app to work on this package:
 
-In the prepository](https://github.com/ekonstantinidis/django-rest-framework-docs) you can find the demo app(at /demo). It is a project with Django & Django Rest Framework that will allow you to work with this project.
+In the project [repository](https://github.com/ekonstantinidis/django-rest-framework-docs) you can find the demo app(at /demo). It is a project with Django & Django Rest Framework that will allow you to work with this project.
 
 From the route of the repository:
 
