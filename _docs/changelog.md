@@ -4,10 +4,23 @@ source_filename: "changelog"
 order: 5
 ---
 
+### Release 0.0.4
+
+  - Allow templates overrides
+  - More template `blocks` to be overridden
+  - Improved MANIFEST.in
+  - Exclude `node_modules/`
+
+
+### Release 0.0.3
+
+  - Fixes a bug where Django's `collectstatic` command was failing because of Glyphicons
+
+
 ### Release 0.0.2
 
   - Search between endpoint paths
-  - Show docstring for each endpoint
+  - Display docstring for each endpoint
 
 
 ### Release 0.0.1
