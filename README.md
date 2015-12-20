@@ -68,7 +68,7 @@ First of all thanks to the [Django](http://www.djangoproject.com/) core team and
 [travis-image]: https://travis-ci.org/ekonstantinidis/django-rest-framework-docs.svg?branch=master
 [travis-url]: https://travis-ci.org/ekonstantinidis/django-rest-framework-docs
 
-[pypi-image]: https://img.shields.io/pypi/v/drfdocs.svg
+[pypi-image]: https://badge.fury.io/py/drfdocs.svg
 [pypi-url]: https://pypi.python.org/pypi/drfdocs/
 
 [codecov-image]: https://codecov.io/github/ekonstantinidis/django-rest-framework-docs/coverage.svg?branch=master
