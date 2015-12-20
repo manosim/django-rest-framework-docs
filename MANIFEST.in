@@ -1,9 +1,12 @@
 include README.md
 include LICENSE
+include MANIFEST.in
 
-recursive-include rest_framework_docs/static *
-recursive-include rest_framework_docs/templates *.html
+global-exclude __pycache__
+global-exclude *.py[co]
+global-exclude package.json
 
-recursive-exclude rest_framework_docs/static/node_modules *.*
-recursive-exclude * __pycache__
-recursive-exclude * *.py[co]
+prune rest_framework_docs/static/node_modules
+
+graft rest_framework_docs/static/rest_framework_docs
+graft rest_framework_docs/templates/rest_framework_docs
