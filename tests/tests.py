@@ -42,9 +42,7 @@ class DRFDocsViewTests(TestCase):
         self.assertEqual(str(response.context["endpoints"][8].errors), "'test_value'")
 
     def test_index_search_with_endpoints(self):
-        url = "%s?search=reset-password" % reverse("drfdocs")
-        print(url)
-        response = self.client.get(url)
+        response = self.client.get("%s?search=reset-password" % reverse("drfdocs"))
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context["endpoints"]), 2)

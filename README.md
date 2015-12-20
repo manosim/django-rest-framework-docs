@@ -1,6 +1,6 @@
 # [Django Rest Framework Docs](http://www.drfdocs.com/) [![travis][travis-image]][travis-url] [![codecov][codecov-image]][codecov-url] [![pypi][pypi-image]][pypi-url]
 
-Document Web APIs made with Django Rest Framework.
+Document Web APIs made with Django Rest Framework. [View Demo](http://demo.drfdocs.com/)
 
 ![DRFdocs](http://drfdocs.com/static/images/mockup.png)
 
