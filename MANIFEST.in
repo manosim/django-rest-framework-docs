@@ -1,7 +1,7 @@
 include README.md
 include LICENSE
 
-recursive-include rest_framework_docs/static *.js *.css *.less *.png *.eot *.svg *.ttf *.woff
+recursive-include rest_framework_docs/static *
 recursive-include rest_framework_docs/templates *.html
 
 recursive-exclude rest_framework_docs/static/node_modules *.*

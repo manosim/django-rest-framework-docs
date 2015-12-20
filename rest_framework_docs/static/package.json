@@ -4,10 +4,10 @@
   "description": "Document Web APIs made with Django Rest Framework",
   "main": "index.js",
   "scripts": {
-    "build-font-awesome": "cp -r node_modules/font-awesome/fonts .",
-    "build-bootstrap-fonts": "cp -r node_modules/bootstrap/fonts .",
-    "build-less": "lessc --clean-css less/style.less css/style.css",
-    "watch-less": "watch 'npm run build-less' less/",
+    "build-font-awesome": "cp -r node_modules/font-awesome/fonts rest_framework_docs/",
+    "build-bootstrap-fonts": "cp -r node_modules/bootstrap/fonts rest_framework_docs/",
+    "build-less": "lessc --clean-css rest_framework_docs/less/style.less rest_framework_docs/css/style.css",
+    "watch-less": "watch 'npm run build-less' rest_framework_docs/less/",
     "build": "npm run build-font-awesome && npm run build-bootstrap-fonts && npm run build-less",
     "start": "npm run build && npm run watch-less",
     "test": "echo \"Error: no test specified\" && exit 1"
