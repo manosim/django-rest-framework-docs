@@ -9,7 +9,10 @@ class ApiDocumentation(object):
     def __init__(self):
         self.endpoints = []
         root_urlconf = __import__(settings.ROOT_URLCONF)
-        self.get_all_view_names(root_urlconf.urls.urlpatterns)
+        if hasattr(root_urlconf, 'urls'):
+            self.get_all_view_names(root_urlconf.urls.urlpatterns)
+        else:
+            self.get_all_view_names(root_urlconf.urlpatterns)
 
     def get_all_view_names(self, urlpatterns, parent_pattern=None):
         for pattern in urlpatterns:
