@@ -4,6 +4,8 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var Endpoints = require('./components/endpoints');
 
-ReactDOM.render(
-  <Endpoints items={endpoints} tags={tags} />, document.getElementById('endpoints')
-);
+window.setupEndpoints = function (endpoints) {
+  ReactDOM.render(
+    <Endpoints endpoints={endpoints} />, document.getElementById('endpoints')
+  );
+};

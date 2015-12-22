@@ -5,11 +5,12 @@ var Endpoints = React.createClass({
 
   getInitialState: function () {
     return {
-      url: '',
       loading: false,
-      submitDisabled: true,
-      errors: false
     };
+  },
+
+  componentDidMount: function() {
+    console.log(this.props.endpoints);
   },
 
   handleChange: function (key, event) {
@@ -26,59 +27,10 @@ var Endpoints = React.createClass({
     }
   },
 
-  onSubmit: function (e) {
-    e.preventDefault();
-
-    var self = this;
-    var slug = this.state.url.split('.com/')[1];
-    var regex = /^(http[s]?:\/\/)?(www\.)?github\.com\/([^\/]+)\/([^\/]+)[\/]?.*$/i;
-    var result = regex.exec(this.state.url);
-
-    if (!result) {
-      this.setState({
-        errors: true
-      });
-      return;
-    }
-
-    var owner = result[3];
-    var repo = result[4];
-
-    this.setState({
-      loading: true,
-      submitDisabled: true,
-      errors: false
-    });
-
-    apiRequests
-      .get('https://api.github.com/repos/' + owner + '/' + repo)
-      .end(function (err, response) {
-        if (response && response.ok) {
-          setTimeout(function() {
-            self.setState({
-              errors: false,
-              loading: false,
-              submitDisabled: false
-            });
-            self.props.gotDetails(response.body);
-          }, 1000);
-        } else {
-          self.setState({
-            errors: true,
-            loading: false,
-            submitDisabled: false
-          });
-        }
-      });
-  },
-
   render: function () {
     return (
       <div className='autogenerator'>
         <h4>Generate from GitHub Repository</h4>
-        <Loading className="loading" shouldShow={this.state.loading}>
-          <h3>Grabbing your repository details from <i className='fa fa-github' /></h3>
-        </Loading>
         <form className='form'>
           <div className='form-group'>
             <input type='text' id='name' className='form-control input-lg' value={this.state.url} placeholder='Example: http://www.github.com/atom/electron' onChange={this.handleChange.bind(this, 'url')} />
