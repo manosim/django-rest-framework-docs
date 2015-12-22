@@ -4,6 +4,11 @@ source_filename: "changelog"
 order: 5
 ---
 
+### Release 0.0.5
+
+  - Support both common types of ROOT_URLCONF
+
+
 ### Release 0.0.4
 
   - Allow templates overrides
