@@ -11,7 +11,25 @@ var Endpoint = React.createClass({
     };
   },
 
+  setAccordionStyle: function () {
+    var box = this.refs.accordionContent.getBoundingClientRect();
+
+    this.setState({
+      accordionStyle: {
+        height: box.height
+      }
+    });
+  },
+
   toggleAccordion: function () {
+    if (this.state.accordionOpen) {
+      window.removeEventListener('resize', this.setAccordionStyle);
+    } else {
+      window.addEventListener('resize', this.setAccordionStyle);
+    }
+
+    this.setAccordionStyle();
+
     this.setState({
       accordionOpen: !this.state.accordionOpen
     });
@@ -50,7 +68,6 @@ var Endpoint = React.createClass({
 
   render: function () {
     var endpoint = this.props.endpoint;
-    var isOpen = this.state.accordionOpen ? ' in' : '';
 
     return (
       <div className='panel panel-default endpoint' onClick={this.toggleAccordion}>
@@ -74,8 +91,9 @@ var Endpoint = React.createClass({
           </div>
         </div>
 
-        <div className={'panel-collapse collapse' + isOpen}>
-          <div className="panel-body">
+        <div className="panel-collapse collapse"
+          style={this.state.accordionOpen ? this.state.accordionStyle : {height: 0}}>
+          <div className="panel-body" ref="accordionContent">
             {endpoint.docstring ? (
               <p className='lead'>{endpoint.docstring}</p>
             ) : null}
