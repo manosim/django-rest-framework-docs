@@ -20,6 +20,22 @@
 /* @end Colours */
 
 
+/* @group Mixins */
+
+// Border Radius (Same Corners)
+.BorderRadius(@radius: 5px) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius:    @radius;
+    border-radius:         @radius;
+
+    -moz-background-clip:    padding;
+    -webkit-background-clip: padding-box;
+    background-clip:         padding-box;
+}
+
+/* @end Mixins */
+
+
 /* @group Misc */
 
 body {
@@ -85,6 +101,16 @@ body {
         &.put { background-color: @PatchColor; }
         &.delete { background-color: @DeleteColor; }
         &.options { background-color: @OptionsColor; }
+
+        &.plug {
+          color: @brand-primary;
+          border: 1px solid @brand-primary;
+          .BorderRadius(50%);
+          font-size: 14px;
+          width: 30px;
+          height: 29px;
+          margin-left: 10px;
+        }
       }
     }
   }
