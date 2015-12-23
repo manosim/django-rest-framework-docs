@@ -57,6 +57,7 @@ var Endpoint = React.createClass({
             <div className='col-md-5 text-right'>
               <ul className='list-inline methods'>
                 {this._renderMethods()}
+                <li key='plug' className={'method plug'}><i className='fa fa-plug' /></li>
               </ul>
             </div>
           </div>
