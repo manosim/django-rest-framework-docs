@@ -11,14 +11,27 @@ var Endpoint = React.createClass({
     };
   },
 
-  toggleAccordion: function () {
+  setAccordionStyle: function () {
     var box = this.refs.accordionContent.getBoundingClientRect();
 
     this.setState({
-      accordionOpen: !this.state.accordionOpen,
       accordionStyle: {
         height: box.height
       }
+    });
+  },
+
+  toggleAccordion: function () {
+    if (this.state.accordionOpen) {
+      window.removeEventListener('resize', this.setAccordionStyle);
+    } else {
+      window.addEventListener('resize', this.setAccordionStyle);
+    }
+
+    this.setAccordionStyle();
+
+    this.setState({
+      accordionOpen: !this.state.accordionOpen
     });
   },
 
