@@ -36,7 +36,7 @@ var Endpoints = React.createClass({
 
   render: function () {
     return (
-      <div className='autogenerator'>
+      <div>
         {this._renderGroups()}
       </div>
     );
