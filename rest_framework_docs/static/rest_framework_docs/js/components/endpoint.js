@@ -3,6 +3,18 @@ var slugify = require('underscore.string/slugify');
 var React = require('react');
 
 var Endpoint = React.createClass({
+  getInitialState: function() {
+    return {
+      open: false
+    };
+  },
+
+  toggleAccordion: function () {
+    this.setState({
+      open: !this.state.open
+    });
+  },
+
   _renderMethods: function () {
     var methods = this.props.endpoint.allowed_methods;
 
@@ -29,9 +41,10 @@ var Endpoint = React.createClass({
 
   render: function () {
     var endpoint = this.props.endpoint;
+    var isOpen = this.state.open ? ' in' : '';
 
     return (
-      <div className='panel panel-default endpoint'>
+      <div className='panel panel-default endpoint' onClick={this.toggleAccordion}>
 
         <div className='panel-heading'>
           <div className='row'>
@@ -49,7 +62,7 @@ var Endpoint = React.createClass({
           </div>
         </div>
 
-        <div className="panel-collapse collapse in" role="tabpanel">
+        <div className={'panel-collapse collapse' + isOpen}>
           <div className="panel-body">
             {endpoint.docstring ? (
               <p className='lead'>{endpoint.docstring}</p>
@@ -61,14 +74,14 @@ var Endpoint = React.createClass({
               </div>
             ) : null}
 
-            {endpoint.fields ? (
+            {endpoint.fields.length ? (
               <div>
                 <p className="fields-desc">Fields:</p>
                 <ul className="list fields">
                   {this._renderFields()}
                 </ul>
               </div>
-            ) : null}
+            ) : <div><p className="fields-desc">No Fields.</p></div>}
           </div>
         </div>
       </div>

@@ -40,6 +40,15 @@ body {
   margin-left: 5px;
 }
 
+.lead {
+  font-size: floor((@font-size-base * 1.15));
+
+  @media (min-width: @screen-sm-min) {
+    font-size: (@font-size-base * 1.25);
+  }
+}
+
+
 /* @end Misc */
 
 
@@ -77,6 +86,7 @@ body {
 
        .method {
         padding: 4px 8px;
+        margin: 0 2px;
         color: #FFF;
 
         &.get { background-color: @GetColor; }
@@ -93,6 +103,7 @@ body {
     padding: 0;
 
     .lead {
+      padding-left: 20px;
       margin-bottom: 5px;
     }
 
@@ -102,6 +113,7 @@ body {
     }
 
     .fields-desc {
+      padding-left: 20px;
       margin-bottom: 5px;
     }
 
