@@ -1,17 +1,26 @@
 var _ = require('underscore');
 var slugify = require('underscore.string/slugify');
 var React = require('react');
+var Modal = require('react-modal');
 
 var Endpoint = React.createClass({
   getInitialState: function() {
     return {
-      open: false
+      accordionOpen: false,
+      modalOpen: false
     };
   },
 
   toggleAccordion: function () {
     this.setState({
-      open: !this.state.open
+      accordionOpen: !this.state.accordionOpen
+    });
+  },
+
+  toggleModal: function (e) {
+    e.stopPropagation();
+    this.setState({
+      modalOpen: !this.state.modalOpen
     });
   },
 
@@ -41,7 +50,7 @@ var Endpoint = React.createClass({
 
   render: function () {
     var endpoint = this.props.endpoint;
-    var isOpen = this.state.open ? ' in' : '';
+    var isOpen = this.state.accordionOpen ? ' in' : '';
 
     return (
       <div className='panel panel-default endpoint' onClick={this.toggleAccordion}>
@@ -57,7 +66,9 @@ var Endpoint = React.createClass({
             <div className='col-md-5 text-right'>
               <ul className='list-inline methods'>
                 {this._renderMethods()}
-                <li key='plug' className={'method plug'}><i className='fa fa-plug' /></li>
+                <li key='plug' className={'method plug'}>
+                  <i className='fa fa-plug' onClick={this.toggleModal} />
+                </li>
               </ul>
             </div>
           </div>
@@ -85,6 +96,32 @@ var Endpoint = React.createClass({
             ) : <div><p className="fields-desc">No Fields.</p></div>}
           </div>
         </div>
+
+        <Modal
+          isOpen={this.state.modalOpen}
+          onRequestClose={this.toggleModal}
+          style={{
+            content : {
+                top                   : '50%',
+                left                  : '50%',
+                right                 : 'auto',
+                bottom                : 'auto',
+                marginRight           : '-50%',
+                transform             : 'translate(-50%, -50%)'
+              }
+          }} >
+
+          <h2>Hello</h2>
+          <button onClick={this.toggleModal}>close</button>
+          <div>I am a modal</div>
+          <form>
+            <input />
+            <button>tab navigation</button>
+            <button>stays</button>
+            <button>inside</button>
+            <button>the modal</button>
+          </form>
+        </Modal>
       </div>
     );
   }
