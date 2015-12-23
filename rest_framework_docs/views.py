@@ -1,3 +1,4 @@
+import json
 from django.http import Http404
 from django.views.generic.base import TemplateView
 from rest_framework_docs.api_docs import ApiDocumentation
@@ -19,8 +20,8 @@ class DRFDocsView(TemplateView):
 
         query = self.request.GET.get("search", "")
         if query and endpoints:
-            endpoints = [endpoint for endpoint in endpoints if query in endpoint.path]
+            endpoints = [endpoint for endpoint in endpoints if query in endpoint["path"]]
 
         context['query'] = query
-        context['endpoints'] = endpoints
+        context['endpoints'] = json.dumps(endpoints)
         return context

@@ -40,7 +40,7 @@ class ApiEndpoint(object):
                         "required": field.required
                     } for key, field in serializer().get_fields().items()]
                 except KeyError as e:
-                    self.errors = e
+                    self.errors = str(e)
                     fields = []
 
                 # FIXME:

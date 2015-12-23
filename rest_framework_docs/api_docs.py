@@ -29,4 +29,11 @@ class ApiDocumentation(object):
         return False
 
     def get_endpoints(self):
-        return self.endpoints
+        return [{
+            "name_parent": endpoint.name_parent,
+            "path": endpoint.path,
+            "allowed_methods": endpoint.allowed_methods,
+            "docstring": endpoint.docstring,
+            "fields": endpoint.fields,
+            "errors": endpoint.errors
+        } for endpoint in self.endpoints]

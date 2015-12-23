@@ -6,8 +6,11 @@
   "scripts": {
     "build-font-awesome": "cp -r node_modules/font-awesome/fonts rest_framework_docs/",
     "build-bootstrap-fonts": "cp -r node_modules/bootstrap/fonts rest_framework_docs/",
+    "build-js": "browserify rest_framework_docs/js/index.js -t [ babelify --presets [ es2015 react ] ] -d -p [ minifyify --map rest_framework_docs/js/dist.map.json --output rest_framework_docs/js/dist.map.json ] > rest_framework_docs/js/dist.js",
     "build-less": "lessc --clean-css rest_framework_docs/less/style.less rest_framework_docs/css/style.css",
+    "watch-js": "watchify rest_framework_docs/js/index.js -t [ babelify --presets [ es2015 react ] ] -d -p [ minifyify --map rest_framework_docs/js/dist.map.json --output rest_framework_docs/js/dist.map.json ] -o rest_framework_docs/js/dist.js -v",
     "watch-less": "watch 'npm run build-less' rest_framework_docs/less/",
+    "watch": "npm run watch-js & npm run watch-less",
     "build": "npm run build-font-awesome && npm run build-bootstrap-fonts && npm run build-less",
     "start": "npm run build && npm run watch-less",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -29,13 +32,24 @@
   },
   "homepage": "https://www.drfdocs.com/",
   "dependencies": {
+    "babel-preset-es2015": "=6.3.13",
+    "babel-preset-react": "=6.3.13",
+    "babelify": "=7.2.0",
     "bootstrap": "=3.3.6",
     "bootswatch": "=3.3.6",
-    "font-awesome": "=4.5.0"
+    "browserify": "=12.0.1",
+    "font-awesome": "=4.5.0",
+    "react": "=0.14.3",
+    "react-dom": "=0.14.3",
+    "react-modal": "=0.6.1",
+    "underscore": "=1.8.3",
+    "underscore.string": "=3.2.2"
   },
   "devDependencies": {
     "less": "=2.5.3",
     "less-plugin-clean-css": "=1.5.1",
-    "watch": "=0.16.0"
+    "minifyify": "=7.1.0",
+    "watch": "=0.16.0",
+    "watchify": "=3.6.1"
   }
 }

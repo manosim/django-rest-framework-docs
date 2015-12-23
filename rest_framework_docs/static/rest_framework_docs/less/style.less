@@ -20,6 +20,22 @@
 /* @end Colours */
 
 
+/* @group Mixins */
+
+// Border Radius (Same Corners)
+.BorderRadius(@radius: 5px) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius:    @radius;
+    border-radius:         @radius;
+
+    -moz-background-clip:    padding;
+    -webkit-background-clip: padding-box;
+    background-clip:         padding-box;
+}
+
+/* @end Mixins */
+
+
 /* @group Misc */
 
 body {
@@ -39,6 +55,15 @@ body {
   padding: 2px 5px;
   margin-left: 5px;
 }
+
+.lead {
+  font-size: floor((@font-size-base * 1.15));
+
+  @media (min-width: @screen-sm-min) {
+    font-size: (@font-size-base * 1.25);
+  }
+}
+
 
 /* @end Misc */
 
@@ -77,6 +102,7 @@ body {
 
        .method {
         padding: 4px 8px;
+        margin: 0 2px;
         color: #FFF;
 
         &.get { background-color: @GetColor; }
@@ -85,6 +111,16 @@ body {
         &.put { background-color: @PatchColor; }
         &.delete { background-color: @DeleteColor; }
         &.options { background-color: @OptionsColor; }
+
+        &.plug {
+          color: @brand-primary;
+          border: 1px solid @brand-primary;
+          .BorderRadius(50%);
+          font-size: 14px;
+          width: 30px;
+          height: 29px;
+          margin-left: 10px;
+        }
       }
     }
   }
@@ -93,6 +129,7 @@ body {
     padding: 0;
 
     .lead {
+      padding-left: 20px;
       margin-bottom: 5px;
     }
 
@@ -102,6 +139,7 @@ body {
     }
 
     .fields-desc {
+      padding-left: 20px;
       margin-bottom: 5px;
     }
 
@@ -111,6 +149,17 @@ body {
   }
 
   > .panel-heading +.panel-collapse > .panel-body { border: 0; }
+}
+
+.collapse {
+  display: block;
+  height: auto;
+  overflow: hidden;
+  -webkit-transition: ease-in-out 0.2s height;
+  -moz-transition: ease-in-out 0.2s height;
+  -ms-transition: ease-in-out 0.2s height;
+  -o-transition: ease-in-out 0.2s height;
+  transition: ease-in-out 0.2s height;
 }
 
 /* @end Endpoint */
@@ -166,3 +215,45 @@ body {
 }
 
 /* @end Github Ribbon - SVG */
+
+
+/* @group React Modal */
+
+.ReactModal__Overlay {
+  -webkit-perspective: 600;
+  perspective: 600;
+  opacity: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+  transition: opacity 150ms ease-out;
+}
+
+.ReactModal__Content {
+  -webkit-transform: scale(0.5) rotateX(-30deg);
+}
+
+.ReactModal__Content--after-open {
+  -webkit-transform: scale(1) rotateX(0deg);
+  transition: all 150ms ease-in;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}
+
+.ReactModal__Content--before-close {
+  -webkit-transform: scale(0.5) rotateX(30deg);
+  transition: all 150ms ease-in;
+}
+
+.ReactModal__Content.modal-dialog {
+  border: none;
+  background-color: transparent;
+}
+
+/* @end React Modal */
