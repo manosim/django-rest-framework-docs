@@ -12,6 +12,21 @@ var Endpoint = React.createClass({
     })
   },
 
+  _renderFields: function () {
+    var fields = this.props.endpoint.fields;
+
+    return _.map(fields, function (field) {
+      return (
+        <li key={field.name} className='field'>
+          {field.name}: {field.type}
+          {field.required ?(
+            <span className="label label-primary label-required" title="Required">R</span>
+          ) : null}
+        </li>
+      )
+    })
+  },
+
   render: function () {
     var endpoint = this.props.endpoint;
 
@@ -34,7 +49,28 @@ var Endpoint = React.createClass({
           </div>
         </div>
 
-        // Body
+        <div className="panel-collapse collapse in" role="tabpanel">
+          <div className="panel-body">
+            {endpoint.docstring ? (
+              <p className='lead'>{endpoint.docstring}</p>
+            ) : null}
+
+            {endpoint.errors ? (
+              <div className="alert alert-danger" role="alert">
+                Oops! There was something wrong with {endpoint.errors}. Please check your code.
+              </div>
+            ) : null}
+
+            {endpoint.fields ? (
+              <div>
+                <p className="fields-desc">Fields:</p>
+                <ul className="list fields">
+                  {this._renderFields()}
+                </ul>
+              </div>
+            ) : null}
+          </div>
+        </div>
       </div>
     );
   }
