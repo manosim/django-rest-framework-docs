@@ -151,6 +151,18 @@ body {
   > .panel-heading +.panel-collapse > .panel-body { border: 0; }
 }
 
+.collapse {
+  display: block;
+  max-height: 0;
+  height: auto;
+  overflow: hidden;
+  -webkit-transition: ease-in-out 0.5s max-height;
+
+  &.in {
+    max-height: 2000px;
+  }
+}
+
 /* @end Endpoint */
 
 
