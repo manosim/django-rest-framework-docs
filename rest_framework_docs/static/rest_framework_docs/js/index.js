@@ -1,5 +1,39 @@
 $( document ).ready(function() {
 
+  var setResponse = function (response) {
+
+    // Status Code
+    var statusCodeFirstChar = String(response.status).charAt(0);
+    var statusCodeClass;
+
+    switch (parseInt(statusCodeFirstChar)) {
+      case 1:
+        statusCodeClass = 'label-info';
+        break;
+      case 2:
+        statusCodeClass = 'label-success';
+        break;
+      case 3:
+        statusCodeClass = 'label-warning';
+        break;
+      case 4:
+        statusCodeClass = 'label-danger';
+        break;
+      case 5:
+        statusCodeClass = 'label-primary';
+        break;
+    }
+
+    $('#responseStatusCode').text(response.status);
+    $('#responseStatusCode').addClass(statusCodeClass);
+
+    $('#responseStatusText').text(response.statusText.toLowerCase());
+    $('#responseData').text(JSON.stringify(response.responseJSON, undefined, 2));
+
+    // console.log(response);
+    // console.log(response.responseJSON);
+  };
+
   var makeRequest = function () {
     var url = $('#requestForm #urlInput').val();
     var method = 'POST';
@@ -13,21 +47,11 @@ $( document ).ready(function() {
         password: 'test'
       }
     }).always(function(response) {
-
-      $('#responseStatusCode').text(response.status);
-      $('#responseStatusText').text(response.statusText);
-      $('#responseData').text(JSON.stringify(response.responseJSON, undefined, 2));
-
-      console.log(response);
-      console.log(response.responseJSON);
+      setResponse(response);
     });
   };
 
   var setupForm = function (data) {
-    console.log('------');
-    console.log(data.path);
-    console.log('------');
-
     $('#urlInput').val(data.path);
 
     $('#requestForm').submit(function (e) {
