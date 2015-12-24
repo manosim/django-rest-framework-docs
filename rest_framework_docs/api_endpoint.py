@@ -1,3 +1,4 @@
+import json
 import inspect
 from django.contrib.admindocs.views import simplify_regex
 
@@ -15,6 +16,7 @@ class ApiEndpoint(object):
         # self.view_name = pattern.callback.__name__
         self.errors = None
         self.fields = self.__get_serializer_fields__()
+        self.fields_json = self.__get_serializer_fields_json__()
 
     def __get_path__(self, parent_pattern):
         if parent_pattern:
@@ -47,3 +49,8 @@ class ApiEndpoint(object):
                 # Show more attibutes of `field`?
 
         return fields
+
+    def __get_serializer_fields_json__(self):
+        # FIXME:
+        # Return JSON or not?
+        return json.dumps(self.fields)

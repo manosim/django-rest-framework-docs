@@ -94,7 +94,14 @@ $( document ).ready(function() {
   };
 
   var _setupFields = function (fields) {
-
+    $.each( fields, function( i, field ) {
+      $('#fields').append("" +
+        '<div class="form-group">' +
+          '<label for="field' + field.name + '">' + field.name + '</label>' +
+          '<input type="text" class="form-control" id="field' + field.name + '" placeholder="' + field.type + '">' +
+        '</div>' +
+      "");
+    });
   };
 
   var setupForm = function (data) {
