@@ -119,6 +119,15 @@ $( document ).ready(function() {
     });
   };
 
+  var _setupAuthorization = function (permissions) {
+
+    console.log(permissions);
+    if (permissions === 'None' || permissions === 'AllowAny') {
+      console.log('EMPTYYYY');
+      $('#headers').empty();
+    }
+  };
+
   var _setupFields = function (fields) {
     $.each( fields, function( i, field ) {
       var label = field.name.replace('_', ' ');
@@ -140,6 +149,7 @@ $( document ).ready(function() {
     $('#urlInput').val(data.path);
 
     _setupMethods(data.methods);
+    _setupAuthorization(data.permissions);
     _setupFields(data.fields);
 
     $('#requestForm').submit(function (e) {

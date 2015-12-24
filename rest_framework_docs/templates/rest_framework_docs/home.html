@@ -45,6 +45,7 @@
                     data-toggle="modal"
                     data-path="{{ endpoint.path }}"
                     data-methods="{{ endpoint.allowed_methods }}"
+                    data-permissions="{{ endpoint.permissions }}"
                     data-fields="{{ endpoint.fields_json }}">
                     <i class="fa fa-plug"></i></li>
               </ul>
@@ -92,7 +93,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Live API Endpoints</h4>
+          <h4 class="modal-title">Live API Endpoints <span class="label label-info">Beta</span></h4>
         </div>
         <div class="modal-body">
 
@@ -110,11 +111,13 @@
                 <h5 class="section-title"><span>Method</span></h5>
                 <div class="btn-group methods" id="methods" role="group"></div>
 
-                <h5 class="section-title"><span>Headers</span></h5>
-                <div class="form-group">
-                  <label for="exampleInputPassword1" class="col-sm-4 control-label">Authorization</label>
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control input-sm" id="exampleInputPassword1" placeholder="Token">
+                <div id="headers">
+                  <h5 class="section-title"><span>Headers</span></h5>
+                  <div class="form-group">
+                    <label for="authorization" class="col-sm-4 control-label">Authorization</label>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control input-sm" id="authorization" placeholder="Token">
+                    </div>
                   </div>
                 </div>
 
