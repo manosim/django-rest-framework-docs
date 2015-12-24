@@ -137,6 +137,7 @@ $( document ).ready(function() {
       $("#methods .method").removeClass( 'active' );
       // Add 'active' to the clicked button
       $(this).addClass( 'active' );
+      _toggleFields();
     });
   };
 
@@ -152,7 +153,21 @@ $( document ).ready(function() {
     }
   };
 
+  var _toggleFields = function () {
+    // Show/Hide Data depending on method type
+    var method = $("#methods").find( ".active" ).text();
+    if (method === 'GET' || method === 'OPTIONS') {
+      $('#headerData').hide();
+      $('#fields').hide();
+    } else {
+      $('#headerData').show();
+      $('#fields').show();
+    }
+  };
+
   var _setupFields = function (fields) {
+    _toggleFields();
+
     $.each( fields, function( i, field ) {
       var label = field.name.replace('_', ' ');
       $('#fields').append("" +
