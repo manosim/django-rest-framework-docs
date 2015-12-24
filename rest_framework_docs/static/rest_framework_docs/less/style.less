@@ -176,23 +176,20 @@ body {
     .methods {
 
       .method {
-        padding: 4px 8px;
         color: #FFF;
+        background-color: @gray-light;
+        border-left: 1px solid @gray;
 
-        &.get { background-color: @GetColor; }
-        &.post { background-color: @PostColor; }
-        &.patch { background-color: @PutColor; }
-        &.put { background-color: @PatchColor; }
-        &.delete { background-color: @DeleteColor; }
-        &.options { background-color: @OptionsColor; }
-
-        &.active {
-          border: 2px solid red;
+        &:first-child {
+          border-left: 0;
         }
 
-        input[type='radio'] {
-          display: none;
-        }
+        &.get.active { background-color: @GetColor; }
+        &.post.active { background-color: @PostColor; }
+        &.patch.active { background-color: @PutColor; }
+        &.put.active { background-color: @PatchColor; }
+        &.delete.active { background-color: @DeleteColor; }
+        &.options.active { background-color: @OptionsColor; }
       }
     }
   }
