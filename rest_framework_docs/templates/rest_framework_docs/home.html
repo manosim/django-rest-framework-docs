@@ -87,8 +87,7 @@
   {% endif %}
 
   <!-- Modal -->
-  <!-- Modal -->
-  <div class="modal fade" id="liveAPIModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal fade api-modal" id="liveAPIModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -98,7 +97,7 @@
         <div class="modal-body">
 
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 request">
 
               <h3>Request</h3>
               <form id="requestForm">
@@ -123,13 +122,9 @@
 
 
             </div>
-            <div class="col-md-6">
-              <h3>Response</h3>
-              <ul class="list">
-                <li>Status Code: <span id="responseStatusCode"></span></li>
-                <li>Status Text: <span id="responseStatusText"></span></li>
-              </ul>
-
+            <div class="col-md-6 response">
+              <h3>Response <span id="responseStatusCode" class="label pull-right"></span></h3>
+              <div><strong>Status Text</strong>: <span class="status-text" id="responseStatusText"></span></div>
               <pre id="responseData"></pre>
             </div>
           </div>
