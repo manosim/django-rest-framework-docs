@@ -22,6 +22,8 @@ var jsonPP = {
 
 $( document ).ready(function() {
 
+  var token = null;
+
   var resetForm = function () {
     $('#methods').empty();
     $('#fields').empty();
@@ -31,8 +33,9 @@ $( document ).ready(function() {
     $('#responseStatusCode').removeClass(function (index, css) {
       return (css.match (/(^|\s)label-\S+/g) || []).join(' ');
     });
-    $('#responseStatusText').text( '' );
-    $('#responseData').html( '' );
+    $('#responseStatusText').text('');
+    $('#responseData').html('');
+    $('#saveTokenButton').hide();
   };
 
   var setResponse = function (response) {
@@ -63,6 +66,17 @@ $( document ).ready(function() {
 
     $('#responseStatusText').text(response.statusText.toLowerCase());
     $('#responseData').html(jsonPP.prettyPrint(response.responseJSON));
+
+    // Setup token store
+    if (response.responseJSON.hasOwnProperty('token')) {
+      // If the JSON has a token, show the button to save it
+      $('#saveTokenButton').show();
+
+      $('#saveTokenButton').on('click', function () {
+        // Save the token to the window
+        token = response.responseJSON['token'];
+      });
+    }
   };
 
   var getFormData = function () {
@@ -85,9 +99,16 @@ $( document ).ready(function() {
     var url = $('#requestForm #urlInput').val();
     var method = $("#methods").find( ".active" ).text();
     var data = getFormData();
+
+    var token = $('#headers #authorization').val();
+    var headers = token ? {
+      'Authorization' : token
+    } : null;
+
     $.ajax({
       url: url,
       method: method,
+      headers: headers,
       context: document.body,
       data: data
     }).always(function(data, textStatus, jqXHR) {
@@ -120,11 +141,14 @@ $( document ).ready(function() {
   };
 
   var _setupAuthorization = function (permissions) {
-
-    console.log(permissions);
     if (permissions === 'None' || permissions === 'AllowAny') {
-      console.log('EMPTYYYY');
-      $('#headers').empty();
+      $('#headers').hide();
+    } else {
+      $('#headers').show();
+      // Check if token exists
+      if (token) {
+        $('#headers #authorization').val('Token ' + token);
+      }
     }
   };
 
@@ -145,6 +169,7 @@ $( document ).ready(function() {
   var setupForm = function (data) {
     // Reset Form - Remove Methods & Fields
     resetForm();
+    cleanResponse();
 
     $('#urlInput').val(data.path);
 
