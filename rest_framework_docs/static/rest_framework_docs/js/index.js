@@ -98,8 +98,10 @@ $( document ).ready(function() {
       var label = field.name.replace('_', ' ');
       $('#fields').append("" +
         '<div class="form-group">' +
-          '<label for="field' + field.name + '">' + label + '</label>' +
+          '<label for="field' + field.name + '" class="col-sm-4 control-label">' + label + '</label>' +
+          '<div class="col-sm-8">' +
           '<input type="text" class="form-control input-sm" id="field' + field.name + '" placeholder="' + field.type + '">' +
+          '</div>' +
         '</div>' +
       "");
     });
