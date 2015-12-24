@@ -23,13 +23,8 @@ var jsonPP = {
 $( document ).ready(function() {
 
   var setResponse = function (method, response) {
-
-    console.log(response);
-    console.log(response.status);
-
     if (method == 'OPTIONS') {
-      $('#responseData').html(jsonPP.prettyPrint(response));
-      return;
+      return $('#responseData').html(jsonPP.prettyPrint(response));
     }
 
     // Status Code
@@ -59,9 +54,6 @@ $( document ).ready(function() {
 
     $('#responseStatusText').text(response.statusText.toLowerCase());
     $('#responseData').html(jsonPP.prettyPrint(response.responseJSON));
-
-    // console.log(response);
-    // console.log(response.responseJSON);
   };
 
   var makeRequest = function () {
@@ -81,12 +73,10 @@ $( document ).ready(function() {
     });
   };
 
-  var setupForm = function (data) {
-    $('#urlInput').val(data.path);
-
+  var _setupMethods = function (methods) {
     // List Methods (Radio Buttons)
     // FIXME: Use regex - convert to JSON
-    var methods = data.methods.replace("[", "").replace("]", "").replace(/'/g, "").replace(/\s/g, "").split(',');
+    var methods = methods.replace("[", "").replace("]", "").replace(/'/g, "").replace(/\s/g, "").split(',');
     $.each( methods, function( i, method ) {
       var methodClass = "btn btn-sm method " + method.toLowerCase();
       $('#methods').append("<button type='button' class='" + methodClass + "'>" + method + "</button>");
@@ -101,6 +91,17 @@ $( document ).ready(function() {
       // Add 'active' to the clicked button
       $(this).addClass( 'active' );
     });
+  };
+
+  var _setupFields = function (fields) {
+
+  };
+
+  var setupForm = function (data) {
+    $('#urlInput').val(data.path);
+
+    _setupMethods(data.methods);
+    _setupFields(data.fields);
 
     $('#requestForm').submit(function (e) {
       // Prevent Submit
