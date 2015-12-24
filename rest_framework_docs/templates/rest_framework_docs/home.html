@@ -41,7 +41,12 @@
                 {% for method in endpoint.allowed_methods %}
                   <li class="method {{ method|lower }}">{{ method }}</li>
                 {% endfor %}
-                  <li class="method plug" data-toggle="modal" data-target="#myModal"><i class="fa fa-plug"></i></li>
+                  <li class="method plug"
+                    data-toggle="modal"
+                    data-path="{{ endpoint.path }}"
+                    data-methods="{{ endpoint.allowed_methods }}"
+                    data-fields="{{ endpoint.fields }}">
+                    <i class="fa fa-plug"></i></li>
               </ul>
             </div>
           </div>
@@ -83,19 +88,48 @@
 
   <!-- Modal -->
   <!-- Modal -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
+  <div class="modal fade" id="liveAPIModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title" id="myModalLabel">Modal title</h4>
         </div>
         <div class="modal-body">
-          ...
+
+          <div class="row">
+            <div class="col-md-6">
+
+              <h3>Request</h3>
+              <form id="requestForm">
+                <div class="form-group">
+                  <label for="urlInput">Endpoint</label>
+                  <input type="text" class="form-control" id="urlInput" placeholder="Url">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-default">Send</button>
+              </form>
+
+
+            </div>
+            <div class="col-md-6">
+              <h3>Response</h3>
+              <ul class="list">
+                <li>Status Code: <span id="responseStatusCode"></span></li>
+                <li>Status Text: <span id="responseStatusText"></span></li>
+              </ul>
+
+              <pre id="responseData"></pre>
+            </div>
+          </div>
+
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div>
     </div>
