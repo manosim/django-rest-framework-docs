@@ -22,10 +22,14 @@ var jsonPP = {
 
 $( document ).ready(function() {
 
-  var cleanResponse = function () {
+  var resetForm = function () {
+    $('#methods').empty();
+    $('#fields').empty();
+  };
 
+  var cleanResponse = function () {
     $('#responseStatusCode').removeClass(function (index, css) {
-        return (css.match (/(^|\s)label-\S+/g) || []).join(' ');
+      return (css.match (/(^|\s)label-\S+/g) || []).join(' ');
     });
     $('#responseStatusText').text( '' );
     $('#responseData').html( '' );
@@ -130,6 +134,9 @@ $( document ).ready(function() {
   };
 
   var setupForm = function (data) {
+    // Reset Form - Remove Methods & Fields
+    resetForm();
+
     $('#urlInput').val(data.path);
 
     _setupMethods(data.methods);
