@@ -95,12 +95,13 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title">Live API Endpoints <span class="label label-info">Beta</span></h4>
         </div>
+
+        <form class="form-horizontal" id="requestForm">
         <div class="modal-body">
 
           <div class="row">
             <div class="col-md-6 request">
               <h3>Request</h3>
-              <form class="form-horizontal" id="requestForm">
                 <div class="form-group">
                   <label for="urlInput" class="col-sm-4 control-label">Endpoint</label>
                   <div class="col-sm-8">
@@ -123,17 +124,15 @@
 
                 <h5 class="section-title" id="headerData"><span>Data</span></h5>
                 <div id="fields" class="fields"></div>
-
-                <button type="submit" class="btn btn-default">Send</button>
-              </form>
             </div>
 
             <div class="col-md-6 response">
               <h3>Response <span id="responseStatusCode" class="label status-code pull-right"></span></h3>
               <div><strong>Status Text</strong>: <span class="status-text" id="responseStatusText"></span></div>
               <pre><code id="responseData"></code></pre>
-              <div id="saveTokenButton">
+              <div class="well well-default text-center" id="saveTokenButton">
                 <button class='btn btn-info'><i class='fa fa-key'></i> Save Token</button>
+                <h5>Your token will be lost when you refresh the page.</h5>
               </div>
             </div>
           </div>
@@ -142,7 +141,9 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" id="submitButton" class="btn btn-primary">Send</button>
         </div>
+        </form>
       </div>
     </div>
   </div>
