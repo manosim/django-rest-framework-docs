@@ -36,6 +36,7 @@ $( document ).ready(function() {
     $('#responseStatusText').text('');
     $('#responseData').html('');
     $('#saveTokenButton').hide();
+    $('#responseData').parent().hide();
   };
 
   var setResponse = function (response) {
@@ -60,6 +61,8 @@ $( document ).ready(function() {
         statusCodeClass = 'label-primary';
         break;
     }
+
+    $('#responseData').parent().show();
 
     $('#responseStatusCode').text(response.status);
     $('#responseStatusCode').addClass(statusCodeClass);
@@ -158,6 +161,7 @@ $( document ).ready(function() {
     var method = $("#methods").find( ".active" ).text();
     if (method === 'GET' || method === 'OPTIONS') {
       $('#headerData').hide();
+      $('#headers #authorization').val();
       $('#fields').hide();
     } else {
       $('#headerData').show();
