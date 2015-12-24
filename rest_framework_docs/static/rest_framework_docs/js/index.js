@@ -84,10 +84,13 @@ $( document ).ready(function() {
       $('#methods').append("<button type='button' class='" + methodClass + "'>" + method + "</button>");
     });
 
+    // Make the first method active
     $('#methods').children(".btn").first().addClass( 'active' );
 
     $("#methods .method").on('click', function (evt) {
+      // Remove 'active' from all methods
       $("#methods .method").removeClass( 'active' );
+      // Add 'active' to the clicked button
       $(this).addClass( 'active' );
     });
 
