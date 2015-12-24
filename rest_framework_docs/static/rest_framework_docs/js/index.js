@@ -31,7 +31,7 @@ $( document ).ready(function() {
 
   var cleanResponse = function () {
     $('#responseStatusCode').removeClass(function (index, css) {
-      return (css.match (/(^|\s)label-\S+/g) || []).join(' ');
+      return (css.match (/(^|\s)status-code-\S+/g) || []).join(' ');
     });
     $('#responseStatusText').hide();
     $('#responseStatusText').find('span').text('');
@@ -41,30 +41,10 @@ $( document ).ready(function() {
   };
 
   var setResponse = function (response) {
-    // Status Code
     var statusCodeFirstChar = String(response.status).charAt(0);
-    var statusCodeClass;
-
-    switch (parseInt(statusCodeFirstChar)) {
-      case 1:
-        statusCodeClass = 'label-info';
-        break;
-      case 2:
-        statusCodeClass = 'label-success';
-        break;
-      case 3:
-        statusCodeClass = 'label-warning';
-        break;
-      case 4:
-        statusCodeClass = 'label-danger';
-        break;
-      case 5:
-        statusCodeClass = 'label-primary';
-        break;
-    }
 
     $('#responseStatusCode').text(response.status);
-    $('#responseStatusCode').addClass(statusCodeClass);
+    $('#responseStatusCode').addClass('status-code-' + statusCodeFirstChar);
 
     $('#responseStatusText').show();
     $('#responseStatusText').find('span').text(response.statusText.toLowerCase());
