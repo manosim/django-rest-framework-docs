@@ -58,7 +58,7 @@ $( document ).ready(function() {
 
   var makeRequest = function () {
     var url = $('#requestForm #urlInput').val();
-    var method = 'POST';
+    var method = $("#methods").find( ".active" ).text();
 
     $.ajax({
       url: url,
@@ -77,29 +77,18 @@ $( document ).ready(function() {
     $('#urlInput').val(data.path);
 
     // List Methods (Radio Buttons)
-    // FIXME: Use regex - conver to JSON
+    // FIXME: Use regex - convert to JSON
     var methods = data.methods.replace("[", "").replace("]", "").replace(/'/g, "").replace(/\s/g, "").split(',');
-
     $.each( methods, function( i, method ) {
-      var methodClass = "radio-inline method " + method.toLowerCase();
-      $('#methods').append("" +
-        "<label class='" + methodClass + "'>"+
-        "<input type='radio' name='methodRadio' value='" + method + "'>" + method +
-        "</label>" +
-      "")
+      var methodClass = "btn btn-sm method " + method.toLowerCase();
+      $('#methods').append("<button type='button' class='" + methodClass + "'>" + method + "</button>");
     });
 
-    $(".radio-inline.method").off().on('click', function (evt) {
-      // Prevent the event firing twice
-      evt.stopPropagation();
-      evt.preventDefault();
+    $('#methods').children(".btn").first().addClass( 'active' );
 
-      // Uncheck all checkboxes and
-      // Check the clicked radio
-      $('.radio-inline.method').removeClass('active');
-      $('.radio-inline.method').children('input').attr('checked', false);
-      $(this).addClass("active");
-      $(this).children('input').first().attr('checked', true);
+    $("#methods .method").on('click', function (evt) {
+      $("#methods .method").removeClass( 'active' );
+      $(this).addClass( 'active' );
     });
 
     $('#requestForm').submit(function (e) {
@@ -111,9 +100,10 @@ $( document ).ready(function() {
     });
   };
 
-  $('.plug').bind('click', function(e) {
+  $('.plug').bind('click', function(evt) {
     // Prevent the accordion from collapsing
-    e.stopPropagation();
+    evt.stopPropagation();
+    evt.preventDefault();
 
     // Open Modal
     $('#liveAPIModal').modal('toggle');
