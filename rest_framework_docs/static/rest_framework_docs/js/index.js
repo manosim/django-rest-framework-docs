@@ -56,18 +56,28 @@ $( document ).ready(function() {
     $('#responseData').html(jsonPP.prettyPrint(response.responseJSON));
   };
 
+  var getFormData = function () {
+    var data = {};
+
+    $( '#fields .form-group' ).each(function(){
+      var input = $(this).find( 'input' );
+      var name = input.attr( 'id' );
+      var value = input.val();
+      data[name] = value;
+    })
+
+    return data;
+  };
+
   var makeRequest = function () {
     var url = $('#requestForm #urlInput').val();
     var method = $("#methods").find( ".active" ).text();
-
+    var data = getFormData();
     $.ajax({
       url: url,
       method: method,
       context: document.body,
-      data: {
-        username: 'test',
-        password: 'test'
-      }
+      data: data
     }).always(function(response) {
       setResponse(method, response);
     });
@@ -100,7 +110,7 @@ $( document ).ready(function() {
         '<div class="form-group">' +
           '<label for="field' + field.name + '" class="col-sm-4 control-label">' + label + '</label>' +
           '<div class="col-sm-8">' +
-          '<input type="text" class="form-control input-sm" id="field' + field.name + '" placeholder="' + field.type + '">' +
+          '<input type="text" class="form-control input-sm" id="' + field.name + '" placeholder="' + field.type + '">' +
           '</div>' +
         '</div>' +
       "");
