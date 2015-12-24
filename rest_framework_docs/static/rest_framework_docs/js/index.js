@@ -16,7 +16,7 @@ $( document ).ready(function() {
 
       $('#responseStatusCode').text(response.status);
       $('#responseStatusText').text(response.statusText);
-      $('#responseData').text(JSON.stringify(response.responseJSON));
+      $('#responseData').text(JSON.stringify(response.responseJSON, undefined, 2));
 
       console.log(response);
       console.log(response.responseJSON);
