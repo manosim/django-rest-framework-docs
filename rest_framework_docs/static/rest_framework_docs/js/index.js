@@ -28,7 +28,7 @@ $( document ).ready(function() {
     $('#responseStatusCode').addClass(statusCodeClass);
 
     $('#responseStatusText').text(response.statusText.toLowerCase());
-    $('#responseData').text(JSON.stringify(response.responseJSON, undefined, 2));
+    $('#responseData').JSONView(response.responseJSON);
 
     // console.log(response);
     // console.log(response.responseJSON);
