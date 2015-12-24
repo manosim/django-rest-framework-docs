@@ -23,7 +23,7 @@ var jsonPP = {
 $( document ).ready(function() {
 
   var setResponse = function (method, response) {
-    if (method == 'OPTIONS') {
+    if (!response.status) {
       return $('#responseData').html(jsonPP.prettyPrint(response));
     }
 
@@ -95,10 +95,11 @@ $( document ).ready(function() {
 
   var _setupFields = function (fields) {
     $.each( fields, function( i, field ) {
+      var label = field.name.replace('_', ' ');
       $('#fields').append("" +
         '<div class="form-group">' +
-          '<label for="field' + field.name + '">' + field.name + '</label>' +
-          '<input type="text" class="form-control" id="field' + field.name + '" placeholder="' + field.type + '">' +
+          '<label for="field' + field.name + '">' + label + '</label>' +
+          '<input type="text" class="form-control input-sm" id="field' + field.name + '" placeholder="' + field.type + '">' +
         '</div>' +
       "");
     });
