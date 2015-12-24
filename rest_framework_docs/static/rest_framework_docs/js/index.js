@@ -22,7 +22,15 @@ var jsonPP = {
 
 $( document ).ready(function() {
 
-  var setResponse = function (response) {
+  var setResponse = function (method, response) {
+
+    console.log(response);
+    console.log(response.status);
+
+    if (method == 'OPTIONS') {
+      $('#responseData').html(jsonPP.prettyPrint(response));
+      return;
+    }
 
     // Status Code
     var statusCodeFirstChar = String(response.status).charAt(0);
@@ -69,7 +77,7 @@ $( document ).ready(function() {
         password: 'test'
       }
     }).always(function(response) {
-      setResponse(response);
+      setResponse(method, response);
     });
   };
 
