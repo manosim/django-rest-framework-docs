@@ -76,6 +76,32 @@ $( document ).ready(function() {
   var setupForm = function (data) {
     $('#urlInput').val(data.path);
 
+    // List Methods (Radio Buttons)
+    // FIXME: Use regex - conver to JSON
+    var methods = data.methods.replace("[", "").replace("]", "").replace(/'/g, "").replace(/\s/g, "").split(',');
+
+    $.each( methods, function( i, method ) {
+      var methodClass = "radio-inline method " + method.toLowerCase();
+      $('#methods').append("" +
+        "<label class='" + methodClass + "'>"+
+        "<input type='radio' name='methodRadio' value='" + method + "'>" + method +
+        "</label>" +
+      "")
+    });
+
+    $(".radio-inline.method").off().on('click', function (evt) {
+      // Prevent the event firing twice
+      evt.stopPropagation();
+      evt.preventDefault();
+
+      // Uncheck all checkboxes and
+      // Check the clicked radio
+      $('.radio-inline.method').removeClass('active');
+      $('.radio-inline.method').children('input').attr('checked', false);
+      $(this).addClass("active");
+      $(this).children('input').first().attr('checked', true);
+    });
+
     $('#requestForm').submit(function (e) {
       // Prevent Submit
       e.preventDefault();

@@ -172,6 +172,29 @@ body {
 
   .request {
 
+
+    .methods {
+
+      .method {
+        padding: 4px 8px;
+        color: #FFF;
+
+        &.get { background-color: @GetColor; }
+        &.post { background-color: @PostColor; }
+        &.patch { background-color: @PutColor; }
+        &.put { background-color: @PatchColor; }
+        &.delete { background-color: @DeleteColor; }
+        &.options { background-color: @OptionsColor; }
+
+        &.active {
+          border: 2px solid red;
+        }
+
+        input[type='radio'] {
+          display: none;
+        }
+      }
+    }
   }
 
   .response {
