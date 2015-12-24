@@ -33,7 +33,8 @@ $( document ).ready(function() {
     $('#responseStatusCode').removeClass(function (index, css) {
       return (css.match (/(^|\s)label-\S+/g) || []).join(' ');
     });
-    $('#responseStatusText').text('');
+    $('#responseStatusText').hide();
+    $('#responseStatusText').find('span').text('');
     $('#responseData').html('');
     $('#saveTokenButton').hide();
     $('#responseData').parent().hide();
@@ -62,12 +63,13 @@ $( document ).ready(function() {
         break;
     }
 
-    $('#responseData').parent().show();
-
     $('#responseStatusCode').text(response.status);
     $('#responseStatusCode').addClass(statusCodeClass);
 
-    $('#responseStatusText').text(response.statusText.toLowerCase());
+    $('#responseStatusText').show();
+    $('#responseStatusText').find('span').text(response.statusText.toLowerCase());
+
+    $('#responseData').parent().show();
     $('#responseData').html(jsonPP.prettyPrint(response.responseJSON));
 
     // Setup token store
