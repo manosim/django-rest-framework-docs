@@ -22,11 +22,16 @@ var jsonPP = {
 
 $( document ).ready(function() {
 
-  var setResponse = function (method, response) {
-    if (!response.status) {
-      return $('#responseData').html(jsonPP.prettyPrint(response));
-    }
+  var cleanResponse = function () {
 
+    $('#responseStatusCode').removeClass(function (index, css) {
+        return (css.match (/(^|\s)label-\S+/g) || []).join(' ');
+    });
+    $('#responseStatusText').text( '' );
+    $('#responseData').html( '' );
+  };
+
+  var setResponse = function (response) {
     // Status Code
     var statusCodeFirstChar = String(response.status).charAt(0);
     var statusCodeClass;
@@ -70,6 +75,9 @@ $( document ).ready(function() {
   };
 
   var makeRequest = function () {
+    // Clean the response
+    cleanResponse();
+
     var url = $('#requestForm #urlInput').val();
     var method = $("#methods").find( ".active" ).text();
     var data = getFormData();
@@ -78,8 +86,12 @@ $( document ).ready(function() {
       method: method,
       context: document.body,
       data: data
-    }).always(function(response) {
-      setResponse(method, response);
+    }).always(function(data, textStatus, jqXHR) {
+
+      if (textStatus != 'success') {
+        jqXHR = data;
+      }
+      setResponse(jqXHR);
     });
   };
 
