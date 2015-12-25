@@ -2,6 +2,7 @@ var _ = require('underscore');
 var React = require('react');
 var APIRequest = require('superagent');
 
+var RequestUtils = require('../utils/request');
 var Request = require('./request');
 var Response = require('./response');
 
@@ -15,7 +16,7 @@ var LiveAPIEndpoints = React.createClass({
 
   getData: function () {
     var method = this.refs.request.state.method;
-    return method === 'GET' || method === 'OPTIONS' ? null : (
+    return RequestUtils.shouldAddData(method) ? null : (
       this.refs.request.state.data
     );
   },

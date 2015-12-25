@@ -1,10 +1,11 @@
 var _ = require('underscore');
 var React = require('react');
 
+var FieldsData = require('./request/fields-data');
 var FieldUrl = require('./request/field-url');
 var Header = require('./helpers/header');
 var Methods = require('./request/methods');
-var FieldsData = require('./request/fields-data');
+var RequestUtils = require('../utils/request');
 
 var Request = React.createClass({
 
@@ -57,7 +58,7 @@ var Request = React.createClass({
           </div>
         </div>
 
-        {this.state.method === 'GET' || this.state.method === 'OPTIONS' ? null : (
+        {RequestUtils.shouldAddData(this.state.method) ? null : (
           <div>
             <Header title='Data' />
             <FieldsData fields={endpoint.fields} data={this.state.data} onChange={this.handleDataFieldChange} />
