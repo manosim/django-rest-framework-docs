@@ -32390,14 +32390,20 @@ var LiveAPIEndpoints = React.createClass({
     };
   },
 
+  getData: function getData() {
+    var method = this.refs.request.state.method;
+    return method === 'GET' || method === 'OPTIONS' ? null : this.refs.request.state.data;
+  },
+
   makeRequest: function makeRequest(event) {
     event.preventDefault();
 
     var self = this;
     var request = this.refs.request.state;
+    var data = this.getData();
 
     // Now Make the Request
-    APIRequest(request.method, request.urlEndpoint).end(function (err, res) {
+    APIRequest(request.method, request.urlEndpoint).send(data).end(function (err, res) {
       self.setState({
         response: res
       });
@@ -32519,8 +32525,12 @@ var Request = React.createClass({
           React.createElement('input', { type: 'text', className: 'form-control input-sm', id: 'authorization', placeholder: 'Token' })
         )
       ),
-      React.createElement(Header, { title: 'Data' }),
-      React.createElement(FieldsData, { fields: endpoint.fields, data: this.state.data, onChange: this.handleDataFieldChange })
+      this.state.method === 'GET' || this.state.method === 'OPTIONS' ? null : React.createElement(
+        'div',
+        null,
+        React.createElement(Header, { title: 'Data' }),
+        React.createElement(FieldsData, { fields: endpoint.fields, data: this.state.data, onChange: this.handleDataFieldChange })
+      )
     );
   }
 });

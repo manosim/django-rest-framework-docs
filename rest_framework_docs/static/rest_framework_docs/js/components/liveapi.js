@@ -13,14 +13,23 @@ var LiveAPIEndpoints = React.createClass({
     };
   },
 
+  getData: function () {
+    var method = this.refs.request.state.method;
+    return method === 'GET' || method === 'OPTIONS' ? null : (
+      this.refs.request.state.data
+    );
+  },
+
   makeRequest: function (event) {
     event.preventDefault();
 
     var self = this;
     var request = this.refs.request.state;
+    var data = this.getData();
 
     // Now Make the Request
     APIRequest(request.method, request.urlEndpoint)
+      .send(data)
       .end(function (err, res) {
         self.setState({
           response: res

@@ -57,8 +57,12 @@ var Request = React.createClass({
           </div>
         </div>
 
-        <Header title='Data' />
-        <FieldsData fields={endpoint.fields} data={this.state.data} onChange={this.handleDataFieldChange} />
+        {this.state.method === 'GET' || this.state.method === 'OPTIONS' ? null : (
+          <div>
+            <Header title='Data' />
+            <FieldsData fields={endpoint.fields} data={this.state.data} onChange={this.handleDataFieldChange} />
+          </div>
+        )}
       </div>
     );
   }
