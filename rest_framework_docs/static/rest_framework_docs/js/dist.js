@@ -31048,8 +31048,9 @@ var Request = React.createClass({
 
   getInitialState: function getInitialState() {
     return {
-      urlEndpoint: this.props.endpoint.path,
-      method: null
+      data: {},
+      method: null,
+      urlEndpoint: this.props.endpoint.path
     };
   },
 
@@ -31060,13 +31061,17 @@ var Request = React.createClass({
   },
 
   handleInputChange: function handleInputChange(value, event) {
-    console.log(value);
-    console.log(event.target.value);
-    console.log('---------------');
-
     var state = this.state;
     state[value] = event.target.value;
     this.setState(state);
+  },
+
+  handleDataFieldChange: function handleDataFieldChange(value, fieldName) {
+    var data = this.state.data;
+    data[fieldName] = value;
+    this.setState({
+      data: data
+    });
   },
 
   render: function render() {
@@ -31100,7 +31105,7 @@ var Request = React.createClass({
         )
       ),
       React.createElement(Header, { title: 'Data' }),
-      React.createElement(FieldsData, { fields: endpoint.fields, onChange: this.handleInputChange.bind(this, 'fields') })
+      React.createElement(FieldsData, { fields: endpoint.fields, data: this.state.data, onChange: this.handleDataFieldChange })
     );
   }
 });
@@ -31139,16 +31144,17 @@ var Input = require('../helpers/input');
 var FieldsData = React.createClass({
   displayName: 'FieldsData',
 
-  handleChange: function handleChange(value, event) {
-    this.props.onChange(value, event);
+  handleChange: function handleChange(fieldName, event) {
+    this.props.onChange(event.target.value, fieldName);
   },
 
   _renderFields: function _renderFields() {
     return this.props.fields.map(function (field, key) {
+      var value = this.props.data[field.name];
       return React.createElement(Input, {
         key: key,
         name: field.name,
-        value: '',
+        value: value,
         placeholder: field.type,
         required: field.required,
         onChange: this.handleChange.bind(this, field.name) });

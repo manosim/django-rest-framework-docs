@@ -10,8 +10,9 @@ var Request = React.createClass({
 
   getInitialState: function () {
     return {
-      urlEndpoint: this.props.endpoint.path,
-      method: null
+      data: {},
+      method: null,
+      urlEndpoint: this.props.endpoint.path
     };
   },
 
@@ -22,13 +23,17 @@ var Request = React.createClass({
   },
 
   handleInputChange: function (value, event) {
-    console.log(value);
-    console.log(event.target.value);
-    console.log('---------------');
-
     var state = this.state;
     state[value] = event.target.value;
     this.setState(state);
+  },
+
+  handleDataFieldChange: function (value, fieldName) {
+    var data = this.state.data;
+    data[fieldName] = value;
+    this.setState({
+      data: data
+    });
   },
 
   render: function () {
@@ -53,7 +58,7 @@ var Request = React.createClass({
         </div>
 
         <Header title='Data' />
-        <FieldsData fields={endpoint.fields} onChange={this.handleInputChange.bind(this, 'fields')} />
+        <FieldsData fields={endpoint.fields} data={this.state.data} onChange={this.handleDataFieldChange} />
       </div>
     );
   }
