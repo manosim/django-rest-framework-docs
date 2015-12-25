@@ -30922,6 +30922,64 @@ module.exports = require('./lib/React');
 },{}],161:[function(require,module,exports){
 'use strict';
 
+var React = require('react');
+
+var Header = React.createClass({
+  displayName: 'Header',
+
+  render: function render() {
+    return React.createElement(
+      'h5',
+      { className: 'section-title' },
+      this.props.title
+    );
+  }
+});
+
+module.exports = Header;
+
+},{"react":159}],162:[function(require,module,exports){
+'use strict';
+
+var _ = require('underscore');
+var React = require('react');
+
+var Input = React.createClass({
+  displayName: 'Input',
+
+  handleChange: function handleChange(value) {
+    this.props.onChange(value);
+  },
+
+  render: function render() {
+    return React.createElement(
+      'div',
+      { className: 'form-group' },
+      React.createElement(
+        'label',
+        { htmlFor: this.props.name, className: 'col-sm-4 control-label' },
+        this.props.name
+      ),
+      React.createElement(
+        'div',
+        { className: 'col-sm-8' },
+        React.createElement('input', {
+          type: 'text',
+          className: 'form-control input-sm',
+          id: this.props.name,
+          placeholder: 'Url',
+          onChange: this.handleChange,
+          value: this.props.value })
+      )
+    );
+  }
+});
+
+module.exports = Input;
+
+},{"react":159,"underscore":160}],163:[function(require,module,exports){
+'use strict';
+
 var _ = require('underscore');
 var React = require('react');
 
@@ -30974,12 +31032,14 @@ var LiveAPIEndpoints = React.createClass({
 
 module.exports = LiveAPIEndpoints;
 
-},{"./request":162,"./response":164,"react":159,"underscore":160}],162:[function(require,module,exports){
+},{"./request":164,"./response":167,"react":159,"underscore":160}],164:[function(require,module,exports){
 'use strict';
 
 var _ = require('underscore');
 var React = require('react');
 
+var FieldUrl = require('./request/field-url');
+var Header = require('./helpers/header');
 var Methods = require('./request/methods');
 
 var Request = React.createClass({
@@ -30987,6 +31047,7 @@ var Request = React.createClass({
 
   getInitialState: function getInitialState() {
     return {
+      urlEndpoint: this.props.endpoint.path,
       method: null
     };
   },
@@ -30995,6 +31056,12 @@ var Request = React.createClass({
     this.setState({
       method: method
     });
+  },
+
+  handleInputChange: function handleInputChange(value, event) {
+    var state = this.state;
+    state[value] = event.target.value;
+    this.setState(state);
   },
 
   render: function render() {
@@ -31008,66 +31075,26 @@ var Request = React.createClass({
         null,
         'Request'
       ),
+      React.createElement(Header, { title: 'API Endpoint' }),
+      React.createElement(FieldUrl, { name: 'urlEndpoint', value: this.state.urlEndpoint, onChange: this.handleInputChange.bind(this, 'urlEndpoint') }),
+      React.createElement(Header, { title: 'Method' }),
+      React.createElement(Methods, { methods: endpoint.methods, active: this.state.method, setMethod: this.setMethod }),
+      React.createElement(Header, { title: 'Headers' }),
       React.createElement(
         'div',
         { className: 'form-group' },
         React.createElement(
           'label',
-          { htmlFor: 'urlInput', className: 'col-sm-4 control-label' },
-          'Endpoint'
+          { htmlFor: 'authorization', className: 'col-sm-4 control-label' },
+          'Authorization'
         ),
         React.createElement(
           'div',
           { className: 'col-sm-8' },
-          React.createElement('input', { type: 'text', className: 'form-control input-sm', id: 'urlInput', placeholder: 'Url', value: endpoint.path })
+          React.createElement('input', { type: 'text', className: 'form-control input-sm', id: 'authorization', placeholder: 'Token' })
         )
       ),
-      React.createElement(
-        'h5',
-        { className: 'section-title' },
-        React.createElement(
-          'span',
-          null,
-          'Method'
-        )
-      ),
-      React.createElement(Methods, { methods: endpoint.methods, active: this.state.method, setMethod: this.setMethod }),
-      React.createElement(
-        'div',
-        { id: 'headers' },
-        React.createElement(
-          'h5',
-          { className: 'section-title' },
-          React.createElement(
-            'span',
-            null,
-            'Headers'
-          )
-        ),
-        React.createElement(
-          'div',
-          { className: 'form-group' },
-          React.createElement(
-            'label',
-            { htmlFor: 'authorization', className: 'col-sm-4 control-label' },
-            'Authorization'
-          ),
-          React.createElement(
-            'div',
-            { className: 'col-sm-8' },
-            React.createElement('input', { type: 'text', className: 'form-control input-sm', id: 'authorization', placeholder: 'Token' })
-          )
-        )
-      ),
-      React.createElement(
-        'h5',
-        { className: 'section-title', id: 'headerData' },
-        React.createElement(
-          'span',
-          null,
-          'Data'
-        )
-      ),
+      React.createElement(Header, { title: 'Data' }),
       React.createElement('div', { id: 'fields', className: 'fields' })
     );
   }
@@ -31075,7 +31102,30 @@ var Request = React.createClass({
 
 module.exports = Request;
 
-},{"./request/methods":163,"react":159,"underscore":160}],163:[function(require,module,exports){
+},{"./helpers/header":161,"./request/field-url":165,"./request/methods":166,"react":159,"underscore":160}],165:[function(require,module,exports){
+'use strict';
+
+var _ = require('underscore');
+var React = require('react');
+
+var Input = require('../helpers/input');
+
+var FieldUrl = React.createClass({
+  displayName: 'FieldUrl',
+
+  handleChange: function handleChange(value) {
+    console.log('111111');
+    this.props.onChange(value);
+  },
+
+  render: function render() {
+    return React.createElement(Input, { name: 'Url Endpoint', value: this.props.value, onChange: this.handleChange });
+  }
+});
+
+module.exports = FieldUrl;
+
+},{"../helpers/input":162,"react":159,"underscore":160}],166:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -31123,7 +31173,7 @@ var Methods = React.createClass({
 
 module.exports = Methods;
 
-},{"react":159}],164:[function(require,module,exports){
+},{"react":159}],167:[function(require,module,exports){
 'use strict';
 
 var _ = require('underscore');
@@ -31185,7 +31235,7 @@ var Response = React.createClass({
 
 module.exports = Response;
 
-},{"react":159,"underscore":160}],165:[function(require,module,exports){
+},{"react":159,"underscore":160}],168:[function(require,module,exports){
 'use strict';
 
 var $ = window.$ = window.jQuery = require('jquery');
@@ -31209,4 +31259,4 @@ $('.plug').bind('click', function (evt) {
   ReactDOM.render(React.createElement(LiveAPIEndpoints, { endpoint: data }), document.getElementById('liveAPIEndpoints'));
 });
 
-},{"./components/liveapi":161,"jquery":2,"react":159,"react-dom":3}]},{},[165]);
+},{"./components/liveapi":163,"jquery":2,"react":159,"react-dom":3}]},{},[168]);

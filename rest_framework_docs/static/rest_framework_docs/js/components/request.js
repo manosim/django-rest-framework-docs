@@ -1,12 +1,15 @@
 var _ = require('underscore');
 var React = require('react');
 
+var FieldUrl = require('./request/field-url');
+var Header = require('./helpers/header');
 var Methods = require('./request/methods');
 
 var Request = React.createClass({
 
   getInitialState: function () {
     return {
+      urlEndpoint: this.props.endpoint.path,
       method: null
     };
   },
@@ -17,6 +20,12 @@ var Request = React.createClass({
     });
   },
 
+  handleInputChange: function (value, event) {
+    var state = this.state;
+    state[value] = event.target.value;
+    this.setState(state);
+  },
+
   render: function () {
     var endpoint = this.props.endpoint;
 
@@ -24,27 +33,21 @@ var Request = React.createClass({
       <div>
         <h3>Request</h3>
 
-        <div className="form-group">
-          <label htmlFor="urlInput" className="col-sm-4 control-label">Endpoint</label>
-          <div className="col-sm-8">
-            <input type="text" className="form-control input-sm" id="urlInput" placeholder="Url" value={endpoint.path} />
-          </div>
-        </div>
+        <Header title='API Endpoint' />
+        <FieldUrl name='urlEndpoint' value={this.state.urlEndpoint} onChange={this.handleInputChange.bind(this, 'urlEndpoint')} />
 
-        <h5 className="section-title"><span>Method</span></h5>
+        <Header title='Method' />
         <Methods methods={endpoint.methods} active={this.state.method} setMethod={this.setMethod} />
 
-        <div id="headers">
-          <h5 className="section-title"><span>Headers</span></h5>
-          <div className="form-group">
-            <label htmlFor="authorization" className="col-sm-4 control-label">Authorization</label>
-            <div className="col-sm-8">
-              <input type="text" className="form-control input-sm" id="authorization" placeholder="Token" />
-            </div>
+        <Header title='Headers' />
+        <div className="form-group">
+          <label htmlFor="authorization" className="col-sm-4 control-label">Authorization</label>
+          <div className="col-sm-8">
+            <input type="text" className="form-control input-sm" id="authorization" placeholder="Token" />
           </div>
         </div>
 
-        <h5 className="section-title" id="headerData"><span>Data</span></h5>
+        <Header title='Data' />
         <div id="fields" className="fields"></div>
       </div>
     );
