@@ -15,7 +15,7 @@ module.exports = {
 
   prettyPrint: function (obj) {
     var jsonLine = /^( *)("[\w]+": )?("[^"]*"|[\w.+-]*)?([,[{])?$/mg;
-    return JSON.stringify(obj, null, 3)
+    return JSON.stringify(obj, null, 2)
       .replace(/&/g, '&amp;').replace(/\\"/g, '&quot;')
       .replace(/</g, '&lt;').replace(/>/g, '&gt;')
       .replace(jsonLine, this.replacer);

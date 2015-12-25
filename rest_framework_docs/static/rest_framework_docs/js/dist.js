@@ -31128,6 +31128,11 @@ var Response = React.createClass({
     };
   },
 
+  saveToken: function saveToken() {
+    window.token = 'Token ' + this.props.payload.body.token;
+    console.log('Token ' + this.props.payload.body.token);
+  },
+
   render: function render() {
     if (!this.props.payload) {
       return React.createElement(
@@ -31136,8 +31141,7 @@ var Response = React.createClass({
         React.createElement(
           'h3',
           null,
-          'Response ',
-          React.createElement('span', { className: 'label status-code pull-right' })
+          'Response'
         ),
         React.createElement(
           'p',
@@ -31191,9 +31195,9 @@ var Response = React.createClass({
         { className: 'well well-default text-center' },
         React.createElement(
           'button',
-          { className: 'btn btn-sm btn-info' },
+          { className: 'btn btn-sm btn-info', onClick: this.saveToken },
           React.createElement('i', { className: 'fa fa-key' }),
-          ' Save Token'
+          'Save Token'
         ),
         React.createElement(
           'h6',
@@ -31248,7 +31252,7 @@ module.exports = {
 
   prettyPrint: function prettyPrint(obj) {
     var jsonLine = /^( *)("[\w]+": )?("[^"]*"|[\w.+-]*)?([,[{])?$/mg;
-    return JSON.stringify(obj, null, 3).replace(/&/g, '&amp;').replace(/\\"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(jsonLine, this.replacer);
+    return JSON.stringify(obj, null, 2).replace(/&/g, '&amp;').replace(/\\"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(jsonLine, this.replacer);
   }
 
 };

@@ -10,11 +10,16 @@ var Response = React.createClass({
     };
   },
 
+  saveToken: function () {
+    window.token = 'Token ' + this.props.payload.body.token;
+    console.log('Token ' + this.props.payload.body.token);
+  },
+
   render: function () {
     if (!this.props.payload) {
       return (
         <div>
-          <h3>Response <span className='label status-code pull-right'></span></h3>
+          <h3>Response</h3>
           <p className='lead text-center'>Awaiting request...</p>
         </div>
       );
@@ -35,7 +40,10 @@ var Response = React.createClass({
 
         {hasToken ? (
           <div className='well well-default text-center'>
-            <button className='btn btn-sm btn-info'><i className='fa fa-key'></i> Save Token</button>
+            <button className='btn btn-sm btn-info' onClick={this.saveToken}>
+              <i className='fa fa-key' />
+              Save Token
+          </button>
             <h6>Your token will be lost when you refresh the page.</h6>
           </div>
         ) : null}
