@@ -1,8 +1,12 @@
 'use strict';
 
+var $ = window.$ = window.jQuery = require('jquery');
+var jQuery = require('jquery');
+
 var React = require('react');
 var ReactDOM = require('react-dom');
-var LiveAPI = require('./components/liveapi');
+var LiveAPIEndpoints = require('./components/liveapi');
+
 
 $('.plug').bind('click', function(evt) {
   // Prevent the accordion from collapsing
@@ -16,6 +20,6 @@ $('.plug').bind('click', function(evt) {
   var data = $(this).data();
 
   ReactDOM.render(
-    <LiveApi endpoint={data} />, document.getElementById('endpoints')
+    <LiveAPIEndpoints endpoint={data} />, document.getElementById('liveAPIEndpoints')
   );
 });

@@ -39,6 +39,7 @@
     "bootswatch": "=3.3.6",
     "browserify": "=12.0.1",
     "font-awesome": "=4.5.0",
+    "jquery": "=1.11.3",
     "react": "=0.14.3",
     "react-dom": "=0.14.3",
     "react-modal": "=0.6.1",
