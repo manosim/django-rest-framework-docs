@@ -21,6 +21,7 @@ var Response = React.createClass({
     }
 
     var responseJSON = JSONpp.prettyPrint(this.props.payload.body);
+    var hasToken = this.props.payload.body.hasOwnProperty('token');
     var statusText = this.props.payload.statusText.toLowerCase();
     var statusCodeFirstChar = String(this.props.payload.status).charAt(0);
     var statusCodeClass = 'label status-code pull-right status-code-' + statusCodeFirstChar;
@@ -31,10 +32,13 @@ var Response = React.createClass({
 
         <div><strong>Status</strong>: <span className='status-text'>{statusText}</span></div>
         <pre><code dangerouslySetInnerHTML={{__html: responseJSON}}></code></pre>
-        <div className='well well-default text-center'>
-          <button className='btn btn-sm btn-info'><i className='fa fa-key'></i> Save Token</button>
-          <h6>Your token will be lost when you refresh the page.</h6>
-        </div>
+
+        {hasToken ? (
+          <div className='well well-default text-center'>
+            <button className='btn btn-sm btn-info'><i className='fa fa-key'></i> Save Token</button>
+            <h6>Your token will be lost when you refresh the page.</h6>
+          </div>
+        ) : null}
       </div>
     );
   }
