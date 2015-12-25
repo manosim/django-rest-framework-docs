@@ -1,14 +1,31 @@
 var _ = require('underscore');
 var React = require('react');
+var APIRequest = require('superagent');
 
 var Request = require('./request');
 var Response = require('./response');
 
 var LiveAPIEndpoints = React.createClass({
 
+  getInitialState: function() {
+    return {
+      response: null
+    };
+  },
+
   makeRequest: function (event) {
     event.preventDefault();
+
+    var self = this;
+    var request = this.refs.request.state;
+
     // Now Make the Request
+    APIRequest(request.method, request.urlEndpoint)
+      .end(function (err, res) {
+        self.setState({
+          response: res
+        });
+      });
   },
 
   render: function () {
@@ -18,10 +35,10 @@ var LiveAPIEndpoints = React.createClass({
         <div className="modal-body">
           <div className="row">
             <div className="col-md-6 request">
-              <Request endpoint={this.props.endpoint} />
+              <Request endpoint={this.props.endpoint} ref='request' />
             </div>
             <div className="col-md-6 response">
-              <Response />
+              <Response payload={this.state.response} />
             </div>
           </div>
         </div>
