@@ -6,9 +6,9 @@
   "scripts": {
     "build-font-awesome": "cp -r node_modules/font-awesome/fonts rest_framework_docs/",
     "build-bootstrap-fonts": "cp -r node_modules/bootstrap/fonts rest_framework_docs/",
-    "build-js": "browserify rest_framework_docs/js/index.js -t [ babelify --presets [ es2015 react ] ] -d -p [ minifyify --map rest_framework_docs/js/dist.map.json --output rest_framework_docs/js/dist.map.json ] > rest_framework_docs/js/dist.js",
+    "build-js": "browserify rest_framework_docs/js/index.js -t [ babelify --presets [ es2015 react ] ] > rest_framework_docs/js/dist.js",
     "build-less": "lessc --clean-css rest_framework_docs/less/style.less rest_framework_docs/css/style.css",
-    "watch-js": "watchify rest_framework_docs/js/index.js -t [ babelify --presets [ es2015 react ] ] -d -p [ minifyify --map rest_framework_docs/js/dist.map.json --output rest_framework_docs/js/dist.map.json ] -o rest_framework_docs/js/dist.js -v",
+    "watch-js": "watchify rest_framework_docs/js/index.js -t [ babelify --presets [ es2015 react ] ] -o rest_framework_docs/js/dist.js -v",
     "watch-less": "watch 'npm run build-less' rest_framework_docs/less/",
     "watch": "npm run watch-js & npm run watch-less",
     "build": "npm run build-font-awesome && npm run build-bootstrap-fonts && npm run build-less",
