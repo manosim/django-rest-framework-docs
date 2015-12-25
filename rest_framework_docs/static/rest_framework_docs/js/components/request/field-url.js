@@ -4,6 +4,18 @@ var Input = require('../helpers/input');
 
 var FieldUrl = React.createClass({
 
+  getInitialState: function() {
+    return {
+      value: this.props.url
+    };
+  },
+
+  componentWillReceiveProps: function(nextProps) {
+    this.setState({
+      url: nextProps.url
+    });
+  },
+
   handleChange: function (value) {
     this.props.onChange(value);
   },
@@ -12,7 +24,7 @@ var FieldUrl = React.createClass({
     return (
       <Input
         name='Url Endpoint'
-        value={this.props.value}
+        value={this.state.url}
         placeholder='Endpoint Url'
         onChange={this.handleChange} />
     );

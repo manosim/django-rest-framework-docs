@@ -16,6 +16,12 @@ var Request = React.createClass({
     };
   },
 
+  componentWillReceiveProps: function(nextProps) {
+    this.setState({
+      urlEndpoint: nextProps.endpoint.path 
+    });
+  },
+
   setMethod: function (method) {
     this.setState({
       method: method
@@ -46,7 +52,7 @@ var Request = React.createClass({
         <Header title='API Endpoint' />
         <FieldUrl
           name='urlEndpoint'
-          value={this.state.urlEndpoint}
+          url={this.state.urlEndpoint}
           onChange={this.handleInputChange.bind(this, 'urlEndpoint')} />
 
         <Header title='Method' />
