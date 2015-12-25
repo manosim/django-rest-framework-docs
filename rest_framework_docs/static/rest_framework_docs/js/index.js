@@ -1,7 +1,6 @@
 'use strict';
 
 var $ = window.$ = window.jQuery = require('jquery');
-var jQuery = require('jquery');
 
 var React = require('react');
 var ReactDOM = require('react-dom');

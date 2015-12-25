@@ -1,4 +1,3 @@
-var _ = require('underscore');
 var React = require('react');
 
 var Input = require('../helpers/input');
@@ -11,7 +10,11 @@ var FieldUrl = React.createClass({
 
   render: function () {
     return (
-      <Input name='Url Endpoint' value={this.props.value} placeholder='Endpoint Url' onChange={this.handleChange} />
+      <Input
+        name='Url Endpoint'
+        value={this.props.value}
+        placeholder='Endpoint Url'
+        onChange={this.handleChange} />
     );
   }
 });

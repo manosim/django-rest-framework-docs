@@ -20,7 +20,7 @@ var FieldsData = React.createClass({
           required={field.required}
           onChange={this.handleChange.bind(this, field.name)} />
       );
-    }, this)
+    }, this);
   },
 
   render: function () {
