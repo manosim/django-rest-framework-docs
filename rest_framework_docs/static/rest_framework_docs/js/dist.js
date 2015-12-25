@@ -30865,7 +30865,7 @@ var LiveAPIEndpoints = React.createClass({
 
     return React.createElement(
       'form',
-      { className: 'form-horizontal' },
+      { className: 'form-horizontal', onSubmit: this.makeRequest },
       React.createElement(
         'div',
         { className: 'modal-body' },
@@ -30894,7 +30894,7 @@ var LiveAPIEndpoints = React.createClass({
         ),
         React.createElement(
           'button',
-          { type: 'submit', onClick: this.makeRequest, className: 'btn btn-primary' },
+          { type: 'submit', className: 'btn btn-primary' },
           'Send'
         )
       )
@@ -31148,6 +31148,7 @@ var Response = React.createClass({
     }
 
     var responseJSON = JSONpp.prettyPrint(this.props.payload.body);
+    var hasToken = this.props.payload.body.hasOwnProperty('token');
     var statusText = this.props.payload.statusText.toLowerCase();
     var statusCodeFirstChar = String(this.props.payload.status).charAt(0);
     var statusCodeClass = 'label status-code pull-right status-code-' + statusCodeFirstChar;
@@ -31185,7 +31186,7 @@ var Response = React.createClass({
         null,
         React.createElement('code', { dangerouslySetInnerHTML: { __html: responseJSON } })
       ),
-      React.createElement(
+      hasToken ? React.createElement(
         'div',
         { className: 'well well-default text-center' },
         React.createElement(
@@ -31199,7 +31200,7 @@ var Response = React.createClass({
           null,
           'Your token will be lost when you refresh the page.'
         )
-      )
+      ) : null
     );
   }
 });

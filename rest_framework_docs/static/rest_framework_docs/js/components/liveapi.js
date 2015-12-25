@@ -40,7 +40,7 @@ var LiveAPIEndpoints = React.createClass({
   render: function () {
 
     return (
-      <form className="form-horizontal">
+      <form className="form-horizontal" onSubmit={this.makeRequest}>
         <div className="modal-body">
           <div className="row">
             <div className="col-md-6 request">
@@ -53,7 +53,7 @@ var LiveAPIEndpoints = React.createClass({
         </div>
         <div className="modal-footer">
           <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="submit" onClick={this.makeRequest} className="btn btn-primary">Send</button>
+          <button type="submit" className="btn btn-primary">Send</button>
         </div>
       </form>
     );
