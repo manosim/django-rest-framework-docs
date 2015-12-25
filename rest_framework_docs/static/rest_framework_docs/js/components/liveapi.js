@@ -9,8 +9,15 @@ var LiveAPIEndpoints = React.createClass({
 
   getInitialState: function() {
     return {
+      endpoint: this.props.endpoint,
       response: null
     };
+  },
+
+  componentWillReceiveProps: function(nextProps) {
+    this.setState({
+      endpoint: nextProps.endpoint
+    });
   },
 
   getData: function () {
@@ -38,13 +45,12 @@ var LiveAPIEndpoints = React.createClass({
   },
 
   render: function () {
-
     return (
       <form className="form-horizontal" onSubmit={this.makeRequest}>
         <div className="modal-body">
           <div className="row">
             <div className="col-md-6 request">
-              <Request endpoint={this.props.endpoint} ref='request' />
+              <Request endpoint={this.state.endpoint} ref='request' />
             </div>
             <div className="col-md-6 response">
               <Response payload={this.state.response} />

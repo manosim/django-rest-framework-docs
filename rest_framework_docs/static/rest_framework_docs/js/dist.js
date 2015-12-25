@@ -30837,8 +30837,15 @@ var LiveAPIEndpoints = React.createClass({
 
   getInitialState: function getInitialState() {
     return {
+      endpoint: this.props.endpoint,
       response: null
     };
+  },
+
+  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+    this.setState({
+      endpoint: nextProps.endpoint
+    });
   },
 
   getData: function getData() {
@@ -30862,7 +30869,6 @@ var LiveAPIEndpoints = React.createClass({
   },
 
   render: function render() {
-
     return React.createElement(
       'form',
       { className: 'form-horizontal', onSubmit: this.makeRequest },
@@ -30875,7 +30881,7 @@ var LiveAPIEndpoints = React.createClass({
           React.createElement(
             'div',
             { className: 'col-md-6 request' },
-            React.createElement(Request, { endpoint: this.props.endpoint, ref: 'request' })
+            React.createElement(Request, { endpoint: this.state.endpoint, ref: 'request' })
           ),
           React.createElement(
             'div',
@@ -30926,6 +30932,12 @@ var Request = React.createClass({
     };
   },
 
+  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+    this.setState({
+      urlEndpoint: nextProps.endpoint.path
+    });
+  },
+
   setMethod: function setMethod(method) {
     this.setState({
       method: method
@@ -30960,7 +30972,7 @@ var Request = React.createClass({
       React.createElement(Header, { title: 'API Endpoint' }),
       React.createElement(FieldUrl, {
         name: 'urlEndpoint',
-        value: this.state.urlEndpoint,
+        url: this.state.urlEndpoint,
         onChange: this.handleInputChange.bind(this, 'urlEndpoint') }),
       React.createElement(Header, { title: 'Method' }),
       React.createElement(Methods, { methods: endpoint.methods, active: this.state.method, setMethod: this.setMethod }),
@@ -31007,6 +31019,18 @@ var Input = require('../helpers/input');
 var FieldUrl = React.createClass({
   displayName: 'FieldUrl',
 
+  getInitialState: function getInitialState() {
+    return {
+      value: this.props.url
+    };
+  },
+
+  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+    this.setState({
+      url: nextProps.url
+    });
+  },
+
   handleChange: function handleChange(value) {
     this.props.onChange(value);
   },
@@ -31014,7 +31038,7 @@ var FieldUrl = React.createClass({
   render: function render() {
     return React.createElement(Input, {
       name: 'Url Endpoint',
-      value: this.props.value,
+      value: this.state.url,
       placeholder: 'Endpoint Url',
       onChange: this.handleChange });
   }
