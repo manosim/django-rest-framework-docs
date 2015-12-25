@@ -25,7 +25,7 @@ def flake8_main(args):
 
 def run_tests_eslint():
     print('Running: eslint')
-    command = subprocess.call(['cd rest_framework_docs/static/ && npm install && npm test'], shell=True)
+    command = subprocess.call(['cd rest_framework_docs/static/ && npm test'], shell=True)
     print("" if command else "Success. eslint passed.")
     return command
 

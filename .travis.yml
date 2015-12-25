@@ -12,6 +12,7 @@ env:
   - DJANGO_VERSION=1.9
 
 install:
+  - npm install
   - pip install -r requirements.txt
   - pip install -U Django==$DJANGO_VERSION
   - pip install codecov
