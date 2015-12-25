@@ -2,7 +2,7 @@
 
 var $ = window.$ = window.jQuery = require('jquery');
 
-var React = require('react');
+var React = require('react'); // eslint-disable-line no-unused-vars
 var ReactDOM = require('react-dom');
 var LiveAPIEndpoints = require('./components/liveapi');
 
