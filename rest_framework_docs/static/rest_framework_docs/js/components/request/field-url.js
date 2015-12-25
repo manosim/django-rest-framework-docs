@@ -6,7 +6,6 @@ var Input = require('../helpers/input');
 var FieldUrl = React.createClass({
 
   handleChange: function (value) {
-    console.log('111111');
     this.props.onChange(value);
   },
 

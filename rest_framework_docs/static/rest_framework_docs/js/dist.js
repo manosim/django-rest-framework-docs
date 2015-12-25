@@ -31032,7 +31032,7 @@ var LiveAPIEndpoints = React.createClass({
 
 module.exports = LiveAPIEndpoints;
 
-},{"./request":164,"./response":167,"react":159,"underscore":160}],164:[function(require,module,exports){
+},{"./request":164,"./response":168,"react":159,"underscore":160}],164:[function(require,module,exports){
 'use strict';
 
 var _ = require('underscore');
@@ -31041,6 +31041,7 @@ var React = require('react');
 var FieldUrl = require('./request/field-url');
 var Header = require('./helpers/header');
 var Methods = require('./request/methods');
+var FieldsData = require('./request/fields-data');
 
 var Request = React.createClass({
   displayName: 'Request',
@@ -31059,6 +31060,10 @@ var Request = React.createClass({
   },
 
   handleInputChange: function handleInputChange(value, event) {
+    console.log(value);
+    console.log(event.target.value);
+    console.log('---------------');
+
     var state = this.state;
     state[value] = event.target.value;
     this.setState(state);
@@ -31095,14 +31100,14 @@ var Request = React.createClass({
         )
       ),
       React.createElement(Header, { title: 'Data' }),
-      React.createElement('div', { id: 'fields', className: 'fields' })
+      React.createElement(FieldsData, { fields: endpoint.fields, onChange: this.handleInputChange.bind(this, 'fields') })
     );
   }
 });
 
 module.exports = Request;
 
-},{"./helpers/header":161,"./request/field-url":165,"./request/methods":166,"react":159,"underscore":160}],165:[function(require,module,exports){
+},{"./helpers/header":161,"./request/field-url":165,"./request/fields-data":166,"./request/methods":167,"react":159,"underscore":160}],165:[function(require,module,exports){
 'use strict';
 
 var _ = require('underscore');
@@ -31114,7 +31119,6 @@ var FieldUrl = React.createClass({
   displayName: 'FieldUrl',
 
   handleChange: function handleChange(value) {
-    console.log('111111');
     this.props.onChange(value);
   },
 
@@ -31126,6 +31130,42 @@ var FieldUrl = React.createClass({
 module.exports = FieldUrl;
 
 },{"../helpers/input":162,"react":159,"underscore":160}],166:[function(require,module,exports){
+'use strict';
+
+var _ = require('underscore');
+var React = require('react');
+
+var Input = require('../helpers/input');
+
+var FieldsData = React.createClass({
+  displayName: 'FieldsData',
+
+  handleChange: function handleChange(value) {
+    this.props.onChange(value);
+  },
+
+  _renderFields: function _renderFields() {
+    return _.each(this.props.fields, function (field, key) {
+      console.log('======');
+      console.log(key);
+      console.log(field);
+
+      return React.createElement(Input, { key: key, name: field.name, value: '', placeholder: field.type, required: field.required, onChange: this.handleChange });
+    }, this);
+  },
+
+  render: function render() {
+    return React.createElement(
+      'div',
+      null,
+      this._renderFields()
+    );
+  }
+});
+
+module.exports = FieldsData;
+
+},{"../helpers/input":162,"react":159,"underscore":160}],167:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -31173,7 +31213,7 @@ var Methods = React.createClass({
 
 module.exports = Methods;
 
-},{"react":159}],167:[function(require,module,exports){
+},{"react":159}],168:[function(require,module,exports){
 'use strict';
 
 var _ = require('underscore');
@@ -31235,7 +31275,7 @@ var Response = React.createClass({
 
 module.exports = Response;
 
-},{"react":159,"underscore":160}],168:[function(require,module,exports){
+},{"react":159,"underscore":160}],169:[function(require,module,exports){
 'use strict';
 
 var $ = window.$ = window.jQuery = require('jquery');
@@ -31259,4 +31299,4 @@ $('.plug').bind('click', function (evt) {
   ReactDOM.render(React.createElement(LiveAPIEndpoints, { endpoint: data }), document.getElementById('liveAPIEndpoints'));
 });
 
-},{"./components/liveapi":163,"jquery":2,"react":159,"react-dom":3}]},{},[168]);
+},{"./components/liveapi":163,"jquery":2,"react":159,"react-dom":3}]},{},[169]);

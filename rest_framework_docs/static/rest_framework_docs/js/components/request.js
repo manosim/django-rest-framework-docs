@@ -4,6 +4,7 @@ var React = require('react');
 var FieldUrl = require('./request/field-url');
 var Header = require('./helpers/header');
 var Methods = require('./request/methods');
+var FieldsData = require('./request/fields-data');
 
 var Request = React.createClass({
 
@@ -21,6 +22,10 @@ var Request = React.createClass({
   },
 
   handleInputChange: function (value, event) {
+    console.log(value);
+    console.log(event.target.value);
+    console.log('---------------');
+
     var state = this.state;
     state[value] = event.target.value;
     this.setState(state);
@@ -48,7 +53,7 @@ var Request = React.createClass({
         </div>
 
         <Header title='Data' />
-        <div id="fields" className="fields"></div>
+        <FieldsData fields={endpoint.fields} onChange={this.handleInputChange.bind(this, 'fields')} />
       </div>
     );
   }
