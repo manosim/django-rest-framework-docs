@@ -30989,6 +30989,11 @@ var Response = require('./response');
 var LiveAPIEndpoints = React.createClass({
   displayName: 'LiveAPIEndpoints',
 
+  makeRequest: function makeRequest(event) {
+    event.preventDefault();
+    // Now Make the Request
+  },
+
   render: function render() {
 
     return React.createElement(
@@ -31022,7 +31027,7 @@ var LiveAPIEndpoints = React.createClass({
         ),
         React.createElement(
           'button',
-          { type: 'submit', id: 'submitButton', className: 'btn btn-primary' },
+          { type: 'submit', onClick: this.makeRequest, className: 'btn btn-primary' },
           'Send'
         )
       )

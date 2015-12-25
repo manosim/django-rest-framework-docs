@@ -6,6 +6,11 @@ var Response = require('./response');
 
 var LiveAPIEndpoints = React.createClass({
 
+  makeRequest: function (event) {
+    event.preventDefault();
+    // Now Make the Request
+  },
+
   render: function () {
 
     return (
@@ -22,7 +27,7 @@ var LiveAPIEndpoints = React.createClass({
         </div>
         <div className="modal-footer">
           <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="submit" id="submitButton" className="btn btn-primary">Send</button>
+          <button type="submit" onClick={this.makeRequest} className="btn btn-primary">Send</button>
         </div>
       </form>
     );
