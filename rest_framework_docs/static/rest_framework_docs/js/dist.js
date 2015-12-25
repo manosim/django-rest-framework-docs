@@ -32378,6 +32378,7 @@ var _ = require('underscore');
 var React = require('react');
 var APIRequest = require('superagent');
 
+var RequestUtils = require('../utils/request');
 var Request = require('./request');
 var Response = require('./response');
 
@@ -32392,7 +32393,7 @@ var LiveAPIEndpoints = React.createClass({
 
   getData: function getData() {
     var method = this.refs.request.state.method;
-    return method === 'GET' || method === 'OPTIONS' ? null : this.refs.request.state.data;
+    return RequestUtils.shouldAddData(method) ? null : this.refs.request.state.data;
   },
 
   makeRequest: function makeRequest(event) {
@@ -32453,16 +32454,17 @@ var LiveAPIEndpoints = React.createClass({
 
 module.exports = LiveAPIEndpoints;
 
-},{"./request":167,"./response":171,"react":159,"superagent":160,"underscore":163}],167:[function(require,module,exports){
+},{"../utils/request":174,"./request":167,"./response":171,"react":159,"superagent":160,"underscore":163}],167:[function(require,module,exports){
 'use strict';
 
 var _ = require('underscore');
 var React = require('react');
 
+var FieldsData = require('./request/fields-data');
 var FieldUrl = require('./request/field-url');
 var Header = require('./helpers/header');
 var Methods = require('./request/methods');
-var FieldsData = require('./request/fields-data');
+var RequestUtils = require('../utils/request');
 
 var Request = React.createClass({
   displayName: 'Request',
@@ -32525,7 +32527,7 @@ var Request = React.createClass({
           React.createElement('input', { type: 'text', className: 'form-control input-sm', id: 'authorization', placeholder: 'Token' })
         )
       ),
-      this.state.method === 'GET' || this.state.method === 'OPTIONS' ? null : React.createElement(
+      RequestUtils.shouldAddData(this.state.method) ? null : React.createElement(
         'div',
         null,
         React.createElement(Header, { title: 'Data' }),
@@ -32537,7 +32539,7 @@ var Request = React.createClass({
 
 module.exports = Request;
 
-},{"./helpers/header":164,"./request/field-url":168,"./request/fields-data":169,"./request/methods":170,"react":159,"underscore":163}],168:[function(require,module,exports){
+},{"../utils/request":174,"./helpers/header":164,"./request/field-url":168,"./request/fields-data":169,"./request/methods":170,"react":159,"underscore":163}],168:[function(require,module,exports){
 'use strict';
 
 var _ = require('underscore');
@@ -32782,6 +32784,27 @@ var jsonPP = module.exports = {
       var jsonLine = /^( *)("[\w]+": )?("[^"]*"|[\w.+-]*)?([,[{])?$/mg;
       return JSON.stringify(obj, null, 3).replace(/&/g, '&amp;').replace(/\\"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(jsonLine, this.replacer);
    }
+};
+
+},{}],174:[function(require,module,exports){
+'use strict';
+
+module.exports = {
+
+  shouldAddData: function shouldAddData(method) {
+    if (method === 'GET' || method === 'OPTIONS') {
+      return true;
+    }
+    return false;
+  },
+
+  shouldAddHeader: function shouldAddHeader(permissions) {
+    if (permissions === 'AllowAny' || permissions === 'None') {
+      return true;
+    }
+    return false;
+  }
+
 };
 
 },{}]},{},[172]);
