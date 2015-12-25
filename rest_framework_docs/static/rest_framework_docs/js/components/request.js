@@ -1,12 +1,20 @@
 var _ = require('underscore');
 var React = require('react');
 
+var Methods = require('./request/methods');
+
 var Request = React.createClass({
 
   getInitialState: function () {
     return {
-      endpoints: [],
+      method: null
     };
+  },
+
+  setMethod: function (method) {
+    this.setState({
+      method: method
+    });
   },
 
   render: function () {
@@ -24,7 +32,7 @@ var Request = React.createClass({
         </div>
 
         <h5 className="section-title"><span>Method</span></h5>
-        <div className="btn-group methods" id="methods" role="group"></div>
+        <Methods methods={endpoint.methods} active={this.state.method} setMethod={this.setMethod} />
 
         <div id="headers">
           <h5 className="section-title"><span>Headers</span></h5>
