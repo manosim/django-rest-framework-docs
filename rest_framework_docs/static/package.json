@@ -13,7 +13,7 @@
     "watch": "npm run watch-js & npm run watch-less",
     "build": "npm run build-font-awesome && npm run build-bootstrap-fonts && npm run build-less",
     "start": "npm run build && npm run watch-less",
-    "lint": "eslint 'rest_framework_docs/js/' --ignore-pattern 'rest_framework_docs/js/dist.js' --plugin eslint-plugin-react",
+    "lint": "eslint 'rest_framework_docs/js/' --ignore-pattern 'rest_framework_docs/js/dist.js'",
     "test": "npm run lint"
   },
   "repository": {

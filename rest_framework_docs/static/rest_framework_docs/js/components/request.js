@@ -1,4 +1,3 @@
-var _ = require('underscore');
 var React = require('react');
 
 var FieldsData = require('./request/fields-data');
@@ -45,7 +44,10 @@ var Request = React.createClass({
         <h3>Request</h3>
 
         <Header title='API Endpoint' />
-        <FieldUrl name='urlEndpoint' value={this.state.urlEndpoint} onChange={this.handleInputChange.bind(this, 'urlEndpoint')} />
+        <FieldUrl
+          name='urlEndpoint'
+          value={this.state.urlEndpoint}
+          onChange={this.handleInputChange.bind(this, 'urlEndpoint')} />
 
         <Header title='Method' />
         <Methods methods={endpoint.methods} active={this.state.method} setMethod={this.setMethod} />
@@ -54,14 +56,20 @@ var Request = React.createClass({
         <div className="form-group">
           <label htmlFor="authorization" className="col-sm-4 control-label">Authorization</label>
           <div className="col-sm-8">
-            <input type="text" className="form-control input-sm" id="authorization" placeholder="Token" />
+            <input
+              type="text"
+              className="form-control input-sm"
+              placeholder="Token" />
           </div>
         </div>
 
         {RequestUtils.shouldAddData(this.state.method) ? null : (
           <div>
             <Header title='Data' />
-            <FieldsData fields={endpoint.fields} data={this.state.data} onChange={this.handleDataFieldChange} />
+            <FieldsData
+              fields={endpoint.fields}
+              data={this.state.data}
+              onChange={this.handleDataFieldChange} />
           </div>
         )}
       </div>

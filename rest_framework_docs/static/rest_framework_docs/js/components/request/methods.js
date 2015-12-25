@@ -9,10 +9,10 @@ var Methods = React.createClass({
   },
 
   componentWillMount: function() {
-    var methods =this.props.methods
-        .replace(/\W+/g, " ")
+    var methods = this.props.methods
+        .replace(/\W+/g, ' ')
         .replace(/^[ ]+|[ ]+$/g,'')
-        .split(" ");
+        .split(' ');
 
     this.setState({
       methods: methods
@@ -29,10 +29,17 @@ var Methods = React.createClass({
     // var self = this;
 
     return (
-      <div className="btn-group methods">
+      <div className='btn-group methods'>
         {this.state.methods.map(function (method, i) {
-          var methodClass = "btn btn-sm method " + method.toLowerCase() + (this.props.active == method ? ' active': null);
-          return <button key={i} type='button' className={methodClass} onClick={this.setMethod.bind(this, method)}>{method}</button>;
+          var methodClass = 'btn btn-sm method ' + method.toLowerCase() +
+            (this.props.active == method ? ' active' : null);
+          return (
+            <button
+              key={i}
+              type='button'
+              className={methodClass}
+              onClick={this.setMethod.bind(this, method)}>{method}</button>
+          );
         }, this)}
       </div>
     );

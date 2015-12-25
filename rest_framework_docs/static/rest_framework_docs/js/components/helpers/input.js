@@ -1,4 +1,3 @@
-var _ = require('underscore');
 var React = require('react');
 
 var Input = React.createClass({
@@ -10,7 +9,11 @@ var Input = React.createClass({
   render: function () {
     return (
       <div className="form-group">
-        <label htmlFor={this.props.name} className="col-sm-4 control-label">{this.props.name}</label>
+        <label
+          htmlFor={this.props.name}
+          className="col-sm-4 control-label">
+            {this.props.name}
+        </label>
         <div className="col-sm-8">
           <input
             type="text"
