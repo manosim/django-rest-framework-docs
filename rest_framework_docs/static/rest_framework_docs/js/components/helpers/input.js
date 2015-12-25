@@ -16,7 +16,7 @@ var Input = React.createClass({
             type="text"
             className="form-control input-sm"
             id={this.props.name}
-            placeholder="Url"
+            placeholder={this.props.placeholder}
             onChange={this.handleChange}
             value={this.props.value} />
         </div>

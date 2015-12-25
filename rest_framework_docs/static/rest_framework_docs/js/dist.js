@@ -30967,7 +30967,7 @@ var Input = React.createClass({
           type: 'text',
           className: 'form-control input-sm',
           id: this.props.name,
-          placeholder: 'Url',
+          placeholder: this.props.placeholder,
           onChange: this.handleChange,
           value: this.props.value })
       )
@@ -31123,7 +31123,7 @@ var FieldUrl = React.createClass({
   },
 
   render: function render() {
-    return React.createElement(Input, { name: 'Url Endpoint', value: this.props.value, onChange: this.handleChange });
+    return React.createElement(Input, { name: 'Url Endpoint', value: this.props.value, placeholder: 'Endpoint Url', onChange: this.handleChange });
   }
 });
 
@@ -31132,7 +31132,6 @@ module.exports = FieldUrl;
 },{"../helpers/input":162,"react":159,"underscore":160}],166:[function(require,module,exports){
 'use strict';
 
-var _ = require('underscore');
 var React = require('react');
 
 var Input = require('../helpers/input');
@@ -31140,17 +31139,19 @@ var Input = require('../helpers/input');
 var FieldsData = React.createClass({
   displayName: 'FieldsData',
 
-  handleChange: function handleChange(value) {
-    this.props.onChange(value);
+  handleChange: function handleChange(value, event) {
+    this.props.onChange(value, event);
   },
 
   _renderFields: function _renderFields() {
-    return _.each(this.props.fields, function (field, key) {
-      console.log('======');
-      console.log(key);
-      console.log(field);
-
-      return React.createElement(Input, { key: key, name: field.name, value: '', placeholder: field.type, required: field.required, onChange: this.handleChange });
+    return this.props.fields.map(function (field, key) {
+      return React.createElement(Input, {
+        key: key,
+        name: field.name,
+        value: '',
+        placeholder: field.type,
+        required: field.required,
+        onChange: this.handleChange.bind(this, field.name) });
     }, this);
   },
 
@@ -31165,7 +31166,7 @@ var FieldsData = React.createClass({
 
 module.exports = FieldsData;
 
-},{"../helpers/input":162,"react":159,"underscore":160}],167:[function(require,module,exports){
+},{"../helpers/input":162,"react":159}],167:[function(require,module,exports){
 'use strict';
 
 var React = require('react');

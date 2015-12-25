@@ -11,7 +11,7 @@ var FieldUrl = React.createClass({
 
   render: function () {
     return (
-      <Input name='Url Endpoint' value={this.props.value} onChange={this.handleChange} />
+      <Input name='Url Endpoint' value={this.props.value} placeholder='Endpoint Url' onChange={this.handleChange} />
     );
   }
 });
