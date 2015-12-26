@@ -16,7 +16,7 @@ var Input = React.createClass({
         </label>
         <div className="col-sm-8">
           <input
-            type="text"
+            type={this.props.type}
             className="form-control input-sm"
             id={this.props.name}
             placeholder={this.props.placeholder}

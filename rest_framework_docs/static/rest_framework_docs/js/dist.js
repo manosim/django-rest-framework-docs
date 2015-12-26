@@ -32359,7 +32359,7 @@ var Input = React.createClass({
         "div",
         { className: "col-sm-8" },
         React.createElement("input", {
-          type: "text",
+          type: this.props.type,
           className: "form-control input-sm",
           id: this.props.name,
           placeholder: this.props.placeholder,
@@ -32597,6 +32597,7 @@ var FieldUrl = React.createClass({
       null,
       React.createElement(Header, { title: 'API Endpoint' }),
       React.createElement(Input, {
+        type: 'text',
         name: 'Url Endpoint',
         value: this.state.url,
         placeholder: 'Endpoint Url',
@@ -32624,8 +32625,10 @@ var FieldsData = React.createClass({
   _renderFields: function _renderFields() {
     return this.props.fields.map(function (field, key) {
       var value = this.props.data[field.name];
+      var type = field.name == 'password' ? 'password' : 'text';
       return React.createElement(Input, {
         key: key,
+        type: type,
         name: field.name,
         value: value,
         placeholder: field.type,
