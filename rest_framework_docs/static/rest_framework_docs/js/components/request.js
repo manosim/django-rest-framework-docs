@@ -1,4 +1,3 @@
-var _ = require('underscore');
 var React = require('react');
 
 var FieldsData = require('./request/fields-data');
@@ -18,20 +17,11 @@ var Request = React.createClass({
 
   componentWillMount: function() {
     var endpoint = this.props.endpoint;
-    endpoint['methods'] = _.isArray(endpoint.methods) ?
-      endpoint.methods : this.transformMethods(endpoint.methods);
 
     this.setState({
       endpoint: endpoint,
       selectedMethod: endpoint['methods'][0]
     });
-  },
-
-  transformMethods: function (methods) {
-    return methods
-      .replace(/\W+/g, ' ')
-      .replace(/^[ ]+|[ ]+$/g,'')
-      .split(' ');
   },
 
   setSelectedMethod: function (method) {
