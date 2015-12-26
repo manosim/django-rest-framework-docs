@@ -26,10 +26,17 @@ var LiveAPIEndpoints = React.createClass({
 
     var self = this;
     var request = this.refs.request.state;
+
+    var headers = {};
+    if (this.refs.request.state.headers.authorization) {
+      headers['Authorization'] = this.refs.request.state.headers.authorization;
+    };
+
     var data = this.getData();
 
     // Now Make the Request
     APIRequest(request.selectedMethod, request.endpoint.path)
+      .set(headers)
       .send(data)
       .end(function (err, res) {
         self.setState({
