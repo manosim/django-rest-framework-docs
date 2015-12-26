@@ -6,7 +6,7 @@ var FieldUrl = React.createClass({
 
   getInitialState: function() {
     return {
-      value: this.props.url
+      url: this.props.url
     };
   },
 

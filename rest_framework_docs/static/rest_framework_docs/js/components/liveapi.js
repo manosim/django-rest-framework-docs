@@ -14,12 +14,6 @@ var LiveAPIEndpoints = React.createClass({
     };
   },
 
-  componentWillReceiveProps: function(nextProps) {
-    this.setState({
-      endpoint: nextProps.endpoint
-    });
-  },
-
   getData: function () {
     var method = this.refs.request.state.selectedMethod;
     return RequestUtils.shouldAddData(method) ? null : (
