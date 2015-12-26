@@ -1,25 +1,30 @@
 var React = require('react');
 
+var Header = require('./helpers/header');
+var Headers = require('./request/headers');
 var FieldsData = require('./request/fields-data');
 var FieldUrl = require('./request/field-url');
-var Header = require('./helpers/header');
 var Methods = require('./request/methods');
 var RequestUtils = require('../utils/request');
 
 var Request = React.createClass({
   getInitialState: function () {
     return {
-      endpoint: null,
       data: {},
+      endpoint: null,
+      headers: {},
       selectedMethod: null,
     };
   },
 
   componentWillMount: function() {
     var endpoint = this.props.endpoint;
+    var headers = this.state.headers;
+    headers['authorization'] = window.token ? window.token : '';
 
     this.setState({
       endpoint: endpoint,
+      headers: headers,
       selectedMethod: endpoint['methods'][0]
     });
   },
@@ -38,6 +43,14 @@ var Request = React.createClass({
 
     this.setState({
       endpoint: endpoint
+    });
+  },
+
+  handleHeaderChange: function (value, fieldName) {
+    var headers = this.state.headers;
+    headers[fieldName] = value;
+    this.setState({
+      headers: headers
     });
   },
 
@@ -68,15 +81,7 @@ var Request = React.createClass({
           setMethod={this.setSelectedMethod} />
 
         <Header title='Headers' />
-        <div className="form-group">
-          <label htmlFor="authorization" className="col-sm-4 control-label">Authorization</label>
-          <div className="col-sm-8">
-            <input
-              type="text"
-              className="form-control input-sm"
-              placeholder="Token" />
-          </div>
-        </div>
+        <Headers headers={this.state.headers} handleHeaderChange={this.handleHeaderChange} />
 
         {RequestUtils.shouldAddData(this.state.method) ? null : (
           <div>

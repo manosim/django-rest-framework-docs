@@ -32454,14 +32454,15 @@ var LiveAPIEndpoints = React.createClass({
 
 module.exports = LiveAPIEndpoints;
 
-},{"../utils/request":174,"./request":167,"./response":171,"react":159,"superagent":160}],167:[function(require,module,exports){
+},{"../utils/request":175,"./request":167,"./response":172,"react":159,"superagent":160}],167:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
 
+var Header = require('./helpers/header');
+var Headers = require('./request/headers');
 var FieldsData = require('./request/fields-data');
 var FieldUrl = require('./request/field-url');
-var Header = require('./helpers/header');
 var Methods = require('./request/methods');
 var RequestUtils = require('../utils/request');
 
@@ -32470,17 +32471,21 @@ var Request = React.createClass({
 
   getInitialState: function getInitialState() {
     return {
-      endpoint: null,
       data: {},
+      endpoint: null,
+      headers: {},
       selectedMethod: null
     };
   },
 
   componentWillMount: function componentWillMount() {
     var endpoint = this.props.endpoint;
+    var headers = this.state.headers;
+    headers['authorization'] = window.token ? window.token : '';
 
     this.setState({
       endpoint: endpoint,
+      headers: headers,
       selectedMethod: endpoint['methods'][0]
     });
   },
@@ -32499,6 +32504,14 @@ var Request = React.createClass({
 
     this.setState({
       endpoint: endpoint
+    });
+  },
+
+  handleHeaderChange: function handleHeaderChange(value, fieldName) {
+    var headers = this.state.headers;
+    headers[fieldName] = value;
+    this.setState({
+      headers: headers
     });
   },
 
@@ -32531,23 +32544,7 @@ var Request = React.createClass({
         selectedMethod: this.state.selectedMethod,
         setMethod: this.setSelectedMethod }),
       React.createElement(Header, { title: 'Headers' }),
-      React.createElement(
-        'div',
-        { className: 'form-group' },
-        React.createElement(
-          'label',
-          { htmlFor: 'authorization', className: 'col-sm-4 control-label' },
-          'Authorization'
-        ),
-        React.createElement(
-          'div',
-          { className: 'col-sm-8' },
-          React.createElement('input', {
-            type: 'text',
-            className: 'form-control input-sm',
-            placeholder: 'Token' })
-        )
-      ),
+      React.createElement(Headers, { headers: this.state.headers, handleHeaderChange: this.handleHeaderChange }),
       RequestUtils.shouldAddData(this.state.method) ? null : React.createElement(
         'div',
         null,
@@ -32563,7 +32560,7 @@ var Request = React.createClass({
 
 module.exports = Request;
 
-},{"../utils/request":174,"./helpers/header":164,"./request/field-url":168,"./request/fields-data":169,"./request/methods":170,"react":159}],168:[function(require,module,exports){
+},{"../utils/request":175,"./helpers/header":164,"./request/field-url":168,"./request/fields-data":169,"./request/headers":170,"./request/methods":171,"react":159}],168:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -32643,6 +32640,47 @@ module.exports = FieldsData;
 
 var React = require('react');
 
+var Input = require('../helpers/input');
+
+var Headers = React.createClass({
+  displayName: 'Headers',
+
+  getInitialState: function getInitialState() {
+    return {
+      authorization: this.props.headers.authorization
+    };
+  },
+
+  handleChange: function handleChange(fieldName, event) {
+    this.props.handleHeaderChange(event.target.value, fieldName);
+  },
+
+  componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
+    this.setState({
+      authorization: nextProps.headers.authorization
+    });
+  },
+
+  render: function render() {
+    return React.createElement(
+      'div',
+      null,
+      React.createElement(Input, {
+        name: 'authorization',
+        value: this.state.authorization,
+        placeholder: 'Token 1234567890',
+        onChange: this.handleChange.bind(this, 'authorization') })
+    );
+  }
+});
+
+module.exports = Headers;
+
+},{"../helpers/input":165,"react":159}],171:[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+
 var Methods = React.createClass({
   displayName: 'Methods',
 
@@ -32693,7 +32731,7 @@ var Methods = React.createClass({
 
 module.exports = Methods;
 
-},{"react":159}],171:[function(require,module,exports){
+},{"react":159}],172:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -32797,7 +32835,7 @@ var Response = React.createClass({
 
 module.exports = Response;
 
-},{"../utils/jsonpp":173,"react":159}],172:[function(require,module,exports){
+},{"../utils/jsonpp":174,"react":159}],173:[function(require,module,exports){
 'use strict';
 
 var $ = window.$ = window.jQuery = require('jquery');
@@ -32833,7 +32871,7 @@ $('#liveAPIModal').on('hidden.bs.modal', function () {
   ReactDOM.unmountComponentAtNode(document.getElementById('liveAPIEndpoints'));
 });
 
-},{"./components/liveapi":166,"jquery":2,"react":159,"react-dom":3,"underscore":163}],173:[function(require,module,exports){
+},{"./components/liveapi":166,"jquery":2,"react":159,"react-dom":3,"underscore":163}],174:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -32856,7 +32894,7 @@ module.exports = {
 
 };
 
-},{}],174:[function(require,module,exports){
+},{}],175:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -32877,4 +32915,4 @@ module.exports = {
 
 };
 
-},{}]},{},[172]);
+},{}]},{},[173]);
