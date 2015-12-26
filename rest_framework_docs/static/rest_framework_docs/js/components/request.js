@@ -1,4 +1,3 @@
-var _ = require('underscore');
 var React = require('react');
 
 var FieldsData = require('./request/fields-data');
@@ -10,7 +9,7 @@ var RequestUtils = require('../utils/request');
 var Request = React.createClass({
   getInitialState: function () {
     return {
-      endpoint: {},
+      endpoint: null,
       data: {},
       selectedMethod: null,
     };
@@ -19,16 +18,6 @@ var Request = React.createClass({
   componentWillMount: function() {
     var endpoint = this.props.endpoint;
     endpoint['methods'] = this.transformMethods(endpoint.methods);
-
-    this.setState({
-      endpoint: endpoint,
-      selectedMethod: endpoint['methods'][0]
-    });
-  },
-
-  componentWillReceiveProps: function (nextProps) {
-    var endpoint = nextProps.endpoint;
-    endpoint['methods'] = _.isArray(endpoint.methods) ? endpoint.methods : this.transformMethods(endpoint.methods);
 
     this.setState({
       endpoint: endpoint,
@@ -51,10 +40,13 @@ var Request = React.createClass({
     });
   },
 
-  handleInputChange: function (value, event) {
-    var state = this.state;
-    state[value] = event.target.value;
-    this.setState(state);
+  handleUrlChange: function (event) {
+    var endpoint = this.state.endpoint;
+    endpoint.path = event.target.value;
+
+    this.setState({
+      endpoint: endpoint
+    });
   },
 
   handleDataFieldChange: function (value, fieldName) {
@@ -67,7 +59,6 @@ var Request = React.createClass({
 
   render: function () {
     var endpoint = this.state.endpoint;
-
     return (
       <div>
         <h3>Request</h3>
@@ -76,7 +67,7 @@ var Request = React.createClass({
         <FieldUrl
           name='urlEndpoint'
           url={endpoint.path}
-          onChange={this.handleInputChange.bind(this, 'urlEndpoint')} />
+          onChange={this.handleUrlChange} />
 
         <Header title='Method' />
         <Methods

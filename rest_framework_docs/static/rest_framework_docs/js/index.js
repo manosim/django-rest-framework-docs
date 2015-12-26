@@ -22,3 +22,8 @@ $('.plug').bind('click', function(evt) {
     <LiveAPIEndpoints endpoint={data} />, document.getElementById('liveAPIEndpoints')
   );
 });
+
+
+$('#liveAPIModal').on('hidden.bs.modal', function () {
+  ReactDOM.unmountComponentAtNode(document.getElementById('liveAPIEndpoints'));
+});

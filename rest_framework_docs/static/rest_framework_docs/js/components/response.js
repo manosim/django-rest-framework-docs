@@ -6,17 +6,22 @@ var Response = React.createClass({
 
   getInitialState: function () {
     return {
-      endpoints: [],
+      payload: this.props.payload,
     };
   },
 
+  componentWillReceiveProps: function(nextProps) {
+    this.setState({
+      payload: nextProps.payload
+    });
+  },
+
   saveToken: function () {
-    window.token = 'Token ' + this.props.payload.body.token;
-    console.log('Token ' + this.props.payload.body.token);
+    window.token = 'Token ' + this.state.payload.body.token;
   },
 
   render: function () {
-    if (!this.props.payload) {
+    if (!this.state.payload) {
       return (
         <div>
           <h3>Response</h3>
@@ -25,10 +30,10 @@ var Response = React.createClass({
       );
     }
 
-    var responseJSON = JSONpp.prettyPrint(this.props.payload.body);
-    var hasToken = this.props.payload.body.hasOwnProperty('token');
-    var statusText = this.props.payload.statusText.toLowerCase();
-    var statusCodeFirstChar = String(this.props.payload.status).charAt(0);
+    var responseJSON = JSONpp.prettyPrint(this.state.payload.body);
+    var hasToken = this.state.payload.body.hasOwnProperty('token');
+    var statusText = this.state.payload.statusText.toLowerCase();
+    var statusCodeFirstChar = String(this.state.payload.status).charAt(0);
     var statusCodeClass = 'label status-code pull-right status-code-' + statusCodeFirstChar;
 
     return (
