@@ -4,21 +4,23 @@ var Methods = React.createClass({
 
   getInitialState: function() {
     return {
-      methods: []
+      methods: [],
+      selectedMethod: null
     };
   },
 
   componentWillMount: function() {
-    var methods = this.props.methods
-        .replace(/\W+/g, ' ')
-        .replace(/^[ ]+|[ ]+$/g,'')
-        .split(' ');
-
     this.setState({
-      methods: methods
+      methods: this.props.methods,
+      selectedMethod: this.props.selectedMethod
     });
+  },
 
-    this.props.setMethod(methods[0]);
+  componentWillReceiveProps: function(nextProps) {
+    this.setState({
+      methods: nextProps.methods,
+      selectedMethod: nextProps.selectedMethod
+    });
   },
 
   setMethod: function (value) {
@@ -26,13 +28,11 @@ var Methods = React.createClass({
   },
 
   render: function () {
-    // var self = this;
-
     return (
       <div className='btn-group methods'>
         {this.state.methods.map(function (method, i) {
           var methodClass = 'btn btn-sm method ' + method.toLowerCase() +
-            (this.props.active == method ? ' active' : null);
+            (this.state.selectedMethod == method ? ' active' : null);
           return (
             <button
               key={i}
