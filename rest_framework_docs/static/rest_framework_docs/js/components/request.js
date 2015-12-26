@@ -1,3 +1,4 @@
+var _ = require('underscore');
 var React = require('react');
 
 var FieldsData = require('./request/fields-data');
@@ -17,7 +18,8 @@ var Request = React.createClass({
 
   componentWillMount: function() {
     var endpoint = this.props.endpoint;
-    endpoint['methods'] = this.transformMethods(endpoint.methods);
+    endpoint['methods'] = _.isArray(endpoint.methods) ?
+      endpoint.methods : this.transformMethods(endpoint.methods);
 
     this.setState({
       endpoint: endpoint,
@@ -88,7 +90,7 @@ var Request = React.createClass({
 
         {RequestUtils.shouldAddData(this.state.method) ? null : (
           <div>
-            <Header title='Data' />
+            {this.state.endpoint.fields.length ? <Header title='Data' /> : null}
             <FieldsData
               fields={endpoint.fields}
               data={this.state.data}
