@@ -542,5 +542,3 @@ module.exports=function(l,n,e){for(var r=0,t=l.length,u=3==arguments.length?e:l[
 "use strict";module.exports={shouldAddData:function(d){return"GET"===d||"OPTIONS"===d?!0:!1},shouldAddHeader:function(d){return"AllowAny"===d?!1:!0}};
 },{}]},{},[173])
 
-
-//# sourceMappingURL=rest_framework_docs/js/dist.map.json
