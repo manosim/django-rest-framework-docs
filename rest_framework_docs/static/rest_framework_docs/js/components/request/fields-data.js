@@ -11,9 +11,11 @@ var FieldsData = React.createClass({
   _renderFields: function () {
     return this.props.fields.map(function (field, key) {
       var value = this.props.data[field.name];
+      var type = field.name == 'password' ? 'password' : 'text';
       return (
         <Input
           key={key}
+          type={type}
           name={field.name}
           value={value}
           placeholder={field.type}

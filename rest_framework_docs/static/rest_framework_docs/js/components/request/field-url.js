@@ -26,6 +26,7 @@ var FieldUrl = React.createClass({
       <div>
         <Header title='API Endpoint' />
         <Input
+          type='text'
           name='Url Endpoint'
           value={this.state.url}
           placeholder='Endpoint Url'
