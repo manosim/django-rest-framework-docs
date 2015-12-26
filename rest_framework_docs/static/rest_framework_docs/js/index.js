@@ -9,7 +9,6 @@ var LiveAPIEndpoints = require('./components/liveapi');
 
 var utils = {
   transformMethods: function (methods) {
-    console.log(methods);
     return methods
       .replace(/\W+/g, ' ')
       .replace(/^[ ]+|[ ]+$/g,'')

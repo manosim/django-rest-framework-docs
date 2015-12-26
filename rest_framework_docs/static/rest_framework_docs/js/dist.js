@@ -32549,8 +32549,10 @@ var Request = React.createClass({
         methods: this.state.endpoint.methods,
         selectedMethod: this.state.selectedMethod,
         setMethod: this.setSelectedMethod }),
-      React.createElement(Header, { title: 'Headers' }),
-      React.createElement(Headers, { headers: this.state.headers, handleHeaderChange: this.handleHeaderChange }),
+      React.createElement(Headers, {
+        headers: this.state.headers,
+        permissions: this.state.endpoint.permissions,
+        handleHeaderChange: this.handleHeaderChange }),
       RequestUtils.shouldAddData(this.state.method) ? null : React.createElement(
         'div',
         null,
@@ -32646,7 +32648,9 @@ module.exports = FieldsData;
 
 var React = require('react');
 
+var Header = require('../helpers/header');
 var Input = require('../helpers/input');
+var RequestUtils = require('../../utils/request');
 
 var Headers = React.createClass({
   displayName: 'Headers',
@@ -32668,9 +32672,14 @@ var Headers = React.createClass({
   },
 
   render: function render() {
+    if (!RequestUtils.shouldAddHeader(this.props.permissions)) {
+      return null;
+    }
+
     return React.createElement(
       'div',
       null,
+      React.createElement(Header, { title: 'Headers' }),
       React.createElement(Input, {
         name: 'authorization',
         value: this.state.authorization,
@@ -32682,7 +32691,7 @@ var Headers = React.createClass({
 
 module.exports = Headers;
 
-},{"../helpers/input":165,"react":159}],171:[function(require,module,exports){
+},{"../../utils/request":175,"../helpers/header":164,"../helpers/input":165,"react":159}],171:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -32853,7 +32862,6 @@ var LiveAPIEndpoints = require('./components/liveapi');
 
 var utils = {
   transformMethods: function transformMethods(methods) {
-    console.log(methods);
     return methods.replace(/\W+/g, ' ').replace(/^[ ]+|[ ]+$/g, '').split(' ');
   }
 };
@@ -32913,10 +32921,10 @@ module.exports = {
   },
 
   shouldAddHeader: function shouldAddHeader(permissions) {
-    if (permissions === 'AllowAny' || permissions === 'None') {
-      return true;
+    if (permissions === 'AllowAny') {
+      return false;
     }
-    return false;
+    return true;
   }
 
 };

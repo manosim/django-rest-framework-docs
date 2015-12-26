@@ -8,10 +8,10 @@ module.exports = {
   },
 
   shouldAddHeader: function (permissions) {
-    if (permissions === 'AllowAny' || permissions === 'None') {
-      return true;
+    if (permissions === 'AllowAny') {
+      return false;
     }
-    return false;
+    return true;
   }
 
 };

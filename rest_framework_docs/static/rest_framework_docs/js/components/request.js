@@ -80,8 +80,10 @@ var Request = React.createClass({
           selectedMethod={this.state.selectedMethod}
           setMethod={this.setSelectedMethod} />
 
-        <Header title='Headers' />
-        <Headers headers={this.state.headers} handleHeaderChange={this.handleHeaderChange} />
+        <Headers
+          headers={this.state.headers}
+          permissions={this.state.endpoint.permissions}
+          handleHeaderChange={this.handleHeaderChange} />
 
         {RequestUtils.shouldAddData(this.state.method) ? null : (
           <div>
