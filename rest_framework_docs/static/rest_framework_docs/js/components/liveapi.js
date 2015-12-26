@@ -21,7 +21,7 @@ var LiveAPIEndpoints = React.createClass({
   },
 
   getData: function () {
-    var method = this.refs.request.state.method;
+    var method = this.refs.request.state.selectedMethod;
     return RequestUtils.shouldAddData(method) ? null : (
       this.refs.request.state.data
     );
@@ -35,7 +35,7 @@ var LiveAPIEndpoints = React.createClass({
     var data = this.getData();
 
     // Now Make the Request
-    APIRequest(request.method, request.urlEndpoint)
+    APIRequest(request.selectedMethod, request.urlEndpoint)
       .send(data)
       .end(function (err, res) {
         self.setState({

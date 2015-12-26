@@ -1,3 +1,4 @@
+var _ = require('underscore');
 var React = require('react');
 
 var FieldsData = require('./request/fields-data');
@@ -7,24 +8,46 @@ var Methods = require('./request/methods');
 var RequestUtils = require('../utils/request');
 
 var Request = React.createClass({
-
   getInitialState: function () {
     return {
+      endpoint: {},
       data: {},
-      method: null,
-      urlEndpoint: this.props.endpoint.path
+      selectedMethod: null,
     };
   },
 
-  componentWillReceiveProps: function(nextProps) {
+  componentWillMount: function() {
+    var endpoint = this.props.endpoint;
+    endpoint['methods'] = this.transformMethods(endpoint.methods);
+
     this.setState({
-      urlEndpoint: nextProps.endpoint.path 
+      endpoint: endpoint,
+      selectedMethod: endpoint['methods'][0]
     });
   },
 
-  setMethod: function (method) {
+  componentWillReceiveProps: function (nextProps) {
+    var endpoint = nextProps.endpoint;
+    endpoint['methods'] = _.isArray(endpoint.methods) ? endpoint.methods : this.transformMethods(endpoint.methods);
+
     this.setState({
-      method: method
+      endpoint: endpoint,
+      selectedMethod: endpoint['methods'][0]
+    });
+  },
+
+  transformMethods: function (methods) {
+    return methods
+      .replace(/\W+/g, ' ')
+      .replace(/^[ ]+|[ ]+$/g,'')
+      .split(' ');
+  },
+
+  setSelectedMethod: function (method) {
+    console.log('REQUEST _ setSelectedMethod');
+
+    this.setState({
+      selectedMethod: method
     });
   },
 
@@ -43,7 +66,7 @@ var Request = React.createClass({
   },
 
   render: function () {
-    var endpoint = this.props.endpoint;
+    var endpoint = this.state.endpoint;
 
     return (
       <div>
@@ -52,11 +75,14 @@ var Request = React.createClass({
         <Header title='API Endpoint' />
         <FieldUrl
           name='urlEndpoint'
-          url={this.state.urlEndpoint}
+          url={endpoint.path}
           onChange={this.handleInputChange.bind(this, 'urlEndpoint')} />
 
         <Header title='Method' />
-        <Methods methods={endpoint.methods} active={this.state.method} setMethod={this.setMethod} />
+        <Methods
+          methods={this.state.endpoint.methods}
+          selectedMethod={this.state.selectedMethod}
+          setMethod={this.setSelectedMethod} />
 
         <Header title='Headers' />
         <div className="form-group">
