@@ -30,8 +30,6 @@ var Request = React.createClass({
   },
 
   setSelectedMethod: function (method) {
-    console.log('REQUEST _ setSelectedMethod');
-
     this.setState({
       selectedMethod: method
     });
@@ -68,13 +66,11 @@ var Request = React.createClass({
       <div>
         <h3>Request</h3>
 
-        <Header title='API Endpoint' />
         <FieldUrl
           name='urlEndpoint'
           url={endpoint.path}
           onChange={this.handleUrlChange} />
 
-        <Header title='Method' />
         <Methods
           methods={this.state.endpoint.methods}
           selectedMethod={this.state.selectedMethod}

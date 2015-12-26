@@ -32497,8 +32497,6 @@ var Request = React.createClass({
   },
 
   setSelectedMethod: function setSelectedMethod(method) {
-    console.log('REQUEST _ setSelectedMethod');
-
     this.setState({
       selectedMethod: method
     });
@@ -32539,12 +32537,10 @@ var Request = React.createClass({
         null,
         'Request'
       ),
-      React.createElement(Header, { title: 'API Endpoint' }),
       React.createElement(FieldUrl, {
         name: 'urlEndpoint',
         url: endpoint.path,
         onChange: this.handleUrlChange }),
-      React.createElement(Header, { title: 'Method' }),
       React.createElement(Methods, {
         methods: this.state.endpoint.methods,
         selectedMethod: this.state.selectedMethod,
@@ -32573,6 +32569,7 @@ module.exports = Request;
 
 var React = require('react');
 
+var Header = require('../helpers/header');
 var Input = require('../helpers/input');
 
 var FieldUrl = React.createClass({
@@ -32595,17 +32592,22 @@ var FieldUrl = React.createClass({
   },
 
   render: function render() {
-    return React.createElement(Input, {
-      name: 'Url Endpoint',
-      value: this.state.url,
-      placeholder: 'Endpoint Url',
-      onChange: this.handleChange });
+    return React.createElement(
+      'div',
+      null,
+      React.createElement(Header, { title: 'API Endpoint' }),
+      React.createElement(Input, {
+        name: 'Url Endpoint',
+        value: this.state.url,
+        placeholder: 'Endpoint Url',
+        onChange: this.handleChange })
+    );
   }
 });
 
 module.exports = FieldUrl;
 
-},{"../helpers/input":165,"react":159}],169:[function(require,module,exports){
+},{"../helpers/header":164,"../helpers/input":165,"react":159}],169:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -32695,6 +32697,7 @@ module.exports = Headers;
 'use strict';
 
 var React = require('react');
+var Header = require('../helpers/header');
 
 var Methods = React.createClass({
   displayName: 'Methods',
@@ -32727,26 +32730,31 @@ var Methods = React.createClass({
   render: function render() {
     return React.createElement(
       'div',
-      { className: 'btn-group methods' },
-      this.state.methods.map(function (method, i) {
-        var methodClass = 'btn btn-sm method ' + method.toLowerCase() + (this.state.selectedMethod == method ? ' active' : null);
-        return React.createElement(
-          'button',
-          {
-            key: i,
-            type: 'button',
-            className: methodClass,
-            onClick: this.setMethod.bind(this, method) },
-          method
-        );
-      }, this)
+      null,
+      React.createElement(Header, { title: 'Method' }),
+      React.createElement(
+        'div',
+        { className: 'btn-group methods' },
+        this.state.methods.map(function (method, i) {
+          var methodClass = 'btn btn-sm method ' + method.toLowerCase() + (this.state.selectedMethod == method ? ' active' : null);
+          return React.createElement(
+            'button',
+            {
+              key: i,
+              type: 'button',
+              className: methodClass,
+              onClick: this.setMethod.bind(this, method) },
+            method
+          );
+        }, this)
+      )
     );
   }
 });
 
 module.exports = Methods;
 
-},{"react":159}],172:[function(require,module,exports){
+},{"../helpers/header":164,"react":159}],172:[function(require,module,exports){
 'use strict';
 
 var React = require('react');

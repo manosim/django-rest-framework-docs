@@ -1,5 +1,6 @@
 var React = require('react');
 
+var Header = require('../helpers/header');
 var Input = require('../helpers/input');
 
 var FieldUrl = React.createClass({
@@ -22,11 +23,14 @@ var FieldUrl = React.createClass({
 
   render: function () {
     return (
-      <Input
-        name='Url Endpoint'
-        value={this.state.url}
-        placeholder='Endpoint Url'
-        onChange={this.handleChange} />
+      <div>
+        <Header title='API Endpoint' />
+        <Input
+          name='Url Endpoint'
+          value={this.state.url}
+          placeholder='Endpoint Url'
+          onChange={this.handleChange} />
+      </div>
     );
   }
 });
