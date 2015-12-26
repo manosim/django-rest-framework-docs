@@ -32457,7 +32457,6 @@ module.exports = LiveAPIEndpoints;
 },{"../utils/request":174,"./request":167,"./response":171,"react":159,"superagent":160}],167:[function(require,module,exports){
 'use strict';
 
-var _ = require('underscore');
 var React = require('react');
 
 var FieldsData = require('./request/fields-data');
@@ -32479,16 +32478,11 @@ var Request = React.createClass({
 
   componentWillMount: function componentWillMount() {
     var endpoint = this.props.endpoint;
-    endpoint['methods'] = _.isArray(endpoint.methods) ? endpoint.methods : this.transformMethods(endpoint.methods);
 
     this.setState({
       endpoint: endpoint,
       selectedMethod: endpoint['methods'][0]
     });
-  },
-
-  transformMethods: function transformMethods(methods) {
-    return methods.replace(/\W+/g, ' ').replace(/^[ ]+|[ ]+$/g, '').split(' ');
   },
 
   setSelectedMethod: function setSelectedMethod(method) {
@@ -32569,7 +32563,7 @@ var Request = React.createClass({
 
 module.exports = Request;
 
-},{"../utils/request":174,"./helpers/header":164,"./request/field-url":168,"./request/fields-data":169,"./request/methods":170,"react":159,"underscore":163}],168:[function(require,module,exports){
+},{"../utils/request":174,"./helpers/header":164,"./request/field-url":168,"./request/fields-data":169,"./request/methods":170,"react":159}],168:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -32808,9 +32802,17 @@ module.exports = Response;
 
 var $ = window.$ = window.jQuery = require('jquery');
 
+var _ = require('underscore');
 var React = require('react'); // eslint-disable-line no-unused-vars
 var ReactDOM = require('react-dom');
 var LiveAPIEndpoints = require('./components/liveapi');
+
+var utils = {
+  transformMethods: function transformMethods(methods) {
+    console.log(methods);
+    return methods.replace(/\W+/g, ' ').replace(/^[ ]+|[ ]+$/g, '').split(' ');
+  }
+};
 
 $('.plug').bind('click', function (evt) {
   // Prevent the accordion from collapsing
@@ -32822,6 +32824,7 @@ $('.plug').bind('click', function (evt) {
 
   // Setup the form
   var data = $(this).data();
+  data.methods = _.isArray(data.methods) ? data.methods : utils.transformMethods(data.methods);
 
   ReactDOM.render(React.createElement(LiveAPIEndpoints, { endpoint: data }), document.getElementById('liveAPIEndpoints'));
 });
@@ -32830,7 +32833,7 @@ $('#liveAPIModal').on('hidden.bs.modal', function () {
   ReactDOM.unmountComponentAtNode(document.getElementById('liveAPIEndpoints'));
 });
 
-},{"./components/liveapi":166,"jquery":2,"react":159,"react-dom":3}],173:[function(require,module,exports){
+},{"./components/liveapi":166,"jquery":2,"react":159,"react-dom":3,"underscore":163}],173:[function(require,module,exports){
 'use strict';
 
 module.exports = {
