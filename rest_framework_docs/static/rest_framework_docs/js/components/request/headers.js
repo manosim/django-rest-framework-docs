@@ -1,6 +1,8 @@
 var React = require('react');
 
+var Header = require('../helpers/header');
 var Input = require('../helpers/input');
+var RequestUtils = require('../../utils/request');
 
 var Headers = React.createClass({
 
@@ -21,8 +23,13 @@ var Headers = React.createClass({
   },
 
   render: function () {
+    if (!RequestUtils.shouldAddHeader(this.props.permissions)) {
+      return null;
+    }
+
     return (
       <div>
+        <Header title='Headers' />
         <Input
           name='authorization'
           value={this.state.authorization}
