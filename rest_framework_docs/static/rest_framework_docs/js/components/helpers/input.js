@@ -21,7 +21,8 @@ var Input = React.createClass({
             id={this.props.name}
             placeholder={this.props.placeholder}
             onChange={this.handleChange}
-            value={this.props.value} />
+            value={this.props.value}
+            required={this.props.required} />
         </div>
       </div>
     );

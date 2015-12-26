@@ -12,6 +12,7 @@ var FieldsData = React.createClass({
     return this.props.fields.map(function (field, key) {
       var value = this.props.data[field.name];
       var type = field.name == 'password' ? 'password' : 'text';
+
       return (
         <Input
           key={key}
@@ -19,7 +20,7 @@ var FieldsData = React.createClass({
           name={field.name}
           value={value}
           placeholder={field.type}
-          required={field.required}
+          required={field.required ? 'required' : false}
           onChange={this.handleChange.bind(this, field.name)} />
       );
     }, this);
