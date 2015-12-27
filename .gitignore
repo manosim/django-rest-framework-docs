@@ -10,3 +10,4 @@ dist/
 drfdocs.egg-info/
 
 rest_framework_docs/static/node_modules/
+rest_framework_docs/static/rest_framework_docs/js/dist.js.map
