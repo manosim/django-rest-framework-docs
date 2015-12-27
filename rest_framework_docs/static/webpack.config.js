@@ -1,4 +1,3 @@
-// var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
@@ -8,22 +7,13 @@ module.exports = {
     path: __dirname + '/rest_framework_docs/js',
     filename: 'dist.js'
   },
+  devtool: 'source-map',
   plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-      },
-      output: {
-        comments: false,
-        sourceMap: false
-      }
-    }),
     new webpack.NoErrorsPlugin()
   ],
   module: {
     loaders: [{
       test: /\.js?$/,
-      // include: path.join(__dirname, '/rest_framework_docs/js'),
       exclude: /node_modules/,
       loader: 'babel',
       query: {
