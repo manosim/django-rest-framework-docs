@@ -4,6 +4,10 @@ var Input = require('../helpers/input');
 
 var FieldsData = React.createClass({
 
+  removeCustomField: function (fieldName) {
+    this.props.removeCustomField(fieldName);
+  },
+
   handleChange: function (fieldName, event) {
     this.props.onChange(event.target.value, fieldName);
   },
@@ -21,6 +25,8 @@ var FieldsData = React.createClass({
           value={value}
           placeholder={field.type}
           required={field.required ? 'required' : false}
+          removeField={this.removeCustomField}
+          isCustom={field.isCustom ? 'isCustom' : false}
           onChange={this.handleChange.bind(this, field.name)} />
       );
     }, this);
