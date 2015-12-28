@@ -2,6 +2,11 @@ var React = require('react');
 
 var Input = React.createClass({
 
+  removeField: function (fieldName, event) {
+    event.preventDefault();
+    this.props.removeField(fieldName);
+  },
+
   handleChange: function (value) {
     this.props.onChange(value);
   },
@@ -12,6 +17,13 @@ var Input = React.createClass({
         <label
           htmlFor={this.props.name}
           className="col-sm-4 control-label">
+            {this.props.isCustom ? (
+              <i
+                className='fa fa-minus-circle'
+                title='Remove Field'
+                onClick={this.removeField.bind(this, this.props.name)}
+                />
+            ) : null}
             {this.props.name}
         </label>
         <div className="col-sm-8">

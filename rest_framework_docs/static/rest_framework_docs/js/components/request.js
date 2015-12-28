@@ -1,5 +1,7 @@
+var _ = require('underscore');
 var React = require('react');
 
+var AddFieldsForm = require('./request/add-fields');
 var Header = require('./helpers/header');
 var Headers = require('./request/headers');
 var FieldsData = require('./request/fields-data');
@@ -26,6 +28,42 @@ var Request = React.createClass({
       endpoint: endpoint,
       headers: headers,
       selectedMethod: endpoint['methods'][0]
+    });
+  },
+
+  addField: function (fieldName) {
+    var endpoint = this.state.endpoint;
+    var fields = endpoint.fields;
+
+    // Check if field already exists
+    if (_.findWhere(fields, {'name': fieldName})) return;
+
+    fields.push({
+      name: fieldName,
+      required: false,
+      type: 'Added Field',
+      isCustom: true
+    });
+
+    endpoint.fields = fields;
+
+    this.setState({
+      endpoint: endpoint
+    });
+  },
+
+  removeField: function (fieldName) {
+    var data = this.state.data;
+    var endpoint = this.state.endpoint;
+    var fields = endpoint.fields;
+
+    data = _.omit(data, fieldName);
+    fields = _.without(fields, _.findWhere(fields, {name: fieldName}));
+    endpoint.fields = fields;
+
+    this.setState({
+      data: data,
+      endpoint: endpoint
     });
   },
 
@@ -87,7 +125,10 @@ var Request = React.createClass({
             <FieldsData
               fields={endpoint.fields}
               data={this.state.data}
+              removeCustomField={this.removeField}
               onChange={this.handleDataFieldChange} />
+
+            <AddFieldsForm onAdd={this.addField} />
           </div>
         )}
       </div>
