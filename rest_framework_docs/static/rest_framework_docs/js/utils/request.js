@@ -1,10 +1,10 @@
 module.exports = {
 
-  shouldAddData: function (method) {
+  shouldIncludeData: function (method) {
     if (method === 'GET' || method === 'OPTIONS') {
-      return true;
+      return false;
     }
-    return false;
+    return true;
   },
 
   shouldAddHeader: function (permissions) {

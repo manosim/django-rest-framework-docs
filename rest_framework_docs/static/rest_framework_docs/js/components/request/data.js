@@ -1,26 +1,20 @@
 var React = require('react');
 
 var FieldText = require('../fields/text');
+var Header = require('../helpers/header');
+var RequestUtils = require('../../utils/request');
 
 var Data = React.createClass({
-  getInitialState: function() {
-    return {
-      fields: this.props.fields
-    };
-  },
-
-  componentWillReceiveProps: function(nextProps) {
-    this.setState({
-      fields: nextProps.fields
-    });
-  },
-
   removeCustomField: function (fieldName) {
     this.props.removeCustomField(fieldName);
   },
 
   handleChange: function (fieldName, event) {
     this.props.onChange(event.target.value, fieldName);
+  },
+
+  _renderBooleanField: function (field, key) {
+    console.log(field, key);
   },
 
   _renderTextInput: function (field, key) {
@@ -41,17 +35,31 @@ var Data = React.createClass({
   },
 
   _renderFields: function () {
-    return this.state.fields.map(function (field, key) {
+    return this.props.fields.map(function (field, key) {
+
       switch (field.type) {
+      case ('BooleanField'):
+        return this._renderBooleanField(field, key);
+
       case ('CharField'):
+      default:
         return this._renderTextInput(field, key);
+
       }
     }, this);
   },
 
   render: function () {
+    if (!RequestUtils.shouldIncludeData(this.props.method)) {
+      return null;
+    }
+
     return (
       <div>
+
+        {this.props.fields.length ? <Header title='Data' /> : null}
+
+
         {this._renderFields()}
       </div>
     );
