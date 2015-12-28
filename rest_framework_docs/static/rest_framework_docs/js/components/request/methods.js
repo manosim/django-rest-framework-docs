@@ -30,7 +30,7 @@ var Methods = React.createClass({
 
   render: function () {
     return (
-      <div>
+      <div className='text-center'>
         <Header title='Method' />
         <div className='btn-group methods'>
           {this.state.methods.map(function (method, i) {
