@@ -11,10 +11,12 @@ var AddFieldsForm = React.createClass({
   },
 
   addField: function () {
-    this.props.onAdd(this.state.fieldName);
-    this.setState({
-      fieldName: ''
-    });
+    if (this.state.fieldName) {
+      this.props.onAdd(this.state.fieldName);
+      this.setState({
+        fieldName: ''
+      });
+    }
   },
 
   handleKeyPress: function (event) {
@@ -36,12 +38,12 @@ var AddFieldsForm = React.createClass({
         <Header title='Add Extra Fields' />
 
         <div className='form-group'>
-          <label className='col-sm-4 control-label'>Add Field</label>
+          <label className='col-sm-4 control-label'>Field Name</label>
           <div className="col-sm-6">
             <input
               type='text'
               className='form-control input-sm'
-              placeholder='Field Name (ie. email_address)'
+              placeholder='ie. email_address'
               onKeyPress = {this.handleKeyPress}
               onChange={this.handleChange}
               value={this.state.fieldName} />
