@@ -37,4 +37,4 @@ First release of the project to [pypi](https://pypi.python.org/pypi). Features i
  - Override Templates
  - Support for Python 2.7, 3.3, 3.4, 3.5
  - Support for Django 1.8, 1.9
- - Support for Django Rest Framework 3 and above
+ - Support for Django REST Framework 3 and above
