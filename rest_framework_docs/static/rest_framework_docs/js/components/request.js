@@ -35,6 +35,9 @@ var Request = React.createClass({
     var endpoint = this.state.endpoint;
     var fields = endpoint.fields;
 
+    // Check if field already exists
+    if (_.findWhere(fields, {'name': fieldName})) return;
+
     fields.push({
       name: fieldName,
       required: false,
