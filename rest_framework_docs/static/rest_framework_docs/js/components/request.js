@@ -1,5 +1,6 @@
 var React = require('react');
 
+var AddFieldsForm = require('./request/add-fields');
 var Header = require('./helpers/header');
 var Headers = require('./request/headers');
 var FieldsData = require('./request/fields-data');
@@ -27,6 +28,10 @@ var Request = React.createClass({
       headers: headers,
       selectedMethod: endpoint['methods'][0]
     });
+  },
+
+  addField: function (field) {
+    console.log('Adding field: ', field);
   },
 
   setSelectedMethod: function (method) {
@@ -88,6 +93,8 @@ var Request = React.createClass({
               fields={endpoint.fields}
               data={this.state.data}
               onChange={this.handleDataFieldChange} />
+
+            <AddFieldsForm onAdd={this.addField} />
           </div>
         )}
       </div>
