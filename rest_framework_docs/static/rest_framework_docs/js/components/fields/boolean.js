@@ -16,8 +16,9 @@ var FieldBoolean = React.createClass({
     this.props.onChange(value);
   },
 
-  isChecked: function () {
+  isChecked: function (value) {
     if (this.props.value === undefined) return;
+    return this.props.value === value;
   },
 
   render: function () {
@@ -41,7 +42,6 @@ var FieldBoolean = React.createClass({
             <input
               type='radio'
               name={this.props.name}
-              value='True'
               checked={this.isChecked(true)}
               onChange={this.handleChange.bind(this, true)} /> True
           </label>
@@ -49,7 +49,6 @@ var FieldBoolean = React.createClass({
             <input
               type='radio'
               name={this.props.name}
-              value='False'
               checked={this.isChecked(false)}
               onChange={this.handleChange.bind(this, false)} /> False
           </label>
