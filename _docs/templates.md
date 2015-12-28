@@ -1,5 +1,5 @@
 ---
-title:  "Extending the Template"
+title:  "Template Customization"
 source_filename: "templates"
 order: 4
 ---
