@@ -1,7 +1,7 @@
 var React = require('react');
 
 var Header = require('../helpers/header');
-var Input = require('../helpers/input');
+var FieldText = require('../fields/text');
 
 var FieldUrl = React.createClass({
 
@@ -25,7 +25,7 @@ var FieldUrl = React.createClass({
     return (
       <div>
         <Header title='API Endpoint' />
-        <Input
+        <FieldText
           type='text'
           name='Url Endpoint'
           value={this.state.url}
