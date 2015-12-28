@@ -30,8 +30,21 @@ var Request = React.createClass({
     });
   },
 
-  addField: function (field) {
-    console.log('Adding field: ', field);
+  addField: function (fieldName) {
+    var endpoint = this.state.endpoint;
+    var fields = endpoint.fields;
+
+    fields.push({
+      name: fieldName,
+      required: false,
+      type: 'Added Field'
+    });
+
+    endpoint.fields = fields;
+
+    this.setState({
+      endpoint: endpoint
+    });
   },
 
   setSelectedMethod: function (method) {

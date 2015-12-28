@@ -12,6 +12,16 @@ var AddFieldsForm = React.createClass({
 
   addField: function () {
     this.props.onAdd(this.state.fieldName);
+    this.setState({
+      fieldName: ''
+    });
+  },
+
+  handleKeyPress: function (event) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      this.addField();
+    }
   },
 
   handleChange: function (event) {
@@ -32,6 +42,7 @@ var AddFieldsForm = React.createClass({
               type='text'
               className='form-control input-sm'
               placeholder='Field Name (ie. email_address)'
+              onKeyPress = {this.handleKeyPress}
               onChange={this.handleChange}
               value={this.state.fieldName} />
           </div>
