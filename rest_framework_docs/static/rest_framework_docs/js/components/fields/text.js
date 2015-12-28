@@ -1,6 +1,6 @@
 var React = require('react');
 
-var Input = React.createClass({
+var FieldText = React.createClass({
 
   removeField: function (fieldName, event) {
     event.preventDefault();
@@ -12,6 +12,8 @@ var Input = React.createClass({
   },
 
   render: function () {
+    var labelName = this.props.name.replace('_', ' ');
+
     return (
       <div className="form-group">
         <label
@@ -24,7 +26,7 @@ var Input = React.createClass({
                 onClick={this.removeField.bind(this, this.props.name)}
                 />
             ) : null}
-            {this.props.name}
+            {labelName}
         </label>
         <div className="col-sm-8">
           <input
@@ -41,4 +43,4 @@ var Input = React.createClass({
   }
 });
 
-module.exports = Input;
+module.exports = FieldText;
