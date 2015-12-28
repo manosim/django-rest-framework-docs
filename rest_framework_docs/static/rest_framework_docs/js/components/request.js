@@ -4,7 +4,7 @@ var React = require('react');
 var AddFieldsForm = require('./request/add-fields');
 var Header = require('./helpers/header');
 var Headers = require('./request/headers');
-var FieldsData = require('./request/fields-data');
+var Data = require('./request/data');
 var FieldUrl = require('./request/field-url');
 var Methods = require('./request/methods');
 var RequestUtils = require('../utils/request');
@@ -41,7 +41,7 @@ var Request = React.createClass({
     fields.push({
       name: fieldName,
       required: false,
-      type: 'Added Field',
+      type: 'text',
       isCustom: true
     });
 
@@ -122,7 +122,7 @@ var Request = React.createClass({
         {RequestUtils.shouldAddData(this.state.method) ? null : (
           <div>
             {this.state.endpoint.fields.length ? <Header title='Data' /> : null}
-            <FieldsData
+            <Data
               fields={endpoint.fields}
               data={this.state.data}
               removeCustomField={this.removeField}

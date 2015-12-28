@@ -1,8 +1,8 @@
 var React = require('react');
 
-var Input = require('../helpers/input');
+var FieldInput = require('../fields/input');
 
-var FieldsData = React.createClass({
+var Data = React.createClass({
 
   removeCustomField: function (fieldName) {
     this.props.removeCustomField(fieldName);
@@ -18,7 +18,7 @@ var FieldsData = React.createClass({
       var type = field.name == 'password' ? 'password' : 'text';
 
       return (
-        <Input
+        <FieldInput
           key={key}
           type={type}
           name={field.name}
@@ -41,4 +41,4 @@ var FieldsData = React.createClass({
   }
 });
 
-module.exports = FieldsData;
+module.exports = Data;
