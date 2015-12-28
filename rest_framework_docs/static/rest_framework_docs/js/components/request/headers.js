@@ -1,7 +1,7 @@
 var React = require('react');
 
 var Header = require('../helpers/header');
-var FieldInput = require('../fields/input');
+var FieldText = require('../fields/text');
 var RequestUtils = require('../../utils/request');
 
 var Headers = React.createClass({
@@ -30,7 +30,7 @@ var Headers = React.createClass({
     return (
       <div>
         <Header title='Headers' />
-        <FieldInput
+        <FieldText
           name='authorization'
           value={this.state.authorization}
           placeholder='Token 1234567890'
