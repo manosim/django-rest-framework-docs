@@ -1,6 +1,7 @@
 var React = require('react');
 
 var FieldText = require('../fields/text');
+var FieldBoolean = require('../fields/boolean');
 var Header = require('../helpers/header');
 var RequestUtils = require('../../utils/request');
 
@@ -9,12 +10,27 @@ var Data = React.createClass({
     this.props.removeCustomField(fieldName);
   },
 
-  handleChange: function (fieldName, event) {
+  handleBooleanChange: function (fieldName, value) {
+    this.props.onChange(value, fieldName);
+  },
+
+  handleTextChange: function (fieldName, event) {
     this.props.onChange(event.target.value, fieldName);
   },
 
   _renderBooleanField: function (field, key) {
-    console.log(field, key);
+    var value = this.props.data[field.name];
+
+    return (
+      <FieldBoolean
+        key={key}
+        name={field.name}
+        value={value}
+        required={field.required ? 'required' : false}
+        removeField={this.removeCustomField}
+        isCustom={field.isCustom ? 'isCustom' : false}
+        onChange={this.handleBooleanChange.bind(this, field.name)} />
+    );
   },
 
   _renderTextInput: function (field, key) {
@@ -30,7 +46,7 @@ var Data = React.createClass({
         required={field.required ? 'required' : false}
         removeField={this.removeCustomField}
         isCustom={field.isCustom ? 'isCustom' : false}
-        onChange={this.handleChange.bind(this, field.name)} />
+        onChange={this.handleTextChange.bind(this, field.name)} />
     );
   },
 
@@ -56,10 +72,7 @@ var Data = React.createClass({
 
     return (
       <div>
-
         {this.props.fields.length ? <Header title='Data' /> : null}
-
-
         {this._renderFields()}
       </div>
     );
