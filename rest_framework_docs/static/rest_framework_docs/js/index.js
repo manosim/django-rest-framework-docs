@@ -1,6 +1,5 @@
-'use strict';
-
 var $ = window.$ = window.jQuery = require('jquery');
+var bootstrap = require('bootstrap'); // eslint-disable-line no-unused-vars
 
 var _ = require('underscore');
 var React = require('react'); // eslint-disable-line no-unused-vars
@@ -15,7 +14,6 @@ var utils = {
       .split(' ');
   },
 };
-
 
 $('.plug').bind('click', function(evt) {
   // Prevent the accordion from collapsing
@@ -33,7 +31,6 @@ $('.plug').bind('click', function(evt) {
     <LiveAPIEndpoints endpoint={data} />, document.getElementById('liveAPIEndpoints')
   );
 });
-
 
 $('#liveAPIModal').on('hidden.bs.modal', function () {
   ReactDOM.unmountComponentAtNode(document.getElementById('liveAPIEndpoints'));
