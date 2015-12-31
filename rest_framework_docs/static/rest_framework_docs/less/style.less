@@ -94,29 +94,39 @@ body {
     }
 
     .methods {
-      margin-bottom: 0;
+      margin: 10px 0 5px;
 
-       .method {
-        padding: 4px 8px;
-        color: #FFF;
-
-        &.get { background-color: @GetColor; }
-        &.post { background-color: @PostColor; }
-        &.patch { background-color: @PutColor; }
-        &.put { background-color: @PatchColor; }
-        &.delete { background-color: @DeleteColor; }
-        &.options { background-color: @OptionsColor; }
-
-        &.plug {
-          color: @brand-primary;
-          border: 1px solid @brand-primary;
-          .BorderRadius(50%);
-          font-size: 14px;
-          width: 30px;
-          height: 29px;
-          margin-left: 10px;
-        }
+      @media (min-width: @screen-md-min) {
+        text-align: right;
+        margin: 0;
       }
+
+     .method {
+      padding: 4px 8px;
+      margin-top: 5px;
+      color: #FFF;
+
+      @media (min-width: @screen-md-min) {
+        margin-top: 0;
+      }
+
+      &.get { background-color: @GetColor; }
+      &.post { background-color: @PostColor; }
+      &.patch { background-color: @PutColor; }
+      &.put { background-color: @PatchColor; }
+      &.delete { background-color: @DeleteColor; }
+      &.options { background-color: @OptionsColor; }
+
+      &.plug {
+        color: @brand-primary;
+        border: 1px solid @brand-primary;
+        .BorderRadius(50%);
+        font-size: 14px;
+        width: 30px;
+        height: 29px;
+        margin-left: 10px;
+      }
+    }
     }
   }
 
@@ -171,8 +181,10 @@ body {
 
 .modal {
 
-  h3 {
-    margin-top: 0;
+  @media (min-width: @screen-md-min) {
+    h3 {
+      margin-top: 0;
+    }
   }
 
   .control-label {

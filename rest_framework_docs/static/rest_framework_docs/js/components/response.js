@@ -46,8 +46,7 @@ var Response = React.createClass({
         {hasToken ? (
           <div className='well well-default text-center'>
             <button className='btn btn-sm btn-info' onClick={this.saveToken}>
-              <i className='fa fa-key' />
-              Save Token
+              <i className='fa fa-key' /> Save Token
           </button>
             <h6>Your token will be lost when you refresh the page.</h6>
           </div>

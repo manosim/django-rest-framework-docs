@@ -16,9 +16,9 @@ var LiveAPIEndpoints = React.createClass({
 
   getData: function () {
     var method = this.refs.request.state.selectedMethod;
-    return RequestUtils.shouldAddData(method) ? null : (
+    return RequestUtils.shouldIncludeData(method) ? (
       this.refs.request.state.data
-    );
+    ) : null;
   },
 
   makeRequest: function (event) {

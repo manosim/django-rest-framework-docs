@@ -2,12 +2,10 @@ var _ = require('underscore');
 var React = require('react');
 
 var AddFieldsForm = require('./request/add-fields');
-var Header = require('./helpers/header');
 var Headers = require('./request/headers');
-var FieldsData = require('./request/fields-data');
+var Data = require('./request/data');
 var FieldUrl = require('./request/field-url');
 var Methods = require('./request/methods');
-var RequestUtils = require('../utils/request');
 
 var Request = React.createClass({
   getInitialState: function () {
@@ -33,19 +31,16 @@ var Request = React.createClass({
 
   addField: function (fieldName) {
     var endpoint = this.state.endpoint;
-    var fields = endpoint.fields;
 
     // Check if field already exists
-    if (_.findWhere(fields, {'name': fieldName})) return;
+    if (_.findWhere(endpoint.fields, {'name': fieldName})) return;
 
-    fields.push({
+    endpoint.fields.push({
       name: fieldName,
       required: false,
-      type: 'Added Field',
+      type: 'text',
       isCustom: true
     });
-
-    endpoint.fields = fields;
 
     this.setState({
       endpoint: endpoint
@@ -100,6 +95,7 @@ var Request = React.createClass({
 
   render: function () {
     var endpoint = this.state.endpoint;
+
     return (
       <div>
         <h3>Request</h3>
@@ -119,18 +115,15 @@ var Request = React.createClass({
           permissions={this.state.endpoint.permissions}
           handleHeaderChange={this.handleHeaderChange} />
 
-        {RequestUtils.shouldAddData(this.state.method) ? null : (
-          <div>
-            {this.state.endpoint.fields.length ? <Header title='Data' /> : null}
-            <FieldsData
-              fields={endpoint.fields}
-              data={this.state.data}
-              removeCustomField={this.removeField}
-              onChange={this.handleDataFieldChange} />
+        <Data
+          method={this.state.selectedMethod}
+          fields={endpoint.fields}
+          data={this.state.data}
+          removeCustomField={this.removeField}
+          onChange={this.handleDataFieldChange} />
 
-            <AddFieldsForm onAdd={this.addField} />
-          </div>
-        )}
+        <AddFieldsForm
+          onAdd={this.addField} />
       </div>
     );
   }

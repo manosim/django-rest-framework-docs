@@ -51,7 +51,7 @@ var AddFieldsForm = React.createClass({
           <div className="col-sm-2">
             <button
               type="button"
-              className='btn btn-sm btn-block btn-primary'
+              className='btn btn-sm btn-block btn-info'
               onClick={this.addField}>
               Add
             </button>
