@@ -6,7 +6,7 @@ from rest_framework_docs.settings import DRFSettings
 class DRFDocsViewTests(TestCase):
 
     SETTINGS_HIDE_DOCS = {
-        'SHOW_DOCS': False  # Default: True
+        'HIDE_DOCS': True  # Default: False
     }
 
     def setUp(self):
@@ -16,7 +16,7 @@ class DRFDocsViewTests(TestCase):
 
         settings = DRFSettings()
 
-        self.assertEqual(settings.get_setting("SHOW_DOCS"), True)
+        self.assertEqual(settings.get_setting("HIDE_DOCS"), True)
         self.assertEqual(settings.get_setting("TEST"), None)
 
     def test_index_view_with_endpoints(self):
@@ -52,8 +52,8 @@ class DRFDocsViewTests(TestCase):
     @override_settings(REST_FRAMEWORK_DOCS=SETTINGS_HIDE_DOCS)
     def test_index_view_docs_hidden(self):
         """
-        Should prevent the docs from loading the "SHOW_DOCS" is set
-        to "False" or undefined under settings
+        Should prevent the docs from loading the "HIDE_DOCS" is set
+        to "True" or undefined under settings
         """
         response = self.client.get(reverse('drfdocs'))
 
