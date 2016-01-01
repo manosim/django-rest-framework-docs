@@ -16,7 +16,7 @@ class DRFDocsViewTests(TestCase):
 
         settings = DRFSettings()
 
-        self.assertEqual(settings.get_setting("HIDE_DOCS"), True)
+        self.assertEqual(settings.get_setting("HIDE_DOCS"), False)
         self.assertEqual(settings.get_setting("TEST"), None)
 
     def test_index_view_with_endpoints(self):
