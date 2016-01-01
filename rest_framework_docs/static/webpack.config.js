@@ -5,7 +5,7 @@ module.exports = {
   entry: './index.js',
   output: {
     path: __dirname + '/rest_framework_docs/js',
-    filename: 'dist.js'
+    filename: 'dist.min.js'
   },
   devtool: 'source-map',
   plugins: [
