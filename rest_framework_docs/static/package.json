@@ -15,7 +15,7 @@
     "release-js": "webpack --config webpack.rel.config.js",
     "release": "npm run build-font-awesome && npm run build-bootstrap-fonts && npm run release-js && npm run build-less",
     "start": "npm run build && npm run watch-less",
-    "lint": "eslint 'rest_framework_docs/js/' --ignore-pattern 'rest_framework_docs/js/dist.js'",
+    "lint": "eslint 'rest_framework_docs/js/' --ignore-pattern 'rest_framework_docs/js/dist.min.js'",
     "test": "npm run lint"
   },
   "repository": {
