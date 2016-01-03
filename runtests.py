@@ -23,6 +23,13 @@ def flake8_main(args):
     return command
 
 
+def run_tests_eslint():
+    print('Running: eslint')
+    command = subprocess.call(['cd rest_framework_docs/static/ && npm test'], shell=True)
+    print("" if command else "Success. eslint passed.")
+    return command
+
+
 def run_tests_coverage():
     if __name__ == "__main__":
         os.environ['DJANGO_SETTINGS_MODULE'] = 'tests.settings'
@@ -47,4 +54,5 @@ def run_tests_coverage():
         cov.html_report(directory='covhtml')
 
 exit_on_failure(flake8_main(FLAKE8_ARGS))
+exit_on_failure(run_tests_eslint())
 exit_on_failure(run_tests_coverage())

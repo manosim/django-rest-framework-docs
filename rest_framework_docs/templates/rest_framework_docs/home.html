@@ -36,11 +36,18 @@
               </h4>
             </div>
 
-            <div class="col-md-5 text-right">
+            <div class="col-md-5">
               <ul class="list-inline methods">
                 {% for method in endpoint.allowed_methods %}
                   <li class="method {{ method|lower }}">{{ method }}</li>
                 {% endfor %}
+                  <li class="method plug"
+                    data-toggle="modal"
+                    data-path="{{ endpoint.path }}"
+                    data-methods="{{ endpoint.allowed_methods }}"
+                    data-permissions="{{ endpoint.permissions }}"
+                    data-fields="{{ endpoint.fields_json }}">
+                    <i class="fa fa-plug"></i></li>
               </ul>
             </div>
           </div>
@@ -79,5 +86,19 @@
   {% else %}
     <h2 class="text-center">No endpoints found for {{ query }}.</h2>
   {% endif %}
+
+  <!-- Modal -->
+  <div class="modal fade api-modal" id="liveAPIModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Live API Endpoints <span class="label label-info">Beta</span></h4>
+        </div>
+
+        <div id="liveAPIEndpoints"></div>
+      </div>
+    </div>
+  </div>
 
 {% endblock %}

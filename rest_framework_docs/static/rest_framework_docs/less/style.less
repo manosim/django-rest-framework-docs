@@ -20,6 +20,22 @@
 /* @end Colours */
 
 
+/* @group Mixins */
+
+// Border Radius (Same Corners)
+.BorderRadius(@radius: 5px) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius:    @radius;
+    border-radius:         @radius;
+
+    -moz-background-clip:    padding;
+    -webkit-background-clip: padding-box;
+    background-clip:         padding-box;
+}
+
+/* @end Mixins */
+
+
 /* @group Misc */
 
 body {
@@ -38,6 +54,11 @@ body {
 .label-required {
   padding: 2px 5px;
   margin-left: 5px;
+}
+
+.btn:focus,
+.btn:active {
+  outline: none !important;
 }
 
 /* @end Misc */
@@ -73,19 +94,39 @@ body {
     }
 
     .methods {
-      margin-bottom: 0;
+      margin: 10px 0 5px;
 
-       .method {
-        padding: 4px 8px;
-        color: #FFF;
-
-        &.get { background-color: @GetColor; }
-        &.post { background-color: @PostColor; }
-        &.patch { background-color: @PutColor; }
-        &.put { background-color: @PatchColor; }
-        &.delete { background-color: @DeleteColor; }
-        &.options { background-color: @OptionsColor; }
+      @media (min-width: @screen-md-min) {
+        text-align: right;
+        margin: 0;
       }
+
+     .method {
+      padding: 4px 8px;
+      margin-top: 5px;
+      color: #FFF;
+
+      @media (min-width: @screen-md-min) {
+        margin-top: 0;
+      }
+
+      &.get { background-color: @GetColor; }
+      &.post { background-color: @PostColor; }
+      &.patch { background-color: @PutColor; }
+      &.put { background-color: @PatchColor; }
+      &.delete { background-color: @DeleteColor; }
+      &.options { background-color: @OptionsColor; }
+
+      &.plug {
+        color: @brand-primary;
+        border: 1px solid @brand-primary;
+        .BorderRadius(50%);
+        font-size: 14px;
+        width: 30px;
+        height: 29px;
+        margin-left: 10px;
+      }
+    }
     }
   }
 
@@ -134,6 +175,105 @@ body {
 }
 
 /* @end Footer */
+
+
+/* @group Modal API */
+
+.modal {
+
+  @media (min-width: @screen-md-min) {
+    h3 {
+      margin-top: 0;
+    }
+  }
+
+  .control-label {
+    padding-top: 7px;
+    text-transform: capitalize;
+  }
+
+  .request {
+
+    .section-title {
+      background-color: @gray-lighter;
+      text-align: center;
+      padding: 5px;
+      .BorderRadius(3px);
+    }
+
+    .methods {
+
+      .method {
+        color: #FFF;
+        background-color: @gray-light;
+        border-left: 1px solid @gray;
+
+        &:first-child {
+          border-left: 0;
+        }
+
+        &.get.active { background-color: @GetColor; }
+        &.post.active { background-color: @PostColor; }
+        &.patch.active { background-color: @PutColor; }
+        &.put.active { background-color: @PatchColor; }
+        &.delete.active { background-color: @DeleteColor; }
+        &.options.active { background-color: @OptionsColor; }
+      }
+    }
+
+    .form-group {
+
+      label {
+
+        .fa {
+          margin-right: 5px;
+          color: @brand-danger;
+        }
+      }
+    }
+  }
+
+  .response {
+    .status-code {
+      font-weight: 300;
+
+      &.status-code-1 { background-color: @brand-info; }
+      &.status-code-2 { background-color: @brand-success; }
+      &.status-code-3 { background-color: @brand-warning; }
+      &.status-code-4 { background-color: @brand-danger; }
+      &.status-code-5 { background-color: @brand-primary; }
+    }
+
+    .status-text {
+      text-transform: capitalize;
+    }
+
+    pre {
+      font-size: 12px;
+      margin-top: 20px;
+    }
+  }
+}
+
+
+/* @end Modal API */
+
+
+/* @group Response / JSON View */
+
+.json-key {
+  color: brown;
+}
+
+.json-value {
+  color: navy;
+}
+
+.json-string {
+  color: olive;
+}
+
+/* @end Response / JSON View */
 
 
 /* @group Github Ribbon - SVG */

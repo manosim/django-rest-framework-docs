@@ -10,3 +10,6 @@ prune rest_framework_docs/static/node_modules
 
 graft rest_framework_docs/static/rest_framework_docs
 graft rest_framework_docs/templates/rest_framework_docs
+
+recursive-exclude rest_framework_docs/static/rest_framework_docs dist.min.js.map index.js
+recursive-exclude rest_framework_docs/static/rest_framework_docs/*/* *

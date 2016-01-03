@@ -26,9 +26,7 @@ class ApiDocumentation(object):
 
     def _is_drf_view(self, pattern):
         # Should check whether a pattern inherits from DRF's APIView
-        if hasattr(pattern.callback, 'cls') and issubclass(pattern.callback.cls, APIView):
-            return True
-        return False
+        return hasattr(pattern.callback, 'cls') and issubclass(pattern.callback.cls, APIView)
 
     def get_endpoints(self):
         return sorted(self.endpoints, key=attrgetter('name_parent'))
