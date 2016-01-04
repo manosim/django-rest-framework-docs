@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^docs/', include('rest_framework_docs.urls')),
 
     # API
-    url(r'^accounts/', view=include('project.accounts.urls', namespace='accounts')),
-    url(r'^organisations/', view=include('project.organisations.urls', namespace='organisations')),
+    url(r'^accounts/', view=include('project.accounts.urls', namespace='accounts', app_name='accounts')),
+    url(r'^organisations/', view=include('project.organisations.urls', namespace='organisations',
+                                         app_name='organisations')),
 ]

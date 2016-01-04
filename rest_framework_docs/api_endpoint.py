@@ -9,13 +9,12 @@ class ApiEndpoint(object):
     def __init__(self, pattern, parent_pattern=None):
         self.pattern = pattern
         self.callback = pattern.callback
-        # self.name = pattern.name
         self.docstring = self.__get_docstring__()
         if parent_pattern:
             self.name_parent = parent_pattern.namespace or parent_pattern.app_name or \
                 simplify_regex(parent_pattern.regex.pattern).replace('/', '-')
             if hasattr(pattern.callback, 'cls') and issubclass(pattern.callback.cls, ModelViewSet):
-                self.name_parent = '{} (REST)'.format(self.name_parent)
+                self.name_parent = '%s (REST)' % self.name_parent
         else:
             self.name_parent = ''
         self.path = self.__get_path__(parent_pattern)

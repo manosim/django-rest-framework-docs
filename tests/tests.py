@@ -30,16 +30,16 @@ class DRFDocsViewTests(TestCase):
         self.assertEqual(len(response.context["endpoints"]), 10)
 
         # Test the login view
-        self.assertEqual(response.context["endpoints"][0].name_parent, "accounts")
-        self.assertEqual(response.context["endpoints"][0].allowed_methods, ['POST', 'OPTIONS'])
-        self.assertEqual(response.context["endpoints"][0].path, "/accounts/login/")
-        self.assertEqual(response.context["endpoints"][0].docstring, "A view that allows users to login providing their username and password.")
-        self.assertEqual(len(response.context["endpoints"][0].fields), 2)
-        self.assertEqual(response.context["endpoints"][0].fields[0]["type"], "CharField")
-        self.assertTrue(response.context["endpoints"][0].fields[0]["required"])
+        self.assertEqual(response.context["endpoints"][1].name_parent, "accounts")
+        self.assertEqual(response.context["endpoints"][1].allowed_methods, ['POST', 'OPTIONS'])
+        self.assertEqual(response.context["endpoints"][1].path, "/accounts/login/")
+        self.assertEqual(response.context["endpoints"][1].docstring, "A view that allows users to login providing their username and password.")
+        self.assertEqual(len(response.context["endpoints"][1].fields), 2)
+        self.assertEqual(response.context["endpoints"][1].fields[0]["type"], "CharField")
+        self.assertTrue(response.context["endpoints"][1].fields[0]["required"])
 
         # The view "OrganisationErroredView" (organisations/(?P<slug>[\w-]+)/errored/) should contain an error.
-        self.assertEqual(str(response.context["endpoints"][8].errors), "'test_value'")
+        self.assertEqual(str(response.context["endpoints"][9].errors), "'test_value'")
 
     def test_index_search_with_endpoints(self):
         response = self.client.get("%s?search=reset-password" % reverse("drfdocs"))
@@ -59,3 +59,42 @@ class DRFDocsViewTests(TestCase):
 
         self.assertEqual(response.status_code, 404)
         self.assertEqual(response.reason_phrase.upper(), "NOT FOUND")
+
+    def test_index_view_with_existent_app_name(self):
+        """
+        Should load the drf docs view with all the endpoints contained in the specified app_name.
+        NOTE: Views that do **not** inherit from DRF's "APIView" are not included.
+        """
+        # Test 'accounts' app_name
+        response = self.client.get(reverse('drfdocs-ns', args=['accounts']))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context["endpoints"]), 5)
+
+        # Test the login view
+        self.assertEqual(response.context["endpoints"][0].name_parent, "accounts")
+        self.assertEqual(response.context["endpoints"][0].allowed_methods, ['POST', 'OPTIONS'])
+        self.assertEqual(response.context["endpoints"][0].path, "/accounts/login/")
+
+        # Test 'organisations' app_name
+        response = self.client.get(reverse('drfdocs-ns', args=['organisations']))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context["endpoints"]), 4)
+
+        # The view "OrganisationErroredView" (organisations/(?P<slug>[\w-]+)/errored/) should contain an error.
+        self.assertEqual(str(response.context["endpoints"][3].errors), "'test_value'")
+
+    def test_index_search_with_existent_app_name(self):
+        response = self.client.get("%s?search=reset-password" % reverse('drfdocs-ns', args=['accounts']))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context["endpoints"]), 2)
+        self.assertEqual(response.context["endpoints"][1].path, "/accounts/reset-password/confirm/")
+        self.assertEqual(len(response.context["endpoints"][1].fields), 3)
+
+    def test_index_view_with_non_existent_app_name(self):
+        """
+        Should load the drf docs view with no endpoint.
+        """
+        response = self.client.get(reverse('drfdocs-ns', args=['non_existent_app_name']))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context["endpoints"]), 0)
