@@ -32,4 +32,4 @@ class ApiDocumentation(object):
         return hasattr(pattern.callback, 'cls') and issubclass(pattern.callback.cls, APIView)
 
     def get_endpoints(self):
-        return sorted(self.endpoints, key=attrgetter('name_parent'))
+        return sorted(self.endpoints, key=attrgetter('name'))

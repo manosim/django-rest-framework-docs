@@ -13,10 +13,14 @@ class ApiEndpoint(object):
         if parent_pattern:
             self.name_parent = parent_pattern.namespace or parent_pattern.app_name or \
                 simplify_regex(parent_pattern.regex.pattern).replace('/', '-')
+            self.name = self.name_parent
             if hasattr(pattern.callback, 'cls') and issubclass(pattern.callback.cls, ModelViewSet):
-                self.name_parent = '%s (REST)' % self.name_parent
+                self.name = '%s (REST)' % self.name_parent
         else:
             self.name_parent = ''
+            self.name = ''
+        # self.labels = (self.name_parent, self.name, slugify(self.name))
+        self.labels = dict(parent=self.name_parent, name=self.name)
         self.path = self.__get_path__(parent_pattern)
         self.allowed_methods = self.__get_allowed_methods__()
         self.errors = None
