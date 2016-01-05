@@ -121,6 +121,6 @@ class DRFDocsViewTests(TestCase):
         """
         Should load the drf docs view with no endpoint.
         """
-        response = self.client.get(reverse('drfdocs-filter', args=['non_existent_ns_or_app_name']))
+        response = self.client.get(reverse('drfdocs-filter', args=['non-existent-ns-or-app-name']))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context["endpoints"]), 0)
