@@ -43,7 +43,6 @@ INSTALLED_APPS = (
 
     'project.accounts',
     'project.organisations',
-
 )
 
 MIDDLEWARE_CLASSES = (
