@@ -2,25 +2,28 @@
 
 {% block apps_menu %}
 {% regroup endpoints by name_parent as endpoints_grouped %}
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Jump To <span class="caret"></span></a>
-  <ul class="dropdown-menu">
-    {% for group in endpoints_grouped %}
-      <li><a href="#{{ group.grouper|lower }}-group">{{ group.grouper }}</a></li>
-    {% endfor %}
-  </ul>
-</li>
+{% if endpoints_grouped|length > 1 %}
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Jump To <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      {% for group in endpoints_grouped %}
+        <li><a href="#{{ group.grouper|lower }}-group">{{ group.grouper }}</a></li>
+      {% endfor %}
+    </ul>
+  </li>
+{% endif %}
 {% endblock %}
 
 
 {% block content %}
-
   {% regroup endpoints by name_parent as endpoints_grouped %}
-
   {% if endpoints_grouped %}
   {% for group in endpoints_grouped %}
-
-    <h1 id="{{ group.grouper|lower }}-group">{{group.grouper}}</h1>
+    <h1 id="{{ group.grouper|lower }}-group">
+      {% if group.grouper %}
+        <a href="{% url 'drfdocs-filter' group.grouper %}">{{group.grouper}}</a>
+      {% endif %}
+    </h1>
 
     <div class="panel-group" role="tablist">
 

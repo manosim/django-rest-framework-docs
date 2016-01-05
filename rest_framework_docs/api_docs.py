@@ -7,20 +7,23 @@ from rest_framework_docs.api_endpoint import ApiEndpoint
 
 class ApiDocumentation(object):
 
-    def __init__(self, app_name=None):
+    def __init__(self, filter_param=None):
+        """
+        :param filter_param: namespace or app_name
+        """
         self.endpoints = []
         root_urlconf = __import__(settings.ROOT_URLCONF)
         if hasattr(root_urlconf, 'urls'):
-            self.get_all_view_names(root_urlconf.urls.urlpatterns, app_name=app_name)
+            self.get_all_view_names(root_urlconf.urls.urlpatterns, filter_param=filter_param)
         else:
-            self.get_all_view_names(root_urlconf.urlpatterns, app_name=app_name)
+            self.get_all_view_names(root_urlconf.urlpatterns, filter_param=filter_param)
 
-    def get_all_view_names(self, urlpatterns, parent_pattern=None, app_name=None):
+    def get_all_view_names(self, urlpatterns, parent_pattern=None, filter_param=None):
         for pattern in urlpatterns:
-            if isinstance(pattern, RegexURLResolver) and (not app_name or app_name == pattern.app_name):
-                self.get_all_view_names(urlpatterns=pattern.url_patterns, parent_pattern=pattern)
+            if isinstance(pattern, RegexURLResolver) and (not filter_param or filter_param in [pattern.app_name, pattern.namespace]):
+                self.get_all_view_names(urlpatterns=pattern.url_patterns, parent_pattern=pattern, filter_param=filter_param)
             elif isinstance(pattern, RegexURLPattern) and self._is_drf_view(pattern):
-                if not app_name or getattr(parent_pattern, 'app_name', None) == app_name:
+                if not filter_param or (parent_pattern and filter_param in [parent_pattern.app_name, parent_pattern.namespace]):
                     api_endpoint = ApiEndpoint(pattern, parent_pattern)
                     self.endpoints.append(api_endpoint)
 

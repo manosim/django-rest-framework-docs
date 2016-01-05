@@ -13,15 +13,29 @@ Including another URLconf
     1. Add an import:  from blog import urls as blog_urls
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
+import django
 from django.conf.urls import include, url
 from django.contrib import admin
+from .organisations.urls import organisations_urlpatterns, members_urlpatterns
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^docs/', include('rest_framework_docs.urls')),
 
     # API
-    url(r'^accounts/', view=include('project.accounts.urls', namespace='accounts', app_name='accounts')),
-    url(r'^organisations/', view=include('project.organisations.urls', namespace='organisations',
-                                         app_name='organisations')),
+    url(r'^accounts/', view=include('project.accounts.urls', namespace='accounts')),
 ]
+
+# Django 1.9 Support for the app_name argument is deprecated
+# https://docs.djangoproject.com/en/1.9/ref/urls/#include
+django_version = django.VERSION
+if django.VERSION[:2] >= (1, 9, ):
+    urlpatterns.extend([
+        url(r'^organisations/', view=include(organisations_urlpatterns, namespace='organisations')),
+        url(r'^members/', view=include(members_urlpatterns, namespace='members')),
+    ])
+else:
+    urlpatterns.extend([
+        url(r'^organisations/', view=include(organisations_urlpatterns, namespace='organisations', app_name='organisations_app')),
+        url(r'^members/', view=include(members_urlpatterns, namespace='members', app_name='organisations_app')),
+    ])
