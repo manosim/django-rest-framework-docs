@@ -8,19 +8,24 @@ class DRFDocsView(TemplateView):
 
     template_name = "rest_framework_docs/home.html"
 
-    def get_context_data(self, filter_param=None, **kwargs):
+    def get_context_data(self, **kwargs):
         settings = DRFSettings().settings
+        search_query = self.request.GET.get("search", "")
+        filter_param = self.kwargs.get("filter_param", None)
+
         if settings["HIDE_DOCS"]:
             raise Http404("Django Rest Framework Docs are hidden. Check your settings.")
 
-        context = super(DRFDocsView, self).get_context_data(**kwargs)
         docs = ApiDocumentation(filter_param=filter_param)
         endpoints = docs.get_endpoints()
 
-        query = self.request.GET.get("search", "")
-        if query and endpoints:
-            endpoints = [endpoint for endpoint in endpoints if query in endpoint.path]
+        if filter_param and not endpoints:
+            raise Http404("The are no endpoints for \"%s\"." % filter_param)
 
-        context['query'] = query
+        if search_query and endpoints:
+            endpoints = [endpoint for endpoint in endpoints if search_query in endpoint.path]
+
+        context = super(DRFDocsView, self).get_context_data(**kwargs)
+        context['query'] = search_query
         context['endpoints'] = endpoints
         return context
