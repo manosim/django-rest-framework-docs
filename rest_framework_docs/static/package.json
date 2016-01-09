@@ -41,7 +41,6 @@
     "jquery": "=1.11.3",
     "react": "=0.14.3",
     "react-dom": "=0.14.3",
-    "react-modal": "=0.6.1",
     "superagent": "=1.6.1",
     "underscore": "=1.8.3",
     "underscore.string": "=3.2.2"
@@ -57,6 +56,6 @@
     "less": "=2.5.3",
     "less-plugin-clean-css": "=1.5.1",
     "watch": "=0.16.0",
-    "webpack": "=1.12.9"
+    "webpack": "=1.12.10"
   }
 }
