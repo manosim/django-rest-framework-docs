@@ -1,0 +1,14 @@
+<ul class="list fields">
+    {% for field in item.fields %}
+    <li class="field">
+        {{ field.name }}: {{ field.type }} {% if field.required %}<span class="label label-primary label-required"
+                                                                        title="Required">R</span>{% endif %}
+        {% if field.sub_type %} ({{ field.sub_type }}) {% endif %}
+        {% if field.fields %}
+            {% with field as item %}
+                {% include 'rest_framework_docs/fields.html' %}
+            {% endwith %}
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>

@@ -1,6 +1,7 @@
 import json
 import inspect
 from django.contrib.admindocs.views import simplify_regex
+from rest_framework import serializers
 from rest_framework.viewsets import ModelViewSet
 
 
@@ -50,11 +51,7 @@ class ApiEndpoint(object):
             serializer = self.callback.cls.serializer_class
             if hasattr(serializer, 'get_fields'):
                 try:
-                    fields = [{
-                        "name": key,
-                        "type": str(field.__class__.__name__),
-                        "required": field.required
-                    } for key, field in serializer().get_fields().items()]
+                    fields = self.__get_fields__(serializer)
                 except KeyError as e:
                     self.errors = e
                     fields = []
@@ -62,6 +59,24 @@ class ApiEndpoint(object):
                 # FIXME:
                 # Show more attibutes of `field`?
 
+        return fields
+
+    def __get_fields__(self, serializer):
+        fields = []
+        for key, field in serializer().get_fields().items():
+            item = dict(
+                name=key,
+                type=str(field.__class__.__name__),
+                required=field.required
+            )
+            if isinstance(field, (serializers.ListSerializer, serializers.ListField)):
+                sub_type = field.child.__class__
+                item['sub_type'] = str(sub_type.__name__)
+                if isinstance(sub_type(), serializers.Serializer):
+                    item['fields'] = self.__get_fields__(sub_type)
+            elif isinstance(field, serializers.Serializer):
+                item['fields'] = self.__get_fields__(field)
+            fields.append(item)
         return fields
 
     def __get_serializer_fields_json__(self):

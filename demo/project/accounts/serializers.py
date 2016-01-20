@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from project.accounts.models import User
+from rest_framework.authtoken.serializers import AuthTokenSerializer
 
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
@@ -30,3 +31,12 @@ class ResetPasswordSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'token', 'password',)
         extra_kwargs = {'password': {'write_only': True}}
+
+
+class NestedSerializer(serializers.Serializer):
+    nb_test = serializers.IntegerField(default=0, required=False)
+    liste_codes = serializers.ListField(child=serializers.CharField())
+
+
+class CustomAuthTokenSerializer(AuthTokenSerializer):
+    nested = NestedSerializer(many=True)
