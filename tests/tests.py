@@ -39,7 +39,7 @@ class DRFDocsViewTests(TestCase):
         self.assertTrue(response.context["endpoints"][1].fields[0]["required"])
 
         # The view "OrganisationErroredView" (organisations/(?P<slug>[\w-]+)/errored/) should contain an error.
-        self.assertEqual(str(response.context["endpoints"][9].errors), "'test_value'")
+        self.assertEqual(str(response.context["endpoints"][7].errors), "'test_value'")
 
     def test_index_search_with_endpoints(self):
         response = self.client.get("%s?search=reset-password" % reverse("drfdocs"))
@@ -81,7 +81,7 @@ class DRFDocsViewTests(TestCase):
         self.assertEqual(len(response.context["endpoints"]), 3)
 
         # The view "OrganisationErroredView" (organisations/(?P<slug>[\w-]+)/errored/) should contain an error.
-        self.assertEqual(str(response.context["endpoints"][2].errors), "'test_value'")
+        self.assertEqual(str(response.context["endpoints"][0].errors), "'test_value'")
 
         # Test 'members' namespace
         response = self.client.get(reverse('drfdocs-filter', args=['members']))

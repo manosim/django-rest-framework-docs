@@ -3,6 +3,7 @@ import inspect
 from django.contrib.admindocs.views import simplify_regex
 from rest_framework import serializers
 from rest_framework.viewsets import ModelViewSet
+from rest_framework_docs import SERIALIZER_FIELDS
 
 
 class ApiEndpoint(object):
@@ -25,6 +26,7 @@ class ApiEndpoint(object):
         self.path = self.__get_path__(parent_pattern)
         self.allowed_methods = self.__get_allowed_methods__()
         self.errors = None
+        self.nb_recurse = 0
         self.fields = self.__get_serializer_fields__()
         self.fields_json = self.__get_serializer_fields_json__()
         self.permissions = self.__get_permissions_class__()
@@ -62,6 +64,8 @@ class ApiEndpoint(object):
         return fields
 
     def __get_fields__(self, serializer):
+        if serializer in SERIALIZER_FIELDS:
+            return SERIALIZER_FIELDS.get(serializer)
         fields = []
         for key, field in serializer().get_fields().items():
             item = dict(
@@ -77,6 +81,7 @@ class ApiEndpoint(object):
             elif isinstance(field, serializers.Serializer):
                 item['fields'] = self.__get_fields__(field.__class__)
             fields.append(item)
+        SERIALIZER_FIELDS[serializer] = fields
         return fields
 
     def __get_serializer_fields_json__(self):

@@ -2,6 +2,8 @@ from operator import attrgetter
 from django.conf import settings
 from django.core.urlresolvers import RegexURLResolver, RegexURLPattern
 from rest_framework.views import APIView
+
+from rest_framework_docs import SERIALIZER_FIELDS
 from rest_framework_docs.api_endpoint import ApiEndpoint
 
 
@@ -11,6 +13,7 @@ class ApiDocumentation(object):
         """
         :param filter_param: namespace or app_name
         """
+        SERIALIZER_FIELDS.clear()
         self.endpoints = []
         root_urlconf = __import__(settings.ROOT_URLCONF)
         if hasattr(root_urlconf, 'urls'):
@@ -32,4 +35,4 @@ class ApiDocumentation(object):
         return hasattr(pattern.callback, 'cls') and issubclass(pattern.callback.cls, APIView)
 
     def get_endpoints(self):
-        return sorted(self.endpoints, key=attrgetter('name'))
+        return sorted(self.endpoints, key=attrgetter('name', 'path'))
