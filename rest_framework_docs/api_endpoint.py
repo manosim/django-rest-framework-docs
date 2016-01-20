@@ -75,7 +75,7 @@ class ApiEndpoint(object):
                 if isinstance(sub_type(), serializers.Serializer):
                     item['fields'] = self.__get_fields__(sub_type)
             elif isinstance(field, serializers.Serializer):
-                item['fields'] = self.__get_fields__(field)
+                item['fields'] = self.__get_fields__(field.__class__)
             fields.append(item)
         return fields
 
