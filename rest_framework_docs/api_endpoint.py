@@ -2,6 +2,12 @@ import json
 import inspect
 from django.contrib.admindocs.views import simplify_regex
 from django.utils.encoding import force_str
+from rest_framework.viewsets import ModelViewSet
+
+VIEWSET_METHODS = {
+    'List': ['get', 'post'],
+    'Instance': ['get', 'put', 'patch', 'delete'],
+}
 
 
 class ApiEndpoint(object):
@@ -25,8 +31,14 @@ class ApiEndpoint(object):
             return "/{0}{1}".format(self.name_parent, simplify_regex(self.pattern.regex.pattern))
         return simplify_regex(self.pattern.regex.pattern)
 
+    def is_method_allowed(self, method_name, callback_cls):
+        return hasattr(callback_cls, method_name) or (
+            issubclass(callback_cls, ModelViewSet) and method_name in VIEWSET_METHODS.get(self.callback.suffix, [])
+        )
+
     def __get_allowed_methods__(self):
-        return [force_str(m).upper() for m in self.callback.cls.http_method_names if hasattr(self.callback.cls, m)]
+        callback_cls = self.callback.cls
+        return sorted([force_str(name).upper() for name in callback_cls.http_method_names if self.is_method_allowed(name, callback_cls)])
 
     def __get_docstring__(self):
         return inspect.getdoc(self.callback)
