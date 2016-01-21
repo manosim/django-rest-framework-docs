@@ -6,6 +6,12 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework_docs import SERIALIZER_FIELDS
 
 
+VIEWSET_METHODS = {
+    'List': ['get', 'post'],
+    'Instance': ['get', 'put', 'patch', 'delete'],
+}
+
+
 class ApiEndpoint(object):
 
     def __init__(self, pattern, parent_pattern=None):
@@ -37,7 +43,9 @@ class ApiEndpoint(object):
         return simplify_regex(self.pattern.regex.pattern)
 
     def __get_allowed_methods__(self):
-        return [m.upper() for m in self.callback.cls.http_method_names if hasattr(self.callback.cls, m)]
+        callback_cls = self.callback.cls
+        return [m.upper() for m in callback_cls.http_method_names if hasattr(callback_cls, m) or
+                (issubclass(callback_cls, ModelViewSet) and m in VIEWSET_METHODS.get(self.callback.suffix))]
 
     def __get_docstring__(self):
         return inspect.getdoc(self.callback)
