@@ -1,8 +1,8 @@
-# [Django Rest Framework Docs](http://www.drfdocs.com/) [![travis][travis-image]][travis-url] [![codecov][codecov-image]][codecov-url] [![pypi][pypi-image]][pypi-url]
+# [DRF Docs](http://www.drfdocs.com/) [![travis][travis-image]][travis-url] [![codecov][codecov-image]][codecov-url] [![pypi][pypi-image]][pypi-url]
 
 Document Web APIs made with Django Rest Framework. [View Demo](http://demo.drfdocs.com/)
 
-![DRFdocs](http://drfdocs.com/static/images/mockup.png)
+![DRFdocs](https://cloud.githubusercontent.com/assets/6333409/12533070/99e4818a-c21c-11e5-80a3-07ff4f0c7841.png)
 
 ### Supports
 
@@ -16,6 +16,7 @@ Document Web APIs made with Django Rest Framework. [View Demo](http://demo.drfdo
   - [Installation](http://drfdocs.com/docs/installation/)
   - [Settings](http://drfdocs.com/docs/settings/)
   - [Extending the template](http://drfdocs.com/docs/templates/)
+  - [Live API Endpoints](http://drfdocs.com/docs/live-api/)
   - [Contributing & Development](http://drfdocs.com/docs/contributing/)
   - [Changelog](http://drfdocs.com/docs/changelog/)
 
