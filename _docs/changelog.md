@@ -1,8 +1,14 @@
 ---
 title:  "Changelog"
 source_filename: "changelog"
-order: 5
+order: 8
 ---
+
+### Release 0.0.6
+
+  - Introducing Live API Endpoints - Test your endpoints from within the docs
+  - Setting `HIDDEN` is now `HIDE_DOCS`
+
 
 ### Release 0.0.5
 

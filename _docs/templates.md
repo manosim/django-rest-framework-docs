@@ -1,7 +1,7 @@
 ---
 title:  "Template Customization"
 source_filename: "templates"
-order: 4
+order: 6
 ---
 
 ### Create the template file
