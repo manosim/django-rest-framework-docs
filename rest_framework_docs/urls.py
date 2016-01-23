@@ -6,5 +6,5 @@ urlpatterns = [
     url(r'^$', DRFDocsView.as_view(), name='drfdocs'),
 
     # Url to view the API Docs with a specific namespace or app_name
-    url(r'^(?P<parent_app>[\w-]+)/$', DRFDocsView.as_view(), name='drfdocs-filter'),
+    url(r'^(?P<filter_app>[\w-]+)/$', DRFDocsView.as_view(), name='drfdocs-filter'),
 ]

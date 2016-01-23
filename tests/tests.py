@@ -19,7 +19,7 @@ class DRFDocsViewTests(TestCase):
         self.assertEqual(settings.get_setting("HIDE_DOCS"), False)
         self.assertEqual(settings.get_setting("TEST"), None)
 
-    def test_index_view_with_endpoints(self):
+    def test_docs_home_view_with_endpoints(self):
         """
         Should load the drf focs view with all the endpoints.
         NOTE: Views that do **not** inherit from DRF's "APIView" are not included.
@@ -67,6 +67,7 @@ class DRFDocsViewTests(TestCase):
         """
         # Test 'accounts' namespace
         response = self.client.get(reverse('drfdocs-filter', args=['accounts']))
+        # response = self.client.get(reverse('drfdocs-filter', kwargs={'parent_app': 'accountss'}))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context["endpoints"]), 5)
 
@@ -119,8 +120,7 @@ class DRFDocsViewTests(TestCase):
 
     def test_index_view_with_non_existent_namespace_or_app_name(self):
         """
-        Should load the drf docs view with no endpoint.
+        Should raise a 404 if there is no such app name like the param.
         """
         response = self.client.get(reverse('drfdocs-filter', args=['non-existent-ns-or-app-name']))
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.context["endpoints"]), 0)
+        self.assertEqual(response.status_code, 404)
