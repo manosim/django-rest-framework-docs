@@ -10,7 +10,7 @@ Django REST Framework Docs (DRF Docs) allows you to list all your API Endpoints 
 
 <h4>How It Works</h4>
 
-<img class="img-responsive" src="static/images/mockup.png" alt="Mock Up" />
+<img class="img-responsive" src="static/images/docs.png" alt="Mock Up" />
 
 The concept is pretty simple. Once you [install it](/docs/installation/) you should go the the url you set (ie. `http://0.0.0.0:8000/docs/`) and you should see all your API endpoints along with the serializer fields, allowed methods etc for each one.
 
