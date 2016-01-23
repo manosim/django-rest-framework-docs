@@ -1,6 +1,7 @@
 import json
 import inspect
 from django.contrib.admindocs.views import simplify_regex
+from rest_framework.viewsets import ModelViewSet
 
 
 class ApiEndpoint(object):
@@ -8,12 +9,21 @@ class ApiEndpoint(object):
     def __init__(self, pattern, parent_pattern=None):
         self.pattern = pattern
         self.callback = pattern.callback
-        # self.name = pattern.name
         self.docstring = self.__get_docstring__()
-        self.name_parent = simplify_regex(parent_pattern.regex.pattern).replace('/', '') if parent_pattern else None
+
+        if parent_pattern:
+            self.name_parent = parent_pattern.namespace or parent_pattern.app_name or \
+                simplify_regex(parent_pattern.regex.pattern).replace('/', '-')
+            self.name = self.name_parent
+            if hasattr(pattern.callback, 'cls') and issubclass(pattern.callback.cls, ModelViewSet):
+                self.name = '%s (REST)' % self.name_parent
+        else:
+            self.name_parent = ''
+            self.name = ''
+
+        self.labels = dict(parent=self.name_parent, name=self.name)
         self.path = self.__get_path__(parent_pattern)
         self.allowed_methods = self.__get_allowed_methods__()
-        # self.view_name = pattern.callback.__name__
         self.errors = None
         self.fields = self.__get_serializer_fields__()
         self.fields_json = self.__get_serializer_fields_json__()
@@ -21,7 +31,7 @@ class ApiEndpoint(object):
 
     def __get_path__(self, parent_pattern):
         if parent_pattern:
-            return "/{0}{1}".format(self.name_parent, simplify_regex(self.pattern.regex.pattern))
+            return simplify_regex(parent_pattern.regex.pattern + self.pattern.regex.pattern)
         return simplify_regex(self.pattern.regex.pattern)
 
     def __get_allowed_methods__(self):
