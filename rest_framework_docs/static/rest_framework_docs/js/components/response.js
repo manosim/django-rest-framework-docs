@@ -31,7 +31,7 @@ var Response = React.createClass({
     }
 
     var responseJSON = JSONpp.prettyPrint(this.state.payload.body);
-    var hasToken = this.state.payload.body.hasOwnProperty('token');
+    var hasToken = this.state.payload.body ? this.state.payload.body.hasOwnProperty('token') : false;
     var statusText = this.state.payload.statusText.toLowerCase();
     var statusCodeFirstChar = String(this.state.payload.status).charAt(0);
     var statusCodeClass = 'label status-code pull-right status-code-' + statusCodeFirstChar;
