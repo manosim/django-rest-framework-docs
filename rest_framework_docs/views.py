@@ -10,7 +10,7 @@ class DRFDocsView(TemplateView):
 
     def get_context_data(self, filter_param=None, **kwargs):
         settings = DRFSettings().settings
-        if settings["HIDDEN"]:
+        if settings["HIDE_DOCS"]:
             raise Http404("Django Rest Framework Docs are hidden. Check your settings.")
 
         context = super(DRFDocsView, self).get_context_data(**kwargs)
