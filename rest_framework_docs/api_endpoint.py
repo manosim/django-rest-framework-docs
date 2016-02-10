@@ -1,6 +1,7 @@
 import json
 import inspect
 from django.contrib.admindocs.views import simplify_regex
+from django.utils.encoding import force_str
 
 
 class ApiEndpoint(object):
@@ -25,7 +26,7 @@ class ApiEndpoint(object):
         return simplify_regex(self.pattern.regex.pattern)
 
     def __get_allowed_methods__(self):
-        return [m.upper() for m in self.callback.cls.http_method_names if hasattr(self.callback.cls, m)]
+        return [force_str(m).upper() for m in self.callback.cls.http_method_names if hasattr(self.callback.cls, m)]
 
     def __get_docstring__(self):
         return inspect.getdoc(self.callback)
