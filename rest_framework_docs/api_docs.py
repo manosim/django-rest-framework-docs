@@ -17,7 +17,8 @@ class ApiDocumentation(object):
     def get_all_view_names(self, urlpatterns, parent_pattern=None):
         for pattern in urlpatterns:
             if isinstance(pattern, RegexURLResolver):
-                self.get_all_view_names(urlpatterns=pattern.url_patterns, parent_pattern=pattern)
+                parent_pattern = None if pattern._regex == "^" else pattern
+                self.get_all_view_names(urlpatterns=pattern.url_patterns, parent_pattern=parent_pattern)
             elif isinstance(pattern, RegexURLPattern) and self._is_drf_view(pattern):
                 api_endpoint = ApiEndpoint(pattern, parent_pattern)
                 self.endpoints.append(api_endpoint)
