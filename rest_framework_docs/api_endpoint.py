@@ -1,6 +1,9 @@
 import json
 import inspect
+
 from django.contrib.admindocs.views import simplify_regex
+from django.utils.encoding import force_str
+
 from rest_framework import serializers
 from rest_framework.viewsets import ModelViewSet
 from rest_framework_docs import SERIALIZER_FIELDS
@@ -44,7 +47,7 @@ class ApiEndpoint(object):
 
     def __get_allowed_methods__(self):
         callback_cls = self.callback.cls
-        return sorted([m.upper() for m in callback_cls.http_method_names if hasattr(callback_cls, m) or
+        return sorted([force_str(m).upper() for m in callback_cls.http_method_names if hasattr(callback_cls, m) or
                        (issubclass(callback_cls, ModelViewSet) and m in VIEWSET_METHODS.get(self.callback.suffix))])
 
     def __get_docstring__(self):
