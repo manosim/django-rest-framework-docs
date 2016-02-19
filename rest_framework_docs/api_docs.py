@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.core.urlresolvers import RegexURLResolver, RegexURLPattern
+from django.utils.module_loading import import_string
 from rest_framework.views import APIView
 from rest_framework_docs.api_endpoint import ApiEndpoint
 
@@ -8,7 +9,7 @@ class ApiDocumentation(object):
 
     def __init__(self):
         self.endpoints = []
-        root_urlconf = __import__(settings.ROOT_URLCONF)
+        root_urlconf = import_string(settings.ROOT_URLCONF)
         if hasattr(root_urlconf, 'urls'):
             self.get_all_view_names(root_urlconf.urls.urlpatterns)
         else:
