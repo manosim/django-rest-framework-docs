@@ -2,7 +2,7 @@
 
 Document Web APIs made with Django Rest Framework. [View Demo](http://demo.drfdocs.com/)
 
-![DRFdocs](https://cloud.githubusercontent.com/assets/6333409/12533070/99e4818a-c21c-11e5-80a3-07ff4f0c7841.png)
+![DRFdocs](https://cloud.githubusercontent.com/assets/6333409/13193861/69e82aec-d778-11e5-95c4-77f4ef29e6e5.png)
 
 ### Supports
 
