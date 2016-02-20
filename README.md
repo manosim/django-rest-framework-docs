@@ -75,5 +75,5 @@ First of all thanks to the [Django](http://www.djangoproject.com/) core team and
 [codecov-image]: https://codecov.io/github/ekonstantinidis/django-rest-framework-docs/coverage.svg?branch=master
 [codecov-url]:https://codecov.io/github/ekonstantinidis/django-rest-framework-docs?branch=master
 
-[slack-image]: https://img.shields.io/badge/slack-python--dev/drfdocs-e01563.svg
+[slack-image]: https://img.shields.io/badge/slack-pythondev/drfdocs-e01563.svg
 [slack-url]: https://pythondev.slack.com
