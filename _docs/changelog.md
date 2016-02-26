@@ -4,6 +4,13 @@ source_filename: "changelog"
 order: 8
 ---
 
+### Release 0.0.7
+
+  - Fix methods in Live API Endpoints (now compatible with Python 2.7)
+  - Remove `.<format>` from urls
+  - Fixed a bug that removes double slashes from the endpoint's url
+
+
 ### Release 0.0.6
 
   - Introducing Live API Endpoints - Test your endpoints from within the docs
