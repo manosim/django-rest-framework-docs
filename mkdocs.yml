@@ -1,0 +1,12 @@
+site_name: DRF Docs
+
+pages:
+- Home: index.md
+- Changelog: changelog.md
+- Contributing: contributing.md
+- Installation: installation.md
+- Live API Endpoints: live-api.md
+- Settings: settings.md
+- Templates: templates.md
+
+theme: flatly
