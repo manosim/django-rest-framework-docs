@@ -9,5 +9,7 @@ demo/db.sqlite3
 dist/
 drfdocs.egg-info/
 
+site/
+
 rest_framework_docs/static/node_modules/
 rest_framework_docs/static/rest_framework_docs/js/dist.min.js.map
