@@ -1,7 +1,6 @@
 ---
 title:  "Changelog"
 source_filename: "changelog"
-order: 8
 ---
 
 ### Release 0.0.7

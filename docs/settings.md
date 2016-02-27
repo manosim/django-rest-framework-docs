@@ -1,7 +1,6 @@
 ---
 title:  "Settings"
 source_filename: "settings"
-order: 4
 ---
 
 ### How to set the settings
