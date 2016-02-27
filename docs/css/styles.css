@@ -16,10 +16,8 @@ body {
   float: right;
 }
 
-.thanks .img-responsive {
-  display: inline-block;
-  max-width: 145px;
-  margin: 10px auto;
+.side-nav {
+  margin-top: 0;
 }
 
 /* @end Misc */

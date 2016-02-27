@@ -1,7 +1,6 @@
 ---
 title:  "Installation"
 source_filename: "installation"
-order: 2
 ---
 
 The installation itself should not take more than a couple of minutes. Follow the simple steps below.

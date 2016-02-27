@@ -6,4 +6,7 @@
 </div>
 {% endif %}
 
-{{ content }}
+<div class="page">
+  {% if page_title %}<h1 class="page-title">{{ page_title }}</h1>{% endif %}
+  {{ content }}
+</div>

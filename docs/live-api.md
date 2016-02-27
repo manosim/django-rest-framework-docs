@@ -1,7 +1,6 @@
 ---
 title:  "Live API Endpoints"
 source_filename: "live-api"
-order: 5
 ---
 
 ### What is "Live API Endpoints"?

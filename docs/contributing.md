@@ -1,7 +1,6 @@
 ---
 title:  "Contributing & Development"
 source_filename: "contributing"
-order: 7
 ---
 
 ### Development
