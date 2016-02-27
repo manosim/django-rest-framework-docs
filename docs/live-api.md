@@ -9,6 +9,6 @@ Live API Endpoints allow you to test your endpoints from within DRF docs. For ea
 
 It is still in **beta** so if you face any problems - feel free to open an issue/pull request on GitHub.
 
-<img class="img-responsive" src="images/live-api.png" alt="Live API Endpoints" />
+<img class="img-responsive" src="/images/live-api.png" alt="Live API Endpoints" />
 
 The Live API is made with **[React](https://facebook.github.io/react/)**. For more information on how to hack on them, check the README of the repository.
