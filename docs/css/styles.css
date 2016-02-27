@@ -43,13 +43,13 @@ body {
 /* @end Header */
 
 
-/* @group Doc Page */
+/* @group Content Page */
 
-.doc .doc-title {
+.page .page-title {
   margin-top: 0;
 }
 
-/* @end Doc Page */
+/* @end Content Page */
 
 
 /* @group Footer */
