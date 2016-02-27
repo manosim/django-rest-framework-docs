@@ -1,12 +1,21 @@
 site_name: DRF Docs
+site_description:
+site_author:
+site_favicon:
 
 pages:
 - Home: index.md
-- Changelog: changelog.md
-- Contributing: contributing.md
 - Installation: installation.md
-- Live API Endpoints: live-api.md
 - Settings: settings.md
+- Live API Endpoints: live-api.md
 - Templates: templates.md
+- Contributing: contributing.md
+- Changelog: changelog.md
 
-theme: flatly
+theme_dir: 'docs/template'
+extra_css:
+    - css/styles.css
+
+copyright: Copyright © 2015 Emmanouil Konstantinidis.
+google_analytics: ['UA-71505240-1', 'drfdocs.com']
+repo_url: https://github.com/ekonstantinidis/django-rest-framework-docs
