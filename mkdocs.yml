@@ -15,6 +15,8 @@ pages:
 theme_dir: 'docs/template'
 extra_css:
     - css/styles.css
+extra_javascript:
+    - js/index.js
 
 copyright: Copyright © 2015 Emmanouil Konstantinidis.
 google_analytics: ['UA-71505240-1', 'drfdocs.com']

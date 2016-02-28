@@ -5,7 +5,7 @@ source_filename: "installation"
 
 The installation itself should not take more than a couple of minutes. Follow the simple steps below.
 
-Install using pip:
+### Install from PyPI
 
     pip install drfdocs
 
