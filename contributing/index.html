@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        
+
+	<title>Contributing - DRF Docs</title>
+
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+        <link href="../css/base.css" rel="stylesheet">
+        <link href="../css/styles.css" rel="stylesheet">
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-71505240-1', 'drfdocs.com');
+            ga('send', 'pageview');
+        </script>
+        
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="..">DRF Docs</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="https://github.com/ekonstantinidis/django-rest-framework-docs">
+                        
+                            <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container-fluid header">
+  <div class="container">
+    <div class="jumbotron">
+      <h1><img class="img-responsive logo-badge" src="../images/logo-badge.png" alt="DRF Docs Badge" /></h1>
+      <a target="_blank" href="https://pypi.python.org/pypi/drfdocs/"><img class="img-responsive" src="https://badge.fury.io/py/drfdocs.svg" alt="PyPI version" height="18"></a>
+      <h3>Document Web APIs made with <a href="http://www.django-rest-framework.org/" target="_blank">Django REST Framework</a>.</h3>
+    </div>
+  </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print well" role="complementary">
+    <ul class="nav bs-sidenav side-nav">
+    
+
+        <li >
+            <a href="..">Home</a>
+
+            <!-- TOC -->
+            
+
+        </li>
+
+    
+
+        <li >
+            <a href="../installation/">Installation</a>
+
+            <!-- TOC -->
+            
+
+        </li>
+
+    
+
+        <li >
+            <a href="../settings/">Settings</a>
+
+            <!-- TOC -->
+            
+
+        </li>
+
+    
+
+        <li >
+            <a href="../live-api/">Live API Endpoints</a>
+
+            <!-- TOC -->
+            
+
+        </li>
+
+    
+
+        <li >
+            <a href="../templates/">Templates</a>
+
+            <!-- TOC -->
+            
+
+        </li>
+
+    
+
+        <li class="active">
+            <a href="./">Contributing</a>
+
+            <!-- TOC -->
+            
+            <ul class="nav pills">
+            
+                <li class="main active"><a href="#development">Development</a></li>
+                
+            
+                <li class="main "><a href="#contributing-to-the-project">Contributing to the project</a></li>
+                
+            
+                <li class="main "><a href="#code-of-conduct">Code of Conduct</a></li>
+                
+            
+            </ul>
+            
+
+        </li>
+
+    
+
+        <li >
+            <a href="../changelog/">Changelog</a>
+
+            <!-- TOC -->
+            
+
+        </li>
+
+    
+
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<div class="page">
+  <h1 class="page-title">Contributing</h1>
+  <h3 id="development">Development</h3>
+<p>If you want to <strong>use the demo</strong> app to work on this package:</p>
+<p>In the project <a href="https://github.com/ekonstantinidis/django-rest-framework-docs">repository</a> you can find the demo app(at /demo). It is a project with Django &amp; Django Rest Framework that will allow you to work with this project.</p>
+<p>From the root of the repository:</p>
+<pre><code># Create the virtual environment
+pyvenv env
+
+# Install requirements
+env/bin/pip install -r requirements.txt
+
+# Activate the environment
+source env/bin/activate
+
+# Cd Into the demo
+cd demo/
+
+# Install Django Rest Framework Docs
+pip install -e ../
+
+# Run the project
+python manage.py runserver
+</code></pre>
+<p>Note: You do not need a database or to run migrate.</p>
+<p>If you are looking to develop this package with one of your <strong>own django projects</strong>:</p>
+<pre><code>pyvenv env
+env/bin/pip install -r requirements.txt
+pip install -e ~/Projects/drf-docs/
+</code></pre>
+<h3 id="contributing-to-the-project">Contributing to the project</h3>
+<ol>
+<li>Fork it!</li>
+<li>Create your feature branch: <code>git checkout -b my-new-feature</code></li>
+<li>Commit your changes: <code>git commit -am 'Add some feature'</code></li>
+<li>Push to the branch: <code>git push origin my-new-feature</code></li>
+<li>Submit a pull request</li>
+<li>Make sure tests are passing</li>
+</ol>
+<h3 id="code-of-conduct">Code of Conduct</h3>
+<p>As contributors and maintainers of this project, and in the interest of
+fostering an open and welcoming community, we pledge to respect all people who
+contribute through reporting issues, posting feature requests, updating
+documentation, submitting pull requests or patches, and other activities.</p>
+<p>We are committed to making participation in this project a harassment-free
+experience for everyone, regardless of level of experience, gender, gender
+identity and expression, sexual orientation, disability, personal appearance,
+body size, race, ethnicity, age, religion, or nationality.</p>
+<p>Examples of unacceptable behavior by participants include:</p>
+<ul>
+<li>The use of sexualized language or imagery</li>
+<li>Personal attacks</li>
+<li>Trolling or insulting/derogatory comments</li>
+<li>Public or private harassment</li>
+<li>Publishing other's private information, such as physical or electronic
+  addresses, without explicit permission</li>
+<li>Other unethical or unprofessional conduct</li>
+</ul>
+<p>Project maintainers have the right and responsibility to remove, edit, or
+reject comments, commits, code, wiki edits, issues, and other contributions
+that are not aligned to this Code of Conduct, or to ban temporarily or
+permanently any contributor for other behaviors that they deem inappropriate,
+threatening, offensive, or harmful.</p>
+<p>By adopting this Code of Conduct, project maintainers commit themselves to
+fairly and consistently applying these principles to every aspect of managing
+this project. Project maintainers who do not follow or enforce the Code of
+Conduct may be permanently removed from the project team.</p>
+<p>This Code of Conduct applies both within project spaces and in public spaces
+when an individual is representing the project or its community.</p>
+<p>Instances of abusive, harassing, or otherwise unacceptable behavior may be
+reported by contacting a project maintainer at manos@iamemmanouil.com. All
+complaints will be reviewed and investigated and will result in a response that
+is deemed necessary and appropriate to the circumstances. Maintainers are
+obligated to maintain confidentiality with regard to the reporter of an
+incident.</p>
+<p>This Code of Conduct is adapted from the <a href="http://contributor-covenant.org">Contributor Covenant</a>,
+version 1.3.0, available at
+<a href="http://contributor-covenant.org/version/1/3/0/">http://contributor-covenant.org/version/1/3/0/</a></p>
+</div></div>
+        </div>
+
+        <footer class="col-md-12 footer">
+          <div class="links">
+            <a href="http://www.iamemmanouil.com"><i class="fa fa-link"></i></a>
+            <a href="http://www.github.com/ekonstantinidis"><i class="fa fa-github"></i></a>
+            <a href="http://www.twitter.com/iamemmanouil"><i class="fa fa-twitter"></i></a>
+          </div>
+          
+              <center>Copyright © 2015 Emmanouil Konstantinidis.</center>
+          
+          <div>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</div>
+        </footer>
+
+
+        <script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script>
+        <script>var base_url = '..';</script>
+        <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+        <script src="../js/base.js"></script>
+        <script src="../template/js/base.js"></script>
+        <script src="../template/js/bootstrap-3.0.3.min.js"></script>
+        <script src="../template/js/highlight.pack.js"></script>
+        <script src="../template/js/jquery-1.10.2.min.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            From here you can search these documents. Enter
+                            your search terms below.
+                        </p>
+                        <form role="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                            </div>
+                        </form>
+                        <div id="mkdocs-search-results"></div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

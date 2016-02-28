@@ -1,0 +1,169 @@
+{
+    "docs": [
+        {
+            "location": "/",
+            "text": "Django REST Framework Docs (DRF Docs) allows you to list all your API Endpoints that inherit from \nDjango REST Framework\n \nautomatically\n. Its purpose is to work out of the box and it should take a minimum to install it.\n\n\n Visit the Demo\n\n\nLive API Endpoints\n\n\nA really useful feature of DRF Docs is that you can also test endpoints from within the docs. Feel free to use our demo and try them! For more information visit the \nLive API Endpoints\n page of the docs.\n\n\n\n\nHow It Works\n\n\nThe concept is pretty simple. Once you \ninstall it\n you should go the the url you set (ie. \nhttp://0.0.0.0:8000/docs/\n) and you should see all your API endpoints along with the serializer fields, allowed methods etc for each one.\n\n\nDRF Docs will then read all your \nurls\n and will list those that inherit from Django REST Framework's \nAPIView\n.",
+            "title": "Home"
+        },
+        {
+            "location": "/#live-api-endpoints",
+            "text": "A really useful feature of DRF Docs is that you can also test endpoints from within the docs. Feel free to use our demo and try them! For more information visit the  Live API Endpoints  page of the docs.",
+            "title": "Live API Endpoints"
+        },
+        {
+            "location": "/#how-it-works",
+            "text": "The concept is pretty simple. Once you  install it  you should go the the url you set (ie.  http://0.0.0.0:8000/docs/ ) and you should see all your API endpoints along with the serializer fields, allowed methods etc for each one.  DRF Docs will then read all your  urls  and will list those that inherit from Django REST Framework's  APIView .",
+            "title": "How It Works"
+        },
+        {
+            "location": "/installation/",
+            "text": "The installation itself should not take more than a couple of minutes. Follow the simple steps below.\n\n\nInstall using pip:\n\n\npip install drfdocs\n\n\n\nAdd 'rest_framework_docs' to your \nINSTALLED_APPS\n setting:\n\n\nINSTALLED_APPS = (\n    ...\n    'rest_framework_docs',\n)\n\n\n\nFinally include the \nrest_framework_docs\n urls in your \nurls.py\n:\n\n\nurlpatterns = [\n    ...\n    url(r'^docs/', include('rest_framework_docs.urls')),\n]\n\n\n\nYou can now visit \nhttp://0.0.0.0:/8000/docs/\n to view your Web API's docs.",
+            "title": "Installation"
+        },
+        {
+            "location": "/settings/",
+            "text": "How to set the settings\n\n\nTo set DRF docs' settings just include the dictionary below in Django's \nsettings.py\n file.\n\n\nREST_FRAMEWORK_DOCS = {\n    'HIDE_DOCS': True\n}\n\n\n\nSettings Description\n\n\nHIDDEN\n\n\nYou can use hidden to prevent your docs from showing up in different environments (ie. Show in development, hide in production). To do so you can use environment variables.\n\n\nREST_FRAMEWORK_DOCS = {\n    'HIDE_DOCS': os.environ.get('SHOW_DRFDOCS', False)\n}\n\n\n\nThen set the value of the environment variable \nSHOW_DRFDOCS\n for each environment (ie. Use \n.env\n files)\n\n\nList of Settings\n\n\n{:.table .table-striped}\n| Setting | Type    | Options         | Default |\n|---------|---------|-----------------|---------|\n|HIDE_DOCS| Boolean | \nTrue\n, \nFalse\n | \nFalse\n |\n|         |         |                 |         |",
+            "title": "Settings"
+        },
+        {
+            "location": "/settings/#how-to-set-the-settings",
+            "text": "To set DRF docs' settings just include the dictionary below in Django's  settings.py  file.  REST_FRAMEWORK_DOCS = {\n    'HIDE_DOCS': True\n}",
+            "title": "How to set the settings"
+        },
+        {
+            "location": "/settings/#settings-description",
+            "text": "",
+            "title": "Settings Description"
+        },
+        {
+            "location": "/settings/#hidden",
+            "text": "You can use hidden to prevent your docs from showing up in different environments (ie. Show in development, hide in production). To do so you can use environment variables.  REST_FRAMEWORK_DOCS = {\n    'HIDE_DOCS': os.environ.get('SHOW_DRFDOCS', False)\n}  Then set the value of the environment variable  SHOW_DRFDOCS  for each environment (ie. Use  .env  files)",
+            "title": "HIDDEN"
+        },
+        {
+            "location": "/settings/#list-of-settings",
+            "text": "{:.table .table-striped}\n| Setting | Type    | Options         | Default |\n|---------|---------|-----------------|---------|\n|HIDE_DOCS| Boolean |  True ,  False  |  False  |\n|         |         |                 |         |",
+            "title": "List of Settings"
+        },
+        {
+            "location": "/live-api/",
+            "text": "What is \"Live API Endpoints\"?\n\n\nLive API Endpoints allow you to test your endpoints from within DRF docs. For each endpoints you can press the little \nplug\n icon which will bring up a modal with all the endpoint's fields and all the relevant information so that you can make a request instantly.\n\n\nIt is still in \nbeta\n so if you face any problems - feel free to open an issue/pull request on GitHub.\n\n\n\n\nThe Live API is made with \nReact\n. For more information on how to hack on them, check the README of the repository.",
+            "title": "Live API Endpoints"
+        },
+        {
+            "location": "/live-api/#what-is-live-api-endpoints",
+            "text": "Live API Endpoints allow you to test your endpoints from within DRF docs. For each endpoints you can press the little  plug  icon which will bring up a modal with all the endpoint's fields and all the relevant information so that you can make a request instantly.  It is still in  beta  so if you face any problems - feel free to open an issue/pull request on GitHub.   The Live API is made with  React . For more information on how to hack on them, check the README of the repository.",
+            "title": "What is \"Live API Endpoints\"?"
+        },
+        {
+            "location": "/templates/",
+            "text": "Create the template file\n\n\nTo edit the template you will have to create a \n.html\n file to override the original one. Inside your \ntemplates\n directory create a directory named \nrest_framework_docs\n and inside this create the file \ndocs.html\n. You can then extend/override the default template.\n\n\n{% raw %}\n{% extends \"rest_framework_docs/base.html\" %}\n{% endraw %}\n\n\n\nDefault Blocks\n\n\nStyles (CSS)\n\n\n{% raw %}\n{% block style %}\n<link rel=\"stylesheet\" href=\"{% static \"path/to/custom/css/style.css\" %}\">\n{% endblock %}\n{% endraw %}\n\n\n\nGitHub Badge\n\n\nTo hide the GitHub badge from the page, just override it with an empty block.\n\n\n{% raw %}{% block github_badge %}{% endblock %}{% endraw %}\n\n\n\nTitle\n\n\n{% raw %}{% block title %}Project Name{% endblock %}{% endraw %}\n\n\n\nLogo\n\n\n{% raw %}\n{% block logo %}\n  <a class=\"navbar-brand\" href=\"http://www.drfdocs.com/\">DRF Docs</a>\n{% endblock %}\n{% endraw %}\n\n\n\nJumbotron\n\n\n{% raw %}\n{% block jumbotron %}\n<div class=\"jumbotron\">\n  <h1>Project Title</h1>\n  <h3>Documentantion of the project 'Example'.</h3>\n</div>\n{% endblock %}\n{% endraw %}\n\n\n\nFooter\n\n\n{% raw %}\n{% block footer %}\n  <div class=\"footer\">\n    <div class=\"links\">\n      <a href=\"http://www.iamemmanouil.com\"><i class=\"fa fa-link\"></i></a>\n      <a href=\"http://www.github.com/ekonstantinidis\"><i class=\"fa fa-github\"></i></a>\n      <a href=\"http://www.twitter.com/iamemmanouil\"><i class=\"fa fa-twitter\"></i></a>\n    </div>\n    Copyright \u00a9 2015 Emmanouil Konstantinidis.\n  </div>\n{% endblock %}\n{% endraw %}\n\n\n\nComplete Example\n\n\nFile location: \ntemplates/rest_framework_docs/docs.html\n\n\n{% raw %}\n{% extends \"rest_framework_docs/base.html\" %}\n\n{% block title %}Project Name{% endblock %}\n{% block logo %}<a class=\"navbar-brand\" href=\"#\"\">Project Name API Documentation</a>{% endblock %}\n\n{% block jumbotron %}\n<div class=\"jumbotron\">\n  <h1>'Project Name' Web API</h1>\n  <h3>Documentantion of the 'Project Name' Web API.</h3>\n</div>\n{% endblock %}\n\n{% block footer %}<div class=\"footer\">Copyright \u00a9 2015 Project Name.</div>{% endblock %}\n\n{% endraw %}",
+            "title": "Templates"
+        },
+        {
+            "location": "/templates/#create-the-template-file",
+            "text": "To edit the template you will have to create a  .html  file to override the original one. Inside your  templates  directory create a directory named  rest_framework_docs  and inside this create the file  docs.html . You can then extend/override the default template.  {% raw %}\n{% extends \"rest_framework_docs/base.html\" %}\n{% endraw %}",
+            "title": "Create the template file"
+        },
+        {
+            "location": "/templates/#default-blocks",
+            "text": "",
+            "title": "Default Blocks"
+        },
+        {
+            "location": "/templates/#styles-css",
+            "text": "{% raw %}\n{% block style %}\n<link rel=\"stylesheet\" href=\"{% static \"path/to/custom/css/style.css\" %}\">\n{% endblock %}\n{% endraw %}",
+            "title": "Styles (CSS)"
+        },
+        {
+            "location": "/templates/#github-badge",
+            "text": "To hide the GitHub badge from the page, just override it with an empty block.  {% raw %}{% block github_badge %}{% endblock %}{% endraw %}",
+            "title": "GitHub Badge"
+        },
+        {
+            "location": "/templates/#title",
+            "text": "{% raw %}{% block title %}Project Name{% endblock %}{% endraw %}",
+            "title": "Title"
+        },
+        {
+            "location": "/templates/#logo",
+            "text": "{% raw %}\n{% block logo %}\n  <a class=\"navbar-brand\" href=\"http://www.drfdocs.com/\">DRF Docs</a>\n{% endblock %}\n{% endraw %}",
+            "title": "Logo"
+        },
+        {
+            "location": "/templates/#jumbotron",
+            "text": "{% raw %}\n{% block jumbotron %}\n<div class=\"jumbotron\">\n  <h1>Project Title</h1>\n  <h3>Documentantion of the project 'Example'.</h3>\n</div>\n{% endblock %}\n{% endraw %}",
+            "title": "Jumbotron"
+        },
+        {
+            "location": "/templates/#footer",
+            "text": "{% raw %}\n{% block footer %}\n  <div class=\"footer\">\n    <div class=\"links\">\n      <a href=\"http://www.iamemmanouil.com\"><i class=\"fa fa-link\"></i></a>\n      <a href=\"http://www.github.com/ekonstantinidis\"><i class=\"fa fa-github\"></i></a>\n      <a href=\"http://www.twitter.com/iamemmanouil\"><i class=\"fa fa-twitter\"></i></a>\n    </div>\n    Copyright \u00a9 2015 Emmanouil Konstantinidis.\n  </div>\n{% endblock %}\n{% endraw %}",
+            "title": "Footer"
+        },
+        {
+            "location": "/templates/#complete-example",
+            "text": "File location:  templates/rest_framework_docs/docs.html  {% raw %}\n{% extends \"rest_framework_docs/base.html\" %}\n\n{% block title %}Project Name{% endblock %}\n{% block logo %}<a class=\"navbar-brand\" href=\"#\"\">Project Name API Documentation</a>{% endblock %}\n\n{% block jumbotron %}\n<div class=\"jumbotron\">\n  <h1>'Project Name' Web API</h1>\n  <h3>Documentantion of the 'Project Name' Web API.</h3>\n</div>\n{% endblock %}\n\n{% block footer %}<div class=\"footer\">Copyright \u00a9 2015 Project Name.</div>{% endblock %}\n\n{% endraw %}",
+            "title": "Complete Example"
+        },
+        {
+            "location": "/contributing/",
+            "text": "Development\n\n\nIf you want to \nuse the demo\n app to work on this package:\n\n\nIn the project \nrepository\n you can find the demo app(at /demo). It is a project with Django & Django Rest Framework that will allow you to work with this project.\n\n\nFrom the root of the repository:\n\n\n# Create the virtual environment\npyvenv env\n\n# Install requirements\nenv/bin/pip install -r requirements.txt\n\n# Activate the environment\nsource env/bin/activate\n\n# Cd Into the demo\ncd demo/\n\n# Install Django Rest Framework Docs\npip install -e ../\n\n# Run the project\npython manage.py runserver\n\n\n\nNote: You do not need a database or to run migrate.\n\n\nIf you are looking to develop this package with one of your \nown django projects\n:\n\n\npyvenv env\nenv/bin/pip install -r requirements.txt\npip install -e ~/Projects/drf-docs/\n\n\n\nContributing to the project\n\n\n\n\nFork it!\n\n\nCreate your feature branch: \ngit checkout -b my-new-feature\n\n\nCommit your changes: \ngit commit -am 'Add some feature'\n\n\nPush to the branch: \ngit push origin my-new-feature\n\n\nSubmit a pull request\n\n\nMake sure tests are passing\n\n\n\n\nCode of Conduct\n\n\nAs contributors and maintainers of this project, and in the interest of\nfostering an open and welcoming community, we pledge to respect all people who\ncontribute through reporting issues, posting feature requests, updating\ndocumentation, submitting pull requests or patches, and other activities.\n\n\nWe are committed to making participation in this project a harassment-free\nexperience for everyone, regardless of level of experience, gender, gender\nidentity and expression, sexual orientation, disability, personal appearance,\nbody size, race, ethnicity, age, religion, or nationality.\n\n\nExamples of unacceptable behavior by participants include:\n\n\n\n\nThe use of sexualized language or imagery\n\n\nPersonal attacks\n\n\nTrolling or insulting/derogatory comments\n\n\nPublic or private harassment\n\n\nPublishing other's private information, such as physical or electronic\n  addresses, without explicit permission\n\n\nOther unethical or unprofessional conduct\n\n\n\n\nProject maintainers have the right and responsibility to remove, edit, or\nreject comments, commits, code, wiki edits, issues, and other contributions\nthat are not aligned to this Code of Conduct, or to ban temporarily or\npermanently any contributor for other behaviors that they deem inappropriate,\nthreatening, offensive, or harmful.\n\n\nBy adopting this Code of Conduct, project maintainers commit themselves to\nfairly and consistently applying these principles to every aspect of managing\nthis project. Project maintainers who do not follow or enforce the Code of\nConduct may be permanently removed from the project team.\n\n\nThis Code of Conduct applies both within project spaces and in public spaces\nwhen an individual is representing the project or its community.\n\n\nInstances of abusive, harassing, or otherwise unacceptable behavior may be\nreported by contacting a project maintainer at manos@iamemmanouil.com. All\ncomplaints will be reviewed and investigated and will result in a response that\nis deemed necessary and appropriate to the circumstances. Maintainers are\nobligated to maintain confidentiality with regard to the reporter of an\nincident.\n\n\nThis Code of Conduct is adapted from the \nContributor Covenant\n,\nversion 1.3.0, available at\n\nhttp://contributor-covenant.org/version/1/3/0/",
+            "title": "Contributing"
+        },
+        {
+            "location": "/contributing/#development",
+            "text": "If you want to  use the demo  app to work on this package:  In the project  repository  you can find the demo app(at /demo). It is a project with Django & Django Rest Framework that will allow you to work with this project.  From the root of the repository:  # Create the virtual environment\npyvenv env\n\n# Install requirements\nenv/bin/pip install -r requirements.txt\n\n# Activate the environment\nsource env/bin/activate\n\n# Cd Into the demo\ncd demo/\n\n# Install Django Rest Framework Docs\npip install -e ../\n\n# Run the project\npython manage.py runserver  Note: You do not need a database or to run migrate.  If you are looking to develop this package with one of your  own django projects :  pyvenv env\nenv/bin/pip install -r requirements.txt\npip install -e ~/Projects/drf-docs/",
+            "title": "Development"
+        },
+        {
+            "location": "/contributing/#contributing-to-the-project",
+            "text": "Fork it!  Create your feature branch:  git checkout -b my-new-feature  Commit your changes:  git commit -am 'Add some feature'  Push to the branch:  git push origin my-new-feature  Submit a pull request  Make sure tests are passing",
+            "title": "Contributing to the project"
+        },
+        {
+            "location": "/contributing/#code-of-conduct",
+            "text": "As contributors and maintainers of this project, and in the interest of\nfostering an open and welcoming community, we pledge to respect all people who\ncontribute through reporting issues, posting feature requests, updating\ndocumentation, submitting pull requests or patches, and other activities.  We are committed to making participation in this project a harassment-free\nexperience for everyone, regardless of level of experience, gender, gender\nidentity and expression, sexual orientation, disability, personal appearance,\nbody size, race, ethnicity, age, religion, or nationality.  Examples of unacceptable behavior by participants include:   The use of sexualized language or imagery  Personal attacks  Trolling or insulting/derogatory comments  Public or private harassment  Publishing other's private information, such as physical or electronic\n  addresses, without explicit permission  Other unethical or unprofessional conduct   Project maintainers have the right and responsibility to remove, edit, or\nreject comments, commits, code, wiki edits, issues, and other contributions\nthat are not aligned to this Code of Conduct, or to ban temporarily or\npermanently any contributor for other behaviors that they deem inappropriate,\nthreatening, offensive, or harmful.  By adopting this Code of Conduct, project maintainers commit themselves to\nfairly and consistently applying these principles to every aspect of managing\nthis project. Project maintainers who do not follow or enforce the Code of\nConduct may be permanently removed from the project team.  This Code of Conduct applies both within project spaces and in public spaces\nwhen an individual is representing the project or its community.  Instances of abusive, harassing, or otherwise unacceptable behavior may be\nreported by contacting a project maintainer at manos@iamemmanouil.com. All\ncomplaints will be reviewed and investigated and will result in a response that\nis deemed necessary and appropriate to the circumstances. Maintainers are\nobligated to maintain confidentiality with regard to the reporter of an\nincident.  This Code of Conduct is adapted from the  Contributor Covenant ,\nversion 1.3.0, available at http://contributor-covenant.org/version/1/3/0/",
+            "title": "Code of Conduct"
+        },
+        {
+            "location": "/changelog/",
+            "text": "Release 0.0.7\n\n\n\n\nFix methods in Live API Endpoints (now compatible with Python 2.7)\n\n\nRemove \n.<format>\n from urls\n\n\nFixed a bug that removes double slashes from the endpoint's url\n\n\n\n\nRelease 0.0.6\n\n\n\n\nIntroducing Live API Endpoints - Test your endpoints from within the docs\n\n\nSetting \nHIDDEN\n is now \nHIDE_DOCS\n\n\n\n\nRelease 0.0.5\n\n\n\n\nSupport both common types of ROOT_URLCONF\n\n\n\n\nRelease 0.0.4\n\n\n\n\nAllow templates overrides\n\n\nMore template \nblocks\n to be overridden\n\n\nImproved MANIFEST.in\n\n\nExclude \nnode_modules/\n\n\n\n\nRelease 0.0.3\n\n\n\n\nFixes a bug where Django's \ncollectstatic\n command was failing because of Glyphicons\n\n\n\n\nRelease 0.0.2\n\n\n\n\nSearch between endpoint paths\n\n\nDisplay docstring for each endpoint\n\n\n\n\nRelease 0.0.1\n\n\nFirst release of the project to \npypi\n. Features include:\n\n\n\n\nList all endpoints that inherit from DRF's \nAPIView\n\n\nSettings to hide docs view (ie. in Production)\n\n\nOverride Templates\n\n\nSupport for Python 2.7, 3.3, 3.4, 3.5\n\n\nSupport for Django 1.8, 1.9\n\n\nSupport for Django REST Framework 3 and above",
+            "title": "Changelog"
+        },
+        {
+            "location": "/changelog/#release-007",
+            "text": "Fix methods in Live API Endpoints (now compatible with Python 2.7)  Remove  .<format>  from urls  Fixed a bug that removes double slashes from the endpoint's url",
+            "title": "Release 0.0.7"
+        },
+        {
+            "location": "/changelog/#release-006",
+            "text": "Introducing Live API Endpoints - Test your endpoints from within the docs  Setting  HIDDEN  is now  HIDE_DOCS",
+            "title": "Release 0.0.6"
+        },
+        {
+            "location": "/changelog/#release-005",
+            "text": "Support both common types of ROOT_URLCONF",
+            "title": "Release 0.0.5"
+        },
+        {
+            "location": "/changelog/#release-004",
+            "text": "Allow templates overrides  More template  blocks  to be overridden  Improved MANIFEST.in  Exclude  node_modules/",
+            "title": "Release 0.0.4"
+        },
+        {
+            "location": "/changelog/#release-003",
+            "text": "Fixes a bug where Django's  collectstatic  command was failing because of Glyphicons",
+            "title": "Release 0.0.3"
+        },
+        {
+            "location": "/changelog/#release-002",
+            "text": "Search between endpoint paths  Display docstring for each endpoint",
+            "title": "Release 0.0.2"
+        },
+        {
+            "location": "/changelog/#release-001",
+            "text": "First release of the project to  pypi . Features include:   List all endpoints that inherit from DRF's  APIView  Settings to hide docs view (ie. in Production)  Override Templates  Support for Python 2.7, 3.3, 3.4, 3.5  Support for Django 1.8, 1.9  Support for Django REST Framework 3 and above",
+            "title": "Release 0.0.1"
+        }
+    ]
+}
