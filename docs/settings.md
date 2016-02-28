@@ -24,7 +24,6 @@ Then set the value of the environment variable `SHOW_DRFDOCS` for each environme
 
 ### List of Settings
 
-{:.table .table-striped}
 | Setting | Type    | Options         | Default |
 |---------|---------|-----------------|---------|
 |HIDE_DOCS| Boolean | `True`, `False` | `False` |
