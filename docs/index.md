@@ -1,6 +1,5 @@
 ---
-title:  "Home"
-permalink: /
+source_filename: index
 ---
 
 Django REST Framework Docs (DRF Docs) allows you to list all your API Endpoints that inherit from <a href="http://www.django-rest-framework.org/" target="_blank">Django REST Framework</a> **automatically**. Its purpose is to work out of the box and it should take a minimum to install it.

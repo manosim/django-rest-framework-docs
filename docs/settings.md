@@ -1,6 +1,5 @@
 ---
-title:  "Settings"
-source_filename: "settings"
+source_filename: settings
 ---
 
 ### How to set the settings

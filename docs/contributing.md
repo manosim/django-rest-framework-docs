@@ -1,6 +1,5 @@
 ---
-title:  "Contributing & Development"
-source_filename: "contributing"
+source_filename: contributing
 ---
 
 ### Development
