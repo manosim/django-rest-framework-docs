@@ -72,6 +72,36 @@ body {
 /* @end Footer */
 
 
+/* @group Scroll to Top */
+
+.scroll-to-top {
+  padding: 10px;
+  background-color: #ecf0f1;
+  color: #18bc9c;
+  font-size: 12px;
+  text-decoration: none;
+
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  display:none;
+
+  -webkit-border-radius: 5px;
+  -moz-border-radius:    5px;
+  border-radius:         5px;
+  -moz-background-clip:    padding;
+  -webkit-background-clip: padding-box;
+  background-clip:         padding-box;
+}
+
+.scroll-to-top:hover {
+  text-decoration: none;
+}
+
+/* @end Scroll to Top */
+
+
+
 /* @group Github Ribbon - SVG */
 
 .github-corner:hover .octo-arm {
