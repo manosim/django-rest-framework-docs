@@ -1,0 +1,144 @@
+/* @group Misc */
+
+body {
+  background-color: #FEFEFE;
+}
+
+.btn-demo {
+  display: block;
+  margin: 20px auto 10px;
+  max-width: 180px;
+}
+
+.btn-edit {
+  margin-top: 10px;
+  padding: 5px 10px;
+  float: right;
+}
+
+.side-nav {
+  margin-top: 0;
+}
+
+/* @end Misc */
+
+
+/* @group Header */
+
+.header .jumbotron {
+  margin: 30px 0 40px;
+  padding: 10px 20px 20px;
+  text-align: center;
+}
+
+.header .jumbotron .img-responsive {
+  display: inline-block;
+  margin: 5px auto;
+}
+
+.header .jumbotron .logo-badge {
+  max-width: 150px;
+}
+
+/* @end Header */
+
+
+/* @group Content Page */
+
+.page .page-title {
+  margin-top: 0;
+}
+
+/* @end Content Page */
+
+
+/* @group Footer */
+
+.footer {
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.footer .links {
+  padding: 20px 0;
+}
+
+.footer .links .fa {
+  margin: 0 10px;
+  font-size: 22px;
+}
+
+/* @end Footer */
+
+
+/* @group Scroll to Top */
+
+.scroll-to-top {
+  padding: 10px;
+  background-color: #ecf0f1;
+  color: #18bc9c;
+  font-size: 12px;
+  text-decoration: none;
+
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  display:none;
+
+  -webkit-border-radius: 5px;
+  -moz-border-radius:    5px;
+  border-radius:         5px;
+  -moz-background-clip:    padding;
+  -webkit-background-clip: padding-box;
+  background-clip:         padding-box;
+}
+
+.scroll-to-top:hover {
+  text-decoration: none;
+}
+
+/* @end Scroll to Top */
+
+
+
+/* @group Github Ribbon - SVG */
+
+.github-corner:hover .octo-arm {
+  animation: octocat-wave 560ms ease-in-out;
+}
+
+@keyframes octocat-wave {
+  0% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(-25deg);
+  }
+  40% {
+    transform: rotate(10deg);
+  }
+  60% {
+    transform: rotate(-25deg);
+  }
+  80% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .github-corner {
+    display: none;
+  }
+  .github-corner:hover .octo-arm {
+    animation: none;
+  }
+  .github-corner .octo-arm {
+    animation: octocat-wave 560ms ease-in-out;
+  }
+}
+
+/* @end Github Ribbon - SVG */
