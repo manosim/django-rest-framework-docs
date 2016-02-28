@@ -1,6 +1,5 @@
 ---
-title:  "Installation"
-source_filename: "installation"
+source_filename: installation
 ---
 
 The installation itself should not take more than a couple of minutes. Follow the simple steps below.

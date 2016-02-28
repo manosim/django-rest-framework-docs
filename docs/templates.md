@@ -1,6 +1,5 @@
 ---
-title:  "Template Customization"
-source_filename: "templates"
+source_filename: templates
 ---
 
 ### Create the template file
@@ -13,8 +12,7 @@ To edit the template you will have to create a `.html` file to override the orig
 
 ### Default Blocks
 
-
-#### Styles (CSS)
+##### Styles (CSS)
 
     {% raw %}
     {% block style %}
@@ -22,16 +20,16 @@ To edit the template you will have to create a `.html` file to override the orig
     {% endblock %}
     {% endraw %}
 
-#### GitHub Badge
+##### GitHub Badge
 To hide the GitHub badge from the page, just override it with an empty block.
 
     {% raw %}{% block github_badge %}{% endblock %}{% endraw %}
 
-#### Title
+##### Title
 
     {% raw %}{% block title %}Project Name{% endblock %}{% endraw %}
 
-#### Logo
+##### Logo
 
     {% raw %}
     {% block logo %}
@@ -39,7 +37,7 @@ To hide the GitHub badge from the page, just override it with an empty block.
     {% endblock %}
     {% endraw %}
 
-#### Jumbotron
+##### Jumbotron
 
     {% raw %}
     {% block jumbotron %}
@@ -50,7 +48,7 @@ To hide the GitHub badge from the page, just override it with an empty block.
     {% endblock %}
     {% endraw %}
 
-#### Footer
+##### Footer
 
     {% raw %}
     {% block footer %}
@@ -82,6 +80,6 @@ File location: `templates/rest_framework_docs/docs.html`
     </div>
     {% endblock %}
 
-    {% block footer %}<div class="footer">Copyright © 2015 Project Name.</div>{% endblock %}
+    {% block footer %}<div class="footer">Copyright © 2016 Project Name.</div>{% endblock %}
 
     {% endraw %}
