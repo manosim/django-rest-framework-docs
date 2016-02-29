@@ -1,8 +1,8 @@
 from operator import attrgetter
 from django.conf import settings
 from django.core.urlresolvers import RegexURLResolver, RegexURLPattern
+from django.utils.module_loading import import_string
 from rest_framework.views import APIView
-
 from rest_framework_docs import SERIALIZER_FIELDS
 from rest_framework_docs.api_endpoint import ApiEndpoint
 
@@ -15,7 +15,7 @@ class ApiDocumentation(object):
         """
         SERIALIZER_FIELDS.clear()
         self.endpoints = []
-        root_urlconf = __import__(settings.ROOT_URLCONF)
+        root_urlconf = import_string(settings.ROOT_URLCONF)
         if hasattr(root_urlconf, 'urls'):
             self.get_all_view_names(root_urlconf.urls.urlpatterns, filter_param=filter_param)
         else:
@@ -31,8 +31,16 @@ class ApiDocumentation(object):
                     self.endpoints.append(api_endpoint)
 
     def _is_drf_view(self, pattern):
-        # Should check whether a pattern inherits from DRF's APIView
+        """
+        Should check whether a pattern inherits from DRF's APIView
+        """
         return hasattr(pattern.callback, 'cls') and issubclass(pattern.callback.cls, APIView)
+
+    def _is_format_endpoint(self, pattern):
+        """
+        Exclude endpoints with a "format" parameter
+        """
+        return '?P<format>' in pattern._regex
 
     def get_endpoints(self):
         return sorted(self.endpoints, key=attrgetter('name', 'path'))
