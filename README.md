@@ -58,7 +58,8 @@ Finally include the `rest_framework_docs` urls in your `urls.py`:
 You can find detailed information about the package's settings at [the docs](http://drfdocs.com/docs/settings/).
 
     REST_FRAMEWORK_DOCS = {
-        'HIDE_DOCS': True  # Default: False
+        'HIDE_DOCS': True,  # Default: False
+        'LOGIN_REQUIRED': True,  # Default: True
     }
 
 

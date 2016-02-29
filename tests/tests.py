@@ -6,7 +6,8 @@ from rest_framework_docs.settings import DRFSettings
 class DRFDocsViewTests(TestCase):
 
     SETTINGS_HIDE_DOCS = {
-        'HIDE_DOCS': True  # Default: False
+        'HIDE_DOCS': True,  # Default: False
+        'LOGIN_REQUIRED': False,  # Default: False
     }
 
     def setUp(self):

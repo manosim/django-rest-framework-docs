@@ -26,7 +26,7 @@ class ApiEndpoint(object):
                 simplify_regex(parent_pattern.regex.pattern).replace('/', '-')
             self.name = self.name_parent
             if hasattr(pattern.callback, 'cls') and issubclass(pattern.callback.cls, ModelViewSet):
-                self.name = '%s (REST)' % self.name_parent
+                self.name = '%s (RESTful)' % self.name_parent
         else:
             self.name_parent = ''
             self.name = ''
@@ -77,6 +77,7 @@ class ApiEndpoint(object):
     def __get_fields__(self, serializer):
         if serializer in SERIALIZER_FIELDS:
             return SERIALIZER_FIELDS.get(serializer)
+
         fields = []
         for key, field in serializer().get_fields().items():
             item = dict(
@@ -84,6 +85,8 @@ class ApiEndpoint(object):
                 type=str(field.__class__.__name__),
                 required=field.required
             )
+
+            # Nested/List serializer
             if isinstance(field, (serializers.ListSerializer, serializers.ListField)):
                 sub_type = field.child.__class__
                 item['sub_type'] = str(sub_type.__name__)
@@ -92,6 +95,8 @@ class ApiEndpoint(object):
             elif isinstance(field, serializers.Serializer):
                 item['fields'] = self.__get_fields__(field.__class__)
             fields.append(item)
+
+        # Keep a copy of serializer fields for optimization purposes
         SERIALIZER_FIELDS[serializer] = fields
         return fields
 

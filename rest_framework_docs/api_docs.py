@@ -1,7 +1,9 @@
 from operator import attrgetter
+
 from django.conf import settings
 from django.core.urlresolvers import RegexURLResolver, RegexURLPattern
 from django.utils.module_loading import import_string
+
 from rest_framework.views import APIView
 from rest_framework_docs import SERIALIZER_FIELDS
 from rest_framework_docs.api_endpoint import ApiEndpoint
