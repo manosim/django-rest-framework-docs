@@ -47,10 +47,13 @@ class ApiEndpoint(object):
 
     def __get_allowed_methods__(self):
         callback_cls = self.callback.cls
-        return sorted(
-            [force_str(m).upper() for m in callback_cls.http_method_names
-             if hasattr(callback_cls, m) or (issubclass(callback_cls, ModelViewSet)
-             and m in VIEWSET_METHODS.get(self.callback.suffix, ''))])
+
+        def is_method_allowed(method_name):
+            return hasattr(callback_cls, method_name) or (
+                issubclass(callback_cls, ModelViewSet) and
+                method_name in VIEWSET_METHODS.get(self.callback.suffix, []))
+
+        return sorted([force_str(name).upper() for name in callback_cls.http_method_names if is_method_allowed(name)])
 
     def __get_docstring__(self):
         return inspect.getdoc(self.callback)
