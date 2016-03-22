@@ -1,3 +1,4 @@
+from importlib import import_module
 from django.conf import settings
 from django.core.urlresolvers import RegexURLResolver, RegexURLPattern
 from django.utils.module_loading import import_string
@@ -9,7 +10,11 @@ class ApiDocumentation(object):
 
     def __init__(self):
         self.endpoints = []
-        root_urlconf = import_string(settings.ROOT_URLCONF)
+        try:
+            root_urlconf = import_string(settings.ROOT_URLCONF)
+        except ImportError:
+            # Handle a case when there's no dot in ROOT_URLCONF
+            root_urlconf = import_module(settings.ROOT_URLCONF)
         if hasattr(root_urlconf, 'urls'):
             self.get_all_view_names(root_urlconf.urls.urlpatterns)
         else:
