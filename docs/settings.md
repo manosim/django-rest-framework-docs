@@ -12,14 +12,14 @@ To set DRF docs' settings just include the dictionary below in Django's `setting
 
 ### Settings Description
 
-##### HIDDEN
+##### HIDE_DOCS
 You can use hidden to prevent your docs from showing up in different environments (ie. Show in development, hide in production). To do so you can use environment variables.
 
     REST_FRAMEWORK_DOCS = {
-        'HIDE_DOCS': os.environ.get('SHOW_DRFDOCS', False)
+        'HIDE_DOCS': os.environ.get('HIDE_DRFDOCS', False)
     }
 
-Then set the value of the environment variable `SHOW_DRFDOCS` for each environment (ie. Use `.env` files)
+Then set the value of the environment variable `HIDE_DRFDOCS` for each environment (ie. Use `.env` files)
 
 ### List of Settings
 
