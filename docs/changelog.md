@@ -3,6 +3,12 @@ title:  "Changelog"
 source_filename: "changelog"
 ---
 
+### Release 0.0.8
+
+  - Support for more types of `ROOT_URLCONF`
+  - Move docs to [MKDocs](http://www.mkdocs.org/)
+
+
 ### Release 0.0.7
 
   - Fix methods in Live API Endpoints (now compatible with Python 2.7)
@@ -18,7 +24,7 @@ source_filename: "changelog"
 
 ### Release 0.0.5
 
-  - Support both common types of ROOT_URLCONF
+  - Support both common types of `ROOT_URLCONF`
 
 
 ### Release 0.0.4
