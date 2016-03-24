@@ -27,7 +27,7 @@
         },
         {
             "location": "/settings/",
-            "text": "How to set the settings\n\n\nTo set DRF docs' settings just include the dictionary below in Django's \nsettings.py\n file.\n\n\nREST_FRAMEWORK_DOCS = {\n    'HIDE_DOCS': True\n}\n\n\n\nSettings Description\n\n\nHIDDEN\n\n\nYou can use hidden to prevent your docs from showing up in different environments (ie. Show in development, hide in production). To do so you can use environment variables.\n\n\nREST_FRAMEWORK_DOCS = {\n    'HIDE_DOCS': os.environ.get('SHOW_DRFDOCS', False)\n}\n\n\n\nThen set the value of the environment variable \nSHOW_DRFDOCS\n for each environment (ie. Use \n.env\n files)\n\n\nList of Settings\n\n\n\n\n\n\n\n\nSetting\n\n\nType\n\n\nOptions\n\n\nDefault\n\n\n\n\n\n\n\n\n\n\nHIDE_DOCS\n\n\nBoolean\n\n\nTrue\n, \nFalse\n\n\nFalse",
+            "text": "How to set the settings\n\n\nTo set DRF docs' settings just include the dictionary below in Django's \nsettings.py\n file.\n\n\nREST_FRAMEWORK_DOCS = {\n    'HIDE_DOCS': True\n}\n\n\n\nSettings Description\n\n\nHIDE_DOCS\n\n\nYou can use hidden to prevent your docs from showing up in different environments (ie. Show in development, hide in production). To do so you can use environment variables.\n\n\nREST_FRAMEWORK_DOCS = {\n    'HIDE_DOCS': os.environ.get('HIDE_DRFDOCS', False)\n}\n\n\n\nThen set the value of the environment variable \nHIDE_DRFDOCS\n for each environment (ie. Use \n.env\n files)\n\n\nList of Settings\n\n\n\n\n\n\n\n\nSetting\n\n\nType\n\n\nOptions\n\n\nDefault\n\n\n\n\n\n\n\n\n\n\nHIDE_DOCS\n\n\nBoolean\n\n\nTrue\n, \nFalse\n\n\nFalse",
             "title": "Settings"
         },
         {
@@ -41,9 +41,9 @@
             "title": "Settings Description"
         },
         {
-            "location": "/settings/#hidden",
-            "text": "You can use hidden to prevent your docs from showing up in different environments (ie. Show in development, hide in production). To do so you can use environment variables.  REST_FRAMEWORK_DOCS = {\n    'HIDE_DOCS': os.environ.get('SHOW_DRFDOCS', False)\n}  Then set the value of the environment variable  SHOW_DRFDOCS  for each environment (ie. Use  .env  files)",
-            "title": "HIDDEN"
+            "location": "/settings/#hide_docs",
+            "text": "You can use hidden to prevent your docs from showing up in different environments (ie. Show in development, hide in production). To do so you can use environment variables.  REST_FRAMEWORK_DOCS = {\n    'HIDE_DOCS': os.environ.get('HIDE_DRFDOCS', False)\n}  Then set the value of the environment variable  HIDE_DRFDOCS  for each environment (ie. Use  .env  files)",
+            "title": "HIDE_DOCS"
         },
         {
             "location": "/settings/#list-of-settings",
@@ -132,8 +132,13 @@
         },
         {
             "location": "/changelog/",
-            "text": "Release 0.0.7\n\n\n\n\nFix methods in Live API Endpoints (now compatible with Python 2.7)\n\n\nRemove \n.<format>\n from urls\n\n\nFixed a bug that removes double slashes from the endpoint's url\n\n\n\n\nRelease 0.0.6\n\n\n\n\nIntroducing Live API Endpoints - Test your endpoints from within the docs\n\n\nSetting \nHIDDEN\n is now \nHIDE_DOCS\n\n\n\n\nRelease 0.0.5\n\n\n\n\nSupport both common types of ROOT_URLCONF\n\n\n\n\nRelease 0.0.4\n\n\n\n\nAllow templates overrides\n\n\nMore template \nblocks\n to be overridden\n\n\nImproved MANIFEST.in\n\n\nExclude \nnode_modules/\n\n\n\n\nRelease 0.0.3\n\n\n\n\nFixes a bug where Django's \ncollectstatic\n command was failing because of Glyphicons\n\n\n\n\nRelease 0.0.2\n\n\n\n\nSearch between endpoint paths\n\n\nDisplay docstring for each endpoint\n\n\n\n\nRelease 0.0.1\n\n\nFirst release of the project to \npypi\n. Features include:\n\n\n\n\nList all endpoints that inherit from DRF's \nAPIView\n\n\nSettings to hide docs view (ie. in Production)\n\n\nOverride Templates\n\n\nSupport for Python 2.7, 3.3, 3.4, 3.5\n\n\nSupport for Django 1.8, 1.9\n\n\nSupport for Django REST Framework 3 and above",
+            "text": "Release 0.0.9\n\n\n\n\nSupport for more types of \nROOT_URLCONF\n\n\nMove docs to \nMKDocs\n\n\n\n\nRelease 0.0.7\n\n\n\n\nFix methods in Live API Endpoints (now compatible with Python 2.7)\n\n\nRemove \n.<format>\n from urls\n\n\nFixed a bug that removes double slashes from the endpoint's url\n\n\n\n\nRelease 0.0.6\n\n\n\n\nIntroducing Live API Endpoints - Test your endpoints from within the docs\n\n\nSetting \nHIDDEN\n is now \nHIDE_DOCS\n\n\n\n\nRelease 0.0.5\n\n\n\n\nSupport both common types of \nROOT_URLCONF\n\n\n\n\nRelease 0.0.4\n\n\n\n\nAllow templates overrides\n\n\nMore template \nblocks\n to be overridden\n\n\nImproved MANIFEST.in\n\n\nExclude \nnode_modules/\n\n\n\n\nRelease 0.0.3\n\n\n\n\nFixes a bug where Django's \ncollectstatic\n command was failing because of Glyphicons\n\n\n\n\nRelease 0.0.2\n\n\n\n\nSearch between endpoint paths\n\n\nDisplay docstring for each endpoint\n\n\n\n\nRelease 0.0.1\n\n\nFirst release of the project to \npypi\n. Features include:\n\n\n\n\nList all endpoints that inherit from DRF's \nAPIView\n\n\nSettings to hide docs view (ie. in Production)\n\n\nOverride Templates\n\n\nSupport for Python 2.7, 3.3, 3.4, 3.5\n\n\nSupport for Django 1.8, 1.9\n\n\nSupport for Django REST Framework 3 and above",
             "title": "Changelog"
+        },
+        {
+            "location": "/changelog/#release-009",
+            "text": "Support for more types of  ROOT_URLCONF  Move docs to  MKDocs",
+            "title": "Release 0.0.9"
         },
         {
             "location": "/changelog/#release-007",
@@ -147,7 +152,7 @@
         },
         {
             "location": "/changelog/#release-005",
-            "text": "Support both common types of ROOT_URLCONF",
+            "text": "Support both common types of  ROOT_URLCONF",
             "title": "Release 0.0.5"
         },
         {

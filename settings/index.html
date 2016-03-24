@@ -139,7 +139,7 @@
             
                 <li class="main "><a href="#settings-description">Settings Description</a></li>
                 
-                    <li><a href="#hidden">HIDDEN</a></li>
+                    <li><a href="#hide_docs">HIDE_DOCS</a></li>
                 
             
                 <li class="main "><a href="#list-of-settings">List of Settings</a></li>
@@ -205,13 +205,13 @@
 }
 </code></pre>
 <h3 id="settings-description">Settings Description</h3>
-<h5 id="hidden">HIDDEN</h5>
+<h5 id="hide_docs">HIDE_DOCS</h5>
 <p>You can use hidden to prevent your docs from showing up in different environments (ie. Show in development, hide in production). To do so you can use environment variables.</p>
 <pre><code>REST_FRAMEWORK_DOCS = {
-    'HIDE_DOCS': os.environ.get('SHOW_DRFDOCS', False)
+    'HIDE_DOCS': os.environ.get('HIDE_DRFDOCS', False)
 }
 </code></pre>
-<p>Then set the value of the environment variable <code>SHOW_DRFDOCS</code> for each environment (ie. Use <code>.env</code> files)</p>
+<p>Then set the value of the environment variable <code>HIDE_DRFDOCS</code> for each environment (ie. Use <code>.env</code> files)</p>
 <h3 id="list-of-settings">List of Settings</h3>
 <table>
 <thead>
