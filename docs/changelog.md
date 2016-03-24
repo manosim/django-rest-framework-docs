@@ -3,7 +3,7 @@ title:  "Changelog"
 source_filename: "changelog"
 ---
 
-### Release 0.0.8
+### Release 0.0.9
 
   - Support for more types of `ROOT_URLCONF`
   - Move docs to [MKDocs](http://www.mkdocs.org/)
