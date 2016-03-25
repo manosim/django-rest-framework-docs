@@ -62,12 +62,12 @@
         },
         {
             "location": "/templates/",
-            "text": "Create the template file\n\n\nTo edit the template you will have to create a \n.html\n file to override the original one. Inside your \ntemplates\n directory create a directory named \nrest_framework_docs\n and inside this create the file \ndocs.html\n. You can then extend/override the default template.\n\n\n{% raw %}\n{% extends \"rest_framework_docs/base.html\" %}\n{% endraw %}\n\n\n\nDefault Blocks\n\n\nStyles (CSS)\n\n\n{% raw %}\n{% block style %}\n<link rel=\"stylesheet\" href=\"{% static \"path/to/custom/css/style.css\" %}\">\n{% endblock %}\n{% endraw %}\n\n\n\nGitHub Badge\n\n\nTo hide the GitHub badge from the page, just override it with an empty block.\n\n\n{% raw %}{% block github_badge %}{% endblock %}{% endraw %}\n\n\n\nTitle\n\n\n{% raw %}{% block title %}Project Name{% endblock %}{% endraw %}\n\n\n\nLogo\n\n\n{% raw %}\n{% block logo %}\n  <a class=\"navbar-brand\" href=\"http://www.drfdocs.com/\">DRF Docs</a>\n{% endblock %}\n{% endraw %}\n\n\n\nJumbotron\n\n\n{% raw %}\n{% block jumbotron %}\n<div class=\"jumbotron\">\n  <h1>Project Title</h1>\n  <h3>Documentantion of the project 'Example'.</h3>\n</div>\n{% endblock %}\n{% endraw %}\n\n\n\nFooter\n\n\n{% raw %}\n{% block footer %}\n  <div class=\"footer\">\n    <div class=\"links\">\n      <a href=\"http://www.iamemmanouil.com\"><i class=\"fa fa-link\"></i></a>\n      <a href=\"http://www.github.com/ekonstantinidis\"><i class=\"fa fa-github\"></i></a>\n      <a href=\"http://www.twitter.com/iamemmanouil\"><i class=\"fa fa-twitter\"></i></a>\n    </div>\n    Copyright \u00a9 2015 Emmanouil Konstantinidis.\n  </div>\n{% endblock %}\n{% endraw %}\n\n\n\nComplete Example\n\n\nFile location: \ntemplates/rest_framework_docs/docs.html\n\n\n{% raw %}\n{% extends \"rest_framework_docs/base.html\" %}\n\n{% block title %}Project Name{% endblock %}\n{% block logo %}<a class=\"navbar-brand\" href=\"#\"\">Project Name API Documentation</a>{% endblock %}\n\n{% block jumbotron %}\n<div class=\"jumbotron\">\n  <h1>'Project Name' Web API</h1>\n  <h3>Documentantion of the 'Project Name' Web API.</h3>\n</div>\n{% endblock %}\n\n{% block footer %}<div class=\"footer\">Copyright \u00a9 2016 Project Name.</div>{% endblock %}\n\n{% endraw %}",
+            "text": "Create the template file\n\n\nTo edit the template you will have to create a \n.html\n file to override the original one. Inside your \ntemplates\n directory create a directory named \nrest_framework_docs\n and inside this create the file \ndocs.html\n. You can then extend/override the default template.\n\n\n{% extends \"rest_framework_docs/base.html\" %}\n\n\n\nDefault Blocks\n\n\nStyles (CSS)\n\n\n{% block style %}\n<link rel=\"stylesheet\" href=\"{% static \"path/to/custom/css/style.css\" %}\">\n{% endblock %}\n\n\n\nGitHub Badge\n\n\nTo hide the GitHub badge from the page, just override it with an empty block.\n\n\n{% block github_badge %}{% endblock %}\n\n\n\nTitle\n\n\n{% block title %}Project Name{% endblock %}\n\n\n\nLogo\n\n\n{% block logo %}\n  <a class=\"navbar-brand\" href=\"http://www.drfdocs.com/\">DRF Docs</a>\n{% endblock %}\n\n\n\nJumbotron\n\n\n{% block jumbotron %}\n<div class=\"jumbotron\">\n  <h1>Project Title</h1>\n  <h3>Documentantion of the project 'Example'.</h3>\n</div>\n{% endblock %}\n\n\n\nFooter\n\n\n{% block footer %}\n  <div class=\"footer\">\n    <div class=\"links\">\n      <a href=\"http://www.iamemmanouil.com\"><i class=\"fa fa-link\"></i></a>\n      <a href=\"http://www.github.com/ekonstantinidis\"><i class=\"fa fa-github\"></i></a>\n      <a href=\"http://www.twitter.com/iamemmanouil\"><i class=\"fa fa-twitter\"></i></a>\n    </div>\n    Copyright \u00a9 2015 Emmanouil Konstantinidis.\n  </div>\n{% endblock %}\n\n\n\nComplete Example\n\n\nFile location: \ntemplates/rest_framework_docs/docs.html\n\n\n{% extends \"rest_framework_docs/base.html\" %}\n\n{% block title %}Project Name{% endblock %}\n{% block logo %}<a class=\"navbar-brand\" href=\"#\"\">Project Name API Documentation</a>{% endblock %}\n\n{% block jumbotron %}\n<div class=\"jumbotron\">\n  <h1>'Project Name' Web API</h1>\n  <h3>Documentantion of the 'Project Name' Web API.</h3>\n</div>\n{% endblock %}\n\n{% block footer %}<div class=\"footer\">Copyright \u00a9 2016 Project Name.</div>{% endblock %}",
             "title": "Templates"
         },
         {
             "location": "/templates/#create-the-template-file",
-            "text": "To edit the template you will have to create a  .html  file to override the original one. Inside your  templates  directory create a directory named  rest_framework_docs  and inside this create the file  docs.html . You can then extend/override the default template.  {% raw %}\n{% extends \"rest_framework_docs/base.html\" %}\n{% endraw %}",
+            "text": "To edit the template you will have to create a  .html  file to override the original one. Inside your  templates  directory create a directory named  rest_framework_docs  and inside this create the file  docs.html . You can then extend/override the default template.  {% extends \"rest_framework_docs/base.html\" %}",
             "title": "Create the template file"
         },
         {
@@ -77,37 +77,37 @@
         },
         {
             "location": "/templates/#styles-css",
-            "text": "{% raw %}\n{% block style %}\n<link rel=\"stylesheet\" href=\"{% static \"path/to/custom/css/style.css\" %}\">\n{% endblock %}\n{% endraw %}",
+            "text": "{% block style %}\n<link rel=\"stylesheet\" href=\"{% static \"path/to/custom/css/style.css\" %}\">\n{% endblock %}",
             "title": "Styles (CSS)"
         },
         {
             "location": "/templates/#github-badge",
-            "text": "To hide the GitHub badge from the page, just override it with an empty block.  {% raw %}{% block github_badge %}{% endblock %}{% endraw %}",
+            "text": "To hide the GitHub badge from the page, just override it with an empty block.  {% block github_badge %}{% endblock %}",
             "title": "GitHub Badge"
         },
         {
             "location": "/templates/#title",
-            "text": "{% raw %}{% block title %}Project Name{% endblock %}{% endraw %}",
+            "text": "{% block title %}Project Name{% endblock %}",
             "title": "Title"
         },
         {
             "location": "/templates/#logo",
-            "text": "{% raw %}\n{% block logo %}\n  <a class=\"navbar-brand\" href=\"http://www.drfdocs.com/\">DRF Docs</a>\n{% endblock %}\n{% endraw %}",
+            "text": "{% block logo %}\n  <a class=\"navbar-brand\" href=\"http://www.drfdocs.com/\">DRF Docs</a>\n{% endblock %}",
             "title": "Logo"
         },
         {
             "location": "/templates/#jumbotron",
-            "text": "{% raw %}\n{% block jumbotron %}\n<div class=\"jumbotron\">\n  <h1>Project Title</h1>\n  <h3>Documentantion of the project 'Example'.</h3>\n</div>\n{% endblock %}\n{% endraw %}",
+            "text": "{% block jumbotron %}\n<div class=\"jumbotron\">\n  <h1>Project Title</h1>\n  <h3>Documentantion of the project 'Example'.</h3>\n</div>\n{% endblock %}",
             "title": "Jumbotron"
         },
         {
             "location": "/templates/#footer",
-            "text": "{% raw %}\n{% block footer %}\n  <div class=\"footer\">\n    <div class=\"links\">\n      <a href=\"http://www.iamemmanouil.com\"><i class=\"fa fa-link\"></i></a>\n      <a href=\"http://www.github.com/ekonstantinidis\"><i class=\"fa fa-github\"></i></a>\n      <a href=\"http://www.twitter.com/iamemmanouil\"><i class=\"fa fa-twitter\"></i></a>\n    </div>\n    Copyright \u00a9 2015 Emmanouil Konstantinidis.\n  </div>\n{% endblock %}\n{% endraw %}",
+            "text": "{% block footer %}\n  <div class=\"footer\">\n    <div class=\"links\">\n      <a href=\"http://www.iamemmanouil.com\"><i class=\"fa fa-link\"></i></a>\n      <a href=\"http://www.github.com/ekonstantinidis\"><i class=\"fa fa-github\"></i></a>\n      <a href=\"http://www.twitter.com/iamemmanouil\"><i class=\"fa fa-twitter\"></i></a>\n    </div>\n    Copyright \u00a9 2015 Emmanouil Konstantinidis.\n  </div>\n{% endblock %}",
             "title": "Footer"
         },
         {
             "location": "/templates/#complete-example",
-            "text": "File location:  templates/rest_framework_docs/docs.html  {% raw %}\n{% extends \"rest_framework_docs/base.html\" %}\n\n{% block title %}Project Name{% endblock %}\n{% block logo %}<a class=\"navbar-brand\" href=\"#\"\">Project Name API Documentation</a>{% endblock %}\n\n{% block jumbotron %}\n<div class=\"jumbotron\">\n  <h1>'Project Name' Web API</h1>\n  <h3>Documentantion of the 'Project Name' Web API.</h3>\n</div>\n{% endblock %}\n\n{% block footer %}<div class=\"footer\">Copyright \u00a9 2016 Project Name.</div>{% endblock %}\n\n{% endraw %}",
+            "text": "File location:  templates/rest_framework_docs/docs.html  {% extends \"rest_framework_docs/base.html\" %}\n\n{% block title %}Project Name{% endblock %}\n{% block logo %}<a class=\"navbar-brand\" href=\"#\"\">Project Name API Documentation</a>{% endblock %}\n\n{% block jumbotron %}\n<div class=\"jumbotron\">\n  <h1>'Project Name' Web API</h1>\n  <h3>Documentantion of the 'Project Name' Web API.</h3>\n</div>\n{% endblock %}\n\n{% block footer %}<div class=\"footer\">Copyright \u00a9 2016 Project Name.</div>{% endblock %}",
             "title": "Complete Example"
         },
         {

@@ -210,45 +210,36 @@
   <h1 class="page-title">Templates</h1>
   <h3 id="create-the-template-file">Create the template file</h3>
 <p>To edit the template you will have to create a <code>.html</code> file to override the original one. Inside your <code>templates</code> directory create a directory named <code>rest_framework_docs</code> and inside this create the file <code>docs.html</code>. You can then extend/override the default template.</p>
-<pre><code>{% raw %}
-{% extends "rest_framework_docs/base.html" %}
-{% endraw %}
+<pre><code>{% extends "rest_framework_docs/base.html" %}
 </code></pre>
 <h3 id="default-blocks">Default Blocks</h3>
 <h5 id="styles-css">Styles (CSS)</h5>
-<pre><code>{% raw %}
-{% block style %}
+<pre><code>{% block style %}
 &lt;link rel="stylesheet" href="{% static "path/to/custom/css/style.css" %}"&gt;
 {% endblock %}
-{% endraw %}
 </code></pre>
 <h5 id="github-badge">GitHub Badge</h5>
 <p>To hide the GitHub badge from the page, just override it with an empty block.</p>
-<pre><code>{% raw %}{% block github_badge %}{% endblock %}{% endraw %}
+<pre><code>{% block github_badge %}{% endblock %}
 </code></pre>
 <h5 id="title">Title</h5>
-<pre><code>{% raw %}{% block title %}Project Name{% endblock %}{% endraw %}
+<pre><code>{% block title %}Project Name{% endblock %}
 </code></pre>
 <h5 id="logo">Logo</h5>
-<pre><code>{% raw %}
-{% block logo %}
+<pre><code>{% block logo %}
   &lt;a class="navbar-brand" href="http://www.drfdocs.com/"&gt;DRF Docs&lt;/a&gt;
 {% endblock %}
-{% endraw %}
 </code></pre>
 <h5 id="jumbotron">Jumbotron</h5>
-<pre><code>{% raw %}
-{% block jumbotron %}
+<pre><code>{% block jumbotron %}
 &lt;div class="jumbotron"&gt;
   &lt;h1&gt;Project Title&lt;/h1&gt;
   &lt;h3&gt;Documentantion of the project 'Example'.&lt;/h3&gt;
 &lt;/div&gt;
 {% endblock %}
-{% endraw %}
 </code></pre>
 <h5 id="footer">Footer</h5>
-<pre><code>{% raw %}
-{% block footer %}
+<pre><code>{% block footer %}
   &lt;div class="footer"&gt;
     &lt;div class="links"&gt;
       &lt;a href="http://www.iamemmanouil.com"&gt;&lt;i class="fa fa-link"&gt;&lt;/i&gt;&lt;/a&gt;
@@ -258,12 +249,10 @@
     Copyright © 2015 Emmanouil Konstantinidis.
   &lt;/div&gt;
 {% endblock %}
-{% endraw %}
 </code></pre>
 <h3 id="complete-example">Complete Example</h3>
 <p>File location: <code>templates/rest_framework_docs/docs.html</code></p>
-<pre><code>{% raw %}
-{% extends "rest_framework_docs/base.html" %}
+<pre><code>{% extends "rest_framework_docs/base.html" %}
 
 {% block title %}Project Name{% endblock %}
 {% block logo %}&lt;a class="navbar-brand" href="#""&gt;Project Name API Documentation&lt;/a&gt;{% endblock %}
@@ -276,8 +265,6 @@
 {% endblock %}
 
 {% block footer %}&lt;div class="footer"&gt;Copyright © 2016 Project Name.&lt;/div&gt;{% endblock %}
-
-{% endraw %}
 </code></pre>
 
   
