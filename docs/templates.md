@@ -49,7 +49,7 @@ To hide the GitHub badge from the page, just override it with an empty block.
           <a href="http://www.github.com/ekonstantinidis"><i class="fa fa-github"></i></a>
           <a href="http://www.twitter.com/iamemmanouil"><i class="fa fa-twitter"></i></a>
         </div>
-        Copyright © 2015 Emmanouil Konstantinidis.
+        Copyright © 2016 Emmanouil Konstantinidis.
       </div>
     {% endblock %}
 
