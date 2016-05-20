@@ -13,6 +13,7 @@ accounts_urls = [
     url(r'^user/profile/$', views.UserProfileView.as_view(), name="profile"),
 
     url(r'^test/$', views.TestView.as_view(), name="test-view"),
+    url(r'^exclude/$', views.ExcludedTestView.as_view(), name="test-exclude"),
 ]
 
 organisations_urls = [

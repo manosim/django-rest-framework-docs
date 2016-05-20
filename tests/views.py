@@ -19,11 +19,18 @@ class TestView(TemplateView):
     template_name = "a_test.html"
 
 
+class ExcludedTestView(APIView):
+    """
+    This view should not be included in DRF Docs.
+    """
+    drfdocs_exclude = True
+
+
 class LoginView(APIView):
     """
     A view that allows users to login providing their username and password.
     """
-
+    drfdocs_exclude = False
     throttle_classes = ()
     permission_classes = ()
     parser_classes = (parsers.FormParser, parsers.MultiPartParser, parsers.JSONParser,)
@@ -39,7 +46,6 @@ class LoginView(APIView):
 
 
 class UserRegistrationView(generics.CreateAPIView):
-
     permission_classes = (AllowAny,)
     serializer_class = serializers.UserRegistrationSerializer
 
@@ -56,7 +62,6 @@ class UserProfileView(generics.RetrieveUpdateAPIView):
 
 
 class PasswordResetView(APIView):
-
     permission_classes = (AllowAny,)
     queryset = User.objects.all()
 
@@ -72,7 +77,6 @@ class PasswordResetView(APIView):
 
 
 class PasswordResetConfirmView(APIView):
-
     permission_classes = (AllowAny,)
     serializer_class = serializers.ResetPasswordSerializer
 
@@ -84,12 +88,10 @@ class PasswordResetConfirmView(APIView):
 
 
 class CreateOrganisationView(generics.CreateAPIView):
-
     serializer_class = serializers.CreateOrganisationSerializer
 
 
 class OrganisationMembersView(generics.ListAPIView):
-
     serializer_class = serializers.OrganisationMembersSerializer
 
     def get_queryset(self):
@@ -98,7 +100,6 @@ class OrganisationMembersView(generics.ListAPIView):
 
 
 class LeaveOrganisationView(generics.DestroyAPIView):
-
     def get_object(self):
         return Membership.objects.order_by('?').first()
 
@@ -109,5 +110,4 @@ class LeaveOrganisationView(generics.DestroyAPIView):
 
 
 class OrganisationErroredView(generics.ListAPIView):
-
     serializer_class = serializers.OrganisationErroredSerializer

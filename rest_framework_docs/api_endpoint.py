@@ -5,7 +5,6 @@ from django.utils.encoding import force_str
 
 
 class ApiEndpoint(object):
-
     def __init__(self, pattern, parent_pattern=None):
         self.pattern = pattern
         self.callback = pattern.callback
@@ -19,6 +18,7 @@ class ApiEndpoint(object):
         self.fields = self.__get_serializer_fields__()
         self.fields_json = self.__get_serializer_fields_json__()
         self.permissions = self.__get_permissions_class__()
+        self.exclude = getattr(self.callback.cls, 'drfdocs_exclude', False)
 
     def __get_path__(self, parent_pattern):
         if parent_pattern:
@@ -42,17 +42,16 @@ class ApiEndpoint(object):
             serializer = self.callback.cls.serializer_class
             if hasattr(serializer, 'get_fields'):
                 try:
-                    fields = [{
-                        "name": key,
-                        "type": str(field.__class__.__name__),
-                        "required": field.required
-                    } for key, field in serializer().get_fields().items()]
+                    fields = [{"name": key,
+                               "type": str(field.__class__.__name__),
+                               "required": field.required
+                               } for key, field in serializer().get_fields().items()]
                 except KeyError as e:
                     self.errors = e
                     fields = []
 
-                # FIXME:
-                # Show more attibutes of `field`?
+                    # FIXME:
+                    # Show more attibutes of `field`?
 
         return fields
 
