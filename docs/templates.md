@@ -36,7 +36,7 @@ To hide the GitHub badge from the page, just override it with an empty block.
     {% block jumbotron %}
     <div class="jumbotron">
       <h1>Project Title</h1>
-      <h3>Documentantion of the project 'Example'.</h3>
+      <h3>Documentation of the project 'Example'.</h3>
     </div>
     {% endblock %}
 
@@ -65,7 +65,7 @@ File location: `templates/rest_framework_docs/docs.html`
     {% block jumbotron %}
     <div class="jumbotron">
       <h1>'Project Name' Web API</h1>
-      <h3>Documentantion of the 'Project Name' Web API.</h3>
+      <h3>Documentation of the 'Project Name' Web API.</h3>
     </div>
     {% endblock %}
 
