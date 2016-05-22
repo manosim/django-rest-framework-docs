@@ -111,3 +111,24 @@ class LeaveOrganisationView(generics.DestroyAPIView):
 class OrganisationErroredView(generics.ListAPIView):
 
     serializer_class = serializers.OrganisationErroredSerializer
+
+
+class LoginWithSerilaizerClassView(APIView):
+    """
+    A view that allows users to login providing their username and password. Without serializer_class
+    """
+
+    throttle_classes = ()
+    permission_classes = ()
+    parser_classes = (parsers.FormParser, parsers.MultiPartParser, parsers.JSONParser,)
+    renderer_classes = (renderers.JSONRenderer,)
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({'token': token.key})
+
+    def get_serializer_class(self):
+        return AuthTokenSerializer
