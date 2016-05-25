@@ -11,6 +11,14 @@ env:
   - DJANGO_VERSION=1.8
   - DJANGO_VERSION=1.9
 
+cache:
+  - pip
+  - directories:
+    - rest_framework_docs/static/node_modules/
+
+before_install:
+  - nvm install 5
+
 install:
   - cd rest_framework_docs/static/ && npm install && cd ../../
   - pip install -r requirements.txt
