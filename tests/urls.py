@@ -6,6 +6,7 @@ from tests import views
 
 accounts_urls = [
     url(r'^login/$', views.LoginView.as_view(), name="login"),
+    url(r'^login2/$', views.LoginWithSerilaizerClassView.as_view(), name="login2"),
     url(r'^register/$', views.UserRegistrationView.as_view(), name="register"),
     url(r'^reset-password/$', view=views.PasswordResetView.as_view(), name="reset-password"),
     url(r'^reset-password/confirm/$', views.PasswordResetConfirmView.as_view(), name="reset-password-confirm"),
