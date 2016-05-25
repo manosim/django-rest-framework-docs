@@ -43,7 +43,7 @@ class ApiEndpoint(object):
             serializer = self.callback.cls.serializer_class
 
         elif hasattr(self.callback.cls, 'get_serializer_class'):
-            serializer = self.callback.cls.get_serializer_class(self.callback.cls)
+            serializer = self.callback.cls.get_serializer_class(self.pattern.callback.cls())
 
         if hasattr(serializer, 'get_fields'):
             try:
