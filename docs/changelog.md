@@ -3,6 +3,11 @@ title:  "Changelog"
 source_filename: "changelog"
 ---
 
+### Release 0.0.10
+
+  - Use get_serializer_class for Views without serlaizer_class attribute [#92](https://github.com/ekonstantinidis/django-rest-framework-docs/pull/92)
+
+
 ### Release 0.0.9
 
   - Support for more types of `ROOT_URLCONF`
