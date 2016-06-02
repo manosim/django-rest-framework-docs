@@ -32,7 +32,7 @@ urlpatterns = [
     url(r'^docs/', include('rest_framework_docs.urls')),
 
     # API
-    url(r'^accounts/', view=include(accounts_urls, namespace='accounts')),
+    url(r'^accounts/', view=include(accounts_urls, namespace="accounts")),
     # Endpoints without parents/namespaces
     url(r'^another-login/$', views.LoginView.as_view(), name="login"),
 ]

@@ -31,24 +31,18 @@ class DRFDocsViewTests(TestCase):
         self.assertEqual(len(response.context["endpoints"]), 11)
 
         # Test the login view
-        self.assertEqual(response.context["endpoints"][0].name_parent, "accounts")
-        self.assertEqual(response.context["endpoints"][0].allowed_methods, ['POST', 'OPTIONS'])
-        self.assertEqual(response.context["endpoints"][0].path, "/accounts/login/")
-        self.assertEqual(response.context["endpoints"][0].docstring, "A view that allows users to login providing their username and password.")
-        self.assertEqual(len(response.context["endpoints"][0].fields), 2)
-        self.assertEqual(response.context["endpoints"][0].fields[0]["type"], "CharField")
-        self.assertTrue(response.context["endpoints"][0].fields[0]["required"])
-
-        self.assertEqual(response.context["endpoints"][1].name_parent, "accounts")
-        self.assertEqual(response.context["endpoints"][1].allowed_methods, ['POST', 'OPTIONS'])
-        self.assertEqual(response.context["endpoints"][1].path, "/accounts/login2/")
-        self.assertEqual(response.context["endpoints"][1].docstring, "A view that allows users to login providing their username and password. Without serializer_class")
-        self.assertEqual(len(response.context["endpoints"][1].fields), 2)
-        self.assertEqual(response.context["endpoints"][1].fields[0]["type"], "CharField")
-        self.assertTrue(response.context["endpoints"][1].fields[0]["required"])
+        endpoint = response.context["endpoints"][1]
+        self.assertEqual(endpoint.name_parent, "accounts")
+        self.assertEqual(endpoint.allowed_methods, ['POST', 'OPTIONS'])
+        self.assertEqual(endpoint.path, "/accounts/login/")
+        self.assertEqual(endpoint.docstring, "A view that allows users to login providing their username and password.")
+        self.assertEqual(len(endpoint.fields), 2)
+        self.assertEqual(endpoint.fields[0]["type"], "CharField")
+        self.assertTrue(endpoint.fields[0]["required"])
 
         # The view "OrganisationErroredView" (organisations/(?P<slug>[\w-]+)/errored/) should contain an error.
-        self.assertEqual(str(response.context["endpoints"][9].errors), "'test_value'")
+        endpoint = response.context["endpoints"][8]
+        self.assertEqual(str(endpoint.errors), "'test_value'")
 
     def test_index_search_with_endpoints(self):
         response = self.client.get("%s?search=reset-password" % reverse("drfdocs"))
@@ -77,11 +71,11 @@ class DRFDocsViewTests(TestCase):
         # Test 'accounts' namespace
         response = self.client.get(reverse('drfdocs-filter', args=['accounts']))
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.context["endpoints"]), 5)
+        self.assertEqual(len(response.context["endpoints"]), 6)
 
         # Test the login view
         self.assertEqual(response.context["endpoints"][0].name_parent, "accounts")
-        self.assertEqual(response.context["endpoints"][0].allowed_methods, ['OPTIONS', 'POST'])
+        self.assertEqual(response.context["endpoints"][0].allowed_methods, ['POST', 'OPTIONS'])
         self.assertEqual(response.context["endpoints"][0].path, "/accounts/login/")
 
         # Test 'organisations' namespace

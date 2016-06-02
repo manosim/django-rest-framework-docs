@@ -9,6 +9,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework_docs import SERIALIZER_FIELDS
 
 
+METHODS_ORDER = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
 VIEWSET_METHODS = {
     'List': ['get', 'post'],
     'Instance': ['get', 'put', 'patch', 'delete'],
@@ -52,7 +53,9 @@ class ApiEndpoint(object):
                 issubclass(callback_cls, ModelViewSet) and
                 method_name in VIEWSET_METHODS.get(self.callback.suffix, []))
 
-        return sorted([force_str(name).upper() for name in callback_cls.http_method_names if is_method_allowed(name)])
+        return sorted(
+            [force_str(name).upper() for name in callback_cls.http_method_names if is_method_allowed(name)],
+            key=lambda e: METHODS_ORDER.index(e))
 
     def __get_docstring__(self):
         return inspect.getdoc(self.callback)
