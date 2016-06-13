@@ -27,7 +27,7 @@ class DRFDocsViewTests(TestCase):
         response = self.client.get(reverse('drfdocs'))
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.context["endpoints"]), 11)
+        self.assertEqual(len(response.context["endpoints"]), 14)
 
         # Test the login view
         self.assertEqual(response.context["endpoints"][0].name_parent, "accounts")
@@ -67,3 +67,14 @@ class DRFDocsViewTests(TestCase):
 
         self.assertEqual(response.status_code, 404)
         self.assertEqual(response.reason_phrase.upper(), "NOT FOUND")
+
+    def test_model_viewset(self):
+        response = self.client.get(reverse('drfdocs'))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context["endpoints"][10].path, '/organisation-model-viewsets/')
+        self.assertEqual(response.context["endpoints"][11].path, '/organisation-model-viewsets/<pk>/')
+        self.assertEqual(response.context["endpoints"][10].allowed_methods, ['GET', 'POST', 'OPTIONS'])
+        self.assertEqual(response.context["endpoints"][11].allowed_methods, ['GET', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'])
+        self.assertEqual(response.context["endpoints"][12].allowed_methods, ['POST', 'OPTIONS'])
+        self.assertEqual(response.context["endpoints"][12].docstring, 'This is a test.')
