@@ -65,11 +65,7 @@
 
             {% if endpoint.fields %}
             <p class="fields-desc">Fields:</p>
-              <ul class="list fields">
-              {% for field in endpoint.fields %}
-                <li class="field">{{ field.name }}: {{ field.type }} {% if field.required %}<span class="label label-primary label-required" title="Required">R</span>{% endif %}</li>
-              {% endfor %}
-              </ul>
+              {%include "rest_framework_docs/components/fields_list.html" with fields=endpoint.fields %}
             {% elif not endpoint.errors %}
             <p>No fields.</p>
             {% endif %}
