@@ -2,8 +2,16 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from project.organisations.models import Organisation, Membership
 from project.organisations.serializers import (
-    CreateOrganisationSerializer, OrganisationMembersSerializer
+    CreateOrganisationSerializer, OrganisationMembersSerializer, RetrieveOrganisationSerializer
 )
+
+
+class RetrieveOrganisationView(generics.RetrieveAPIView):
+
+    serializer_class = RetrieveOrganisationSerializer
+
+    def get_object(self):
+        pass
 
 
 class CreateOrganisationView(generics.CreateAPIView):

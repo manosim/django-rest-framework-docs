@@ -27,3 +27,17 @@ class OrganisationDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Organisation
         fields = ('name', 'slug', 'is_active')
+
+
+class MembershipSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Membership
+        fields = ('joined', 'is_owner', 'role')
+
+
+class RetrieveOrganisationSerializer(serializers.ModelSerializer):
+    membership_set = MembershipSerializer()
+
+    class Meta:
+        model = Organisation
+        fields = ('name', 'slug', 'is_active', 'membership_set')
