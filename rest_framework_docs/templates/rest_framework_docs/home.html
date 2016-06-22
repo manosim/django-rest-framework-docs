@@ -70,6 +70,29 @@
             {% elif not endpoint.errors %}
             <p>No fields.</p>
             {% endif %}
+
+            {% if endpoint.read_only_fields %}
+            <p class="fields-desc">Read only fields:</p>
+            <ul>
+              {% for field in endpoint.read_only_fields %}
+              <li>
+                {{ field }}
+              </li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+
+            {% if endpoint.write_only_fields %}
+            <p class="fields-desc">Write only fields:</p>
+            <ul>
+              {% for field in endpoint.write_only_fields %}
+              <li>
+                {{ field }}
+              </li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+
           </div>
         </div>
       </div>
