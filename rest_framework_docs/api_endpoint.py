@@ -7,7 +7,8 @@ from rest_framework.serializers import BaseSerializer
 
 class ApiEndpoint(object):
 
-    def __init__(self, pattern, parent_pattern=None):
+    def __init__(self, pattern, parent_pattern=None, drf_router=None):
+        self.drf_router = drf_router
         self.pattern = pattern
         self.callback = pattern.callback
         # self.name = pattern.name
@@ -31,7 +32,39 @@ class ApiEndpoint(object):
         return simplify_regex(self.pattern.regex.pattern)
 
     def __get_allowed_methods__(self):
-        return [force_str(m).upper() for m in self.callback.cls.http_method_names if hasattr(self.callback.cls, m)]
+
+        viewset_methods = []
+        if self.drf_router:
+            for prefix, viewset, basename in self.drf_router.registry:
+                if self.callback.cls != viewset:
+                    continue
+
+                lookup = self.drf_router.get_lookup_regex(viewset)
+                routes = self.drf_router.get_routes(viewset)
+
+                for route in routes:
+
+                    # Only actions which actually exist on the viewset will be bound
+                    mapping = self.drf_router.get_method_map(viewset, route.mapping)
+                    if not mapping:
+                        continue
+
+                    # Build the url pattern
+                    regex = route.url.format(
+                        prefix=prefix,
+                        lookup=lookup,
+                        trailing_slash=self.drf_router.trailing_slash
+                    )
+                    if self.pattern.regex.pattern == regex:
+                        funcs, viewset_methods = zip(
+                            *[(mapping[m], m.upper()) for m in self.callback.cls.http_method_names if m in mapping]
+                        )
+                        viewset_methods = list(viewset_methods)
+                        if len(set(funcs)) == 1:
+                            self.docstring = inspect.getdoc(getattr(self.callback.cls, funcs[0]))
+
+        view_methods = [force_str(m).upper() for m in self.callback.cls.http_method_names if hasattr(self.callback.cls, m)]
+        return viewset_methods + view_methods
 
     def __get_docstring__(self):
         return inspect.getdoc(self.callback)
