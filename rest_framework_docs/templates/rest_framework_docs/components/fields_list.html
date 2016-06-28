@@ -6,6 +6,10 @@
       <span class="label label-primary label-required" title="Required">R</span>
     {% endif %}
 
+    {% if field.to_many_relation %}
+      <span class="label label-primary label-required" title="Required">many = True</span>
+    {% endif %}
+
     {% if field.sub_fields %}
       {%include "rest_framework_docs/components/fields_list.html" with fields=field.sub_fields %}
     {% endif %}
