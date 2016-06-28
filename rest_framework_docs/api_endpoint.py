@@ -91,12 +91,20 @@ class ApiEndpoint(object):
 
         if hasattr(serializer, 'get_fields'):
             for key, field in serializer.get_fields().items():
-                sub_fields = self.__get_serializer_fields__(field) if isinstance(field, BaseSerializer) else None
+                to_many_relation = True if hasattr(field, 'many') else False
+                sub_fields = []
+
+                if to_many_relation:
+                    sub_fields = self.__get_serializer_fields__(field.child) if isinstance(field, BaseSerializer) else None
+                else:
+                    sub_fields = self.__get_serializer_fields__(field) if isinstance(field, BaseSerializer) else None
+
                 fields.append({
                     "name": key,
                     "type": str(field.__class__.__name__),
                     "sub_fields": sub_fields,
-                    "required": field.required
+                    "required": field.required,
+                    "to_many_relation": to_many_relation
                 })
             # FIXME:
             # Show more attibutes of `field`?
