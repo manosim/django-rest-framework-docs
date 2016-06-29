@@ -10,9 +10,6 @@ class RetrieveOrganisationView(generics.RetrieveAPIView):
 
     serializer_class = RetrieveOrganisationSerializer
 
-    def get_object(self):
-        pass
-
 
 class CreateOrganisationView(generics.CreateAPIView):
 
