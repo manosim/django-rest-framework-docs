@@ -149,6 +149,3 @@ class TestModelViewSet(ModelViewSet):
 class RetrieveOrganisationView(generics.RetrieveAPIView):
 
     serializer_class = serializers.RetrieveOrganisationSerializer
-
-    def get_object(self):
-        pass
