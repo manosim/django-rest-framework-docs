@@ -7,7 +7,7 @@
     {% endif %}
 
     {% if field.to_many_relation %}
-      <span class="label label-primary label-required" title="Required">many = True</span>
+      <span class="label label-primary label-required" title="Support sending several objects of this type in a request ({{obj}, {obj}, ... })">Array of objects</span>
     {% endif %}
 
     {% if field.sub_fields %}
