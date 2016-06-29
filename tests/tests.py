@@ -27,7 +27,7 @@ class DRFDocsViewTests(TestCase):
         response = self.client.get(reverse('drfdocs'))
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.context["endpoints"]), 14)
+        self.assertEqual(len(response.context["endpoints"]), 15)
 
         # Test the login view
         self.assertEqual(response.context["endpoints"][0].name_parent, "accounts")
@@ -72,9 +72,12 @@ class DRFDocsViewTests(TestCase):
         response = self.client.get(reverse('drfdocs'))
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context["endpoints"][10].path, '/organisation-model-viewsets/')
-        self.assertEqual(response.context["endpoints"][11].path, '/organisation-model-viewsets/<pk>/')
-        self.assertEqual(response.context["endpoints"][10].allowed_methods, ['GET', 'POST', 'OPTIONS'])
-        self.assertEqual(response.context["endpoints"][11].allowed_methods, ['GET', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'])
-        self.assertEqual(response.context["endpoints"][12].allowed_methods, ['POST', 'OPTIONS'])
-        self.assertEqual(response.context["endpoints"][12].docstring, 'This is a test.')
+
+        self.assertEqual(response.context["endpoints"][10].path, '/organisations/<slug>/')
+        self.assertEqual(response.context['endpoints'][6].fields[2]['to_many_relation'], True)
+        self.assertEqual(response.context["endpoints"][11].path, '/organisation-model-viewsets/')
+        self.assertEqual(response.context["endpoints"][12].path, '/organisation-model-viewsets/<pk>/')
+        self.assertEqual(response.context["endpoints"][11].allowed_methods, ['GET', 'POST', 'OPTIONS'])
+        self.assertEqual(response.context["endpoints"][12].allowed_methods, ['GET', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'])
+        self.assertEqual(response.context["endpoints"][13].allowed_methods, ['POST', 'OPTIONS'])
+        self.assertEqual(response.context["endpoints"][13].docstring, 'This is a test.')
