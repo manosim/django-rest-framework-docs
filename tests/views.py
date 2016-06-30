@@ -144,3 +144,8 @@ class TestModelViewSet(ModelViewSet):
     def test_route(self, request):
         """This is a test."""
         return Response()
+
+
+class RetrieveOrganisationView(generics.RetrieveAPIView):
+
+    serializer_class = serializers.RetrieveOrganisationSerializer

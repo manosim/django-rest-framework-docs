@@ -34,11 +34,26 @@ class ResetPasswordSerializer(serializers.ModelSerializer):
         extra_kwargs = {'password': {'write_only': True}}
 
 
+class MembershipSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Membership
+        fields = ('joined', 'is_owner', 'role')
+
+
 class CreateOrganisationSerializer(serializers.ModelSerializer):
+    membership_set = MembershipSerializer(many=True)
 
     class Meta:
         model = Organisation
-        fields = ('name', 'slug',)
+        fields = ('name', 'slug', 'membership_set')
+
+
+class RetrieveOrganisationSerializer(serializers.ModelSerializer):
+    membership_set = MembershipSerializer()
+
+    class Meta:
+        model = Organisation
+        fields = ('name', 'slug', 'is_active', 'membership_set')
 
 
 class OrganisationMembersSerializer(serializers.ModelSerializer):

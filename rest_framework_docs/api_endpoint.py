@@ -2,6 +2,7 @@ import json
 import inspect
 from django.contrib.admindocs.views import simplify_regex
 from django.utils.encoding import force_str
+from rest_framework.serializers import BaseSerializer
 
 
 class ApiEndpoint(object):
@@ -17,8 +18,12 @@ class ApiEndpoint(object):
         self.allowed_methods = self.__get_allowed_methods__()
         # self.view_name = pattern.callback.__name__
         self.errors = None
-        self.fields = self.__get_serializer_fields__()
-        self.fields_json = self.__get_serializer_fields_json__()
+        self.serializer_class = self.__get_serializer_class__()
+        if self.serializer_class:
+            self.serializer = self.__get_serializer__()
+            self.fields = self.__get_serializer_fields__(self.serializer)
+            self.fields_json = self.__get_serializer_fields_json__()
+
         self.permissions = self.__get_permissions_class__()
 
     def __get_path__(self, parent_pattern):
@@ -68,27 +73,39 @@ class ApiEndpoint(object):
         for perm_class in self.pattern.callback.cls.permission_classes:
             return perm_class.__name__
 
-    def __get_serializer_fields__(self):
-        fields = []
-        serializer = None
+    def __get_serializer__(self):
+        try:
+            return self.serializer_class()
+        except KeyError as e:
+            self.errors = e
 
+    def __get_serializer_class__(self):
         if hasattr(self.callback.cls, 'serializer_class'):
-            serializer = self.callback.cls.serializer_class
+            return self.callback.cls.serializer_class
 
-        elif hasattr(self.callback.cls, 'get_serializer_class'):
-            serializer = self.callback.cls.get_serializer_class(self.pattern.callback.cls())
+        if hasattr(self.callback.cls, 'get_serializer_class'):
+            return self.callback.cls.get_serializer_class(self.pattern.callback.cls())
+
+    def __get_serializer_fields__(self, serializer):
+        fields = []
 
         if hasattr(serializer, 'get_fields'):
-            try:
-                fields = [{
+            for key, field in serializer.get_fields().items():
+                to_many_relation = True if hasattr(field, 'many') else False
+                sub_fields = []
+
+                if to_many_relation:
+                    sub_fields = self.__get_serializer_fields__(field.child) if isinstance(field, BaseSerializer) else None
+                else:
+                    sub_fields = self.__get_serializer_fields__(field) if isinstance(field, BaseSerializer) else None
+
+                fields.append({
                     "name": key,
                     "type": str(field.__class__.__name__),
-                    "required": field.required
-                } for key, field in serializer().get_fields().items()]
-            except KeyError as e:
-                self.errors = e
-                fields = []
-
+                    "sub_fields": sub_fields,
+                    "required": field.required,
+                    "to_many_relation": to_many_relation
+                })
             # FIXME:
             # Show more attibutes of `field`?
 
