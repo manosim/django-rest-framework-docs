@@ -27,7 +27,7 @@ class DRFDocsViewTests(TestCase):
         response = self.client.get(reverse('drfdocs'))
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.context["endpoints"]), 15)
+        self.assertEqual(len(response.context["endpoints"]), 17)
 
         # Test the login view
         self.assertEqual(response.context["endpoints"][0].name_parent, "accounts")
@@ -48,6 +48,16 @@ class DRFDocsViewTests(TestCase):
 
         # The view "OrganisationErroredView" (organisations/(?P<slug>[\w-]+)/errored/) should contain an error.
         self.assertEqual(str(response.context["endpoints"][9].errors), "'test_value'")
+
+    def test_deep_recurrence(self):
+        response = self.client.get("%s?search=inherited" % reverse("drfdocs"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context["endpoints"]), 2)
+
+        endpoints = response.context["endpoints"]
+        self.assertEqual(endpoints[0].path, '/organisations/inherited/view/')
+        self.assertEqual(endpoints[1].path, '/organisations/inherited2no-slash/')
 
     def test_index_search_with_endpoints(self):
         response = self.client.get("%s?search=reset-password" % reverse("drfdocs"))
@@ -75,9 +85,9 @@ class DRFDocsViewTests(TestCase):
 
         self.assertEqual(response.context["endpoints"][10].path, '/organisations/<slug>/')
         self.assertEqual(response.context['endpoints'][6].fields[2]['to_many_relation'], True)
-        self.assertEqual(response.context["endpoints"][11].path, '/organisation-model-viewsets/')
-        self.assertEqual(response.context["endpoints"][12].path, '/organisation-model-viewsets/<pk>/')
-        self.assertEqual(response.context["endpoints"][11].allowed_methods, ['GET', 'POST', 'OPTIONS'])
-        self.assertEqual(response.context["endpoints"][12].allowed_methods, ['GET', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'])
-        self.assertEqual(response.context["endpoints"][13].allowed_methods, ['POST', 'OPTIONS'])
-        self.assertEqual(response.context["endpoints"][13].docstring, 'This is a test.')
+        self.assertEqual(response.context["endpoints"][13].path, '/organisation-model-viewsets/')
+        self.assertEqual(response.context["endpoints"][14].path, '/organisation-model-viewsets/<pk>/')
+        self.assertEqual(response.context["endpoints"][13].allowed_methods, ['GET', 'POST', 'OPTIONS'])
+        self.assertEqual(response.context["endpoints"][14].allowed_methods, ['GET', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'])
+        self.assertEqual(response.context["endpoints"][15].allowed_methods, ['POST', 'OPTIONS'])
+        self.assertEqual(response.context["endpoints"][15].docstring, 'This is a test.')

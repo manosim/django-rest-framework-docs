@@ -13,7 +13,9 @@ class ApiEndpoint(object):
         self.callback = pattern.callback
         # self.name = pattern.name
         self.docstring = self.__get_docstring__()
-        self.name_parent = '/'.join(simplify_regex(pattern.regex.pattern).strip('/') for pattern in (parent_patterns or []))
+        self.name_parent = ''.join([pattern.regex.pattern for pattern in (parent_patterns or [])])
+        self.name_parent_suffix = '/' if self.name_parent.endswith('/') else ''
+        self.name_parent = simplify_regex(self.name_parent).strip('/')
         self.path = self.__get_path__(parent_patterns)
         self.allowed_methods = self.__get_allowed_methods__()
         # self.view_name = pattern.callback.__name__
@@ -28,7 +30,7 @@ class ApiEndpoint(object):
 
     def __get_path__(self, parent_patterns):
         if parent_patterns:
-            return "/{0}{1}".format(self.name_parent, simplify_regex(self.pattern.regex.pattern))
+            return simplify_regex("{}{}{}".format(self.name_parent, self.name_parent_suffix, self.pattern.regex.pattern))
         return simplify_regex(self.pattern.regex.pattern)
 
     def __get_allowed_methods__(self):
