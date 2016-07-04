@@ -13,7 +13,7 @@ class ApiEndpoint(object):
         self.callback = pattern.callback
         # self.name = pattern.name
         self.docstring = self.__get_docstring__()
-        self.name_parent = ''.join([pattern.regex.pattern for pattern in (parent_patterns or [])])
+        self.name_parent = ''.join([parent_pattern.regex.pattern for parent_pattern in (parent_patterns or [])])
         self.name_parent_suffix = '/' if self.name_parent.endswith('/') else ''
         self.name_parent = simplify_regex(self.name_parent).strip('/')
         self.path = self.__get_path__(parent_patterns)
