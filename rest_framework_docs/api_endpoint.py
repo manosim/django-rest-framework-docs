@@ -6,28 +6,23 @@ from rest_framework.serializers import BaseSerializer
 
 
 class ApiEndpoint(object):
-
-    def __init__(self, pattern, parent_pattern=None, drf_router=None):
-        self.drf_router = drf_router
+    def __init__(self, pattern, parent_patterns=None):
         self.pattern = pattern
         self.callback = pattern.callback
         # self.name = pattern.name
         self.docstring = self.__get_docstring__()
-        self.name_parent = simplify_regex(parent_pattern.regex.pattern).strip('/') if parent_pattern else None
-        self.path = self.__get_path__(parent_pattern)
+        self.name_parent = '/'.join(
+                simplify_regex(pattern.regex.pattern).strip('/') for pattern in (parent_patterns or []))
+        self.path = self.__get_path__(parent_patterns)
         self.allowed_methods = self.__get_allowed_methods__()
         # self.view_name = pattern.callback.__name__
         self.errors = None
-        self.serializer_class = self.__get_serializer_class__()
-        if self.serializer_class:
-            self.serializer = self.__get_serializer__()
-            self.fields = self.__get_serializer_fields__(self.serializer)
-            self.fields_json = self.__get_serializer_fields_json__()
-
+        self.fields = self.__get_serializer_fields__()
+        self.fields_json = self.__get_serializer_fields_json__()
         self.permissions = self.__get_permissions_class__()
 
-    def __get_path__(self, parent_pattern):
-        if parent_pattern:
+    def __get_path__(self, parent_patterns):
+        if parent_patterns:
             return "/{0}{1}".format(self.name_parent, simplify_regex(self.pattern.regex.pattern))
         return simplify_regex(self.pattern.regex.pattern)
 
