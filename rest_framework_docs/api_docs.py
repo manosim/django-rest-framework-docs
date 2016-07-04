@@ -21,13 +21,17 @@ class ApiDocumentation(object):
         else:
             self.get_all_view_names(root_urlconf.urlpatterns)
 
-    def get_all_view_names(self, urlpatterns, parent_pattern=None):
+    def get_all_view_names(self, urlpatterns, ancestors_patterns=None):
+        if ancestors_patterns is None:
+            ancestors_patterns = []
         for pattern in urlpatterns:
             if isinstance(pattern, RegexURLResolver):
-                parent_pattern = None if pattern._regex == "^" else pattern
-                self.get_all_view_names(urlpatterns=pattern.url_patterns, parent_pattern=parent_pattern)
+                if pattern._regex != "^":
+                    ancestors_patterns.append(pattern)
+                self.get_all_view_names(urlpatterns=pattern.url_patterns, ancestors_patterns=ancestors_patterns)
+                ancestors_patterns.pop()
             elif isinstance(pattern, RegexURLPattern) and self._is_drf_view(pattern) and not self._is_format_endpoint(pattern):
-                api_endpoint = ApiEndpoint(pattern, parent_pattern, self.drf_router)
+                api_endpoint = ApiEndpoint(pattern, ancestors_patterns, self.drf_router)
                 self.endpoints.append(api_endpoint)
 
     def _is_drf_view(self, pattern):
