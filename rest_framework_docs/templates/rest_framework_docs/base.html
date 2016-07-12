@@ -76,6 +76,8 @@
     </div>
 
     <!-- Dist.js - Inlcuded Live API, jQuery, Bootstrap -->
+    {% block script %}
     <script type="text/javascript" src="{% static "rest_framework_docs/js/dist.min.js" %}"></script>
+    {% endblock %}
   </body>
 </html>
