@@ -29,7 +29,8 @@ class ApiDocumentation(object):
                 if pattern._regex != "^":
                     ancestors_patterns.append(pattern)
                 self.get_all_view_names(urlpatterns=pattern.url_patterns, ancestors_patterns=ancestors_patterns)
-                ancestors_patterns.pop()
+                if ancestors_patterns:
+                    ancestors_patterns.pop()
             elif isinstance(pattern, RegexURLPattern) and self._is_drf_view(pattern) and not self._is_format_endpoint(pattern):
                 api_endpoint = ApiEndpoint(pattern, ancestors_patterns, self.drf_router)
                 self.endpoints.append(api_endpoint)
