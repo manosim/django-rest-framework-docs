@@ -5,7 +5,8 @@ class DRFSettings(object):
 
     def __init__(self):
         self.drf_settings = {
-            "HIDE_DOCS": self.get_setting("HIDE_DOCS") or False
+            "HIDE_DOCS": self.get_setting("HIDE_DOCS") or False,
+            "DOCSTRING_FORMAT": self.get_setting("DOCSTRING_FORMAT") or "text"
         }
 
     def get_setting(self, name):
