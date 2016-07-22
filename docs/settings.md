@@ -21,9 +21,14 @@ You can use hidden to prevent your docs from showing up in different environment
 
 Then set the value of the environment variable `HIDE_DRFDOCS` for each environment (ie. Use `.env` files)
 
+##### DOCSTRING_FORMAT
+Use DOCSTRING_FORMAT to configure the format you follow for the docstrings.  Supported formats are:
+- *text*: Plain text
+- *rst*: reStructuredText
+
 ### List of Settings
 
-| Setting | Type    | Options         | Default |
-|---------|---------|-----------------|---------|
-|HIDE_DOCS| Boolean | `True`, `False` | `False` |
-|         |         |                 |         |
+| Setting        | Type    | Options         | Default |
+|----------------|---------|-----------------|---------|
+|HIDE_DOCS       | Boolean | `True`, `False` | `False` |
+|DOCSTRING_FORMAT| String  | 'text', 'rst'   | 'text'  |
