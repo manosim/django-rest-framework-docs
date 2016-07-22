@@ -4,6 +4,8 @@ from django.contrib.admindocs.views import simplify_regex
 from django.utils.encoding import force_str
 from rest_framework.serializers import BaseSerializer
 
+from django.utils.safestring import mark_safe
+from docutils import core
 
 class ApiEndpoint(object):
 
@@ -67,7 +69,10 @@ class ApiEndpoint(object):
         return viewset_methods + view_methods
 
     def __get_docstring__(self):
-        return inspect.getdoc(self.callback)
+        description = inspect.getdoc(self.callback)
+        parts = core.publish_parts(source = description, writer_name = 'html')
+        html = parts['body_pre_docinfo'] + parts['fragment']
+        return mark_safe(html)
 
     def __get_permissions_class__(self):
         for perm_class in self.pattern.callback.cls.permission_classes:

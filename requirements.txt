@@ -3,3 +3,4 @@ djangorestframework==3.3.2
 coverage==4.0.3
 flake8==2.5.1
 mkdocs==0.15.3
+docutils==0.12
