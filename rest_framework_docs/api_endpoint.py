@@ -3,9 +3,9 @@ import inspect
 from django.contrib.admindocs.views import simplify_regex
 from django.utils.encoding import force_str
 from rest_framework.serializers import BaseSerializer
-
 from django.utils.safestring import mark_safe
 from docutils import core
+
 
 class ApiEndpoint(object):
 
@@ -71,7 +71,7 @@ class ApiEndpoint(object):
 
     def __get_docstring__(self):
         description = inspect.getdoc(self.callback)
-        if (self.docstring_format == "rst"): # reStructuredText
+        if (self.docstring_format == "rst"):  # reStructuredText
             parts = core.publish_parts(source=description, writer_name="html")
             html = parts["body_pre_docinfo"] + parts["fragment"]
             description = mark_safe(html)
