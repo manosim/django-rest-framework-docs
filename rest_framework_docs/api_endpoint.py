@@ -1,8 +1,8 @@
 import json
 import inspect
-
 from django.contrib.admindocs.views import simplify_regex
 from django.utils.encoding import force_str
+from rest_framework.serializers import BaseSerializer
 
 from rest_framework import serializers
 from rest_framework.viewsets import ModelViewSet
@@ -18,7 +18,8 @@ VIEWSET_METHODS = {
 
 class ApiEndpoint(object):
 
-    def __init__(self, pattern, parent_pattern=None):
+    def __init__(self, pattern, parent_pattern=None, drf_router=None):
+        self.drf_router = drf_router
         self.pattern = pattern
         self.callback = pattern.callback
         self.docstring = self.__get_docstring__()
@@ -36,8 +37,12 @@ class ApiEndpoint(object):
         self.path = self.__get_path__(parent_pattern)
         self.allowed_methods = self.__get_allowed_methods__()
         self.errors = None
-        self.fields = self.__get_serializer_fields__()
-        self.fields_json = self.__get_serializer_fields_json__()
+        self.serializer_class = self.__get_serializer_class__()
+        if self.serializer_class:
+            self.serializer = self.__get_serializer__()
+            self.fields = self.__get_serializer_fields__(self.serializer)
+            self.fields_json = self.__get_serializer_fields_json__()
+
         self.permissions = self.__get_permissions_class__()
 
     def __get_path__(self, parent_pattern):
@@ -57,12 +62,74 @@ class ApiEndpoint(object):
             [force_str(name).upper() for name in callback_cls.http_method_names if is_method_allowed(name)],
             key=lambda e: METHODS_ORDER.index(e))
 
+        viewset_methods = []
+        if self.drf_router:
+            for prefix, viewset, basename in self.drf_router.registry:
+                if self.callback.cls != viewset:
+                    continue
+
+                lookup = self.drf_router.get_lookup_regex(viewset)
+                routes = self.drf_router.get_routes(viewset)
+
+                for route in routes:
+
+                    # Only actions which actually exist on the viewset will be bound
+                    mapping = self.drf_router.get_method_map(viewset, route.mapping)
+                    if not mapping:
+                        continue
+
+                    # Build the url pattern
+                    regex = route.url.format(
+                        prefix=prefix,
+                        lookup=lookup,
+                        trailing_slash=self.drf_router.trailing_slash
+                    )
+                    if self.pattern.regex.pattern == regex:
+                        funcs, viewset_methods = zip(
+                            *[(mapping[m], m.upper()) for m in self.callback.cls.http_method_names if m in mapping]
+                        )
+                        viewset_methods = list(viewset_methods)
+                        if len(set(funcs)) == 1:
+                            self.docstring = inspect.getdoc(getattr(self.callback.cls, funcs[0]))
+
+        view_methods = [force_str(m).upper() for m in self.callback.cls.http_method_names if hasattr(self.callback.cls, m)]
+        return viewset_methods + view_methods
+
     def __get_docstring__(self):
         return inspect.getdoc(self.callback)
 
     def __get_permissions_class__(self):
         for perm_class in self.pattern.callback.cls.permission_classes:
             return perm_class.__name__
+
+    def __get_serializer_fields__(self):
+        fields = []
+        serializer = None
+
+        if hasattr(self.callback.cls, 'serializer_class'):
+            serializer = self.callback.cls.serializer_class
+
+        elif hasattr(self.callback.cls, 'get_serializer_class'):
+            serializer = self.callback.cls.get_serializer_class(self.pattern.callback.cls())
+
+        if hasattr(serializer, 'get_fields'):
+            try:
+                fields = self.__get_fields__(serializer)
+            except KeyError as e:
+                self.errors = e
+                fields = []
+    def __get_serializer__(self):
+        try:
+            return self.serializer_class()
+        except KeyError as e:
+            self.errors = e
+
+    def __get_serializer_class__(self):
+        if hasattr(self.callback.cls, 'serializer_class'):
+            return self.callback.cls.serializer_class
+
+        if hasattr(self.callback.cls, 'get_serializer_class'):
+            return self.callback.cls.get_serializer_class(self.pattern.callback.cls())
 
     def __get_serializer_fields__(self):
         fields = []

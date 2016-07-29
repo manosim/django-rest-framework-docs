@@ -5,9 +5,11 @@ from django.views.generic.base import TemplateView
 from rest_framework import parsers, renderers, generics, status
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.serializers import AuthTokenSerializer
+from rest_framework.decorators import detail_route
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.viewsets import ModelViewSet
 from tests.models import User, Organisation, Membership
 from tests import serializers
 
@@ -132,3 +134,18 @@ class LoginWithSerilaizerClassView(APIView):
 
     def get_serializer_class(self):
         return AuthTokenSerializer
+
+
+class TestModelViewSet(ModelViewSet):
+    queryset = Organisation.objects.all()
+    serializer_class = serializers.OrganisationMembersSerializer
+
+    @detail_route(methods=['post'])
+    def test_route(self, request):
+        """This is a test."""
+        return Response()
+
+
+class RetrieveOrganisationView(generics.RetrieveAPIView):
+
+    serializer_class = serializers.RetrieveOrganisationSerializer
