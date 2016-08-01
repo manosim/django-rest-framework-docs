@@ -16,14 +16,12 @@ Including another URLconf
 import django
 from django.conf.urls import include, url
 from django.contrib import admin
-from .organisations.urls import organisations_urlpatterns, members_urlpatterns
+from rest_framework_docs.views import DRFDocsView
+from .accounts.urls import account_urlpatterns, account_router
+from .organisations.urls import organisations_urlpatterns, members_urlpatterns, organisation_router
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^docs/', include('rest_framework_docs.urls')),
-
-    # API
-    url(r'^accounts/', view=include('project.accounts.urls', namespace='accounts')),
 ]
 
 # Django 1.9 Support for the app_name argument is deprecated
@@ -31,11 +29,22 @@ urlpatterns = [
 django_version = django.VERSION
 if django.VERSION[:2] >= (1, 9, ):
     urlpatterns.extend([
+        url(r'^accounts/', view=include(account_urlpatterns, namespace='accounts')),
         url(r'^organisations/', view=include(organisations_urlpatterns, namespace='organisations')),
         url(r'^members/', view=include(members_urlpatterns, namespace='members')),
     ])
 else:
     urlpatterns.extend([
+        url(r'^accounts/', view=include(account_urlpatterns, namespace='accounts', app_name='account_app')),
         url(r'^organisations/', view=include(organisations_urlpatterns, namespace='organisations', app_name='organisations_app')),
         url(r'^members/', view=include(members_urlpatterns, namespace='members', app_name='organisations_app')),
     ])
+
+
+from tests.views import LoginView
+routers = [account_router, organisation_router]
+urlpatterns.extend([
+    url(r'^docs/(?P<filter_param>[\w-]+)/$', DRFDocsView.as_view(drf_router=routers), name='drfdocs-filter'),
+    url(r'^docs/$', DRFDocsView.as_view(drf_router=routers), name='drfdocs'),
+    url(r'^another-login/$', LoginView.as_view(), name="login"),
+])

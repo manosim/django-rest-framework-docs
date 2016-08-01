@@ -1,5 +1,6 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet
 from project.organisations.models import Organisation, Membership
 from project.organisations.serializers import (
     CreateOrganisationSerializer, OrganisationMembersSerializer, RetrieveOrganisationSerializer
@@ -34,3 +35,8 @@ class LeaveOrganisationView(generics.DestroyAPIView):
         instance = self.get_object()
         self.perform_destroy(instance)
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class OrganisationModelViewset(ModelViewSet):
+    queryset = Organisation.objects.all()
+    serializer_class = OrganisationMembersSerializer

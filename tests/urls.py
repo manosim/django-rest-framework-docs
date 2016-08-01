@@ -7,6 +7,7 @@ from rest_framework.routers import SimpleRouter
 from rest_framework_docs.views import DRFDocsView
 from tests import views
 
+
 accounts_urls = [
     url(r'^login/$', views.LoginView.as_view(), name="login"),
     url(r'^login2/$', views.LoginWithSerilaizerClassView.as_view(), name="login2"),
@@ -36,12 +37,14 @@ members_urls = [
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^docs/', DRFDocsView.as_view(drf_router=router), name='drfdocs'),
+
+    # url(r'^docs/', include('rest_framework_docs.urls')),
+    url(r'^docs/(?P<filter_param>[\w-]+)/$', DRFDocsView.as_view(drf_router=router), name='drfdocs-filter'),
+    url(r'^docs/$', DRFDocsView.as_view(drf_router=router), name='drfdocs'),
 
     # API
-    url(r'^accounts/', view=include(accounts_urls, namespace="accounts")),
-    url(r'^accounts/', view=include(accounts_urls, namespace='accounts')),
-    url(r'^organisations/', view=include(organisations_urls, namespace='organisations')),
+    # url(r'^accounts/', view=include(accounts_urls, namespace="accounts")),
+    # url(r'^organisations/', view=include(organisations_urls, namespace='organisations')),
     url(r'^', include(router.urls)),
 
     # Endpoints without parents/namespaces
@@ -55,11 +58,13 @@ if django.VERSION[:2] >= (1, 9, ):
     organisations_urls = (organisations_urls, 'organisations_app', )
     members_urls = (members_urls, 'organisations_app', )
     urlpatterns.extend([
+        url(r'^accounts/', view=include(accounts_urls, namespace="accounts")),
         url(r'^organisations/', view=include(organisations_urls, namespace='organisations')),
         url(r'^members/', view=include(members_urls, namespace='members')),
     ])
 else:
     urlpatterns.extend([
+        url(r'^accounts/', view=include(accounts_urls, namespace="accounts", app_name='accounts_app')),
         url(r'^organisations/', view=include(organisations_urls, namespace='organisations', app_name='organisations_app')),
         url(r'^members/', view=include(members_urls, namespace='members', app_name='organisations_app')),
     ])
