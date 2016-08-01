@@ -41,10 +41,8 @@ else:
     ])
 
 
-from tests.views import LoginView
 routers = [account_router, organisation_router]
 urlpatterns.extend([
     url(r'^docs/(?P<filter_param>[\w-]+)/$', DRFDocsView.as_view(drf_router=routers), name='drfdocs-filter'),
     url(r'^docs/$', DRFDocsView.as_view(drf_router=routers), name='drfdocs'),
-    url(r'^another-login/$', LoginView.as_view(), name="login"),
 ])
