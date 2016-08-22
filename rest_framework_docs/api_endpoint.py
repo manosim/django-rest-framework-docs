@@ -5,18 +5,73 @@ from django.utils.encoding import force_str
 from rest_framework.serializers import BaseSerializer
 
 
-class ApiEndpoint(object):
+class ApiNode(object):
 
-    def __init__(self, pattern, parent_pattern=None, drf_router=None):
-        self.drf_router = drf_router
+    def __init__(self, pattern, parent_node=None, drf_router=None):
         self.pattern = pattern
+        self.parent_node = parent_node
+        self.drf_router = drf_router
+
+    @property
+    def parent_pattern(self):
+        if self.parent_node is None:
+            return None
+        return self.parent_node.pattern
+
+    @property
+    def name_parent(self):
+        if self.parent_pattern is None:
+            return None
+        return simplify_regex(self.parent_pattern.regex.pattern).strip('/')
+
+    @property
+    def name_parent_full(self):
+        name_parent_full = self.name_parent
+        if name_parent_full is None:
+            return None
+        parent_node = self.parent_node
+        parent_name = parent_node.name_parent
+        while parent_name is not None:
+            name_parent_full = "{}/{}".format(parent_name, name_parent_full)
+            parent_node = parent_node.parent_node
+            parent_name = parent_node.name_parent
+        return name_parent_full
+
+    @property
+    def path(self):
+        pattern = self.__get_path__(self.parent_pattern)
+        if pattern is None:
+            return None
+        parent = self.parent_node
+        name_parent = None if parent is None else parent.name_parent
+        while name_parent is not None:
+            pattern = "{}/{}".format(name_parent, pattern)
+            parent = parent.parent_node
+            name_parent = parent.name_parent
+        if pattern[0] != "/":
+            pattern = "/{}".format(pattern)
+        return pattern
+
+    def __get_path__(self, parent_pattern):
+        if parent_pattern:
+            return "{0}{1}".format(
+                self.name_parent,
+                simplify_regex(self.pattern.regex.pattern)
+            )
+        return simplify_regex(self.pattern.regex.pattern)
+
+
+class ApiEndpoint(ApiNode):
+
+    def __init__(self, pattern, parent_node=None, drf_router=None):
+        super(ApiEndpoint, self).__init__(
+            pattern,
+            parent_node=parent_node,
+            drf_router=drf_router
+        )
         self.callback = pattern.callback
-        # self.name = pattern.name
         self.docstring = self.__get_docstring__()
-        self.name_parent = simplify_regex(parent_pattern.regex.pattern).strip('/') if parent_pattern else None
-        self.path = self.__get_path__(parent_pattern)
         self.allowed_methods = self.__get_allowed_methods__()
-        # self.view_name = pattern.callback.__name__
         self.errors = None
         self.serializer_class = self.__get_serializer_class__()
         if self.serializer_class:
@@ -26,13 +81,7 @@ class ApiEndpoint(object):
 
         self.permissions = self.__get_permissions_class__()
 
-    def __get_path__(self, parent_pattern):
-        if parent_pattern:
-            return "/{0}{1}".format(self.name_parent, simplify_regex(self.pattern.regex.pattern))
-        return simplify_regex(self.pattern.regex.pattern)
-
     def __get_allowed_methods__(self):
-
         viewset_methods = []
         if self.drf_router:
             for prefix, viewset, basename in self.drf_router.registry:
