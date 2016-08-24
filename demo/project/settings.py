@@ -101,6 +101,14 @@ REST_FRAMEWORK = {
     )
 }
 
+REST_FRAMEWORK_DOCS = {
+    'HIDE_DOCS': False,
+    'MODULE_ROUTERS': {
+        'project.accounts.urls': 'router',
+    },
+    'DEFAULT_MODULE_ROUTER': 'router',
+}
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
