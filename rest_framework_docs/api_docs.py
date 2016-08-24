@@ -52,8 +52,10 @@ class ApiDocumentation(object):
                     )
                 self.get_all_view_names(urlpatterns=pattern.url_patterns, parent_api_node=parent)
             elif isinstance(pattern, RegexURLPattern) and _is_drf_view(pattern) and not _is_format_endpoint(pattern):
-                router = parent_api_node.drf_router
-                router = self.drf_router if router is None else router
+                router = self.drf_router
+                if parent_api_node is not None:
+                    if parent_api_node.drf_router is not None:
+                        router = parent_api_node.drf_router
                 api_endpoint = ApiEndpoint(pattern, parent_api_node, router)
                 self.endpoints.append(api_endpoint)
 
