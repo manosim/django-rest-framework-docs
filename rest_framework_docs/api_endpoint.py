@@ -110,8 +110,9 @@ class ApiEndpoint(ApiNode):
                         )
                         viewset_methods = list(viewset_methods)
                         if len(set(funcs)) == 1:
-                            self.docstring = inspect.getdoc(getattr(self.callback.cls, funcs[0]))
-
+                            func_docstring = inspect.getdoc(getattr(self.callback.cls, funcs[0]))
+                            if func_docstring is not None:
+                                self.docstring = func_docstring
         view_methods = [force_str(m).upper() for m in self.callback.cls.http_method_names if hasattr(self.callback.cls, m)]
         return viewset_methods + view_methods
 
