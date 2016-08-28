@@ -68,14 +68,14 @@ You can find detailed information about the package's settings at [the docs](htt
 
 First of all thanks to the [Django](http://www.djangoproject.com/) core team and to all the contributors of [Django REST Framework](http://www.django-rest-framework.org/) for their amazing work. Also I would like to thank [Marc Gibbons](https://github.com/marcgibbons) for his *django-rest-framework-docs* project. Both projects share the same idea, it is just that Marc's is not maintained anymore and does not support DRF 3+ & Python 3.
 
-[travis-image]: https://travis-ci.org/ekonstantinidis/django-rest-framework-docs.svg?branch=master
-[travis-url]: https://travis-ci.org/ekonstantinidis/django-rest-framework-docs
+[travis-image]: https://travis-ci.org/manosim/django-rest-framework-docs.svg?branch=master
+[travis-url]: https://travis-ci.org/manosim/django-rest-framework-docs
 
 [pypi-image]: https://badge.fury.io/py/drfdocs.svg
 [pypi-url]: https://pypi.python.org/pypi/drfdocs/
 
-[codecov-image]: https://codecov.io/github/ekonstantinidis/django-rest-framework-docs/coverage.svg?branch=master
-[codecov-url]:https://codecov.io/github/ekonstantinidis/django-rest-framework-docs?branch=master
+[codecov-image]: https://codecov.io/github/manosim/django-rest-framework-docs/coverage.svg?branch=master
+[codecov-url]:https://codecov.io/github/manosim/django-rest-framework-docs?branch=master
 
 [slack-image]: https://img.shields.io/badge/slack-pythondev/drfdocs-e01563.svg
 [slack-url]: https://pythondev.slack.com
