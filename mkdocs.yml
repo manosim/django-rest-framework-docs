@@ -18,6 +18,6 @@ extra_css:
 extra_javascript:
     - js/index.js
 
-copyright: Copyright © 2015 Emmanouil Konstantinidis.
+copyright: Copyright © 2016 Emmanouil Konstantinidis.
 google_analytics: ['UA-71505240-1', 'drfdocs.com']
-repo_url: https://github.com/ekonstantinidis/django-rest-framework-docs
+repo_url: https://github.com/manosim/django-rest-framework-docs
