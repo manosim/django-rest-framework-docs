@@ -53,6 +53,7 @@ def run_tests_coverage():
         cov.report()
         cov.html_report(directory='covhtml')
 
+
 exit_on_failure(flake8_main(FLAKE8_ARGS))
 exit_on_failure(run_tests_eslint())
 exit_on_failure(run_tests_coverage())

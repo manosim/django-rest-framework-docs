@@ -1,5 +1,5 @@
-Django==1.8.7
-djangorestframework==3.3.2
-coverage==4.0.3
-flake8==2.5.1
+Django==1.10.1
+djangorestframework==3.4.6
+coverage==4.2
+flake8<3.0.0
 mkdocs==0.15.3
