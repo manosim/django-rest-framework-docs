@@ -3,11 +3,13 @@ import inspect
 from django.contrib.admindocs.views import simplify_regex
 from django.utils.encoding import force_str
 from rest_framework.serializers import BaseSerializer
+from rest_framework_docs.settings import DRFSettings
 
 
 class ApiEndpoint(object):
 
     def __init__(self, pattern, parent_pattern=None, drf_router=None):
+        self.settings = DRFSettings().settings
         self.drf_router = drf_router
         self.pattern = pattern
         self.callback = pattern.callback
@@ -67,7 +69,7 @@ class ApiEndpoint(object):
         return viewset_methods + view_methods
 
     def __get_docstring__(self):
-        return inspect.getdoc(self.callback)
+        return self.settings["VIEW_DESCRIPTION_FUNCTION"](self.callback, html=True)
 
     def __get_permissions_class__(self):
         for perm_class in self.pattern.callback.cls.permission_classes:
