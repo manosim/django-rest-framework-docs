@@ -7,7 +7,7 @@ class User(AbstractBaseUser):
     modified = models.DateTimeField(auto_now=True)
 
     email = models.EmailField(unique=True, verbose_name='email address', max_length=255)
-    full_name = models.CharField(max_length=255)
+    full_name = models.CharField(max_length=255, help_text='Yes, the full name!')
 
     is_active = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
