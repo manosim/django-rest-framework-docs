@@ -21,7 +21,7 @@ class ApiDocumentation(object):
         else:
             self.get_all_view_names(root_urlconf.urlpatterns)
 
-    def get_all_view_names(self, urlpatterns, parent_regex=None):
+    def get_all_view_names(self, urlpatterns, parent_regex=''):
         for pattern in urlpatterns:
             if isinstance(pattern, RegexURLResolver):
                 regex = '' if pattern._regex == "^" else pattern._regex
