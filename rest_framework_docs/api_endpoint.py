@@ -13,7 +13,7 @@ class ApiEndpoint(object):
         self.callback = pattern.callback
         # self.name = pattern.name
         self.docstring = self.__get_docstring__()
-        self.name_parent = simplify_regex(parent_regex).strip('/') if parent_pattern else None
+        self.name_parent = simplify_regex(parent_regex).strip('/') if parent_regex else None
         self.path = self.__get_path__(parent_regex)
         self.allowed_methods = self.__get_allowed_methods__()
         # self.view_name = pattern.callback.__name__
