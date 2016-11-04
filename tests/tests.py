@@ -31,7 +31,7 @@ class DRFDocsViewTests(TestCase):
 
         # Test the login view
         self.assertEqual(response.context["endpoints"][0].name_parent, "accounts")
-        self.assertEqual(response.context["endpoints"][0].allowed_methods, ['POST', 'OPTIONS'])
+        self.assertEqual(sorted(response.context["endpoints"][0].allowed_methods), sorted(['OPTIONS', 'POST']))
         self.assertEqual(response.context["endpoints"][0].path, "/accounts/login/")
         self.assertEqual(response.context["endpoints"][0].docstring, "A view that allows users to login providing their username and password.")
         self.assertEqual(len(response.context["endpoints"][0].fields), 2)

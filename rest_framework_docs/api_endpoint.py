@@ -1,8 +1,16 @@
 import json
 import inspect
+
 from django.contrib.admindocs.views import simplify_regex
 from django.utils.encoding import force_str
+
+from rest_framework.viewsets import ModelViewSet
 from rest_framework.serializers import BaseSerializer
+
+VIEWSET_METHODS = {
+    'List': ['get', 'post'],
+    'Instance': ['get', 'put', 'patch', 'delete'],
+}
 
 
 class ApiEndpoint(object):
@@ -31,8 +39,14 @@ class ApiEndpoint(object):
             return "/{0}{1}".format(self.name_parent, simplify_regex(self.pattern.regex.pattern))
         return simplify_regex(self.pattern.regex.pattern)
 
-    def __get_allowed_methods__(self):
+    def is_method_allowed(self, callback_cls, method_name):
+        has_attr = hasattr(callback_cls, method_name)
+        viewset_method = (issubclass(callback_cls, ModelViewSet) and
+                          method_name in VIEWSET_METHODS.get(self.callback.suffix, []))
 
+        return has_attr or viewset_method
+
+    def __get_allowed_methods__(self):
         viewset_methods = []
         if self.drf_router:
             for prefix, viewset, basename in self.drf_router.registry:
@@ -57,14 +71,18 @@ class ApiEndpoint(object):
                     )
                     if self.pattern.regex.pattern == regex:
                         funcs, viewset_methods = zip(
-                            *[(mapping[m], m.upper()) for m in self.callback.cls.http_method_names if m in mapping]
+                            *[(mapping[m], m.upper())
+                              for m in self.callback.cls.http_method_names
+                              if m in mapping]
                         )
                         viewset_methods = list(viewset_methods)
                         if len(set(funcs)) == 1:
                             self.docstring = inspect.getdoc(getattr(self.callback.cls, funcs[0]))
 
-        view_methods = [force_str(m).upper() for m in self.callback.cls.http_method_names if hasattr(self.callback.cls, m)]
-        return viewset_methods + view_methods
+        view_methods = [force_str(m).upper()
+                        for m in self.callback.cls.http_method_names
+                        if self.is_method_allowed(self.callback.cls, m)]
+        return sorted(viewset_methods + view_methods)
 
     def __get_docstring__(self):
         return inspect.getdoc(self.callback)
