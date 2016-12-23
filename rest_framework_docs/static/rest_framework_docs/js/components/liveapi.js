@@ -37,6 +37,7 @@ var LiveAPIEndpoints = React.createClass({
     // Now Make the Request
     APIRequest(request.selectedMethod, request.endpoint.path)
       .set(headers)
+      .accept("json")
       .send(data)
       .end(function (err, res) {
         self.setState({

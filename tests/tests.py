@@ -49,6 +49,8 @@ class DRFDocsViewTests(TestCase):
         # The view "OrganisationErroredView" (organisations/(?P<slug>[\w-]+)/errored/) should contain an error.
         self.assertEqual(str(response.context["endpoints"][9].errors), "'test_value'")
 
+        self.assertEqual(response.context["endpoints"][14].path, "/another-login/")
+
     def test_index_search_with_endpoints(self):
         response = self.client.get("%s?search=reset-password" % reverse("drfdocs"))
 
@@ -75,8 +77,8 @@ class DRFDocsViewTests(TestCase):
 
         self.assertEqual(response.context["endpoints"][10].path, '/organisations/<slug>/')
         self.assertEqual(response.context['endpoints'][6].fields[2]['to_many_relation'], True)
-        self.assertEqual(response.context["endpoints"][11].path, '/organisation-model-viewsets/')
-        self.assertEqual(response.context["endpoints"][12].path, '/organisation-model-viewsets/<pk>/')
+        self.assertEqual(response.context["endpoints"][11].path, '/router/organisation-model-viewsets/')
+        self.assertEqual(response.context["endpoints"][12].path, '/router/organisation-model-viewsets/<pk>/')
         self.assertEqual(response.context["endpoints"][11].allowed_methods, ['GET', 'POST', 'OPTIONS'])
         self.assertEqual(response.context["endpoints"][12].allowed_methods, ['GET', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'])
         self.assertEqual(response.context["endpoints"][13].allowed_methods, ['POST', 'OPTIONS'])
