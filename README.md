@@ -61,6 +61,9 @@ You can find detailed information about the package's settings at [the docs](htt
 
     REST_FRAMEWORK_DOCS = {
         'HIDE_DOCS': True  # Default: False
+        'MODULE_ROUTERS': {},
+        'DEFAULT_MODULE_ROUTER': 'router',
+        'DEFAULT_ROUTER': None,
     }
 
 

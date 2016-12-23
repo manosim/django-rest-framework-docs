@@ -16,7 +16,7 @@
 
 {% block content %}
 
-  {% regroup endpoints by name_parent as endpoints_grouped %}
+  {% regroup endpoints by name_parent_full as endpoints_grouped %}
 
   {% if endpoints_grouped %}
   {% for group in endpoints_grouped %}

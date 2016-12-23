@@ -5,7 +5,10 @@ class DRFSettings(object):
 
     def __init__(self):
         self.drf_settings = {
-            "HIDE_DOCS": self.get_setting("HIDE_DOCS") or False
+            "HIDE_DOCS": self.get_setting("HIDE_DOCS") or False,
+            "MODULE_ROUTERS": self.get_setting("MODULE_ROUTERS"),
+            "DEFAULT_MODULE_ROUTER": self.get_setting("DEFAULT_MODULE_ROUTER"),
+            "DEFAULT_ROUTER": self.get_setting("DEFAULT_ROUTER")
         }
 
     def get_setting(self, name):
