@@ -149,3 +149,7 @@ class TestModelViewSet(ModelViewSet):
 class RetrieveOrganisationView(generics.RetrieveAPIView):
 
     serializer_class = serializers.RetrieveOrganisationSerializer
+
+
+class InheritedView(generics.CreateAPIView):
+    serializer_class = serializers.CreateOrganisationSerializer
