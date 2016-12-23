@@ -7,13 +7,13 @@ from rest_framework.serializers import BaseSerializer
 
 class ApiEndpoint(object):
 
-    def __init__(self, pattern, parent_pattern=None, drf_router=None):
+    def __init__(self, pattern, ancestors_patterns=[], drf_router=None):
         self.drf_router = drf_router
         self.pattern = pattern
         self.callback = pattern.callback
         # self.name = pattern.name
         self.docstring = self.__get_docstring__()
-        self.name_parent = simplify_regex(parent_pattern.regex.pattern).strip('/') if parent_pattern else None
+        self.name_parent = ''.join([simplify_regex(parent_pattern.regex.pattern).rstrip('/') for parent_pattern in ancestors_patterns]).lstrip('/') if ancestors_patterns else None
         self.path = self.__get_path__(parent_pattern)
         self.allowed_methods = self.__get_allowed_methods__()
         # self.view_name = pattern.callback.__name__
