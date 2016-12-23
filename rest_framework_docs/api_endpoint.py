@@ -3,14 +3,17 @@ import inspect
 from django.contrib.admindocs.views import simplify_regex
 from django.utils.encoding import force_str
 from rest_framework.serializers import BaseSerializer
+from django.utils.safestring import mark_safe
+from docutils import core
 
 
 class ApiEndpoint(object):
 
-    def __init__(self, pattern, parent_pattern=None, drf_router=None):
+    def __init__(self, pattern, parent_pattern=None, drf_router=None, docstring_format=None):
         self.drf_router = drf_router
         self.pattern = pattern
         self.callback = pattern.callback
+        self.docstring_format = docstring_format
         # self.name = pattern.name
         self.docstring = self.__get_docstring__()
         self.name_parent = simplify_regex(parent_pattern.regex.pattern).strip('/') if parent_pattern else None
@@ -67,7 +70,12 @@ class ApiEndpoint(object):
         return viewset_methods + view_methods
 
     def __get_docstring__(self):
-        return inspect.getdoc(self.callback)
+        description = inspect.getdoc(self.callback)
+        if (self.docstring_format == "rst"):  # reStructuredText
+            parts = core.publish_parts(source=description, writer_name="html")
+            html = parts["body_pre_docinfo"] + parts["fragment"]
+            description = mark_safe(html)
+        return description
 
     def __get_permissions_class__(self):
         for perm_class in self.pattern.callback.cls.permission_classes:

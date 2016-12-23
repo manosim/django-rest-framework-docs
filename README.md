@@ -61,6 +61,7 @@ You can find detailed information about the package's settings at [the docs](htt
 
     REST_FRAMEWORK_DOCS = {
         'HIDE_DOCS': True  # Default: False
+        'DOCSTRING_FORMAT': 'rst' # Default: 'text'
     }
 
 
