@@ -21,7 +21,7 @@ class DRFDocsViewTests(TestCase):
 
     def test_index_view_with_endpoints(self):
         """
-        Should load the drf focs view with all the endpoints.
+        Should load the drf docs view with all the endpoints.
         NOTE: Views that do **not** inherit from DRF's "APIView" are not included.
         """
         response = self.client.get(reverse('drfdocs'))
@@ -31,7 +31,7 @@ class DRFDocsViewTests(TestCase):
 
         # Test the login view
         self.assertEqual(response.context["endpoints"][0].name_parent, "accounts")
-        self.assertEqual(response.context["endpoints"][0].allowed_methods, ['POST', 'OPTIONS'])
+        self.assertEqual(set(response.context["endpoints"][0].allowed_methods), set(['OPTIONS', 'POST']))
         self.assertEqual(response.context["endpoints"][0].path, "/accounts/login/")
         self.assertEqual(response.context["endpoints"][0].docstring, "A view that allows users to login providing their username and password.")
         self.assertEqual(len(response.context["endpoints"][0].fields), 2)
@@ -39,7 +39,7 @@ class DRFDocsViewTests(TestCase):
         self.assertTrue(response.context["endpoints"][0].fields[0]["required"])
 
         self.assertEqual(response.context["endpoints"][1].name_parent, "accounts")
-        self.assertEqual(response.context["endpoints"][1].allowed_methods, ['POST', 'OPTIONS'])
+        self.assertEqual(set(response.context["endpoints"][1].allowed_methods), set(['POST', 'OPTIONS']))
         self.assertEqual(response.context["endpoints"][1].path, "/accounts/login2/")
         self.assertEqual(response.context["endpoints"][1].docstring, "A view that allows users to login providing their username and password. Without serializer_class")
         self.assertEqual(len(response.context["endpoints"][1].fields), 2)
@@ -77,7 +77,7 @@ class DRFDocsViewTests(TestCase):
         self.assertEqual(response.context['endpoints'][6].fields[2]['to_many_relation'], True)
         self.assertEqual(response.context["endpoints"][11].path, '/organisation-model-viewsets/')
         self.assertEqual(response.context["endpoints"][12].path, '/organisation-model-viewsets/<pk>/')
-        self.assertEqual(response.context["endpoints"][11].allowed_methods, ['GET', 'POST', 'OPTIONS'])
-        self.assertEqual(response.context["endpoints"][12].allowed_methods, ['GET', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'])
-        self.assertEqual(response.context["endpoints"][13].allowed_methods, ['POST', 'OPTIONS'])
+        self.assertEqual(set(response.context["endpoints"][11].allowed_methods), set(['GET', 'POST', 'OPTIONS']))
+        self.assertEqual(set(response.context["endpoints"][12].allowed_methods), set(['GET', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']))
+        self.assertEqual(set(response.context["endpoints"][13].allowed_methods), set(['POST', 'OPTIONS']))
         self.assertEqual(response.context["endpoints"][13].docstring, 'This is a test.')
