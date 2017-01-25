@@ -21,7 +21,7 @@ class DRFDocsViewTests(TestCase):
 
     def test_index_view_with_endpoints(self):
         """
-        Should load the drf focs view with all the endpoints.
+        Should load the drf docs view with all the endpoints.
         NOTE: Views that do **not** inherit from DRF's "APIView" are not included.
         """
         response = self.client.get(reverse('drfdocs'))
