@@ -22,4 +22,4 @@ Finally include the `rest_framework_docs` urls in your `urls.py`:
         url(r'^docs/', include('rest_framework_docs.urls')),
     ]
 
-You can now visit [http://0.0.0.0:/8000/docs/](http://0.0.0.0:8000/docs/) to view your Web API's docs.
+You can now visit [http://0.0.0.0:8000/docs/](http://0.0.0.0:8000/docs/) to view your Web API's docs.
