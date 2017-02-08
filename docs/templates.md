@@ -60,7 +60,7 @@ File location: `templates/rest_framework_docs/docs.html`
     {% extends "rest_framework_docs/base.html" %}
 
     {% block title %}Project Name{% endblock %}
-    {% block logo %}<a class="navbar-brand" href="#"">Project Name API Documentation</a>{% endblock %}
+    {% block logo %}<a class="navbar-brand" href="#">Project Name API Documentation</a>{% endblock %}
 
     {% block jumbotron %}
     <div class="jumbotron">
