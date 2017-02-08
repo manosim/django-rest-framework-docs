@@ -44,7 +44,7 @@
                 {% endfor %}
                   <li class="method plug"
                     data-toggle="modal"
-                    data-path="{{ endpoint.path }}"
+                    data-path="{{ endpoint.path }}?format=json"
                     data-methods="{{ endpoint.allowed_methods }}"
                     data-permissions="{{ endpoint.permissions }}"
                     data-fields="{{ endpoint.fields_json }}">
