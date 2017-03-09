@@ -25,7 +25,7 @@
 
     <div class="panel-group" role="tablist">
 
-    {% for endpoint in group.list %}
+    {% for endpoint in group.list|dictsort:"path" %}
 
       <div class="panel panel-default endpoint">
 
