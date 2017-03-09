@@ -21,8 +21,6 @@
   {% if endpoints_grouped %}
   {% for group in endpoints_grouped %}
 
-    <h1 id="{{ group.grouper|lower }}-group">{{group.grouper}}</h1>
-
     <div class="panel-group" role="tablist">
 
     {% for endpoint in group.list|dictsort:"path" %}
