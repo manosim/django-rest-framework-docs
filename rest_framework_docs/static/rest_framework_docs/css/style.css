@@ -41,3 +41,12 @@
   font-size: 120%;
   font-weight: bold;
 }
+
+.methods li.method {
+  display: none;
+}
+
+.methods li.plug {
+  display: block;
+  float: right;
+}
