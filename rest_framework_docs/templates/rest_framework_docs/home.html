@@ -1,18 +1,6 @@
 {% extends "rest_framework_docs/docs.html" %}
 {% load drfdocs_filters %}
 
-{% block apps_menu %}
-{% regroup endpoints by name_parent as endpoints_grouped %}
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Jump To <span class="caret"></span></a>
-  <ul class="dropdown-menu">
-    {% for group in endpoints_grouped %}
-      <li><a href="#{{ group.grouper|lower }}-group">{{ group.grouper }}</a></li>
-    {% endfor %}
-  </ul>
-</li>
-{% endblock %}
-
 
 {% block content %}
 
@@ -21,11 +9,9 @@
   {% if endpoints_grouped %}
   {% for group in endpoints_grouped %}
 
-    <h1 id="{{ group.grouper|lower }}-group">{{group.grouper}}</h1>
-
     <div class="panel-group" role="tablist">
 
-    {% for endpoint in group.list %}
+    {% for endpoint in group.list|dictsort:"path" %}
 
       <div class="panel panel-default endpoint">
 
@@ -57,7 +43,7 @@
         <div id="{{ endpoint.path|slugify }}" class="panel-collapse collapse" role="tabpanel">
           <div class="panel-body">
             {% if endpoint.docstring %}
-            <p class="lead">{{ endpoint.docstring|markdown }}</p>
+                <p class="lead">{{ endpoint.docstring|markdown }}</p>
             {% endif %}
 
             {% if endpoint.errors %}
