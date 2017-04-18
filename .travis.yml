@@ -8,8 +8,11 @@ python:
   - "3.5"
 
 env:
-  - DJANGO_VERSION=1.8
-  - DJANGO_VERSION=1.9
+  global:
+    - secure: "n1kZ3D/3EXtG1A+EZLIoK1PTThvIDt+YSScpTuitAMcwmcjNAVwWddsH6o+I5fnz7ojQKHzaeJhATbuewhJkOauh0qj5y+JZ5epHt9md8w9nJNf8yl3jHKH5M3qsjOZBctaA/fnC/oftNRu3p4HBGlfHpmqpUNRXCVA5dekbglPtg7uWbQb85DQP7ZJOL2f5a5xgkM/WjNkAyDsK6d7OBaFr4WW1AQIxpfIDxBF4sz54Lo3yNMsXgB2Yvv3pXAVmlmVnGDvQVBrlH5hLX+GWJYcYzfOCC+qWbtIknqahymV7JAN5DTEw/ru0w8pTB8xGOPKxL1X/tqPS3frtUJwIArnSUjEcMMSsDD5QTVMl5QcBs+vNemo3+AFO78lw2Ma60qqlyzzUO2IXIEYOBWRZObvhJ4Lpz3gWsVJpiDuqoquvWqVrXGLdhiEzOFD+0MA6PankKwpiF50qq5qnCKYw87eM4QLTKVEiyIJ+uJUkU5Kf2rH75O3lGtyzIvxr22QtDSrZG1qTUjxCa8ke5rYEMY4YVC5iFSYcr6aV5OaksH4cHtCF1zwSRrFvFVAHqWhomNiQpfwJtlUiL/AbnAKAMdIPcHJP3Wq/QOzoYlnvhYyfRTF4j6tC4aVHVVFZYrzwybP9s+ucJZjFJivZobQHqXjhMfZn3zvlARWQr2GSo3s="
+  matrix:
+    - DJANGO_VERSION=1.8
+    - DJANGO_VERSION=1.9
 
 cache:
   - pip
@@ -30,6 +33,7 @@ script:
 
 after_success:
   - codecov
+  - ./docs/deploy
 
 notifications:
   slack:
