@@ -16,3 +16,6 @@ rest_framework_docs/static/rest_framework_docs/js/dist.min.js
 
 rest_framework_docs/static/node_modules/
 rest_framework_docs/static/rest_framework_docs/js/dist.min.js.map
+
+.idea
+.idea/

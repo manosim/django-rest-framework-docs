@@ -1,0 +1,15 @@
+.method-doc{
+    font-size:13px
+}
+
+.panel-title{
+    font-size:15px
+}
+
+.sample-url{
+    color: rgb(191, 127, 63)
+}
+
+.fields-desc, li.field {
+    font-size: 10px
+}
