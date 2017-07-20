@@ -1,3 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #ECF0F1;
+}
+</style>
+</head>
 {% extends "rest_framework_docs/docs.html" %}
 {% load drfdocs_filters %}
 
@@ -65,8 +86,29 @@
             {% endif %}
 
             {% if endpoint.fields %}
+              {% if desc_table %}
+                <p class="fields-desc">Fields details:</p>
+                <table>
+                  <tr>
+                    <th> Field Name </th>
+                    <th> Field Type </th>
+                    <th> Max Length </th>
+                    <th> Is Required </th>
+                  </tr>
+                  {% for field in endpoint.fields %}
+                    <tr>
+                      <td> {{ field.name }} </td>
+                      <td> {{ field.type }} </td>
+                      <td> {{ field.max_length }} </td>
+                      <td> {{ field.required }} </td>
+                    </tr>
+                  {% endfor %}
+                </table>
+              {% else %}
+
             <p class="fields-desc">Fields:</p>
               {%include "rest_framework_docs/components/fields_list.html" with fields=endpoint.fields %}
+              {% endif %}
             {% elif not endpoint.errors %}
             <p>No fields.</p>
             {% endif %}
@@ -99,3 +141,4 @@
   </div>
 
 {% endblock %}
+</html>
