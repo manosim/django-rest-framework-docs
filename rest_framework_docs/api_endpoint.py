@@ -122,7 +122,8 @@ class ApiEndpoint(object):
                     "type": str(field.__class__.__name__),
                     "sub_fields": sub_fields,
                     "required": field.required,
-                    "to_many_relation": to_many_relation
+                    "to_many_relation": to_many_relation,
+                    "max_length": (field.__dict__.get('max_length', '-') if field.__dict__.get('max_length', '-') != None else '-')
                 })
             # FIXME:
             # Show more attibutes of `field`?
