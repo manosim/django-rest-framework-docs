@@ -20,7 +20,7 @@ You can use hidden to prevent your docs from showing up in different environment
     }
 
 ##### DESC_TABLE
-You can use Table representation to make your fields list in the documentation clear. So We can change representation by adding single line inside the `REST_FRAMEWORK_DOCS` in `setting.py`.
+You can use Table representation to make your fields list in the documentation clear. So We can change representation by adding single line inside the `REST_FRAMEWORK_DOCS` in `settings.py`.
 
     'DESC_TABLE': os.environ.get('DESCRIBE_TABLE', False)
 
