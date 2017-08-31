@@ -21,7 +21,7 @@ class TestView(TemplateView):
 
 class LoginView(APIView):
     """
-    A view that allows users to login providing their username and password.
+    A view that allows users to login providing their <b>username</b> and <i>password</i>.
     """
 
     throttle_classes = ()

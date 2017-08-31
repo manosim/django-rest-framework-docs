@@ -57,7 +57,7 @@
         <div id="{{ endpoint.path|slugify }}" class="panel-collapse collapse" role="tabpanel">
           <div class="panel-body">
             {% if endpoint.docstring %}
-            <p class="lead">{{ endpoint.docstring|markdown }}</p>
+            <p class="lead">{{ endpoint.docstring|safe }}</p>
             {% endif %}
 
             {% if endpoint.errors %}
