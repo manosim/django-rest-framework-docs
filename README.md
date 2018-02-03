@@ -8,9 +8,9 @@ Document Web APIs made with Django Rest Framework. [View Demo](http://demo.drfdo
 
 ### Supports
 
-  - Python (2.7, 3.3, 3.4, 3.5)
-  - Django (1.8, 1.9)
-  - Django Rest Framework (3+)
+  - Python (2.7, 3.4, 3.5, 3.6)
+  - Django (1.10, 1.11, 2.0)
+  - Django Rest Framework (3.4+)
 
 
 ### Documentation - Table of contents
