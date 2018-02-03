@@ -6,7 +6,8 @@ from django.utils.encoding import force_str
 
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.serializers import BaseSerializer
-from rest_framework.compat import get_regex_pattern
+
+from .compat import get_regex_pattern
 
 VIEWSET_METHODS = {
     'List': ['get', 'post'],

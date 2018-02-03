@@ -14,7 +14,8 @@ except ImportError:
 from django.utils.module_loading import import_string
 from rest_framework.views import APIView
 from rest_framework_docs.api_endpoint import ApiEndpoint
-from rest_framework.compat import get_regex_pattern
+
+from .compat import get_regex_pattern
 
 
 class ApiDocumentation(object):
