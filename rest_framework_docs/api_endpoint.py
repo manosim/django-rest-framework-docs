@@ -6,6 +6,7 @@ from django.utils.encoding import force_str
 
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.serializers import BaseSerializer
+from rest_framework.compat import get_regex_pattern
 
 VIEWSET_METHODS = {
     'List': ['get', 'post'],
@@ -35,9 +36,10 @@ class ApiEndpoint(object):
         self.permissions = self.__get_permissions_class__()
 
     def __get_path__(self, parent_regex):
+        regex = get_regex_pattern(self.pattern)
         if parent_regex:
-            return "/{0}{1}".format(self.name_parent, simplify_regex(self.pattern.regex.pattern))
-        return simplify_regex(self.pattern.regex.pattern)
+            return "/{0}{1}".format(self.name_parent, simplify_regex(regex))
+        return simplify_regex(regex)
 
     def is_method_allowed(self, callback_cls, method_name):
         has_attr = hasattr(callback_cls, method_name)
@@ -69,7 +71,7 @@ class ApiEndpoint(object):
                         lookup=lookup,
                         trailing_slash=self.drf_router.trailing_slash
                     )
-                    if self.pattern.regex.pattern == regex:
+                    if get_regex_pattern(self.pattern) == regex:
                         funcs, viewset_methods = zip(
                             *[(mapping[m], m.upper())
                               for m in self.callback.cls.http_method_names

@@ -43,7 +43,7 @@ class Membership(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     joined = models.DateTimeField(auto_now_add=True)
 
-    organisation = models.ForeignKey(Organisation)
-    user = models.ForeignKey(User)
+    organisation = models.ForeignKey(Organisation, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     role = models.CharField(choices=MEMBER_ROLES, max_length=20, default="USER")
     is_owner = models.BooleanField(default=False)

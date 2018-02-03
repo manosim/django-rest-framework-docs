@@ -1,6 +1,7 @@
 from django.conf.urls import url
 from project.organisations import views
 
+app_name = "organisations"
 
 urlpatterns = [
 

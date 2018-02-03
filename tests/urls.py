@@ -30,12 +30,12 @@ router = SimpleRouter()
 router.register('organisation-model-viewsets', views.TestModelViewSet, base_name='organisation')
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', admin.site.urls),
     url(r'^docs/', DRFDocsView.as_view(drf_router=router), name='drfdocs'),
 
     # API
-    url(r'^accounts/', view=include(accounts_urls, namespace='accounts')),
-    url(r'^organisations/', view=include(organisations_urls, namespace='organisations')),
+    url(r'^accounts/', view=include((accounts_urls, "accounts"), namespace='accounts')),
+    url(r'^organisations/', view=include((organisations_urls, "organisations"), namespace='organisations')),
     url(r'^', include(router.urls)),
 
     # Endpoints without parents/namespaces

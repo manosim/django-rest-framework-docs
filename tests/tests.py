@@ -1,4 +1,9 @@
-from django.core.urlresolvers import reverse
+try:
+    from django.urls import reverse
+except ImportError:
+    # Will be removed in Django 2.0
+    from django.core.urlresolvers import reverse
+
 from django.test import TestCase, override_settings
 from rest_framework_docs.settings import DRFSettings
 
