@@ -1,3 +1,14 @@
+try:
+    from django.urls import (
+        URLPattern,
+        URLResolver,
+    )
+except ImportError:
+    # Will be removed in Django 2.0
+    from django.urls import (
+        RegexURLPattern as URLPattern,
+        RegexURLResolver as URLResolver,
+    )
 
 
 # This is from the similarly named compat.py file of django-rest-framework 3.7
@@ -12,3 +23,11 @@ def get_regex_pattern(urlpattern):
     else:
         # Django < 2.0
         return urlpattern.regex.pattern
+
+
+def is_url_resolver(instance):
+    return isinstance(instance, URLResolver)
+
+
+def is_url_pattern(instance):
+    return isinstance(instance, URLPattern)
