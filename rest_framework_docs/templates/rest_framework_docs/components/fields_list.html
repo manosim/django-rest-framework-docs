@@ -10,6 +10,16 @@
       <span class="label label-primary label-required" title="Support sending several objects of this type in a request ({{obj}, {obj}, ... })">Array of objects</span>
     {% endif %}
 
+    {% if field.choices %}
+      <p>Choices
+        <ul>
+          {% for choice in field.choices %}
+            <li>{{ choice }}</li>
+          {% endfor %}
+        </ul>
+      </p>
+    {% endif %}
+
     {% if field.sub_fields %}
       {%include "rest_framework_docs/components/fields_list.html" with fields=field.sub_fields %}
     {% endif %}
