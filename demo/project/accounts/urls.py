@@ -1,6 +1,7 @@
 from django.conf.urls import url
 from project.accounts import views
 
+app_name = "accounts"
 
 urlpatterns = [
     url(r'^test/$', views.TestView.as_view(), name="test-view"),

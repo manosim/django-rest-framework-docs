@@ -1,4 +1,9 @@
-from django.core.urlresolvers import reverse
+try:
+    from django.urls import reverse_lazy
+except ImportError:
+    # Will be removed in Django 2.0
+    from django.core.urlresolvers import reverse_lazy
+
 from django.test import TestCase, override_settings
 from rest_framework_docs.settings import DRFSettings
 
@@ -24,7 +29,7 @@ class DRFDocsViewTests(TestCase):
         Should load the drf docs view with all the endpoints.
         NOTE: Views that do **not** inherit from DRF's "APIView" are not included.
         """
-        response = self.client.get(reverse('drfdocs'))
+        response = self.client.get(reverse_lazy('drfdocs'))
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context["endpoints"]), 15)
@@ -50,7 +55,7 @@ class DRFDocsViewTests(TestCase):
         self.assertEqual(str(response.context["endpoints"][9].errors), "'test_value'")
 
     def test_index_search_with_endpoints(self):
-        response = self.client.get("%s?search=reset-password" % reverse("drfdocs"))
+        response = self.client.get("%s?search=reset-password" % reverse_lazy("drfdocs"))
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.context["endpoints"]), 2)
@@ -63,13 +68,13 @@ class DRFDocsViewTests(TestCase):
         Should prevent the docs from loading the "HIDE_DOCS" is set
         to "True" or undefined under settings
         """
-        response = self.client.get(reverse('drfdocs'))
+        response = self.client.get(reverse_lazy('drfdocs'))
 
         self.assertEqual(response.status_code, 404)
         self.assertEqual(response.reason_phrase.upper(), "NOT FOUND")
 
     def test_model_viewset(self):
-        response = self.client.get(reverse('drfdocs'))
+        response = self.client.get(reverse_lazy('drfdocs'))
 
         self.assertEqual(response.status_code, 200)
 
