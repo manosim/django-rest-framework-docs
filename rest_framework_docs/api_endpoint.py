@@ -18,7 +18,7 @@ class ApiEndpoint(object):
         self.docstring = self.__get_docstring__()
         if parent_pattern:
             self.name_parent = parent_pattern.namespace or parent_pattern.app_name or \
-                simplify_regex(parent_pattern.regex.pattern).replace('/', '-')
+                simplify_regex(parent_pattern.pattern.regex.pattern).replace('/', '-')
             self.name = self.name_parent
             if hasattr(pattern.callback, 'cls') and issubclass(pattern.callback.cls, ModelViewSet):
                 self.name = '%s (RESTful)' % self.name_parent
@@ -39,8 +39,9 @@ class ApiEndpoint(object):
 
     def __get_path__(self, parent_pattern):
         if parent_pattern:
-            return simplify_regex(parent_pattern.regex.pattern + self.pattern.regex.pattern)
-        return simplify_regex(self.pattern.regex.pattern)
+            parent_regex = parent_pattern.pattern.regex.pattern
+            return simplify_regex(parent_regex + self.pattern.pattern.regex.pattern)
+        return simplify_regex(self.pattern.pattern.regex.pattern)
 
     def __get_allowed_methods__(self):
 
@@ -66,7 +67,7 @@ class ApiEndpoint(object):
                         lookup=lookup,
                         trailing_slash=router.trailing_slash
                     )
-                    if self.pattern.regex.pattern == regex:
+                    if self.pattern.pattern.regex.pattern == regex:
                         funcs, viewset_methods = zip(
                             *[(mapping[m], m.upper()) for m in self.callback.cls.http_method_names if m in mapping]
                         )

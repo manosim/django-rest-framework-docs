@@ -1,5 +1,5 @@
-Django==1.10.1
-djangorestframework==3.4.6
+Django==2.1.0
+djangorestframework==3.7.7
 coverage==4.2
 flake8<3.0.0
 mkdocs==0.15.3
