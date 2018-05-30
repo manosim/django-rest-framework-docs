@@ -89,7 +89,10 @@ class ApiEndpoint(object):
 
     def __get_permissions_class__(self):
         for perm_class in self.pattern.callback.cls.permission_classes:
-            return perm_class.__name__
+            try:
+                return perm_class.__name__
+            except:
+                return perm_class.__class__.__name__
 
     def __get_serializer__(self):
         try:
