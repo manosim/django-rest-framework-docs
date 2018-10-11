@@ -76,7 +76,7 @@ class ApiEndpoint(object):
                             self.docstring = inspect.getdoc(getattr(self.callback.cls, funcs[0]))
 
         view_methods = [force_str(m).upper() for m in self.callback.cls.http_method_names if
-                        hasattr(self.callback.cls, m)]
+                        hasattr(self.callback.cls, m) or m in getattr(self.callback, 'actions', {})]
         return viewset_methods + view_methods
 
     def __get_docstring__(self):
