@@ -1,6 +1,10 @@
 from importlib import import_module
 from django.conf import settings
-from django.core.urlresolvers import RegexURLResolver, RegexURLPattern
+try:
+    from django.core.urlresolvers import RegexURLResolver, RegexURLPattern
+except:
+    from django.urls import RegexURLResolver, RegexURLPattern
+    
 from django.utils.module_loading import import_string
 from rest_framework.views import APIView
 from rest_framework_docs.api_endpoint import ApiEndpoint
