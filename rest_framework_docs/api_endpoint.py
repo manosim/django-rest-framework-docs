@@ -89,7 +89,8 @@ class ApiEndpoint(object):
 
     def __get_permissions_class__(self):
         for perm_class in self.pattern.callback.cls.permission_classes:
-            return perm_class.__name__
+            if inspect.isclass(perm_class):
+                return perm_class.__name__
 
     def __get_serializer__(self):
         try:
