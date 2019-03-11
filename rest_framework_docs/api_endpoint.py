@@ -36,8 +36,10 @@ class ApiEndpoint(object):
 
     def __get_path__(self, parent_regex):
         if parent_regex:
-            return "/{0}{1}".format(self.name_parent, simplify_regex(self.pattern.regex.pattern))
-        return simplify_regex(self.pattern.regex.pattern)
+            return "/{0}{1}".format(
+                self.name_parent,
+                simplify_regex(self.pattern.pattern.regex.pattern))
+        return simplify_regex(self.pattern.pattern.regex.pattern)
 
     def is_method_allowed(self, callback_cls, method_name):
         has_attr = hasattr(callback_cls, method_name)
@@ -69,7 +71,7 @@ class ApiEndpoint(object):
                         lookup=lookup,
                         trailing_slash=self.drf_router.trailing_slash
                     )
-                    if self.pattern.regex.pattern == regex:
+                    if self.pattern.pattern.regex.pattern == regex:
                         funcs, viewset_methods = zip(
                             *[(mapping[m], m.upper())
                               for m in self.callback.cls.http_method_names

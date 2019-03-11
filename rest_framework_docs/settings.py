@@ -11,8 +11,8 @@ class DRFSettings(object):
     def get_setting(self, name):
         try:
             return settings.REST_FRAMEWORK_DOCS[name]
-        except:
-            return None
+        except Exception as err:
+            return
 
     @property
     def settings(self):
