@@ -125,7 +125,7 @@ class ApiEndpoint(object):
                     "to_many_relation": to_many_relation
                 })
             # FIXME:
-            # Show more attibutes of `field`?
+            # Show more attributes of `field`?
 
         return fields
 
